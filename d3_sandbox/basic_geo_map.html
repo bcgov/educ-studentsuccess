@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<head>
+    <title>Basic geo (svg)</title>
+</head>
+
+<style>
+    body {
+        font-family: "Helvetica Neue", Helvetica, sans-serif;
+        font-size: 14px;
+        color: #333;
+    }
+
+    svg #mapGroup {
+        fill: #ddd;
+        stroke: #aaa;
+    }
+</style>
+
+<body>
+    <div id="map">
+
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
+
+    <script>
+
+        let width = 900;
+        let height = 600;
+        // let rotation =-5;
+
+        //create svg element
+        let svg = d3.select('#map')
+            .append('svg')
+            .attr('width', width)
+            .attr('height', height);
+
+        //create map group
+        let mapGroup = svg.append('g')
+            .attr('id', 'mapGroup');
+        //   .attr('transform', 'rotate('+rotation+')');
+
+
+
+
+        /*MAP*/
+        //1. A geojson often have a FeatureCollection containing an array of features
+
+        d3.json('../lower_mainland_geo.json', function (err, json) {
+            geojson = json;
+
+            //2. Create the function expression for by using d3 projection function
+            // projection takes lon and lat coordinates and transform em into x and y cooirdinates
+            var projection = d3.geoAlbers()
+                .rotate([122, 0, 0])
+                .fitSize([width, height], geojson);
+
+            //3. Create a geogrpahic path generator
+            // this path generator converts a GeoJSON obejct into an SVG path string
+            var geoGenerator = d3.geoPath()
+                .projection(projection);
+
+            function update(json) {
+                var u = d3.select('#mapGroup')
+                    .selectAll('path')
+                    .data(geojson.features);
+
+                u.enter()
+                    .append('path')
+                    .attr('d', geoGenerator);
+            }
+            update();
+        })
+
+
+    </script>
+</body>
+
+</html>

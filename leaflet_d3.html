@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+    <style>
+        #map-canvas {
+            width: 960px;
+            height: 500px;
+        }
+
+        svg {
+            position: relative;
+        }
+
+        path {
+            fill: #000;
+            fill-opacity: .2;
+            stroke: #fff;
+            stroke-width: 1px;
+        }
+    </style>
+</head>
+<div id="map-canvas"></div>
+
+<body>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+    <script>
+        var map = new L.Map("map-canvas", { center: [54, -124], zoom: 5 })
+            .addLayer(new L.TileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"));
+
+        var svg = d3.select(map.getPanes().overlayPane).append("svg"),
+            g = svg.append("g").attr("class", "leaflet-zoom-hide");
+
+        //within the callback function, the passed collection is the contents of the sd_geo.json file
+        d3.json("geo_json/sd_geo.json", function (error, collection) {
+            if (error) throw error;
+
+            /*D3 and Leaflet use different APIs for rendering shapes and projecting points. 
+            Fortunately, it’s easy to adapt Leaflet’s API to fit D3 by implementing a custom geometric transformation. 
+            A transform converts an input geometry (such as polygons in spherical geographic coordinates) to a different output geometry (such as polygons in projected screen coordinates).
+           */
+            var transform = d3.geoTransform({ point: projectPoint }),
+                path = d3.geoPath().projection(transform);
+
+            var feature = g.selectAll("path")
+                .data(collection.features)
+                .enter().append("path");
+            
+            //zoom is a leaflet event
+            map.on("zoom", reset);
+            reset();
+
+            // Reposition the SVG to cover the features.
+            function reset() {
+                var bounds = path.bounds(collection),
+                    topLeft = bounds[0],
+                    bottomRight = bounds[1];
+
+                console.log(bounds, topLeft, bottomRight);
+
+                svg.attr("width", bottomRight[0] - topLeft[0])
+                    .attr("height", bottomRight[1] - topLeft[1])
+                    .style("left", topLeft[0] + "px")
+                    .style("top", topLeft[1] + "px");
+
+                g.attr("transform", "translate(" + -topLeft[0] + "," + -topLeft[1] + ")");
+
+                feature.attr("d", path);
+            }
+
+            // Use Leaflet to implement a D3 geometric transformation.
+            function projectPoint(x, y) {
+                var point = map.latLngToLayerPoint(new L.LatLng(y, x));
+                this.stream.point(point.x, point.y);
+            }
+        });
+    </script>
+</body>
+
+</html>

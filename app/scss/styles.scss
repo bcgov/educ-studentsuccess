@@ -1,0 +1,373 @@
+//varible overrides
+$home-color: #002663;
+$nav-color: #5091CD;
+$nav-bg: #fff;
+$body-bg: #f7f7f9;
+$font-color: #494949;
+$cta-yellow: #FCBA19;
+$btn-color: #38598a;
+$tooltip-bg: #002663;
+$tooltip-info-bg:rgba(208, 208, 209, 0.5);
+
+//Bootstrap sass files
+@import"node_modules/bootstrap/scss/bootstrap";
+
+body {
+
+  background: $body-bg;
+  font-family: 'Lato', sans-serif;
+  color: $font-color;
+
+  a,
+  a:hover {
+    text-decoration: none;
+  }
+
+  .nav-bg {
+    background: $nav-bg;
+  }
+
+  .navbar {
+    padding: 1rem 2rem;
+    box-shadow: 0 0 8px 1px rgba(0,0,0,0.1);
+
+    a {
+      display: inline-block;
+      position: relative;
+    }
+
+    .navbar-nav {
+
+      .nav-link,
+      .nav-link:hover {
+        color: $nav-color;
+      }
+
+      a:after {
+        background: none repeat scroll 0 0 transparent;
+        bottom: 0;
+        content: "";
+        display: block;
+        height: 2px;
+        left: 50%;
+        position: absolute;
+        background: #FCBA19;
+        transition: width 0.3s ease 0s, left 0.3s ease 0s;
+        width: 0;
+      }
+
+      a:hover:after {
+        width: 100%;
+        left: 0;
+      }
+    }
+
+    button {
+      border: none;
+    }
+
+
+    .navbar-brand {
+      color: $home-color;
+    }
+  }
+
+  .intro {
+    padding-top: 5rem;
+  }
+
+  .cta {
+    margin-top: 2rem;
+    max-width: 180px;
+    background: $cta-yellow;
+    border-radius: 50px;
+    padding: .5rem 2rem;
+    color: $body-bg;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05);
+  }
+
+  .cta:hover {
+    color: $body-bg;
+    box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
+    transform: translateY(-0.025em);
+    transition: .3s ease;
+  }
+
+
+
+  #aniContainer {
+
+
+    #aniControl {
+      #year {
+        margin-left: 8rem;
+      }
+
+      #play-button {
+        margin-left: 2rem;
+      }
+
+      #year,
+      #play-button,
+      #slider {
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+
+    .dist {
+      fill: #f7f7f7;
+      stroke: #ccc;
+    }
+
+    #play-button {
+      top: 140px;
+      left: 50px;
+      background: $btn-color;
+      border-radius: 3px;
+      border: none;
+      color: white;
+      margin: 0;
+      padding: 0 12px;
+      width: 60px;
+      cursor: pointer;
+      height: 30px;
+      box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05);
+    }
+
+    #play-button:hover {
+      background-color: $btn-color;
+      box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
+      transform: translateY(-0.025em);
+      transition: .3s ease;
+    }
+
+    .ticks {
+      font-size: 10px;
+    }
+
+    .track,
+    .track-inset,
+    .track-overlay {
+      stroke-linecap: round;
+    }
+
+    .track {
+      stroke: #000;
+      stroke-opacity: 0.3;
+      stroke-width: 10px;
+    }
+
+    .track-inset {
+      stroke: #dcdcdc;
+      stroke-width: 8px;
+    }
+
+    .track-overlay {
+      pointer-events: stroke;
+      stroke-width: 50px;
+      stroke: transparent;
+      cursor: pointer;
+    }
+
+    .handle {
+      fill: #fff;
+      stroke: #000;
+      stroke-opacity: 0.5;
+      stroke-width: 1.25px;
+    }
+
+    #ani_tt{
+      background: $tooltip-info-bg;
+      padding: 10px 10px;
+      border-radius: 3px;
+      color: $font-color;
+    }
+  }
+
+  // interactive map style
+  #inter-map {
+
+    #mapContainer {
+      position: relative;
+    }
+
+    #interactiveMap {
+      display: inline-block;
+    }
+
+    .controlSection {
+      margin: 2rem 0;
+    }
+
+    #distDropdown {
+      /* position: absolute; */
+    }
+
+    .flowBtn {
+      margin-top: .5rem;
+      margin-right: .5rem;
+      padding: 0.25rem 0.5rem;
+      width: 5rem;
+      border: 2px solid $btn-color;
+      border-radius: 50px;
+      background: none;
+      color: $btn-color;
+      font-weight: medium;
+      cursor: pointer;
+  }
+
+    .selected {
+        font-weight: bold;
+        color: #fff;
+        background:$btn-color;
+    }
+
+    /* #maincontainer {
+            display:flex;
+        } */
+
+    #tlTip {
+      pointer-events: none;
+      color: white;
+    }
+
+    #tipDiv {
+      font-size: 16px;
+      border-radius: 3px;
+      position: absolute;
+      width: 180px;
+      z-index: 100;
+      background-repeat: no-repeat;
+      text-align: left;
+      line-height: 20px;
+
+    }
+
+    #tipLoc {
+      font-weight: normal;
+      font-family: Georgia;
+      font-style: Italic;
+      color: white;
+      margin: 0px;
+      padding: 10px 10px;
+      background: $tooltip-bg;
+      font-size: 14px;
+      border-radius: 3px 3px 0 0;
+    }
+
+    // #tipCount {
+    //   font-weight: bold;
+    //   font-size: 32px;
+    //   letter-spacing: -1px;
+    //   margin: 0px;
+    //   padding: 0px 10px 10px 10px;
+    //   color: red;
+    // }
+
+    #tipInfo {
+      font-weight: normal;
+      font-size: 12px;
+      color: $font-color;
+      margin: 0px;
+      padding: 5px 0px 5px 10px;
+      background: $tooltip-info-bg;
+      border-radius: 0 0 3px 3px;
+    }
+
+    #tlTip2 {
+      pointer-events: none;
+      color: white;
+    }
+
+    #tipDiv2 {
+      font-size: 16px;
+      position: absolute;
+      width: 250px;
+      z-index: 100;
+      background-repeat: no-repeat;
+      text-align: left;
+      line-height: 20px;
+    }
+
+    #tipLoc2 {
+      font-weight: normal;
+      font-family: Georgia;
+      font-style: Italic;
+      color: white;
+      margin: 0px;
+      padding: 10px 10px;
+      background: $tooltip-bg;
+      font-size: 14px;
+      border-radius: 3px 3px 0 0;
+    }
+
+    // #tipCount2 {
+    //   font-weight: bold;
+    //   font-size: 32px;
+    //   letter-spacing: -1px;
+    //   margin: 0px;
+    //   padding: 0px 10px 10px 10px;
+    //   color: red;
+    // }
+
+    #tipInfo2 {
+      font-weight: normal;
+      font-size: 10px;
+      color: $font-color;
+      margin: 0px;
+      padding: 5px 0px 5px 10px;
+      background: $tooltip-info-bg;
+      border-radius: 0 0 3px 3px;
+    }
+
+    .tipClear {
+      clear: both;
+    }
+  }
+
+  // interactive line graph
+  #graph{
+    
+    #distContainer {
+      display:flex;
+      justify-content: space-around;
+  
+  .distBtn {
+        margin: 1rem;
+        padding: 0.25rem 1rem;
+        border: 2px solid $btn-color;
+        border-radius: 50px;
+        color: $btn-color;
+        font-weight: medium;
+        cursor: pointer;
+    }
+
+    .selected {
+        font-weight: bold;
+        color: white;
+        background:$btn-color;
+    }
+
+  }
+
+    .line {
+        fill: none;
+        stroke: #fcba19;
+        stroke-width: 3;
+    }
+
+    .dot {
+        fill: #ffab00;
+        stroke: #fff;
+    }
+
+    #line_tt {
+        background: $tooltip-info-bg;
+        padding: 10px 10px;
+        border-radius: 3px;
+        color: $font-color;
+    }
+  
+  }
+}

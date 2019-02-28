@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+
+<head>
+  <title>District migration</title>
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+  <style type="text/css">
+    #maincontainer {
+      position: absolute;
+    }
+
+    #map,
+    #control {
+      display: inline-block;
+    }
+
+    .controlSection {
+      margin: 2rem 0;
+    }
+
+    #distDropdown {
+      /* position: absolute; */
+    }
+
+    .selected {
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    /* #maincontainer {
+            display:flex;
+        } */
+
+    #tt {
+      pointer-events: none;
+      color: white;
+    }
+
+    #tipContainer {
+      font-size: 16px;
+      position: absolute;
+      width: 180px;
+      z-index: 100;
+      background-repeat: no-repeat;
+      text-align: left;
+      line-height: 20px;
+    }
+
+    #tipLocation {
+      font-weight: normal;
+      font-family: Georgia;
+      font-style: Italic;
+      color: white;
+      margin: 0px;
+      padding: 10px 10px;
+      background: #333;
+      font-size: 14px;
+    }
+
+    #tipCount {
+      font-weight: bold;
+      font-size: 32px;
+      letter-spacing: -1px;
+      margin: 0px;
+      padding: 0px 10px 10px 10px;
+      color: #333;
+    }
+
+    #tipKey {
+      font-weight: normal;
+      font-size: 10px;
+      color: #333;
+      margin: 0px;
+      padding: 5px 0px 5px 10px;
+      background: rgba(218, 218, 218, 0.5);
+    }
+
+    #tt2 {
+      pointer-events: none;
+      color: white;
+    }
+
+    #tipContainer2 {
+      font-size: 16px;
+      position: absolute;
+      width: 250px;
+      z-index: 100;
+      background-repeat: no-repeat;
+      text-align: left;
+      line-height: 20px;
+    }
+
+    #tipLocation2 {
+      font-weight: normal;
+      font-family: Georgia;
+      font-style: Italic;
+      color: white;
+      margin: 0px;
+      padding: 10px 10px;
+      background: #333;
+      font-size: 14px;
+    }
+
+    #tipCount2 {
+      font-weight: bold;
+      font-size: 32px;
+      letter-spacing: -1px;
+      margin: 0px;
+      padding: 0px 10px 10px 10px;
+      color: #333;
+    }
+
+    #tipKey2 {
+      font-weight: normal;
+      font-size: 10px;
+      color: #333;
+      margin: 0px;
+      padding: 5px 0px 5px 10px;
+      background: rgba(218, 218, 218, 0.5);
+    }
+
+    .tipClear {
+      clear: both;
+    }
+  </style>
+
+
+
+</head>
+
+<body class="pl-4 pt-4">
+
+
+
+  <h4>D3 Inter District Migration</h4>
+  <p>Circles are sized by net migration to and from the corresponding district - green indicates positive net
+    migration
+    (more students are moving to the district than from it), red indicates negative net migration (more students
+    are
+    moving away
+    from the distict than to it). Hover over a district for raw numbers. Click amo distict to view migration flows
+    to and from
+    that distict - again, green indicates net gain for the selected district, red indicates net loss.</p>
+
+  <div id="maincontainer">
+    <div id="map"></div>
+    <div id='control'>
+      <h3>WHERE DO STUDENTS GO?</h3>
+      <div class="controlSection">
+        <h5>School Year</h5>
+        <select name="yr_dropdown" id="yearDropdown">
+          <option value="2018">2017/2018</option>
+          <option value="2017">2016/2017</option>
+          <option value="2016">2015/2016</option>
+          <option value="2015">2014/2015</option>
+          <option value="2014">2013/2014</option>
+        </select>
+      </div>
+      <div class="controlSection">
+        <h5>School District</h5>
+        <select name="dist_dropdown" id="distDropdown">
+        </select>
+      </div>
+      <div class="controlSection">
+        <h5>Migration Flow</h5>
+        <button class="flowBtn" id="btn_all" value="all">All</button>
+        <button class="flowBtn" id="btn_inflow" value="inflow">Inflow</button>
+        <button class="flowBtn" id="btn_outflow" value="outflow">Outflow</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+  <script type="text/javascript" src="d3_js/interactive_flow.js"></script>
+
+</body>
+
+</html>
