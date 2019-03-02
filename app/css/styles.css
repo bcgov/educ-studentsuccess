@@ -7136,7 +7136,11 @@ body {
     body #inter-map #mapContainer {
       position: relative; }
     body #inter-map #interactiveMap {
-      display: inline-block; }
+      width: 660px;
+      height: 500px;
+      z-index: 1; }
+      body #inter-map #interactiveMap svg {
+        position: relative; }
     body #inter-map .controlSection {
       margin: 2rem 0; }
     body #inter-map #distDropdown {
@@ -7158,7 +7162,8 @@ body {
       background: #38598a; }
     body #inter-map #tlTip {
       pointer-events: none;
-      color: white; }
+      color: white;
+      z-index: 10; }
     body #inter-map #tipDiv {
       font-size: 16px;
       border-radius: 3px;

@@ -193,7 +193,15 @@ body {
     }
 
     #interactiveMap {
-      display: inline-block;
+
+        width: 660px;
+        height: 500px;
+        z-index: 1; //leaftlet defualt z-index is 400, covers tooltip
+    
+
+      svg {
+          position: relative;
+      }
     }
 
     .controlSection {
@@ -230,6 +238,7 @@ body {
     #tlTip {
       pointer-events: none;
       color: white;
+      z-index: 10;
     }
 
     #tipDiv {

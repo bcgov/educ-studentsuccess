@@ -14,16 +14,19 @@ var colors = ["#EDF8FB", "#41083e"]; //color range based on the number of people
 //array used to populate dropdown menu
 var sd_list_arr = [];
 
+var map = new L.Map("interactiveMap", { center: [54, -124], zoom: 5 })
+            .addLayer(new L.TileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"));
+
 //create the projection expression
-var projection = d3.geoAlbers()
-  .rotate([122, 0, 0])
-  .scale(2200)
-  .translate([width * .57, height * 1.4]);
+// var projection = d3.geoAlbers()
+//   .rotate([122, 0, 0])
+//   .scale(2200)
+//   .translate([width * .57, height * 1.4]);
 // .fitSize([width, height], json);
 
 //Define path generator
-var path = d3.geoPath()
-  .projection(projection);
+// var path = d3.geoPath()
+//   .projection(projection);
 
 //create scales
 var circleSize = d3.scaleLinear().range([0, 400]).domain([0, 300]);
@@ -34,10 +37,14 @@ var lineSize = d3.scaleLinear().range([2, 25]).domain([0, 35000]);
 
 
 //Create SVG element
-var svg = d3.select("#interactiveMap")
-  .append("svg")
-  .attr("width", width)
-  .attr("height", height);
+// var svg = d3.select("#interactiveMap")
+//   .append("svg")
+//   .attr("width", width)
+//   .attr("height", height);
+
+var svg = d3.select(map.getPanes().overlayPane).append("svg");
+
+var chartGroup = svg.append("g").attr("class", "leaflet-zoom-hide");
 
 
 var fp = d3.format(".1f"); // format number, 1 place after decimal
@@ -57,7 +64,7 @@ var tooltip2 = d3.select("#mapContainer")
   .style("position", "absolute")
   .style("visibility", "hidden");
 
-var chartGroup = svg.append("g");
+// var chartGroup = svg.append("g");
 
 
 var comingData, goingData;
@@ -178,7 +185,11 @@ function updateMap(coming, going) {
     var fillcolor = d3.scaleLinear().range(colors).domain(indomain);
     ////////////////////////////////////
 
-    d3.json("../assets/geo_json/sd_geo.json", function (json) {
+    d3.json("../assets/geo_json/sd_geo.json", function (error, json) {
+      if (error) throw error;
+
+      var transform = d3.geoTransform({ point: projectPoint });
+      var path = d3.geoPath().projection(transform);
 
       //loop through the csv, length is the total number of rows(districts)
       for (var i = 0; i < data.length; i++) {
@@ -219,7 +230,7 @@ function updateMap(coming, going) {
       }
 
       //Bind data and create one path per GeoJSON feature
-      chartGroup.selectAll("path")
+      var feature = chartGroup.selectAll("path")
         .data(json.features)
         .enter()
         .append("path")
@@ -229,12 +240,16 @@ function updateMap(coming, going) {
           return d.properties.district;
         })
         .attr("d", path) //path here is the geo path generator
-        .attr("stroke-width", 0.5)
-        .style("stroke", "#666")
-        .style("fill", "#fff");
-
-      //Bind data to circles per GeoJSON feature/districts	
-      chartGroup.selectAll("circle")
+        .attr("stroke-width", 0.3)
+        .style("stroke", "#494949")
+        .style("fill", "#fff")
+        .style("fill-opacity", ".6");
+      //zoom is a leaflet event
+      map.on("zoom", reset);
+      reset();
+      
+        //Bind data to circles per GeoJSON feature/districts	
+        chartGroup.selectAll("circle")
         .data(json.features)
         .enter().append("circle")
         .attr("cx", function (d) {
@@ -293,7 +308,7 @@ function updateMap(coming, going) {
           var m = d3.mouse(this);
           mx = m[0];
           my = m[1];
-
+          console.log(mx,my);
           return toolMove(mx, my, d);
         })
         .on("mouseleave", function (d) {
@@ -307,7 +322,29 @@ function updateMap(coming, going) {
         })
         .transition()
         .duration(1500);
-    });
+
+      function reset() {
+        console.log('reset');
+
+        var bounds = path.bounds(json),
+                    topLeft = bounds[0],
+                    bottomRight = bounds[1];
+
+                    svg.attr("width", 1.2*(bottomRight[0] - topLeft[0]))
+                    .attr("height", 1.3*(bottomRight[1] - topLeft[1]))
+                    .style("left", topLeft[0] + "px")
+                    .style("top", topLeft[1] + "px");
+
+                chartGroup.attr("transform", "translate(" + -topLeft[0] + "," + -topLeft[1] + ")");
+
+                feature.attr("d", path);
+    }
+
+    function projectPoint(x, y) {
+      var point = map.latLngToLayerPoint(new L.LatLng(y, x));
+      this.stream.point(point.x, point.y);
+  }
+  });
   });
 }
 

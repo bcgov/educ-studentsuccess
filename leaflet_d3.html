@@ -46,8 +46,8 @@
             Fortunately, it’s easy to adapt Leaflet’s API to fit D3 by implementing a custom geometric transformation. 
             A transform converts an input geometry (such as polygons in spherical geographic coordinates) to a different output geometry (such as polygons in projected screen coordinates).
            */
-            var transform = d3.geoTransform({ point: projectPoint }),
-                path = d3.geoPath().projection(transform);
+            var transform = d3.geoTransform({ point: projectPoint });
+            var path = d3.geoPath().projection(transform);
 
             var feature = g.selectAll("path")
                 .data(collection.features)
@@ -65,8 +65,8 @@
 
                 console.log(bounds, topLeft, bottomRight);
 
-                svg.attr("width", bottomRight[0] - topLeft[0])
-                    .attr("height", bottomRight[1] - topLeft[1])
+                svg.attr("width", 1.2*(bottomRight[0] - topLeft[0]))
+                    .attr("height", 1.3*(bottomRight[1] - topLeft[1]))
                     .style("left", topLeft[0] + "px")
                     .style("top", topLeft[1] + "px");
 
