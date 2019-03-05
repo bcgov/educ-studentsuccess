@@ -198,9 +198,11 @@ body {
         height: 500px;
         z-index: 1; //leaftlet defualt z-index is 400, covers tooltip
     
-
       svg {
-          position: relative;
+        position: relative;
+        .goingline {
+          pointer-events: auto;
+        }
       }
     }
 

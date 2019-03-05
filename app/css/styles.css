@@ -7141,6 +7141,8 @@ body {
       z-index: 1; }
       body #inter-map #interactiveMap svg {
         position: relative; }
+        body #inter-map #interactiveMap svg .goingline {
+          pointer-events: auto; }
     body #inter-map .controlSection {
       margin: 2rem 0; }
     body #inter-map #distDropdown {

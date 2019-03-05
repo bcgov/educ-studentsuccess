@@ -14,8 +14,11 @@ var colors = ["#EDF8FB", "#41083e"]; //color range based on the number of people
 //array used to populate dropdown menu
 var sd_list_arr = [];
 
-var map = new L.Map("interactiveMap", { center: [54, -124], zoom: 5 })
-            .addLayer(new L.TileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"));
+var map = new L.Map("interactiveMap", {
+    center: [54, -124],
+    zoom: 5
+  })
+  .addLayer(new L.TileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"));
 
 //create the projection expression
 // var projection = d3.geoAlbers()
@@ -28,10 +31,11 @@ var map = new L.Map("interactiveMap", { center: [54, -124], zoom: 5 })
 // var path = d3.geoPath()
 //   .projection(projection);
 
-//create scales
-var circleSize = d3.scaleLinear().range([0, 400]).domain([0, 300]);
+var path;
 
-var lineSize = d3.scaleLinear().range([2, 25]).domain([0, 35000]);
+//create scales
+var circleSize = d3.scaleLinear().range([0, 500]).domain([0, 300]);
+var lineSize = d3.scaleLinear().range([2, 25]).domain([0, 100]);
 
 // var fillcolor = d3.scaleLinear().range(colors).domain(immdomain);
 
@@ -169,7 +173,7 @@ function updateMap(coming, going) {
     */
     moveout_min = Math.ceil(Math.min.apply(Math, num_going_arr.filter(Boolean)));
     moveout_max = Math.round(Math.max.apply(Math, num_going_arr));
-    console.log(moveout_min, moveout_max);
+    //console.log(moveout_min, moveout_max);
 
     //this is for max in movingin column
     data.forEach(function (d) {
@@ -188,8 +192,11 @@ function updateMap(coming, going) {
     d3.json("../assets/geo_json/sd_geo.json", function (error, json) {
       if (error) throw error;
 
-      var transform = d3.geoTransform({ point: projectPoint });
-      var path = d3.geoPath().projection(transform);
+      //convert json to svg
+      var transform = d3.geoTransform({
+        point: projectPoint
+      });
+      path = d3.geoPath().projection(transform);
 
       //loop through the csv, length is the total number of rows(districts)
       for (var i = 0; i < data.length; i++) {
@@ -247,104 +254,124 @@ function updateMap(coming, going) {
       //zoom is a leaflet event
       map.on("zoom", reset);
       reset();
-      
-        //Bind data to circles per GeoJSON feature/districts	
-        chartGroup.selectAll("circle")
-        .data(json.features)
-        .enter().append("circle")
-        .attr("cx", function (d) {
-          var centname = d.properties.SDNAME;
-          var ctroid;
-          ctroid = path.centroid(d)[0]; // get the centroid x
-          return ctroid;
-        })
-        .attr("cy", function (d) {
-          var centname = d.properties.SDNAME;
-          var ctroid;
-          ctroid = path.centroid(d)[1]; // get the centroid y
-          return ctroid;
-        })
-        .attr("r", function (d) {
-          //radius of the circle is defined by the number of total net migration change
-
-          /*total_move_in and totale_emm are columns from csv file
-          got added to json features through :    
-          json.features[j].properties[propt] = tempObj[propt];*/
-          var diff = d.properties.total_move_in - d.properties.total_move_out;
-          //gives a minmum r if net changes = 0
-          if (Math.abs(diff) < 5) {
-            return 2;
-          } else {
-            return circleSize(Math.sqrt(Math.abs(diff) / Math.PI));
-          }
-
-        })
-        .attr("class", "circ")
-        //attach district name to each circle
-        .attr("id", function (d) {
-          return d.abbrev;
-        })
-        .attr("fill", function (d) {
-          /*fill the color based on -/+ net changes*/
-          var diff = d.properties.total_move_in - d.properties.total_move_out;
-          if (diff > 0) {
-            return "#65a89d";
-          } else {
-            return "#a96a46";
-          }
-
-        })
-        .attr("fill-opacity", "0.5")
-        .attr("stroke", "#fff")
-        .attr("stroke-weight", "0.5")
-
-        // add event listener for mouse over
-        .on("mouseenter", function (d) {
-          //toolOver is the event handler
-          return toolOver(d, this);
-        })
-        .on("mousemove", function (d) {
-          //gets mouse coordinates on screen
-          var m = d3.mouse(this);
-          mx = m[0];
-          my = m[1];
-          console.log(mx,my);
-          return toolMove(mx, my, d);
-        })
-        .on("mouseleave", function (d) {
-          return toolOut(d, this);
-        })
-        .on("click", function (d) {
-
-          currentDist = d;
-          console.log(currentDist);
-          clicked(d);
-        })
-        .transition()
-        .duration(1500);
 
       function reset() {
-        console.log('reset');
+        // console.log('reset');
+        
+        /*have to redraw everything as coordinates changes after zooming,
+          cannot preserve existing path (inflow, outflow)*/
+        chartGroup.selectAll('.circ').remove().transition()
+          .duration(500);
+          
+        chartGroup.selectAll('.goingline').remove().transition()
+          .duration(500);
 
         var bounds = path.bounds(json),
-                    topLeft = bounds[0],
-                    bottomRight = bounds[1];
+          topLeft = bounds[0],
+          bottomRight = bounds[1];
 
-                    svg.attr("width", 1.2*(bottomRight[0] - topLeft[0]))
-                    .attr("height", 1.3*(bottomRight[1] - topLeft[1]))
-                    .style("left", topLeft[0] + "px")
-                    .style("top", topLeft[1] + "px");
+        var zoomScale = (bottomRight[0] - topLeft [0]);
+        console.log(zoomScale);
 
-                chartGroup.attr("transform", "translate(" + -topLeft[0] + "," + -topLeft[1] + ")");
 
-                feature.attr("d", path);
-    }
 
-    function projectPoint(x, y) {
-      var point = map.latLngToLayerPoint(new L.LatLng(y, x));
-      this.stream.point(point.x, point.y);
-  }
-  });
+        svg.attr("width", 1.2 * (bottomRight[0] - topLeft[0]))
+          .attr("height", 1.3 * (bottomRight[1] - topLeft[1]))
+          .style("left", topLeft[0] + "px")
+          .style("top", topLeft[1] + "px");
+
+        chartGroup.attr("transform", "translate(" + -topLeft[0] + "," + -topLeft[1] + ")");
+
+        feature.attr("d", path);
+
+        //Bind data to circles per GeoJSON feature/districts	
+        chartGroup.selectAll("circle")
+          .data(json.features)
+          .enter().append("circle")
+          .attr("cx", function (d) {
+            var centname = d.properties.SDNAME;
+            var ctroid;
+            ctroid = path.centroid(d)[0]; // get the centroid x
+            return ctroid;
+          })
+          .attr("cy", function (d) {
+            var centname = d.properties.SDNAME;
+            var ctroid;
+            ctroid = path.centroid(d)[1]; // get the centroid y
+            return ctroid;
+          })
+          .attr("r", function (d) {
+            //radius of the circle is defined by the number of total net migration change
+
+            /*total_move_in and totale_emm are columns from csv file
+            got added to json features through :    
+            json.features[j].properties[propt] = tempObj[propt];*/
+            var diff = d.properties.total_move_in - d.properties.total_move_out;
+            //gives a minmum r if net changes = 0
+            if (Math.abs(diff) < 5) {
+              return 2;
+            } else {
+              return circleSize(Math.sqrt(Math.abs(diff) / Math.PI));
+            }
+
+          })
+          .attr("class", "circ")
+          //attach district name to each circle
+          .attr("id", function (d) {
+            return d.abbrev;
+          })
+          .attr("fill", function (d) {
+            /*fill the color based on -/+ net changes*/
+            var diff = d.properties.total_move_in - d.properties.total_move_out;
+            if (diff > 0) {
+              return "#65a89d";
+            } else {
+              return "#a96a46";
+            }
+
+          })
+          .attr("fill-opacity", "0.5")
+          .attr("stroke", "#fff")
+          .attr("stroke-weight", "0.5")
+
+          // add event listener for mouse over
+          .on("mouseenter", function (d) {
+            //toolOver is the event handler
+            return toolOver(d, this);
+          })
+          .on("mousemove", function (d) {
+            //gets mouse coordinates on screen
+            var m = d3.mouse(this);
+            mx = m[0];
+            my = m[1];
+            // console.log(mx, my);
+            return toolMove(mx, my, d);
+          })
+          .on("mouseleave", function (d) {
+            return toolOut(d, this);
+          })
+          .on("click", function (d) {
+
+            currentDist = d;
+            // console.log(currentDist);
+            clicked(d);
+          })
+          .transition()
+          .duration(1500);
+      }
+
+      /* 
+      adapt Leaflet’s API to fit D3 by implementing a custom geometric transformation. 
+      A transform converts an input geometry (such as polygons in spherical geographic coordinates) 
+      to a different output geometry (such as polygons in projected screen coordinates). 
+      */
+      function projectPoint(x, y) {
+        var point = map.latLngToLayerPoint(new L.LatLng(y, x));
+        this.stream.point(point.x, point.y);
+      }
+
+
+    });
   });
 }
 
@@ -445,7 +472,7 @@ function clicked(selected, flowtype) {
 
   if (selected.abbrev && selected.properties.SDNAME) {
     selDist = selected.abbrev;
-    console.log(selDist);
+    // console.log(selDist);
     //sleDist is the SD number, distName is for displaying purpose
     distName = selected.properties.SDNAME;
 
@@ -486,18 +513,18 @@ function clicked(selected, flowtype) {
     .attr("class", "goingline")
 
     .attr("d", function (d, i) {
-      console.log(d); // it's all obejcts in goingData
+      // console.log(d); // it's all obejcts in goingData
       //data points here are from .csv, case sensitive!!!
       var abb = d.Abbrev;
 
-      console.log(abb);
+      // console.log(abb);
 
       /*
       net changes btw going and coming
       the csv coming and going is based on column: e.g. going or coming number of students to the ditrict in title row 
       */
       var finalval = comingData[i][selDist] - goingData[i][selDist];
-      console.log(finalval);
+      // console.log(finalval);
       /*
       select the district (destination, id has been assigned)
       the id here is the id of the circle of destination (circle)
@@ -559,8 +586,11 @@ function clicked(selected, flowtype) {
 
     //prob:stroke-width is fixed at 0.5?????
     .attr("stroke-width", function (d, i) {
+      console.log(comingData[i][selDist], goingData[i][selDist]);
       var finalval = comingData[i][selDist] - goingData[i][selDist];
+
       return lineSize(parseFloat(Math.abs(finalval)));
+
     })
     //stroke color
     .attr("stroke", function (d, i) {
@@ -577,6 +607,7 @@ function clicked(selected, flowtype) {
     .attr("opacity", 0.5)
     .attr("stroke-linecap", "round")
     .on("mouseenter", function (d) {
+      console.log('mouse over');
       return toolOver2(d, this);
     })
     .on("mousemove", function (d, i) {

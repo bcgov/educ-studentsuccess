@@ -425,7 +425,7 @@
 
 				.attr("stroke-width", function (d, i) {
 					var finalval = coming[i][selname] - going[i][selname];
-
+					console.log(lineSize(parseFloat(Math.abs(finalval))));
 					return lineSize(parseFloat(Math.abs(finalval)));
 				})
 				.attr("stroke", function (d, i) {
@@ -442,6 +442,7 @@
 				.attr("opacity", 0.5)
 				.attr("stroke-linecap", "round")
 				.on("mouseover", function (d) {
+					console.log('mouse over');
 					return toolOver2(d, this);
 				})
 				.on("mousemove", function (d, i) {
