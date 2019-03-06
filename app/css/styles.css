@@ -7136,7 +7136,7 @@ body {
     body #inter-map #mapContainer {
       position: relative; }
     body #inter-map #interactiveMap {
-      width: 660px;
+      max-width: 100%;
       height: 500px;
       z-index: 1; }
       body #inter-map #interactiveMap svg {

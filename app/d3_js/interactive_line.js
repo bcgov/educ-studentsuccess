@@ -63,8 +63,9 @@
 
  //canvas
  let line_svg = d3.select('#lineContainer').append('svg')
-     .attr('width', line_width + line_margin.left + line_margin.right)
-     .attr('height', line_height + line_margin.top + line_margin.bottom);
+ .attr("preserveAspectRatio", "xMinYMin meet")  // This forces uniform scaling for both the x and y, aligning the midpoint of the SVG object with the midpoint of the container element.
+ .attr("viewBox", "0 0 600 400") //defines the aspect ratio, the inner scaling of object lengths and coordinates
+ .attr('class', 'svg-content');
 
  let line_chartGroup = line_svg.append('g')
      .attr('class', 'chartGroup')
@@ -159,7 +160,7 @@
 
      distBtn.on('click', function (d) {
          //remove all element with .selected class
-         d3.select('.selected')
+         d3.selectAll('.selected')
              .classed('selected', false);
          //add selected class to button being clicked
          d3.select(this)
