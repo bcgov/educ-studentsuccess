@@ -313,7 +313,7 @@ function updateMap(coming, going) {
 
 //initial/default map
 
-updateMap("../raw_data/sd_coming_2018.csv", "../raw_data/sd_going_2018.csv");
+updateMap("../app/assets/raw_data/sd_coming_2018.csv", "../app/assets/raw_data/sd_going_2018.csv");
 
 function toolOver(v, thepath) {
   d3.select(thepath)
@@ -506,7 +506,6 @@ function clicked(selected, flowtype) {
           //if theres changes meanig movements btw home distric and dest district
           if (finalval > 0) {
             return "M" + destx + "," + desty + " Q" + Number((destx + homex)) / 2 + " " + (desty + homey) / 1.5 + " " + homex + " " + homey;
-
           } else {
             return "M" + homex + "," + homey + " Q" + (destx + homex) / 2 + " " + (desty + homey) / 2.5 + " " + destx + " " + desty;
           }
@@ -520,7 +519,6 @@ function clicked(selected, flowtype) {
 
     //determine the stroke width based on net changes
 
-    //prob:stroke-width is fixed at 0.5?????
     .attr("stroke-width", function (d, i) {
       var finalval = comingData[i][selDist] - goingData[i][selDist];
       return lineSize(parseFloat(Math.abs(finalval)));
@@ -594,7 +592,7 @@ d3.select('#yearDropdown')
     var newData = eval(d3.select(this).property('value'));
     //clear dropdown array
     // sd_list_arr=[];
-    updateMap("../raw_data/sd_coming_" + newData + ".csv", "../raw_data/sd_going_" + newData + ".csv");
+    updateMap("../app/assets/raw_data/sd_coming_" + newData + ".csv", "../app/assets/raw_data/sd_going_" + newData + ".csv");
   });
 
 //dropdown select district
