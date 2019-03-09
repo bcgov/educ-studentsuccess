@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+</head>
+
+<body>
+	<script>
+		var svg = d3.select("body").append("svg")
+			.attr("width", 500)
+			.attr("height", 500);
+
+		var line = d3.svg.diagonal();
+
+		var lineData = {
+			source: { x: 25, y: 25 },
+			target: { x: 400, y: 400 }
+		};
+
+		var path = svg.append("path")
+			.attr("d", line(lineData))
+			.style("stroke", "none")
+			.style("fill", "none");
+
+
+
+		var polygon = svg
+			.append("path");
+
+
+		var poly = "M0 400 L0 0 L400 0 A100 100 0 0 1 400 100 Z"
+
+		polygon
+			.attr("d", poly)
+			.attr("fill", "none")
+			.attr("stroke-width", "2px")
+			.attr("stroke", "#000");
+
+		function circleTransition() {
+
+			let circ = svg.append("circle")
+				.attr("fill", "steelblue")
+				.attr('r', 20);
+			repeat();
+
+			function repeat() {
+				circ
+					.attr("cx", 25) //Starting x
+					.attr("cy", 25) //Starting y
+					.attr('fill-opacity', 1)
+					.transition()
+					.duration(2000)
+					.ease("linear")
+					.tween("pathTween", function () { return pathTween(path) })
+					// .tween("pathTween", pathTween); //Custom tween to set the cx and cy attributes
+					.transition()        // apply a transition
+					.duration(500)      // apply it over 500 milliseconds
+					.attr('fill-opacity', 0)   // circle "disapear"
+					.each("end", repeat); //repeat for this element
+			}
+
+			function pathTween(path) {
+				var length = path.node().getTotalLength(); // Get the length of the path
+				var r = d3.interpolate(0, length); //Set up interpolation from 0 to the path length
+				return function (t) {
+					var point = path.node().getPointAtLength(r(t)); // Get the next point along the path
+					console.log(d3.polygonContains(polygon, [point.x, point.y]));
+
+					d3.select(this) // Select the circle
+						.attr("cx", point.x) // Set the cx
+						.attr("cy", point.y) // Set the cy
+				}
+			}
+
+		}
+
+		circleTransition();
+	</script>
+</body>
+
+</html>

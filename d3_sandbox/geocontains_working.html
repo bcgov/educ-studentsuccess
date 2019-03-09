@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<head>
+    <title>Basic geo (svg)</title>
+</head>
+
+<style>
+    body {
+        font-family: "Helvetica Neue", Helvetica, sans-serif;
+        font-size: 14px;
+        color: #333;
+    }
+
+    svg #mapGroup {
+        fill: #ddd;
+        stroke: #aaa;
+    }
+
+    svg circle {
+        display: none;
+    }
+</style>
+
+<body>
+    <div id="map">
+
+    </div>
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
+
+    <script>
+
+        let width = 800;
+        let height = 400;
+        // let rotation =-5;
+
+        //create svg element
+        let svg = d3.select('#map')
+            .append('svg')
+            .attr('width', width)
+            .attr('height', height);
+
+
+        var data = [
+
+            { 'x': 2, 'y': 5 },
+            { 'x': 3, 'y': 3.7 },
+            { 'x': 4, 'y': 4.5 },
+            { 'x': 5, 'y': 3.9 },
+        ];
+
+        var x_scale = d3.scaleLinear().domain([0, 6]).range([0, 800]);
+        var y_scale = d3.scaleLinear().domain([0, 6]).range([400, 0]);
+
+        var line = d3.line()
+            .x(function (d) { return x_scale(d['x']); })
+            .y(function (d) { return y_scale(d['y']); });
+
+
+
+        var m_path = svg.append("path")
+            .attr("d", line(data))
+            .style("stroke", "none")
+            .style("fill", "none");
+
+
+        //create map group
+        let mapGroup = svg.append('g')
+            .attr('id', 'mapGroup');
+        //   .attr('transform', 'rotate('+rotation+')');
+
+
+        //object stores inverted coordinates
+        var state = {
+            location: null
+        }
+
+        //moving point
+        var point;
+
+
+        /*MAP*/
+        //1. A geojson often have a FeatureCollection containing an array of features
+
+        d3.json('https://gist.githubusercontent.com/d3indepth/f28e1c3a99ea6d84986f35ac8646fac7/raw/c58cede8dab4673c91a3db702d50f7447b373d98/ne_110m_land.json', function (err, json) {
+            geojson = json;
+
+            //2. Create the function expression for by using d3 projection function
+            // projection takes lon and lat coordinates and transform em into x and y cooirdinates
+            var projection = d3.geoOrthographic()
+                .scale(300)
+                .rotate([30, -45])
+                .fitSize([width, height], geojson);
+
+            //3. Create a geogrpahic path generator
+            // this path generator converts a GeoJSON obejct into an SVG path string
+            var geoGenerator = d3.geoPath()
+                .projection(projection);
+
+
+            mapGroup.selectAll('path')
+                .data(geojson.features)
+                .enter()
+                .append('path')
+                .attr('d', geoGenerator);
+
+
+
+            function circleTransition() {
+
+                let circ = svg.append("circle")
+                    .attr("fill", "steelblue")
+                    .attr('r', 10);
+
+                repeat();
+
+                function repeat() {
+                    circ
+                        .attr("cx", 25) //Starting x
+                        .attr("cy", 25) //Starting y
+                        .attr('fill-opacity', 1)
+                        .transition()
+                        .ease(d3.easeQuadOut)
+                        .duration(3000)
+                        .tween("pathTween", function () { return pathTween(m_path) })
+                        .attr('fill-opacity', 0)
+                        // // .tween("pathTween", pathTween); //Custom tween to set the cx and cy attributes
+                        // .transition()        // apply a transition
+                        // .duration(500)      // apply it over 500 milliseconds
+                        // .attr('fill-opacity', 0)   // circle "disapear"
+                        .on("end", repeat); //repeat for this element
+                }
+
+                function pathTween(path) {
+                    var length = m_path.node().getTotalLength(); // Get the length of the path
+                    var r = d3.interpolate(0, length); //Set up interpolation from 0 to the path length
+                    return function (t) {
+                        point = m_path.node().getPointAtLength(r(t)); // Get the next point along the path
+
+                        state.location = projection.invert([point.x, point.y]) // Compute the corresponding geographic coordinates using the inverse projection
+
+                        // geojson.features.forEach(function(d) {
+                        //     let contains = d3.geoContains(d, state.location)
+                        //     console.log(contains);
+                        // });
+                        geojson.features.forEach(function(d) {
+                        if ( d3.geoContains(d, state.location) == true){
+                        d3.select('circle') // Select the circle
+                            .attr("cx", point.x) // Set the cx
+                            .attr("cy", point.y) // Set the cy
+                            .attr('style', 'display: inline-block');
+                        }
+                    });
+                    //   console.log(point.x, point.y);
+                    // console.log(state.location);   
+                    }
+                
+                }
+
+            }
+
+            circleTransition();
+        })
+    </script>
+</body>
+
+</html>
