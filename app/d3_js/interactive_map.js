@@ -146,7 +146,7 @@ function updateMap(coming, going) {
     }
 
     //stop populate the dropdown list again when changing dataset(2014,15,16...)
-    if (sd_list_arr.length <= 60) {
+    if (sd_list_arr.length <= 61) {
       //populate the dropdown list
       //onsole.log(sd_list_arr);
       for (let i = 0; i < sd_list_arr.length; i++) {

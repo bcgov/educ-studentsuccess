@@ -11,6 +11,7 @@
   <link rel='stylesheet' href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
   <link rel="stylesheet" href="/css/bootstrap.css">
+
   <!-- custom css -->
   <link rel="stylesheet" href="/css/styles.css">
 </head>
@@ -33,10 +34,10 @@
             <a class="nav-link" href="#home">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#map">Map</a>
+            <a class="nav-link" href="#inter-map">Map</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#grpah">Graph</a>
+            <a class="nav-link" href="#graph">Graph</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#facts">Facts</a>
@@ -65,8 +66,10 @@
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- defines a horizontal row then col inside -->
+  <!-- defines a horizontal row then col inside -->
+  <div class="container">
     <div class="row" id="inter-map">
       <!-- col = euqal col width -->
       <!-- card is also a component -->
@@ -81,18 +84,22 @@
       <div class="col-sm-12 col-md-4">
         <div class="mb-4" id='control'>
           <div class="controlSection">
+            <h2>WHERE DO STUDENTS GO</h2>
             <h5>School Year</h5>
             <select name="yr_dropdown" id="yearDropdown">
+              <option value="" selected>Select a school year</option>
               <option value="2018">2017/2018</option>
               <option value="2017">2016/2017</option>
               <option value="2016">2015/2016</option>
               <option value="2015">2014/2015</option>
               <option value="2014">2013/2014</option>
             </select>
+
           </div>
           <div class="controlSection">
             <h5>School District</h5>
             <select name="dist_dropdown" id="distDropdown">
+              <option value="" selected>Select a school district</option>
             </select>
           </div>
           <div class="controlSection">
@@ -105,26 +112,85 @@
       </div>
 
     </div>
+  </div>
 
+  <div class="container">
+    <div class="dcr-wrapper">
+    <img src="/assets/img/bg-dcr2.png" class="img-fluid bg-2" alt="map">
+  </div>
     <div class="row" id="graph">
+      <div class="col-sm-12 col-md-4">
+        <h2>DISTRICTS WITH THE HIGHTEST
+          NET MIGRATION GROWTH</h2>
+        <h4>SD-05</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+          dolore
+          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+          commodo
+          consequat. Duis aute irure dolor in reprehenderit.</p>
+      </div>
       <div class="col-sm-12 col-md-8">
         <div id="distContainer"></div>
         <div id="lineContainer"></div>
       </div>
-      <div class="col-sm-12 col-md-4">
-        <h4>SD-05</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit.</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <img src="/assets/img/bars.png" class="img-fluid bg-img" alt="map">
+    <div class="row" id="facts">
+      <div class="col-12 mb-5">
+        <h2 class="text-center">FACT NUMBERS AND INDICATORS</h2>
+      </div>
+      <div class="col-sm-12 col-md-4 fact-container">
+        <img src="/assets/img/migration.png" class="img-fluid fact-img" alt="map">
+        <div class="fact-info">
+          <h6>Total Migration (Year 2017/18)</h6>
+          <h1 class="text-center">7000</h1>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-4 fact-container">
+        <img src="/assets/img/avg.png" class="img-fluid fact-img" alt="map">
+        <div class="fact-info">
+          <h6>Average Migration (in each distict)</h6>
+          <h1 class="text-center">200</h1>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-4 fact-container">
+        <img src="/assets/img/schoolbag.png" class="img-fluid fact-img" alt="map">
+        <div class="fact-info">
+          <h6>Current Full-time Equivlent </h6>
+          <h1 class="text-center">552,600</h1>
+        </div>
       </div>
     </div>
-
   </div>
+
+  <img src="/assets/img/bg-dcr3.png" class="img-fluid fact-img">
+  <footer class="d-flex">
+    <div class="col-md-8 align-middle mt-4 ml-4">
+      <h4>An Expiremental Project by<br> Eucation Analytics Branch</h4>
+      <div class="footer-link">
+        <a href="#">Go to gov.bc.ca</a> |
+        <a href="#">Contact Us</a>
+      </div>
+    </div>
+    <div id="footer-logo" class="col-md-3 d-flex">
+      <img src="/assets/img/bc_logo.png" alt="bc_logo" class="bc_logo">
+      <p class="copyright">© 2019 BC Ministry of Education</p>
+    </div>
+    </div>
+  </footer>
+
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="/js/jquery.min.js"></script>
   <script src="/js/popper.min.js"></script>
   <script src="/js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.4/js/mdb.min.js"></script>
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/d3-queue/3.0.4/d3-queue.min.js"></script>
   <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
@@ -132,7 +198,7 @@
   <script src="/d3_js/migration_trend.js"></script>
   <script src="/d3_js/interactive_map.js"></script>
   <script src="/d3_js/interactive_line.js"></script>
-  
+
 </body>
 
 </html>

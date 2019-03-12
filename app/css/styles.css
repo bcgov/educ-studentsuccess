@@ -7071,7 +7071,13 @@ body {
     box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
     transform: translateY(-0.025em);
     transition: .3s ease; }
-  body #aniContainer #aniControl #year {
+  body .dcr-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin: 2rem 0; }
+  body .bg-img {
+    max-width: 400px; }
+  body #aniContainer #aniControl #yearDropdown {
     margin-left: 8rem; }
   body #aniContainer #aniControl #play-button {
     margin-left: 2rem; }
@@ -7145,8 +7151,10 @@ body {
           pointer-events: auto; }
     body #inter-map .controlSection {
       margin: 2rem 0; }
-    body #inter-map #distDropdown {
-      /* position: absolute; */ }
+      body #inter-map .controlSection #yearDropdown {
+        width: 286px; }
+      body #inter-map .controlSection #distDropdown {
+        /* position: absolute; */ }
     body #inter-map .flowBtn {
       margin-top: .5rem;
       margin-right: .5rem;
@@ -7243,7 +7251,7 @@ body {
     display: inline-block;
     position: relative;
     width: 100%;
-    padding-bottom: 100%;
+    padding-bottom: 30rem;
     vertical-align: top;
     overflow: hidden; }
     body #graph #lineContainer .svg-content {
@@ -7263,3 +7271,35 @@ body {
         padding: 10px 10px;
         border-radius: 3px;
         color: #494949; }
+  body #facts .fact-container {
+    margin: 2rem 0;
+    position: relative;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+    body #facts .fact-container .fact-img {
+      max-width: 200px;
+      max-height: 140px;
+      height: auto;
+      align-content: center; }
+    body #facts .fact-container .fact-info {
+      position: absolute;
+      bottom: 2rem; }
+  body footer {
+    background-color: #1D438C;
+    color: white;
+    padding: 15px; }
+    body footer a,
+    body footer a:hover {
+      text-decoration: none;
+      color: white; }
+    body footer .bc_logo {
+      max-width: 120px;
+      height: auto; }
+    body footer #footer-logo {
+      flex-direction: column;
+      align-items: center; }
+      body footer #footer-logo p.copyright {
+        display: inline-block;
+        font-size: 12px; }

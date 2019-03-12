@@ -1,6 +1,7 @@
 //varible overrides
 $home-color: #002663;
 $nav-color: #5091CD;
+$footer-color:#1D438C;
 $nav-bg: #fff;
 $body-bg: #f7f7f9;
 $font-color: #494949;
@@ -29,7 +30,7 @@ body {
 
   .navbar {
     padding: 1rem 2rem;
-    box-shadow: 0 0 8px 1px rgba(0,0,0,0.1);
+    box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.1);
 
     a {
       display: inline-block;
@@ -93,14 +94,24 @@ body {
     transition: .3s ease;
   }
 
+  .dcr-wrapper{
+    display: flex;
+    justify-content: flex-end;
+    margin: 2rem 0;
+  }
+
+  .bg-img{
+    max-width: 400px;
+  }
 
 
   #aniContainer {
 
 
     #aniControl {
-      #year {
+      #yearDropdown {
         margin-left: 8rem;
+
       }
 
       #play-button {
@@ -177,7 +188,7 @@ body {
       stroke-width: 1.25px;
     }
 
-    #ani_tt{
+    #ani_tt {
       background: $tooltip-info-bg;
       padding: 10px 10px;
       border-radius: 3px;
@@ -194,12 +205,13 @@ body {
 
     #interactiveMap {
 
-        max-width: 100%;
-        height: 500px;
-        z-index: 1; //leaftlet defualt z-index is 400, covers tooltip
-    
+      max-width: 100%;
+      height: 500px;
+      z-index: 1; //leaftlet defualt z-index is 400, covers tooltip
+
       svg {
         position: relative;
+
         .goingline {
           pointer-events: auto;
         }
@@ -208,10 +220,14 @@ body {
 
     .controlSection {
       margin: 2rem 0;
-    }
 
-    #distDropdown {
-      /* position: absolute; */
+      #yearDropdown {
+        width: 286px;
+      }
+
+      #distDropdown {
+        /* position: absolute; */
+      }
     }
 
     .flowBtn {
@@ -225,12 +241,12 @@ body {
       color: $btn-color;
       font-weight: medium;
       cursor: pointer;
-  }
+    }
 
     .selected {
-        font-weight: bold;
-        color: #fff;
-        background:$btn-color;
+      font-weight: bold;
+      color: #fff;
+      background: $btn-color;
     }
 
     /* #maincontainer {
@@ -338,13 +354,13 @@ body {
   }
 
   // interactive line graph
-  #graph{
-    
+  #graph {
+
     #distContainer {
-      display:flex;
+      display: flex;
       justify-content: space-around;
-  
-  .distBtn {
+
+      .distBtn {
         margin: 1rem;
         padding: 0.25rem 1rem;
         border: 2px solid $btn-color;
@@ -352,47 +368,101 @@ body {
         color: $btn-color;
         font-weight: medium;
         cursor: pointer;
-    }
+      }
 
-    .selected {
+      .selected {
         font-weight: bold;
         color: white;
-        background:$btn-color;
+        background: $btn-color;
+      }
+
     }
 
+    #lineContainer {
+      display: inline-block;
+      position: relative;
+      width: 100%;
+      padding-bottom: 30rem;
+      vertical-align: top;
+      overflow: hidden;
+
+      .svg-content {
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        .line {
+          fill: none;
+          stroke: #fcba19;
+          stroke-width: 3;
+        }
+
+        .dot {
+          fill: #ffab00;
+          stroke: #fff;
+        }
+
+        #line_tt {
+          background: $tooltip-info-bg;
+          padding: 10px 10px;
+          border-radius: 3px;
+          color: $font-color;
+        }
+      }
+    }
   }
 
-  #lineContainer{
-    display: inline-block;
-    position: relative;
-    width: 100%;
-    padding-bottom: 100%;
-    vertical-align: top;
-    overflow: hidden;
-    
-    .svg-content{
-      display: inline-block;
-      position: absolute;
-      top: 0;
-      left: 0;
+  //facts
+  #facts {
+    .fact-container {
+      margin: 2rem 0;
+      position: relative;
+      height: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .fact-img {
+        max-width: 200px;
+        max-height: 140px;
+        height: auto;
+        align-content: center;
+      }
       
-    .line {
-        fill: none;
-        stroke: #fcba19;
-        stroke-width: 3;
+      .fact-info {
+        position: absolute;
+        bottom: 2rem;
+      }
+
+    }
+  }
+
+  footer {
+    background-color: $footer-color;
+    color: white;
+    padding: 15px;
+
+
+
+    a,
+    a:hover {
+      text-decoration: none;
+      color: white;
     }
 
-    .dot {
-        fill: #ffab00;
-        stroke: #fff;
+    .bc_logo {
+      max-width: 120px;
+      height: auto;
     }
 
-    #line_tt {
-        background: $tooltip-info-bg;
-        padding: 10px 10px;
-        border-radius: 3px;
-        color: $font-color;
-        }
+    #footer-logo {
+      flex-direction: column;
+      align-items: center;
+
+      p.copyright {
+        display: inline-block;
+        font-size: 12px;
       }
     }
   }

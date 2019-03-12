@@ -320,6 +320,7 @@ function updateMap(coming, going) {
         .nodes();
       //console.log(allDist);
       allDist.forEach(d => {
+        console.log(d);
         clicked(d);
       });
     });
@@ -330,7 +331,7 @@ function updateMap(coming, going) {
 
 //initial/default map
 
-updateMap("../app/assets/raw_data/sd_coming_2018.csv", "../app/assets/raw_data/sd_going_2018.csv");
+updateMap("/d3_sandbox/data/sd_coming_2018.csv", "/d3_sandbox/data/sd_going_2018.csv");
 
 function toolOver(v, thepath) {
   d3.select(thepath)
@@ -495,12 +496,12 @@ function clicked(selected, flowtype) {
       var desty = path.centroid(theDistrict.nodes()[0].__data__)[1];
 
       if (flowtype && flowtype == 'inflow') {
-        if (!isNaN(finalval) && (finalval > 0)) {
+        if (!isNaN(finalval) && (finalval > 5)) {
           return "M" + destx + "," + desty + " Q" + Number((destx + homex)) / 2 + " " + (desty + homey) / 1.5 + " " + homex + " " + homey;
         }
 
       } else if (flowtype && flowtype == 'outflow') {
-        if (!isNaN(finalval) && (finalval < 0)) {
+        if (!isNaN(finalval) && (finalval < - 5)) {
           return "M" + homex + "," + homey + " Q" + (destx + homex) / 2 + " " + (desty + homey) / 2.5 + " " + destx + " " + desty;
         }
       } else {
@@ -509,10 +510,10 @@ function clicked(selected, flowtype) {
           //extract the district name from the __data__ obejct
           //console.log(theDistrict.nodes()[0].__data__.id);
 
-          //if theres changes meanig movements btw home distric and dest district
-          if (finalval > 0) {
+          //if theres changes meaning movements btw home distric and dest district
+          if (finalval > 5) {
             return "M" + destx + "," + desty + " Q" + Number((destx + homex)) / 2 + " " + (desty + homey) / 1.5 + " " + homex + " " + homey;
-          } else {
+          } else if (finalval < - 5) {
             return "M" + homex + "," + homey + " Q" + (destx + homex) / 2 + " " + (desty + homey) / 2.5 + " " + destx + " " + desty;
           }
         }
@@ -541,7 +542,7 @@ function clicked(selected, flowtype) {
 
     })
     .attr("fill", "none")
-    .attr("opacity", 0.5)
+    .attr("opacity", 0.3)
     .attr("stroke-linecap", "round")
     .on("mouseenter", function (d) {
       return toolOver2(d, this);
