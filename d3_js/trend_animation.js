@@ -341,6 +341,7 @@ function updateMap(coming, going) {
         .nodes();
 
       allDist.forEach(d => {
+        console.log(d);
         clicked(d);
       });
     });
@@ -562,7 +563,7 @@ function clicked(selected, flowtype) {
 
     })
     .attr("fill", "none")
-    .attr("opacity", 0.5)
+    .attr("opacity", 0.3)
     .attr("stroke-linecap", "round")
     .on("mouseenter", function (d) {
       return toolOver2(d, this);
