@@ -33,13 +33,18 @@ var lineSize = d3.scaleLinear().range([2, 25]).domain([0, 35000]);
 // var fillcolor = d3.scaleLinear().range(colors).domain(immdomain);
 
 //flag determines if clicked has been called before. if yes only append new path. 
-  let called = false;
+let called = false;
 
 //Create SVG element
 var svg = d3.select("#map")
   .append("svg")
   .attr("width", width)
   .attr("height", height);
+
+
+// .attr("preserveAspectRatio", "xMinYMin meet")  // This forces uniform scaling for both the x and y, aligning the midpoint of the SVG object with the midpoint of the container element.
+// .attr("viewBox", "0 0 760 600") //defines the aspect ratio, the inner scaling of object lengths and coordinates
+// .attr('class', 'svg-content');
 
 
 var fp = d3.format(".1f"); // format number, 1 place after decimal
@@ -67,6 +72,14 @@ var comingData, goingData;
 var currentDist;
 
 let flowPath;
+
+//object stores inverted coordinates
+let state = {
+  location: null
+}
+
+//moving point
+let m_circ, movingPoint;
 
 
 //the BIG function that wraps around the d3 pattern (bind, add, update, remove)
@@ -114,13 +127,13 @@ function updateMap(coming, going) {
   d3.csv(going, function (data) {
     goingData = data;
 
-    //console.log(goingData);
     //array contains all going numbers
     let num_going_arr = [];
 
     //loop through the csv, length is the total number of rows(states)
     for (var i = 0; i < data.length; i++) {
       //for...in statement iterates over all non-Symbol, enumerable properties (columns) of an object(each row)
+
       for (var stu_num in data[i]) {
 
         //filter out last two colums (totals)
@@ -137,6 +150,8 @@ function updateMap(coming, going) {
 
       sd_list_arr.push(sd_num + '-' + sd_name);
     }
+
+
 
     //stop populate the dropdown list again when changing dataset(2014,15,16...)
     if (sd_list_arr.length <= 60) {
@@ -197,7 +212,7 @@ function updateMap(coming, going) {
         //Find the corresponding district inside the GeoJSON
         for (var j = 0; j < json.features.length; j++) {
 
-          var jsonDistrict = json.features[j].properties.SDNAME; //state names in json file
+          var jsonDistrict = json.features[j].properties.SDNAME; //distric names in json file
 
           if (dataDistrict == jsonDistrict) {
 
@@ -312,13 +327,19 @@ function updateMap(coming, going) {
       // .transition()
       // .duration(1500);
 
+      // array of objects (all district)
+      // var aDistrict;
+      // for (var i = 0; i < data.length; i++) {
+      //   aDistrict = data;
+      // }
+      // aDistrict.forEach(d=>{
+      //   let netDiff = d.total_move_in-d.total_move_out;
+      //   });
 
-
-
-
+      //arry of circles for making the clicked() call
       let allDist = d3.selectAll('.circ')
         .nodes();
-      //console.log(allDist);
+
       allDist.forEach(d => {
         clicked(d);
       });
@@ -330,7 +351,7 @@ function updateMap(coming, going) {
 
 //initial/default map
 
-updateMap("../app/assets/raw_data/sd_coming_2018.csv", "../app/assets/raw_data/sd_going_2018.csv");
+updateMap("/d3_sandbox/data/sd_coming_2018.csv", "/d3_sandbox/data/sd_going_2018.csv");
 
 function toolOver(v, thepath) {
   d3.select(thepath)
@@ -423,7 +444,7 @@ function clicked(selected, flowtype) {
   //here we dont have distName, will define later
   selDist = selected.getAttribute('id');
 
-  // //console.log(selDist);
+  // console.log(selected);
 
   //convert attribute string to number for use in the path('d',val)
   homex = +(selected.getAttribute('cx'));
@@ -448,6 +469,12 @@ function clicked(selected, flowtype) {
       //bind going data
       .data(goingData)
       .enter();
+
+
+    m_circ = chartGroup.append('circle')
+      .attr('r', 10)
+      .attr("fill", "steelblue");
+
     called = true;
   }
 
@@ -455,7 +482,7 @@ function clicked(selected, flowtype) {
     .attr("class", "goingline" + selDist)
 
     .attr("d", function (d, i) {
-      // //console.log(d); // it's all obejcts in goingData
+      //console.log(d); // it's all obejcts in goingData
       //data points here are from .csv, case sensitive!!!
       var abb = d.Abbrev;
 
@@ -466,7 +493,7 @@ function clicked(selected, flowtype) {
       the csv coming and going is based on column: e.g. going or coming number of students to the ditrict in title row 
       */
       var finalval = comingData[i][selDist] - goingData[i][selDist];
-      // //console.log(finalval);
+      let netDiff = goingData[i].total_move_in - goingData[i].total_move_out;
       /*
       select the district (destination, id has been assigned)
       the id here is the id of the circle of destination (circle)
@@ -494,27 +521,18 @@ function clicked(selected, flowtype) {
       var destx = path.centroid(theDistrict.nodes()[0].__data__)[0];
       var desty = path.centroid(theDistrict.nodes()[0].__data__)[1];
 
-      if (flowtype && flowtype == 'inflow') {
-        if (!isNaN(finalval) && (finalval > 0)) {
+
+      //validate and check the net changes, and exclude path with no migration change
+      if (!isNaN(finalval) && (comingData[i][selDist] != 0 || goingData[i][selDist] != 0)) {
+        //extract the district name from the __data__ obejct
+        //console.log(theDistrict.nodes()[0].__data__.id);
+
+        //if netflow > 0 only show dominant inflow, if netflow < 0, only show dominant outflow, 
+        //show movements btw home distric and dest district more than 5 students
+        if (netDiff > 0 && finalval > 5) {
           return "M" + destx + "," + desty + " Q" + Number((destx + homex)) / 2 + " " + (desty + homey) / 1.5 + " " + homex + " " + homey;
-        }
-
-      } else if (flowtype && flowtype == 'outflow') {
-        if (!isNaN(finalval) && (finalval < 0)) {
+        } else if (netDiff < 0 && finalval < -5) {
           return "M" + homex + "," + homey + " Q" + (destx + homex) / 2 + " " + (desty + homey) / 2.5 + " " + destx + " " + desty;
-        }
-      } else {
-        //validate and check the net changes, and exclude path with no migration change
-        if (!isNaN(finalval) && (comingData[i][selDist] != 0 || goingData[i][selDist] != 0)) {
-          //extract the district name from the __data__ obejct
-          //console.log(theDistrict.nodes()[0].__data__.id);
-
-          //if theres changes meanig movements btw home distric and dest district
-          if (finalval > 0) {
-            return "M" + destx + "," + desty + " Q" + Number((destx + homex)) / 2 + " " + (desty + homey) / 1.5 + " " + homex + " " + homey;
-          } else {
-            return "M" + homex + "," + homey + " Q" + (destx + homex) / 2 + " " + (desty + homey) / 2.5 + " " + destx + " " + desty;
-          }
         }
       }
 
@@ -522,12 +540,15 @@ function clicked(selected, flowtype) {
 
     //the drawing annimation
     // .call(transition)
+    // .call(repeat(selDist,homex,homey))
 
     //determine the stroke width based on net changes
 
     .attr("stroke-width", function (d, i) {
       var finalval = comingData[i][selDist] - goingData[i][selDist];
-      return lineSize(parseFloat(Math.abs(finalval)));
+      if (finalval > 5 || finalval < -5) {
+        return lineSize(parseFloat(Math.abs(finalval)));
+      }
     })
     //stroke color
     .attr("stroke", function (d, i) {
@@ -555,7 +576,67 @@ function clicked(selected, flowtype) {
     .on("mouseleave", function (d) {
       return toolOut2(d, this);
     });
+  
+  
+
+  //for each district, select all exisiting path and remove them if they don't have 'd' attribute.
+  let existingPath = d3.selectAll('.goingline' + selDist).nodes();
+  
+  existingPath.forEach(function (d) {
+
+    if (!(d.getAttribute('d'))) {
+      d.remove();
+    } else {
+    existingPath.push(d);
+    }
+  });
+ 
+
+  function repeat(m_path) {
+    m_circ
+      .attr("class", "movingpoint")
+      .attr("cx", homex) //Starting x
+      .attr("cy", homey) //Starting y
+      .attr('fill-opacity', 1)
+      .transition()
+      .ease(d3.easeQuadOut)
+      .duration(3000)
+      .tween("pathTween", function () { return pathTween(m_path) })
+      .attr('fill-opacity', 0)
+      // // .tween("pathTween", pathTween); //Custom tween to set the cx and cy attributes
+      // .transition()        // apply a transition
+      // .duration(500)      // apply it over 500 milliseconds
+      // .attr('fill-opacity', 0)   // circle "disapear"
+      .on("end", repeat); //repeat for this element
+  }
+  
+  function pathTween(m_path) {
+    var length = m_path.node().getTotalLength(); // Get the length of the path
+    var r = d3.interpolate(0, length); //Set up interpolation from 0 to the path length
+    return function (t) {
+      movingPoint = path.node().getPointAtLength(r(t)); // Get the next point along the path
+  
+      state.location = projection.invert([movingPoint.x, movingPoint.y]) // Compute the corresponding geographic coordinates using the inverse projection
+  
+      // geojson.features.forEach(function(d) {
+      //     let contains = d3.geoContains(d, state.location)
+      //     console.log(contains);
+      // });
+  
+      // geojson.features.forEach(function (d) {
+      //   if (d3.geoContains(d, state.location) == true) {
+      //     d3.select('circle') // Select the circle
+      //       .attr("cx", movingPoint.x) // Set the cx
+      //       .attr("cy", movingPoint.y) // Set the cy
+      //       .attr('style', 'display: inline-block');
+      //   }
+      // });
+  
+    }
+  }
+
 }
+
 
 //must append elements or bind data before a transition starts.
 //use the attrTween and transform to navigate along the path

@@ -108,56 +108,55 @@
                 .attr('d', geoGenerator);
 
 
+            let circ = svg.append("circle")
+                .attr("fill", "steelblue")
+                .attr('r', 10);
 
             function circleTransition() {
 
-                let circ = svg.append("circle")
-                    .attr("fill", "steelblue")
-                    .attr('r', 10);
-
                 repeat();
 
-                function repeat() {
-                    circ
-                        .attr("cx", 25) //Starting x
-                        .attr("cy", 25) //Starting y
-                        .attr('fill-opacity', 1)
-                        .transition()
-                        .ease(d3.easeQuadOut)
-                        .duration(3000)
-                        .tween("pathTween", function () { return pathTween(m_path) })
-                        .attr('fill-opacity', 0)
-                        // // .tween("pathTween", pathTween); //Custom tween to set the cx and cy attributes
-                        // .transition()        // apply a transition
-                        // .duration(500)      // apply it over 500 milliseconds
-                        // .attr('fill-opacity', 0)   // circle "disapear"
-                        .on("end", repeat); //repeat for this element
-                }
+            }
 
-                function pathTween(path) {
-                    var length = m_path.node().getTotalLength(); // Get the length of the path
-                    var r = d3.interpolate(0, length); //Set up interpolation from 0 to the path length
-                    return function (t) {
-                        point = m_path.node().getPointAtLength(r(t)); // Get the next point along the path
+            function repeat() {
+                circ
+                    .attr("cx", 25) //Starting x
+                    .attr("cy", 25) //Starting y
+                    .attr('fill-opacity', 1)
+                    .transition()
+                    .ease(d3.easeQuadOut)
+                    .duration(3000)
+                    .tween("pathTween", function () { return pathTween(m_path) })
+                    .attr('fill-opacity', 0)
+                    // // .tween("pathTween", pathTween); //Custom tween to set the cx and cy attributes
+                    // .transition()        // apply a transition
+                    // .duration(500)      // apply it over 500 milliseconds
+                    // .attr('fill-opacity', 0)   // circle "disapear"
+                    .on("end", repeat); //repeat for this element
+            }
 
-                        state.location = projection.invert([point.x, point.y]) // Compute the corresponding geographic coordinates using the inverse projection
+            function pathTween(path) {
+                var length = m_path.node().getTotalLength(); // Get the length of the path
+                var r = d3.interpolate(0, length); //Set up interpolation from 0 to the path length
+                return function (t) {
+                    point = m_path.node().getPointAtLength(r(t)); // Get the next point along the path
 
-                        // geojson.features.forEach(function(d) {
-                        //     let contains = d3.geoContains(d, state.location)
-                        //     console.log(contains);
-                        // });
-                        geojson.features.forEach(function(d) {
-                        if ( d3.geoContains(d, state.location) == true){
-                        d3.select('circle') // Select the circle
-                            .attr("cx", point.x) // Set the cx
-                            .attr("cy", point.y) // Set the cy
-                            .attr('style', 'display: inline-block');
+                    state.location = projection.invert([point.x, point.y]) // Compute the corresponding geographic coordinates using the inverse projection
+
+                    // geojson.features.forEach(function(d) {
+                    //     let contains = d3.geoContains(d, state.location)
+                    //     console.log(contains);
+                    // });
+                    geojson.features.forEach(function (d) {
+                        if (d3.geoContains(d, state.location) == true) {
+                            d3.select('circle') // Select the circle
+                                .attr("cx", point.x) // Set the cx
+                                .attr("cy", point.y) // Set the cy
+                                .attr('style', 'display: inline-block');
                         }
                     });
                     //   console.log(point.x, point.y);
                     // console.log(state.location);   
-                    }
-                
                 }
 
             }
