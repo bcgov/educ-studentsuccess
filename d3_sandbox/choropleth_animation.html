@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+
+<head>
+    <title>District migration</title>
+    <link rel="stylesheet" type="text/css"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+        <style type="text/css">
+            h5 {
+                display: inline-block;
+            }
+    
+            #maincontainer {
+                padding: 2rem;
+            }
+    
+    
+            .dist {
+                stroke: #fff;
+            }
+    
+            /* #play-button {
+                top: 140px;
+                left: 50px;
+                background: #f08080;
+                border-radius: 3px;
+                border: none;
+                color: white;
+                margin: 0;
+                padding: 0 12px;
+                width: 60px;
+                cursor: pointer;
+                height: 30px;
+            } */
+
+            #play-pause {
+                width: 40px;
+                height:40px;
+            }
+    
+            .play {
+                background: url(../app/assets/img/play&pause.png) 0 0;
+                background-size: cover;
+                cursor: pointer;
+            }
+
+            .pause {
+                background: url(../app/assets/img/play&pause.png) 40px 0;
+                background-size: cover;
+                cursor: pointer;
+            }
+    
+            .tick {
+                font-size: 10px;
+                font-weight: 600;
+            }
+
+            .track,
+            .track-inset,
+            .track-overlay {
+                stroke-linecap: round;
+            }
+    
+            .track {
+                stroke: #000;
+                stroke-opacity: 0.3;
+                stroke-width: 10px;
+            }
+    
+            .track-inset {
+                stroke: #dcdcdc;
+                stroke-width: 8px;
+            }
+    
+            .track-overlay {
+                pointer-events: stroke;
+                stroke-width: 50px;
+                stroke: transparent;
+                cursor: pointer;
+            }
+    
+            .handle {
+                fill: #fff;
+                stroke: #000;
+                stroke-opacity: 0.5;
+                stroke-width: 1.25px;
+            }
+        </style>
+
+
+</head>
+
+<body>
+    <div id="aniContainer">
+        <div id="animationMap"></div>
+        <div id="aniControl">
+            <div id="year">
+            </div>
+            <div id="play-pause" class="play"></div>
+            <div id="slider"></div>
+        </div>
+    </div>
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+    <script type="text/javascript" src="../d3_js/choropleth_animation.js"></script>
+
+</body>
+
+</html>

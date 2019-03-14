@@ -541,7 +541,7 @@ function clicked(selected, flowtype) {
 
     //the drawing annimation
     // .call(transition)
-    // .call(repeat(selDist,homex,homey))
+    // .call(repeat())
 
     //determine the stroke width based on net changes
 
