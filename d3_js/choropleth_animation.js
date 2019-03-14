@@ -7,7 +7,7 @@ let margin = {
 }
 
 let ani_width = 600 - margin.left - margin.right;
-let ani_height = 450 - margin.top - margin.bottom;
+let ani_height = 400 - margin.top - margin.bottom;
 
 //format int val
 let formatC = d3.format(",.0f");
@@ -15,26 +15,50 @@ let formatC = d3.format(",.0f");
 //the data object here is used to load different year's data
 let data = {};
 
-//define the projection expression
+//define the projection expressions
 let projection1 = d3.geoAlbers()
     .rotate([122, 0, 0])
-    .scale(2000)
-    .translate([ani_width * .9, ani_height * 2.2]);
+    .scale(1800)
+    .translate([ani_width * 0.97, ani_height * 2.28]);
 
-//Define path generator
+let projection_LM = d3.geoAlbers()
+    .rotate([122, 0, 0])
+    .scale(6500)
+    .translate([ani_width * 0.2, ani_height * 5.15]);
+
+let projection_SVI = d3.geoAlbers()
+    .rotate([122, 0, 0])
+    .scale(6000)
+    .translate([ani_width * 0.5, ani_height * 4.26]);
+
+
+//Define path generators
 let ani_path = d3.geoPath()
     .projection(projection1);
+
+let ani_path_lm = d3.geoPath()
+    .projection(projection_LM);
+
+let ani_path_svi = d3.geoPath()
+    .projection(projection_SVI);
 
 //Create SVG element for map
 let svg_map = d3.select("#animationMap")
     .append("svg")
     .attr("preserveAspectRatio", "xMinYMin meet")  // This forces uniform scaling for both the x and y, aligning the midpoint of the SVG object with the midpoint of the container element.
-    .attr("viewBox", "0 0 600 450") //defines the aspect ratio, the inner scaling of object lengths and coordinates
+    .attr("viewBox", "0 0 600 400") //defines the aspect ratio, the inner scaling of object lengths and coordinates
     .attr('class', 'svg-content');
 
 
-//chart group
-let mapGroup = svg_map.append('g');
+//chart groups
+let mapGroup = svg_map.append('g')
+    .attr('class', 'mainMap');
+
+let mapGroup_lm = svg_map.append('g')
+    .attr('class', 'lmMap');
+
+let mapGroup_svi = svg_map.append('g')
+    .attr('class', 'sviMap');
 
 //initialize html animation_tooltip
 let animation_tooltip = d3.select("#aniContainer")
@@ -69,7 +93,7 @@ let legend = function (g) {
         .attr("font-weight", "bold")
         .text("Net Migration (FTE)");
 
-    let ticks = ["Outflow", "Inflow"];
+    let ticks = ["Inflow", "Outflow"];
 
     let xscale = d3.scalePoint()
         .domain(ticks)
@@ -81,14 +105,19 @@ let legend = function (g) {
         .tickSize(18);
 
     g.call(axis)
-     .select('.domain').remove(); // removes the overhead line of the axis
+        .select('.domain').remove(); // removes the overhead line of the axis
     g.selectAll(".tick line").attr('stroke', '#494949');
     g.selectAll(".tick text").attr('fill', '#494949');
 }
 
 let legendGroup = svg_map.append('g')
-    .attr('transform', 'translate(440, 50)')
+    .attr('class', 'legend')
+    .attr('transform', 'translate(460, 40)')
     .call(legend);
+
+//transition animation 
+let trans = d3.transition()
+    .duration(200);
 
 //update migration map 
 function update(year) {
@@ -101,107 +130,111 @@ function update(year) {
 
     colorIn.domain([0, maxMove]);
     colorOut.domain([minMove, 0]);
+    
 
-    //transition animation 
-    let trans = d3.transition()
-        .duration(200);
-
-    d3.json("../app/assets/geo_json/sd_geo.json", function (json) {
-
-        for (var i = 0; i < csv_data.length; i++) {
-            var dataDistrict = csv_data[i].District; //district names in csv data
-
-            var tempObj = {}; //crate a temp object
-
-            //for...in statement iterates over all non-Symbol, enumerable properties (columns) of an object(each row)
-            for (var propt in csv_data[i]) {
-                var valz = parseFloat(csv_data[i][propt]); //parseFloat() parses a string and returns a floating point number
-                tempObj[propt] = valz;
-            }
-            //Find the corresponding district inside the GeoJSON
-            for (var j = 0; j < json.features.length; j++) {
-
-                var jsonDistrict = json.features[j].properties.SDNAME; //district names in json file
-
-                if (dataDistrict == jsonDistrict) {
-
-                    matched = true; //match flag
-                    //create new properties and add vals in json
-                    json.features[j].properties.district = dataDistrict;
-                    json.features[j].id = dataDistrict;
-                    json.features[j].abbrev = csv_data[i].Abbrev;
-                    json.features[j].ind = i;
-
-                    //loop all propt in this temp object
-                    for (var propt in tempObj) {
-                        //check if it's a number
-                        if (!isNaN(tempObj[propt])) {
-                            //add properties&vals to json
-                            json.features[j].properties[propt] = tempObj[propt];
-                        }
-
-                    }
-                    break;
-                }
-            }
-        }
-
-        //Bind data and create one path per GeoJSON feature
-        let districtShape = mapGroup.selectAll("path")
-            .data(json.features);
-
-        let newDistrictShape = districtShape
-            .enter()
-            .append("path")
-            .attr("class", "dist")
-            //add id(district name) to each path (district shape on map)
-            .attr("id", function (d) {
-                return d.properties.district;
-            })
-            .attr("d", ani_path) //path here is the geo path generator
-            //uses .style to fill path color
-            .style("fill", function (d) {
-                /*fill the color based on -/+ net changes*/
-                let diff = d.properties.total_move_in - d.properties.total_move_out;
-                if (diff > 0) {
-                    return colorIn(diff);
-                } else {
-                    return colorOut(diff);
-                }
-            })
-            .attr("stroke-width", 0.5);
-
-        // update district shape by merge()
-        newDistrictShape.merge(districtShape)
-            .transition(trans)
-            .style("fill", function (d) {
-                /*fill the color based on -/+ net changes*/
-                let diff = d.properties.total_move_in - d.properties.total_move_out;
-                if (diff > 0) {
-                    return colorIn(diff);
-                } else {
-                    return colorOut(diff);
-                }
-            });
-
-        newDistrictShape.on("mouseenter", function (d) {
-            //toolOver is the event handler
-            return ani_toolOver(d, this);
-        })
-            .on("mousemove", function (d) {
-                //gets mouse coordinates on screen
-                var m = d3.mouse(this);
-                mx = m[0];
-                my = m[1];
-
-                return ani_toolMove(mx, my, d);
-            })
-            .on("mouseleave", function (d) {
-                return ani_toolOut(d, this);
-            });
+    d3.json("../geo_json/sd_geo.json", function (json) {
+        loadJson(csv_data, json, mapGroup, ani_path, 'dist-main');
     });
+
+    d3.json("../geo_json/lower_mainland_chilliwack.json", function (json) {
+        loadJson(csv_data, json, mapGroup_lm, ani_path_lm, 'dist-lm');
+    });
+
+    d3.json("../geo_json/southern_vancouver_island.json", function (json) {
+        loadJson(csv_data, json, mapGroup_svi, ani_path_svi, 'dist-svi');
+    });
+
 }
 
+
+
+//load json and draw map
+function loadJson(csv_data, json, map, path, pathClass) {
+    console.log('json updated');
+    for (var i = 0; i < csv_data.length; i++) {
+        var dataDistrict = csv_data[i].District; //district names in csv data
+
+        var tempObj = {}; //crate a temp object
+
+        //for...in statement iterates over all non-Symbol, enumerable properties (columns) of an object(each row)
+        for (var propt in csv_data[i]) {
+            var valz = parseFloat(csv_data[i][propt]); //parseFloat() parses a string and returns a floating point number
+            tempObj[propt] = valz;
+        }
+        //Find the corresponding district inside the GeoJSON
+        for (var j = 0; j < json.features.length; j++) {
+
+            var jsonDistrict = json.features[j].properties.SDNAME; //district names in json file
+
+            if (dataDistrict == jsonDistrict) {
+
+                matched = true; //match flag
+                //create new properties and add vals in json
+                json.features[j].properties.district = dataDistrict;
+                json.features[j].id = dataDistrict;
+                json.features[j].abbrev = csv_data[i].Abbrev;
+                json.features[j].ind = i;
+
+                //loop all propt in this temp object
+                for (var propt in tempObj) {
+                    //check if it's a number
+                    if (!isNaN(tempObj[propt])) {
+                        //add properties&vals to json
+                        json.features[j].properties[propt] = tempObj[propt];
+                    }
+
+                }
+                break;
+            }
+        }
+    }
+
+    //Bind data and create one path per GeoJSON feature
+    let districtShape = map.selectAll("." + pathClass)
+        .data(json.features);
+
+    let newDistrictShape = districtShape
+        .enter()
+        .append("path")
+        .attr("class", pathClass)
+        //add id(district name) to each path (district shape on map)
+        .attr("id", function (d) {
+            return d.properties.district;
+        })
+        .attr("d", path) //path here is the geo path generator
+        //uses .style to fill path color
+        .attr("stroke-width", 0.5);
+
+    // update district shape by merge()
+    newDistrictShape.merge(districtShape)
+        .transition(trans)
+        .style("fill", function (d) {
+            /*fill the color based on -/+ net changes*/
+            let diff = d.properties.total_move_in - d.properties.total_move_out;
+            if (diff > 0) {
+                return colorIn(diff);
+            } else {
+                if(isNaN(diff)) {return '#e6e6e6';} // for lower mainland and southern vancouver island
+                return colorOut(diff);
+            }
+        });
+
+    newDistrictShape.on("mouseenter", function (d) {
+        //toolOver is the event handler
+        return ani_toolOver(d, this);
+    })
+        .on("mousemove", function (d) {
+            //gets mouse coordinates on screen
+            var m = d3.mouse(this);
+            mx = m[0];
+            my = m[1];
+
+            return ani_toolMove(mx, my, d);
+        })
+        .on("mouseleave", function (d) {
+            return ani_toolOut(d, this);
+        });
+}
 
 // queue to load the multiple datasets
 d3.queue()
@@ -248,12 +281,18 @@ function ani_toolMove(mx, my, data) {
         my = 40
     };
 
+    if(data.id){
     //create the animation_tooltip, style it and inject info
     return animation_tooltip.style("top", my + - 80 + "px")
         .style("left", mx - 140 + "px")
         .html("<div id='tipContainer'><div id='tipLocation'><b>" + data.id +
             "</b></div><div id='tipKey'>Net migration: <b>" + formatC((data.properties.total_move_in - data.properties.total_move_out)) +
             "</b></div><div class='tipClear'></div> </div>");
+    } else {
+        return animation_tooltip.style("top", my + - 80 + "px")
+        .style("left", mx - 140 + "px")
+        .html("<div id='tipContainer'><div id='tipLocation'><b>See side maps for details</b></div><div class='tipClear'></div> </div>");
+    }
 };
 
 
