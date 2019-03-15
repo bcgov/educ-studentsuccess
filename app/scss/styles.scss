@@ -109,6 +109,8 @@ body {
 
 
     #aniControl {
+      display: flex;
+      justify-content: center;
       #yearDropdown {
         margin-left: 8rem;
 
@@ -118,44 +120,42 @@ body {
         margin-left: 2rem;
       }
 
-      #year,
-      #play-button,
-      #slider {
-        display: inline-block;
-        vertical-align: middle;
-      }
+      // #year,
+      // #play-button,
+      // #slider {
+      //   display: inline-block;
+      //   vertical-align: middle;
+      // }
     }
 
-    .dist {
-      fill: #f7f7f7;
-      stroke: #ccc;
+      .dist-main, .dist-lm, .dist-svi {
+        stroke: #fff;
     }
 
-    #play-button {
-      top: 140px;
-      left: 50px;
-      background: $btn-color;
-      border-radius: 3px;
-      border: none;
-      color: white;
-      margin: 0;
-      padding: 0 12px;
-      width: 60px;
+      .tick {
+        font-size: 10px;
+        font-weight: 600;
+    }
+    .caption {
+        fill: #494949;
+    }
+
+    #play-pause {
+      width: 40px;
+      height:40px;
+  }
+
+  .play {
+      background: url(../assets/img/play&pause.png) 0 0;
+      background-size: cover;
       cursor: pointer;
-      height: 30px;
-      box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05);
-    }
+  }
 
-    #play-button:hover {
-      background-color: $btn-color;
-      box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
-      transform: translateY(-0.025em);
-      transition: .3s ease;
-    }
-
-    .ticks {
-      font-size: 10px;
-    }
+  .pause {
+      background: url(../assets/img/play&pause.png) 40px 0;
+      background-size: cover;
+      cursor: pointer;
+  }
 
     .track,
     .track-inset,
@@ -361,7 +361,6 @@ body {
       justify-content: space-around;
 
       .distBtn {
-        margin: 1rem;
         padding: 0.25rem 1rem;
         border: 2px solid $btn-color;
         border-radius: 50px;
