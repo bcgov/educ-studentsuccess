@@ -132,7 +132,7 @@ function update(year) {
     colorOut.domain([minMove, 0]);
     
 
-    d3.json("../geo_json/sd_geo.json", function (json) {
+    d3.json("../geo_json/sd_geo_grouped.json", function (json) {
         loadJson(csv_data, json, mapGroup, ani_path, 'dist-main');
     });
 

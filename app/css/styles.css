@@ -7077,38 +7077,31 @@ body {
     margin: 2rem 0; }
   body .bg-img {
     max-width: 400px; }
-  body #aniContainer #aniControl #yearDropdown {
-    margin-left: 8rem; }
-  body #aniContainer #aniControl #play-button {
-    margin-left: 2rem; }
-  body #aniContainer #aniControl #year,
-  body #aniContainer #aniControl #play-button,
-  body #aniContainer #aniControl #slider {
-    display: inline-block;
-    vertical-align: middle; }
-  body #aniContainer .dist {
-    fill: #f7f7f7;
-    stroke: #ccc; }
-  body #aniContainer #play-button {
-    top: 140px;
-    left: 50px;
-    background: #38598a;
-    border-radius: 3px;
-    border: none;
-    color: white;
-    margin: 0;
-    padding: 0 12px;
-    width: 60px;
-    cursor: pointer;
-    height: 30px;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
-  body #aniContainer #play-button:hover {
-    background-color: #38598a;
-    box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
-    transform: translateY(-0.025em);
-    transition: .3s ease; }
-  body #aniContainer .ticks {
-    font-size: 10px; }
+  body #aniContainer #aniControl {
+    display: flex;
+    justify-content: center; }
+    body #aniContainer #aniControl #yearDropdown {
+      margin-left: 8rem; }
+    body #aniContainer #aniControl #play-button {
+      margin-left: 2rem; }
+  body #aniContainer .dist-main, body #aniContainer .dist-lm, body #aniContainer .dist-svi {
+    stroke: #fff; }
+  body #aniContainer .tick {
+    font-size: 10px;
+    font-weight: 600; }
+  body #aniContainer .caption {
+    fill: #494949; }
+  body #aniContainer #play-pause {
+    width: 40px;
+    height: 40px; }
+  body #aniContainer .play {
+    background: url(../assets/img/play&pause.png) 0 0;
+    background-size: cover;
+    cursor: pointer; }
+  body #aniContainer .pause {
+    background: url(../assets/img/play&pause.png) 40px 0;
+    background-size: cover;
+    cursor: pointer; }
   body #aniContainer .track,
   body #aniContainer .track-inset,
   body #aniContainer .track-overlay {
@@ -7236,7 +7229,6 @@ body {
     display: flex;
     justify-content: space-around; }
     body #graph #distContainer .distBtn {
-      margin: 1rem;
       padding: 0.25rem 1rem;
       border: 2px solid #38598a;
       border-radius: 50px;
