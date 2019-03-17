@@ -102,31 +102,81 @@ body {
 
   .bg-img{
     max-width: 400px;
+    height: auto;
   }
 
 
   #aniContainer {
 
-
     #aniControl {
       display: flex;
       justify-content: center;
-      #yearDropdown {
-        margin-left: 8rem;
+  
+       #year {
+         align-self: flex-end; 
+         font-weight: bold;
+         margin: 0 2rem;
+         font-size: 1.6rem;
+       }
+        
+        #play-control {
+          display: flex;
+          align-items: flex-end;
 
+        #play-pause {
+          width: 40px;
+          height:40px;
       }
-
-      #play-button {
-        margin-left: 2rem;
+    
+      .play {
+          background: url(../assets/img/play&pause.png) 0 0;
+          background-size: cover;
+          cursor: pointer;
       }
+    
+      .pause {
+          background: url(../assets/img/play&pause.png) 40px 0;
+          background-size: cover;
+          cursor: pointer;
+      }    
+       
+        .track,
+        .track-inset,
+        .track-overlay {
+          stroke-linecap: round;
+        }
+    
+        .track {
+          stroke: #000;
+          stroke-opacity: 0.3;
+          stroke-width: 10px;
+        }
+    
+        .track-inset {
+          stroke: #e7e7e7;
+          stroke-width: 8px;
+        }
+    
+        .track-overlay {
+          pointer-events: stroke;
+          stroke-width: 50px;
+          stroke: transparent;
+          cursor: pointer;
+        }
+    
+        .handle {
+          fill: $btn-color;
+          stroke: #000;
+          stroke-opacity: 0.5;
+          stroke-width: 1px;
+        }
 
-      // #year,
-      // #play-button,
-      // #slider {
-      //   display: inline-block;
-      //   vertical-align: middle;
-      // }
+        .ticks {
+          fill: $font-color;
+          font-size: 12px;
+      }
     }
+  }
 
       .dist-main, .dist-lm, .dist-svi {
         stroke: #fff;
@@ -136,56 +186,9 @@ body {
         font-size: 10px;
         font-weight: 600;
     }
+
     .caption {
         fill: #494949;
-    }
-
-    #play-pause {
-      width: 40px;
-      height:40px;
-  }
-
-  .play {
-      background: url(../assets/img/play&pause.png) 0 0;
-      background-size: cover;
-      cursor: pointer;
-  }
-
-  .pause {
-      background: url(../assets/img/play&pause.png) 40px 0;
-      background-size: cover;
-      cursor: pointer;
-  }
-
-    .track,
-    .track-inset,
-    .track-overlay {
-      stroke-linecap: round;
-    }
-
-    .track {
-      stroke: #000;
-      stroke-opacity: 0.3;
-      stroke-width: 10px;
-    }
-
-    .track-inset {
-      stroke: #dcdcdc;
-      stroke-width: 8px;
-    }
-
-    .track-overlay {
-      pointer-events: stroke;
-      stroke-width: 50px;
-      stroke: transparent;
-      cursor: pointer;
-    }
-
-    .handle {
-      fill: #fff;
-      stroke: #000;
-      stroke-opacity: 0.5;
-      stroke-width: 1.25px;
     }
 
     #ani_tt {
@@ -224,10 +227,6 @@ body {
       #yearDropdown {
         width: 286px;
       }
-
-      #distDropdown {
-        /* position: absolute; */
-      }
     }
 
     .flowBtn {
@@ -247,6 +246,7 @@ body {
       font-weight: bold;
       color: #fff;
       background: $btn-color;
+      box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05);
     }
 
     /* #maincontainer {
@@ -373,6 +373,7 @@ body {
         font-weight: bold;
         color: white;
         background: $btn-color;
+        box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05);
       }
 
     }
@@ -417,14 +418,14 @@ body {
     .fact-container {
       margin: 2rem 0;
       position: relative;
-      height: 320px;
+      height: 280px;
       display: flex;
       flex-direction: column;
       align-items: center;
 
       .fact-img {
-        max-width: 200px;
-        max-height: 140px;
+        max-width: 180px;
+        max-height: 120px;
         height: auto;
         align-content: center;
       }

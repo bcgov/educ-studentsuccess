@@ -301,7 +301,7 @@ function ani_toolMove(mx, my, data) {
 //Create SVG element for slider
 let svg_slider = d3.select("#slider")
     .append("svg")
-    .attr("width", ani_width-50)
+    .attr("width", ani_width-100)
     .attr("height", 50);
 
 let sliderGroup = svg_slider.append("g")
@@ -317,14 +317,14 @@ let step = 1;
 let yearValues = d3.range(years[0], years[1], step || 1).concat(years[1]);
 
 let yearText = d3.select('#year')
-    .html("<h5>Year:</h5><span> 2013</span>");
+    .html("<span>Year: 2013</span>");
 
 let playButton = d3.select("#play-pause");
 
 //scales
 let xScale = d3.scaleLinear()
     .domain(years)
-    .range([0, targetValue])
+    .range([0, targetValue-50])
     .clamp(true);
 
 
@@ -405,7 +405,7 @@ function inputYear(val) {
 
     // update position and text of label according to slider scale
     handle.attr("x", cx - 5);
-    yearText.html("<h5>Year:</h5><span> " + xVal + "</span>");
+    yearText.html("<span>Year:  " + xVal + "</span>");
     update(xVal);
 }
 

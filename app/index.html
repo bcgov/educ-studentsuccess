@@ -46,9 +46,9 @@
       </div>
     </div>
   </nav>
-  <div class="container">
+  <div class="container" id='home'>
     <!-- Jumbotron / hero section, a component -->
-    <div class="row mt-5 mb-5" id='home'>
+    <div class="row">
       <div class="col-sm-12 col-md-4 intro">
         <h2 class="dispaly-4">Student Migration</h2>
         <p>Understand student mobility throughout the province and its impact on student enrolment.</p>
@@ -58,10 +58,12 @@
         <div id="aniContainer">
           <div id="animationMap"></div>
           <div id="aniControl">
+            <div id='play-control'>
+              <div id="play-pause" class="play"></div>
+              <div id="slider"></div>
+            </div>
             <div id="year">
             </div>
-            <div id="play-pause" class="play"></div>
-            <div id="slider"></div>
           </div>
         </div>
       </div>
@@ -69,8 +71,8 @@
   </div>
 
   <!-- defines a horizontal row then col inside -->
-  <div class="container">
-    <div class="row" id="inter-map">
+  <div class="container mt-5" id="inter-map">
+    <div class="row" >
       <!-- col = euqal col width -->
       <!-- card is also a component -->
       <!-- sm-12: entire width when mobile, md-4: 1/3 width medium window size-->
@@ -114,11 +116,11 @@
     </div>
   </div>
 
-  <div class="container">
+  <div class="container mt-5" id="graph">
     <div class="dcr-wrapper">
-    <img src="/assets/img/bg-dcr2.png" class="img-fluid bg-2" alt="map">
-  </div>
-    <div class="row" id="graph">
+      <img src="/assets/img/bg-dcr2.png" class="img-fluid bg-img" alt="map">
+    </div>
+    <div class="row">
       <div class="col-sm-12 col-md-4">
         <h2>DISTRICTS WITH THE HIGHTEST
           NET MIGRATION GROWTH</h2>
@@ -136,7 +138,7 @@
     </div>
   </div>
 
-  <div class="container">
+  <div class="container mt-5" id="facts">
     <img src="/assets/img/bars.png" class="img-fluid bg-img" alt="map">
     <div class="row" id="facts">
       <div class="col-12 mb-5">

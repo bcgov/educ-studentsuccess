@@ -7076,14 +7076,54 @@ body {
     justify-content: flex-end;
     margin: 2rem 0; }
   body .bg-img {
-    max-width: 400px; }
+    max-width: 400px;
+    height: auto; }
   body #aniContainer #aniControl {
     display: flex;
     justify-content: center; }
-    body #aniContainer #aniControl #yearDropdown {
-      margin-left: 8rem; }
-    body #aniContainer #aniControl #play-button {
-      margin-left: 2rem; }
+    body #aniContainer #aniControl #year {
+      align-self: flex-end;
+      font-weight: bold;
+      margin: 0 2rem;
+      font-size: 1.6rem; }
+    body #aniContainer #aniControl #play-control {
+      display: flex;
+      align-items: flex-end; }
+      body #aniContainer #aniControl #play-control #play-pause {
+        width: 40px;
+        height: 40px; }
+      body #aniContainer #aniControl #play-control .play {
+        background: url(../assets/img/play&pause.png) 0 0;
+        background-size: cover;
+        cursor: pointer; }
+      body #aniContainer #aniControl #play-control .pause {
+        background: url(../assets/img/play&pause.png) 40px 0;
+        background-size: cover;
+        cursor: pointer; }
+      body #aniContainer #aniControl #play-control .track,
+      body #aniContainer #aniControl #play-control .track-inset,
+      body #aniContainer #aniControl #play-control .track-overlay {
+        stroke-linecap: round; }
+      body #aniContainer #aniControl #play-control .track {
+        stroke: #000;
+        stroke-opacity: 0.3;
+        stroke-width: 10px; }
+      body #aniContainer #aniControl #play-control .track-inset {
+        stroke: #e7e7e7;
+        stroke-width: 8px; }
+      body #aniContainer #aniControl #play-control .track-overlay {
+        pointer-events: stroke;
+        stroke-width: 50px;
+        stroke: transparent;
+        cursor: pointer; }
+      body #aniContainer #aniControl #play-control .handle {
+        fill: #38598a;
+        stroke: #000;
+        stroke-opacity: 0.5;
+        stroke-width: 1px; }
+      body #aniContainer #aniControl #play-control .ticks {
+        fill: #494949;
+        font-size: 12px; }
   body #aniContainer .dist-main, body #aniContainer .dist-lm, body #aniContainer .dist-svi {
     stroke: #fff; }
   body #aniContainer .tick {
@@ -7091,38 +7131,6 @@ body {
     font-weight: 600; }
   body #aniContainer .caption {
     fill: #494949; }
-  body #aniContainer #play-pause {
-    width: 40px;
-    height: 40px; }
-  body #aniContainer .play {
-    background: url(../assets/img/play&pause.png) 0 0;
-    background-size: cover;
-    cursor: pointer; }
-  body #aniContainer .pause {
-    background: url(../assets/img/play&pause.png) 40px 0;
-    background-size: cover;
-    cursor: pointer; }
-  body #aniContainer .track,
-  body #aniContainer .track-inset,
-  body #aniContainer .track-overlay {
-    stroke-linecap: round; }
-  body #aniContainer .track {
-    stroke: #000;
-    stroke-opacity: 0.3;
-    stroke-width: 10px; }
-  body #aniContainer .track-inset {
-    stroke: #dcdcdc;
-    stroke-width: 8px; }
-  body #aniContainer .track-overlay {
-    pointer-events: stroke;
-    stroke-width: 50px;
-    stroke: transparent;
-    cursor: pointer; }
-  body #aniContainer .handle {
-    fill: #fff;
-    stroke: #000;
-    stroke-opacity: 0.5;
-    stroke-width: 1.25px; }
   body #aniContainer #ani_tt {
     background: rgba(208, 208, 209, 0.5);
     padding: 10px 10px;
@@ -7146,8 +7154,6 @@ body {
       margin: 2rem 0; }
       body #inter-map .controlSection #yearDropdown {
         width: 286px; }
-      body #inter-map .controlSection #distDropdown {
-        /* position: absolute; */ }
     body #inter-map .flowBtn {
       margin-top: .5rem;
       margin-right: .5rem;
@@ -7162,7 +7168,8 @@ body {
     body #inter-map .selected {
       font-weight: bold;
       color: #fff;
-      background: #38598a; }
+      background: #38598a;
+      box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
     body #inter-map #tlTip {
       pointer-events: none;
       color: white;
@@ -7238,7 +7245,8 @@ body {
     body #graph #distContainer .selected {
       font-weight: bold;
       color: white;
-      background: #38598a; }
+      background: #38598a;
+      box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
   body #graph #lineContainer {
     display: inline-block;
     position: relative;
@@ -7266,13 +7274,13 @@ body {
   body #facts .fact-container {
     margin: 2rem 0;
     position: relative;
-    height: 320px;
+    height: 280px;
     display: flex;
     flex-direction: column;
     align-items: center; }
     body #facts .fact-container .fact-img {
-      max-width: 200px;
-      max-height: 140px;
+      max-width: 180px;
+      max-height: 120px;
       height: auto;
       align-content: center; }
     body #facts .fact-container .fact-info {
