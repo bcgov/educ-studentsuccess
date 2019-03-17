@@ -7035,6 +7035,35 @@ body {
     body .navbar a {
       display: inline-block;
       position: relative; }
+    body .navbar .navbar-toggler {
+      padding: 0; }
+    body .navbar .icon {
+      width: 30px;
+      height: 30px;
+      position: relative;
+      cursor: pointer; }
+      body .navbar .icon .line {
+        position: absolute;
+        left: 0;
+        transform: transition(-15px);
+        height: 2px;
+        width: 100%;
+        background: #ccc;
+        border-radius: 2px;
+        transition: all cubic-bezier(0.26, 0.1, 0.27, 1.55) 0.35s; }
+      body .navbar .icon .top {
+        top: 18%; }
+      body .navbar .icon .middle {
+        top: 48%; }
+      body .navbar .icon .bottom {
+        top: 78%; }
+    body .navbar .close .top {
+      transform: rotate(45deg);
+      top: 48%; }
+    body .navbar .close .middle,
+    body .navbar .close .bottom {
+      transform: rotate(-45deg);
+      top: 48%; }
     body .navbar .navbar-nav .nav-link,
     body .navbar .navbar-nav .nav-link:hover {
       color: #5091CD; }
@@ -7084,7 +7113,9 @@ body {
       margin-left: 8rem; }
     body #aniContainer #aniControl #play-button {
       margin-left: 2rem; }
-  body #aniContainer .dist-main, body #aniContainer .dist-lm, body #aniContainer .dist-svi {
+  body #aniContainer .dist-main,
+  body #aniContainer .dist-lm,
+  body #aniContainer .dist-svi {
     stroke: #fff; }
   body #aniContainer .tick {
     font-size: 10px;
