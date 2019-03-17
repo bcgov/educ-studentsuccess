@@ -37,6 +37,52 @@ body {
       position: relative;
     }
 
+    .navbar-toggler {
+      padding: 0;
+    }
+
+    .icon {
+      width: 30px;
+      height: 30px;
+      position: relative;
+      cursor: pointer;
+
+      .line {
+        position: absolute;
+        left: 0;
+        transform: transition(-15px);
+        height: 2px;
+        width: 100%;
+        background: #ccc;
+        border-radius: 2px;
+        transition: all cubic-bezier(0.26, 0.1, 0.27, 1.55) 0.35s;
+      }
+
+      .top {
+        top: 18%;
+      }
+
+      .middle {
+        top: 48%;
+      }
+
+      .bottom {
+        top: 78%;
+      }
+    }
+
+    .close .top {
+      transform: rotate(45deg);
+      top: 48%
+    }
+
+    .close .middle,
+    .close .bottom {
+      transform: rotate(-45deg);
+      top: 48%
+    }
+
+
     .navbar-nav {
 
       .nav-link,
@@ -94,13 +140,13 @@ body {
     transition: .3s ease;
   }
 
-  .dcr-wrapper{
+  .dcr-wrapper {
     display: flex;
     justify-content: flex-end;
     margin: 2rem 0;
   }
 
-  .bg-img{
+  .bg-img {
     max-width: 400px;
     height: auto;
   }
@@ -178,17 +224,19 @@ body {
     }
   }
 
-      .dist-main, .dist-lm, .dist-svi {
-        stroke: #fff;
+    .dist-main,
+    .dist-lm,
+    .dist-svi {
+      stroke: #fff;
     }
 
-      .tick {
-        font-size: 10px;
-        font-weight: 600;
+    .tick {
+      font-size: 10px;
+      font-weight: 600;
     }
 
     .caption {
-        fill: #494949;
+      fill: #494949;
     }
 
     #ani_tt {
@@ -429,7 +477,7 @@ body {
         height: auto;
         align-content: center;
       }
-      
+
       .fact-info {
         position: absolute;
         bottom: 2rem;

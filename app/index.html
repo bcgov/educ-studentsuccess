@@ -25,8 +25,12 @@
       <a class="navbar-brand" href="#">Student Migration</a>
 
       <!-- hamburger menu -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
-        <span class="navbar-toggler-icon"></span>
+      <button class="navbar-toggler"  type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+        <div class="icon">
+          <span class="line top"></span>
+          <span class="line middle"></span>
+          <span class="line bottom"></span>
+        </div>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
@@ -48,7 +52,7 @@
   </nav>
   <div class="container" id='home'>
     <!-- Jumbotron / hero section, a component -->
-    <div class="row">
+    <div class="row mb-5" id='home'>
       <div class="col-sm-12 col-md-4 intro">
         <h2 class="dispaly-4">Student Migration</h2>
         <p>Understand student mobility throughout the province and its impact on student enrolment.</p>
@@ -118,9 +122,9 @@
 
   <div class="container mt-5" id="graph">
     <div class="dcr-wrapper">
-      <img src="/assets/img/bg-dcr2.png" class="img-fluid bg-img" alt="map">
+      <img src="/assets/img/bg-dcr2.png" class="img-fluid bg-2" alt="map">
     </div>
-    <div class="row">
+    <div class="row" id="graph">
       <div class="col-sm-12 col-md-4">
         <h2>DISTRICTS WITH THE HIGHTEST
           NET MIGRATION GROWTH</h2>
@@ -197,6 +201,7 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/d3-queue/3.0.4/d3-queue.min.js"></script>
   <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+  <script src="/js/transforming_menu.js"></script>
   <script src="/d3_js/choropleth_animation.js"></script>
   <script src="/d3_js/interactive_map.js"></script>
   <script src="/d3_js/interactive_line.js"></script>
