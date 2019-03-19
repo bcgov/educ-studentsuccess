@@ -7110,7 +7110,6 @@ body {
   body #aniContainer #aniControl {
     display: flex;
     justify-content: center; }
-<<<<<<< HEAD
     body #aniContainer #aniControl #year {
       align-self: flex-end;
       font-weight: bold;
@@ -7154,16 +7153,9 @@ body {
       body #aniContainer #aniControl #play-control .ticks {
         fill: #494949;
         font-size: 12px; }
-  body #aniContainer .dist-main, body #aniContainer .dist-lm, body #aniContainer .dist-svi {
-=======
-    body #aniContainer #aniControl #yearDropdown {
-      margin-left: 8rem; }
-    body #aniContainer #aniControl #play-button {
-      margin-left: 2rem; }
   body #aniContainer .dist-main,
   body #aniContainer .dist-lm,
   body #aniContainer .dist-svi {
->>>>>>> 1f5df464692ee53673faf22c0e1658ae02a8d4fe
     stroke: #fff; }
   body #aniContainer .tick {
     font-size: 10px;
