@@ -253,6 +253,10 @@ function updateMap(coming, going) {
         .style("fill-opacity", ".6");
       //zoom is a leaflet event
       map.on("zoom", reset);
+      map.on("moveend", function() {
+        console.log('pan');
+        
+      });
       reset();
 
       function reset() {
@@ -344,8 +348,13 @@ function updateMap(coming, going) {
             var m = d3.mouse(this);
             mx = m[0];
             my = m[1];
-            // console.log(mx, my);
-            return toolMove(mx, my, d);
+            console.log(mx,my);
+            // d3.event.clientX & Y give the updated coordinates after panning and zooming
+            // if(my>d3.event.clientY) {
+            return toolMove(d3.event.clientX, d3.event.clientY, d);
+            // } else if (my<d3.event.clientY) {
+            //   return toolMove(d3.event.clientX, my, d);
+            // }
           })
           .on("mouseleave", function (d) {
             return toolOut(d, this);
@@ -405,8 +414,10 @@ function toolMove(mx, my, data) {
     my = 40
   };
 
+  console.log(mx,my);
+
   //create the tooltip, style it and inject info
-  return tooltip.style("top", my + -140 + "px")
+  return tooltip.style("top", my + "px")
     .style("left", mx - 120 + "px")
     .html("<div id='tipDiv'><div id='tipLoc'><b>" + data.id +
       "</b></div><div id='tipInfo'>Migration in: <b>" + formatC(data.properties.total_move_in) +
@@ -435,7 +446,7 @@ function toolOut2(m, thepath) {
 };
 
 function toolMove2(mx, my, home, end, v1, v2) {
-  var diff = v1 - v2;
+  // var diff = v1 - v2;
 
   if (mx < 120) {
     mx = 120
@@ -446,7 +457,7 @@ function toolMove2(mx, my, home, end, v1, v2) {
   };
 
   //create the tooltip for paths, style it and inject info
-  return tooltip2.style("top", my + -140 + "px")
+  return tooltip2.style("top", my + "px")
     .style("left", mx - 120 + "px")
     .html("<div id='tipDiv2'><div id='tipLoc2'><b>" + home +
       "/" + end + "</b></div><div id='tipInfo2'>Migration, " + home +
@@ -614,7 +625,11 @@ function clicked(selected, flowtype) {
       var m = d3.mouse(this);
       mx = m[0];
       my = m[1];
-      return toolMove2(mx, my, distName, d.District, comingData[i][selDist], goingData[i][selDist]);
+    if(my>d3.event.clientY){
+      return toolMove2(d3.event.clientX, d3.event.clientY, distName, d.District, comingData[i][selDist], goingData[i][selDist]);
+    } else if (my<d3.event.clientY){
+      return toolMove2(d3.event.clientX, my, distName, d.District, comingData[i][selDist], goingData[i][selDist]);
+    }
     })
     .on("mouseleave", function (d) {
       return toolOut2(d, this);

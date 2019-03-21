@@ -7020,325 +7020,353 @@ a.text-dark:hover, a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6; } }
 
-body {
-  background: #f7f7f9;
-  font-family: 'Lato', sans-serif;
-  color: #494949; }
-  body a,
-  body a:hover {
-    text-decoration: none; }
-  body .nav-bg {
-    background: #fff; }
-  body .navbar {
-    padding: 1rem 2rem;
-    box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.1); }
-    body .navbar a {
-      display: inline-block;
-      position: relative; }
-    body .navbar .navbar-toggler {
-      padding: 0; }
-    body .navbar .icon {
-      width: 30px;
-      height: 30px;
-      position: relative;
-      cursor: pointer; }
-      body .navbar .icon .line {
-        position: absolute;
-        left: 0;
-        transform: transition(-15px);
-        height: 2px;
-        width: 100%;
-        background: #ccc;
-        border-radius: 2px;
-        transition: all cubic-bezier(0.26, 0.1, 0.27, 1.55) 0.35s; }
-      body .navbar .icon .top {
-        top: 18%; }
-      body .navbar .icon .middle {
+html {
+  scroll-behavior: smooth; }
+  html body {
+    background: #f7f7f9;
+    font-family: 'Lato', sans-serif;
+    color: #494949; }
+    html body a,
+    html body a:hover {
+      text-decoration: none; }
+    html body .nav-bg {
+      background: #fff; }
+    html body .navbar {
+      padding: 1rem 2rem;
+      box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.1); }
+      html body .navbar a {
+        display: inline-block;
+        position: relative; }
+      html body .navbar .navbar-toggler {
+        padding: 0; }
+      html body .navbar .icon {
+        width: 30px;
+        height: 30px;
+        position: relative;
+        cursor: pointer; }
+        html body .navbar .icon .line {
+          position: absolute;
+          left: 0;
+          transform: transition(-15px);
+          height: 2px;
+          width: 100%;
+          background: #ccc;
+          border-radius: 2px;
+          transition: all cubic-bezier(0.26, 0.1, 0.27, 1.55) 0.35s; }
+        html body .navbar .icon .top {
+          top: 18%; }
+        html body .navbar .icon .middle {
+          top: 48%; }
+        html body .navbar .icon .bottom {
+          top: 78%; }
+      html body .navbar .close .top {
+        transform: rotate(45deg);
         top: 48%; }
-      body .navbar .icon .bottom {
-        top: 78%; }
-    body .navbar .close .top {
-      transform: rotate(45deg);
-      top: 48%; }
-    body .navbar .close .middle,
-    body .navbar .close .bottom {
-      transform: rotate(-45deg);
-      top: 48%; }
-    body .navbar .navbar-nav .nav-link,
-    body .navbar .navbar-nav .nav-link:hover {
-      color: #5091CD; }
-    body .navbar .navbar-nav a:after {
-      background: none repeat scroll 0 0 transparent;
-      bottom: 0;
+      html body .navbar .close .middle,
+      html body .navbar .close .bottom {
+        transform: rotate(-45deg);
+        top: 48%; }
+      html body .navbar .navbar-nav .nav-link,
+      html body .navbar .navbar-nav .nav-link:hover {
+        color: #5091CD; }
+      html body .navbar .navbar-nav a:after {
+        background: none repeat scroll 0 0 transparent;
+        bottom: 0;
+        content: "";
+        display: block;
+        height: 2px;
+        left: 50%;
+        position: absolute;
+        background: #FCBA19;
+        transition: width 0.3s ease 0s, left 0.3s ease 0s;
+        width: 0; }
+      html body .navbar .navbar-nav a:hover:after {
+        width: 100%;
+        left: 0; }
+      html body .navbar button {
+        border: none; }
+      html body .navbar .navbar-brand {
+        color: #002663;
+        font-size: 1.4rem; }
+    html body #overview::before, html body #inter-map::before, html body #graph::before, html body #facts::before {
       content: "";
       display: block;
-      height: 2px;
-      left: 50%;
-      position: absolute;
-      background: #FCBA19;
-      transition: width 0.3s ease 0s, left 0.3s ease 0s;
-      width: 0; }
-    body .navbar .navbar-nav a:hover:after {
-      width: 100%;
-      left: 0; }
-    body .navbar button {
-      border: none; }
-    body .navbar .navbar-brand {
-      color: #002663; }
-  body .intro {
-    padding-top: 5rem; }
-  body .cta {
-    margin-top: 2rem;
-    max-width: 180px;
-    background: #FCBA19;
-    border-radius: 50px;
-    padding: .5rem 2rem;
-    color: #f7f7f9;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
-  body .cta:hover {
-    color: #f7f7f9;
-    box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
-    transform: translateY(-0.025em);
-    transition: .3s ease; }
-  body .dcr-wrapper {
-    display: flex;
-    justify-content: flex-end;
-    margin: 2rem 0; }
-  body .bg-img {
-    max-width: 400px;
-    height: auto; }
-  body #aniContainer #aniControl {
-    display: flex;
-    justify-content: center; }
-<<<<<<< HEAD
-    body #aniContainer #aniControl #year {
-      align-self: flex-end;
-      font-weight: bold;
-      margin: 0 2rem;
-      font-size: 1.6rem; }
-    body #aniContainer #aniControl #play-control {
+      height: 100px;
+      /* fixed header height*/
+      margin-top: -100px;
+      /* negative fixed header height */ }
+    html body #overview {
+      background-image: url(../assets/img/bg-dcr.png);
+      background-size: 40% auto;
+      background-repeat: no-repeat;
+      background-position: left bottom;
+      background-attachment: scroll;
+      padding-bottom: 6rem; }
+      html body #overview .intro {
+        padding-top: 5rem; }
+      html body #overview .cta {
+        margin-top: 2rem;
+        max-width: 180px;
+        background: #FCBA19;
+        border-radius: 50px;
+        padding: .5rem 2rem;
+        color: #f7f7f9;
+        box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
+      html body #overview .cta:hover {
+        color: #f7f7f9;
+        box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
+        transform: translateY(-0.025em);
+        transition: .3s ease; }
+    html body .dcr-wrapper {
       display: flex;
-      align-items: flex-end; }
-      body #aniContainer #aniControl #play-control #play-pause {
-        width: 40px;
-        height: 40px; }
-      body #aniContainer #aniControl #play-control .play {
-        background: url(../assets/img/play&pause.png) 0 0;
-        background-size: cover;
-        cursor: pointer; }
-      body #aniContainer #aniControl #play-control .pause {
-        background: url(../assets/img/play&pause.png) 40px 0;
-        background-size: cover;
-        cursor: pointer; }
-      body #aniContainer #aniControl #play-control .track,
-      body #aniContainer #aniControl #play-control .track-inset,
-      body #aniContainer #aniControl #play-control .track-overlay {
-        stroke-linecap: round; }
-      body #aniContainer #aniControl #play-control .track {
-        stroke: #000;
-        stroke-opacity: 0.3;
-        stroke-width: 10px; }
-      body #aniContainer #aniControl #play-control .track-inset {
-        stroke: #e7e7e7;
-        stroke-width: 8px; }
-      body #aniContainer #aniControl #play-control .track-overlay {
-        pointer-events: stroke;
-        stroke-width: 50px;
-        stroke: transparent;
-        cursor: pointer; }
-      body #aniContainer #aniControl #play-control .handle {
-        fill: #38598a;
-        stroke: #000;
-        stroke-opacity: 0.5;
-        stroke-width: 1px; }
-      body #aniContainer #aniControl #play-control .ticks {
-        fill: #494949;
-        font-size: 12px; }
-  body #aniContainer .dist-main, body #aniContainer .dist-lm, body #aniContainer .dist-svi {
-=======
-    body #aniContainer #aniControl #yearDropdown {
-      margin-left: 8rem; }
-    body #aniContainer #aniControl #play-button {
-      margin-left: 2rem; }
-  body #aniContainer .dist-main,
-  body #aniContainer .dist-lm,
-  body #aniContainer .dist-svi {
->>>>>>> 1f5df464692ee53673faf22c0e1658ae02a8d4fe
-    stroke: #fff; }
-  body #aniContainer .tick {
-    font-size: 10px;
-    font-weight: 600; }
-  body #aniContainer .caption {
-    fill: #494949; }
-  body #aniContainer #ani_tt {
-    background: rgba(208, 208, 209, 0.5);
-    padding: 10px 10px;
-    border-radius: 3px;
-    color: #494949; }
-  body #inter-map {
-    /* #maincontainer {
+      justify-content: flex-end;
+      margin: 2rem 0; }
+    html body .bg-img {
+      max-width: 400px;
+      height: auto; }
+    html body #aniContainer #aniControl {
+      display: flex;
+      justify-content: center; }
+      html body #aniContainer #aniControl #year {
+        align-self: flex-end;
+        font-weight: bold;
+        margin: 0 2rem;
+        font-size: 1.6rem; }
+      html body #aniContainer #aniControl #play-control {
+        display: flex;
+        align-items: flex-end; }
+        html body #aniContainer #aniControl #play-control #play-pause {
+          width: 40px;
+          height: 40px; }
+        html body #aniContainer #aniControl #play-control .play {
+          background: url(../assets/img/play&pause.png) 0 0;
+          background-size: cover;
+          cursor: pointer; }
+        html body #aniContainer #aniControl #play-control .pause {
+          background: url(../assets/img/play&pause.png) 40px 0;
+          background-size: cover;
+          cursor: pointer; }
+        html body #aniContainer #aniControl #play-control .track,
+        html body #aniContainer #aniControl #play-control .track-inset,
+        html body #aniContainer #aniControl #play-control .track-overlay {
+          stroke-linecap: round; }
+        html body #aniContainer #aniControl #play-control .track {
+          stroke: #000;
+          stroke-opacity: 0.3;
+          stroke-width: 10px; }
+        html body #aniContainer #aniControl #play-control .track-inset {
+          stroke: #e7e7e7;
+          stroke-width: 8px; }
+        html body #aniContainer #aniControl #play-control .track-overlay {
+          pointer-events: stroke;
+          stroke-width: 50px;
+          stroke: transparent;
+          cursor: pointer; }
+        html body #aniContainer #aniControl #play-control .handle {
+          fill: #38598a;
+          stroke: #000;
+          stroke-opacity: 0.5;
+          stroke-width: 1px; }
+        html body #aniContainer #aniControl #play-control .ticks {
+          fill: #494949;
+          font-size: 12px; }
+    html body #aniContainer .dist-main,
+    html body #aniContainer .dist-lm,
+    html body #aniContainer .dist-svi {
+      stroke: #fff; }
+    html body #aniContainer .tick {
+      font-size: 10px;
+      font-weight: 600; }
+    html body #aniContainer .caption {
+      fill: #494949; }
+    html body #aniContainer #ani_tt {
+      background: rgba(208, 208, 209, 0.5);
+      padding: 10px 10px;
+      border-radius: 3px;
+      color: #494949; }
+    html body #inter-map {
+      background-image: url(../assets/img/bg-dcr2.png);
+      background-size: 30% auto;
+      background-repeat: no-repeat;
+      background-position: right bottom;
+      background-attachment: scroll;
+      padding-bottom: 8rem;
+      /* #maincontainer {
             display:flex;
         } */ }
-    body #inter-map #mapContainer {
-      position: relative; }
-    body #inter-map #interactiveMap {
-      max-width: 100%;
-      height: 500px;
-      z-index: 1; }
-      body #inter-map #interactiveMap svg {
+      html body #inter-map #mapContainer {
         position: relative; }
-        body #inter-map #interactiveMap svg .goingline {
-          pointer-events: auto; }
-    body #inter-map .controlSection {
-      margin: 2rem 0; }
-      body #inter-map .controlSection #yearDropdown {
-        width: 286px; }
-    body #inter-map .flowBtn {
-      margin-top: .5rem;
-      margin-right: .5rem;
-      padding: 0.25rem 0.5rem;
-      width: 5rem;
-      border: 2px solid #38598a;
-      border-radius: 50px;
-      background: none;
-      color: #38598a;
-      font-weight: medium;
-      cursor: pointer; }
-    body #inter-map .selected {
-      font-weight: bold;
-      color: #fff;
-      background: #38598a;
-      box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
-    body #inter-map #tlTip {
-      pointer-events: none;
-      color: white;
-      z-index: 10; }
-    body #inter-map #tipDiv {
-      font-size: 16px;
-      border-radius: 3px;
-      position: absolute;
-      width: 180px;
-      z-index: 100;
-      background-repeat: no-repeat;
-      text-align: left;
-      line-height: 20px; }
-    body #inter-map #tipLoc {
-      font-weight: normal;
-      font-family: Georgia;
-      font-style: Italic;
-      color: white;
-      margin: 0px;
-      padding: 10px 10px;
-      background: #002663;
-      font-size: 14px;
-      border-radius: 3px 3px 0 0; }
-    body #inter-map #tipInfo {
-      font-weight: normal;
-      font-size: 12px;
-      color: #494949;
-      margin: 0px;
-      padding: 5px 0px 5px 10px;
-      background: rgba(208, 208, 209, 0.5);
-      border-radius: 0 0 3px 3px; }
-    body #inter-map #tlTip2 {
-      pointer-events: none;
-      color: white; }
-    body #inter-map #tipDiv2 {
-      font-size: 16px;
-      position: absolute;
-      width: 250px;
-      z-index: 100;
-      background-repeat: no-repeat;
-      text-align: left;
-      line-height: 20px; }
-    body #inter-map #tipLoc2 {
-      font-weight: normal;
-      font-family: Georgia;
-      font-style: Italic;
-      color: white;
-      margin: 0px;
-      padding: 10px 10px;
-      background: #002663;
-      font-size: 14px;
-      border-radius: 3px 3px 0 0; }
-    body #inter-map #tipInfo2 {
-      font-weight: normal;
-      font-size: 10px;
-      color: #494949;
-      margin: 0px;
-      padding: 5px 0px 5px 10px;
-      background: rgba(208, 208, 209, 0.5);
-      border-radius: 0 0 3px 3px; }
-    body #inter-map .tipClear {
-      clear: both; }
-  body #graph #distContainer {
-    display: flex;
-    justify-content: space-around; }
-    body #graph #distContainer .distBtn {
-      padding: 0.25rem 1rem;
-      border: 2px solid #38598a;
-      border-radius: 50px;
-      color: #38598a;
-      font-weight: medium;
-      cursor: pointer; }
-    body #graph #distContainer .selected {
-      font-weight: bold;
-      color: white;
-      background: #38598a;
-      box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
-  body #graph #lineContainer {
-    display: inline-block;
-    position: relative;
-    width: 100%;
-    padding-bottom: 30rem;
-    vertical-align: top;
-    overflow: hidden; }
-    body #graph #lineContainer .svg-content {
-      display: inline-block;
-      position: absolute;
-      top: 0;
-      left: 0; }
-      body #graph #lineContainer .svg-content .line {
-        fill: none;
-        stroke: #fcba19;
-        stroke-width: 3; }
-      body #graph #lineContainer .svg-content .dot {
-        fill: #ffab00;
-        stroke: #fff; }
-      body #graph #lineContainer .svg-content #line_tt {
-        background: rgba(208, 208, 209, 0.5);
-        padding: 10px 10px;
+      html body #inter-map #interactiveMap {
+        max-width: 100%;
+        height: 500px;
+        z-index: 1; }
+        html body #inter-map #interactiveMap svg {
+          position: relative; }
+          html body #inter-map #interactiveMap svg .goingline {
+            pointer-events: auto; }
+      html body #inter-map .controlSection {
+        margin-bottom: 2rem; }
+        html body #inter-map .controlSection #yearDropdown {
+          width: 286px; }
+      html body #inter-map .flowBtn {
+        margin-top: .5rem;
+        margin-right: .5rem;
+        padding: 0.25rem 0.5rem;
+        width: 5rem;
+        border: 2px solid #38598a;
+        border-radius: 50px;
+        background: none;
+        color: #38598a;
+        font-weight: medium;
+        cursor: pointer; }
+      html body #inter-map .selected {
+        font-weight: bold;
+        color: #fff;
+        background: #38598a;
+        box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
+      html body #inter-map #tlTip {
+        pointer-events: none;
+        color: white;
+        z-index: 10; }
+      html body #inter-map #tipDiv {
+        font-size: 16px;
         border-radius: 3px;
-        color: #494949; }
-  body #facts .fact-container {
-    margin: 2rem 0;
-    position: relative;
-    height: 280px;
-    display: flex;
-    flex-direction: column;
-    align-items: center; }
-    body #facts .fact-container .fact-img {
-      max-width: 180px;
-      max-height: 120px;
-      height: auto;
-      align-content: center; }
-    body #facts .fact-container .fact-info {
-      position: absolute;
-      bottom: 2rem; }
-  body footer {
-    background-color: #1D438C;
-    color: white;
-    padding: 15px; }
-    body footer a,
-    body footer a:hover {
-      text-decoration: none;
-      color: white; }
-    body footer .bc_logo {
-      max-width: 120px;
-      height: auto; }
-    body footer #footer-logo {
-      flex-direction: column;
-      align-items: center; }
-      body footer #footer-logo p.copyright {
+        position: absolute;
+        width: 180px;
+        z-index: 100;
+        background-repeat: no-repeat;
+        text-align: left;
+        line-height: 20px; }
+      html body #inter-map #tipLoc {
+        font-weight: normal;
+        font-family: Georgia;
+        font-style: Italic;
+        color: white;
+        margin: 0px;
+        padding: 10px 10px;
+        background: #002663;
+        font-size: 14px;
+        border-radius: 3px 3px 0 0; }
+      html body #inter-map #tipInfo {
+        font-weight: normal;
+        font-size: 12px;
+        color: #494949;
+        margin: 0px;
+        padding: 5px 0px 5px 10px;
+        background: rgba(208, 208, 209, 0.5);
+        border-radius: 0 0 3px 3px; }
+      html body #inter-map #tlTip2 {
+        pointer-events: none;
+        color: white; }
+      html body #inter-map #tipDiv2 {
+        font-size: 16px;
+        position: absolute;
+        width: 250px;
+        z-index: 100;
+        background-repeat: no-repeat;
+        text-align: left;
+        line-height: 20px; }
+      html body #inter-map #tipLoc2 {
+        font-weight: normal;
+        font-family: Georgia;
+        font-style: Italic;
+        color: white;
+        margin: 0px;
+        padding: 10px 10px;
+        background: #002663;
+        font-size: 14px;
+        border-radius: 3px 3px 0 0; }
+      html body #inter-map #tipInfo2 {
+        font-weight: normal;
+        font-size: 10px;
+        color: #494949;
+        margin: 0px;
+        padding: 5px 0px 5px 10px;
+        background: rgba(208, 208, 209, 0.5);
+        border-radius: 0 0 3px 3px; }
+      html body #inter-map .tipClear {
+        clear: both; }
+    html body #graph #distContainer {
+      display: flex;
+      justify-content: space-around; }
+      html body #graph #distContainer .distBtn {
+        padding: 0.25rem 1rem;
+        border: 2px solid #38598a;
+        border-radius: 50px;
+        color: #38598a;
+        font-weight: medium;
+        cursor: pointer; }
+      html body #graph #distContainer .selected {
+        font-weight: bold;
+        color: white;
+        background: #38598a;
+        box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
+    html body #graph #lineContainer {
+      display: inline-block;
+      position: relative;
+      width: 100%;
+      padding-bottom: 30rem;
+      vertical-align: top;
+      overflow: hidden; }
+      html body #graph #lineContainer .svg-content {
         display: inline-block;
-        font-size: 12px; }
+        position: absolute;
+        top: 0;
+        left: 0; }
+        html body #graph #lineContainer .svg-content .line {
+          fill: none;
+          stroke: #fcba19;
+          stroke-width: 3; }
+        html body #graph #lineContainer .svg-content .dot {
+          fill: #ffab00;
+          stroke: #fff; }
+        html body #graph #lineContainer .svg-content #line_tt {
+          background: rgba(208, 208, 209, 0.5);
+          padding: 10px 10px;
+          border-radius: 3px;
+          color: #494949; }
+    html body #facts {
+      background-image: url(../assets/img/bg-dcr3.png);
+      background-size: 30% auto;
+      background-repeat: no-repeat;
+      background-position: left top;
+      background-attachment: scroll;
+      padding-top: 6rem; }
+      html body #facts .fact-container {
+        margin: 2rem 0;
+        position: relative;
+        height: 280px;
+        display: flex;
+        flex-direction: column;
+        align-items: center; }
+        html body #facts .fact-container .fact-img {
+          max-width: 160px;
+          max-height: 120px;
+          height: auto;
+          align-content: center; }
+        html body #facts .fact-container .fact-info {
+          position: absolute;
+          bottom: 2rem; }
+    html body .footer-img {
+      display: block;
+      width: calc(100% + 200px) !important;
+      height: auto; }
+    html body footer {
+      background-color: #1D438C;
+      color: white; }
+      html body footer a,
+      html body footer a:hover {
+        text-decoration: none;
+        color: white; }
+      html body footer .container {
+        display: flex; }
+        html body footer .container #footer-logo {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end; }
+          html body footer .container #footer-logo .bc_logo {
+            max-width: 120px;
+            height: auto; }
+          html body footer .container #footer-logo p.copyright {
+            display: inline-block;
+            font-size: 10px; }

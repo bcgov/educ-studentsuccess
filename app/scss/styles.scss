@@ -13,6 +13,9 @@ $tooltip-info-bg:rgba(208, 208, 209, 0.5);
 //Bootstrap sass files
 @import"node_modules/bootstrap/scss/bootstrap";
 
+html {
+    scroll-behavior: smooth;
+
 body {
 
   background: $body-bg;
@@ -116,8 +119,25 @@ body {
 
     .navbar-brand {
       color: $home-color;
+      font-size: 1.4rem;
     }
   }
+
+  #overview::before, #inter-map::before, #graph::before, #facts::before {
+    content:"";
+    display:block;
+    height:100px; /* fixed header height*/
+    margin-top:-100px; /* negative fixed header height */
+  }
+
+  #overview {
+
+  background-image: url(../assets/img/bg-dcr.png);
+  background-size:40% auto;
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-attachment: scroll;
+  padding-bottom: 6rem;
 
   .intro {
     padding-top: 5rem;
@@ -140,11 +160,14 @@ body {
     transition: .3s ease;
   }
 
+}
+
   .dcr-wrapper {
     display: flex;
     justify-content: flex-end;
     margin: 2rem 0;
   }
+
 
   .bg-img {
     max-width: 400px;
@@ -250,6 +273,14 @@ body {
   // interactive map style
   #inter-map {
 
+    background-image: url(../assets/img/bg-dcr2.png);
+    background-size:30% auto;
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-attachment: scroll;
+    padding-bottom: 8rem;
+
+   
     #mapContainer {
       position: relative;
     }
@@ -270,7 +301,7 @@ body {
     }
 
     .controlSection {
-      margin: 2rem 0;
+      margin-bottom: 2rem;
 
       #yearDropdown {
         width: 286px;
@@ -463,6 +494,13 @@ body {
 
   //facts
   #facts {
+    background-image: url(../assets/img/bg-dcr3.png);
+    background-size:30% auto;
+    background-repeat: no-repeat;
+    background-position: left top;
+    background-attachment: scroll;
+    padding-top: 6rem;
+
     .fact-container {
       margin: 2rem 0;
       position: relative;
@@ -472,7 +510,7 @@ body {
       align-items: center;
 
       .fact-img {
-        max-width: 180px;
+        max-width: 160px;
         max-height: 120px;
         height: auto;
         align-content: center;
@@ -486,12 +524,15 @@ body {
     }
   }
 
+  .footer-img{
+    display: block;
+    width: calc(100% + 200px) !important;
+    height:auto;
+  }
+
   footer {
     background-color: $footer-color;
     color: white;
-    padding: 15px;
-
-
 
     a,
     a:hover {
@@ -499,19 +540,28 @@ body {
       color: white;
     }
 
+    .container{
+      display: flex;
+
+    #footer-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+
+      
     .bc_logo {
       max-width: 120px;
       height: auto;
     }
 
-    #footer-logo {
-      flex-direction: column;
-      align-items: center;
-
       p.copyright {
         display: inline-block;
-        font-size: 12px;
+        font-size: 10px;
       }
     }
+
   }
+
+  }
+}
 }

@@ -25,7 +25,7 @@
       <a class="navbar-brand" href="#">Student Migration</a>
 
       <!-- hamburger menu -->
-      <button class="navbar-toggler"  type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
         <div class="icon">
           <span class="line top"></span>
           <span class="line middle"></span>
@@ -35,7 +35,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#home">Home</a>
+            <a class="nav-link" href="#overview">Overview</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#inter-map">Map</a>
@@ -50,15 +50,15 @@
       </div>
     </div>
   </nav>
-  <div class="container" id='home'>
+  <div class="container" id='overview'>
     <!-- Jumbotron / hero section, a component -->
-    <div class="row mb-5" id='home'>
+    <div class="row mb-5">
       <div class="col-sm-12 col-md-4 intro">
-        <h2 class="dispaly-4">Student Migration</h2>
+        <h2 class="dispaly-4 font-weight-bold">Student Migration</h2>
         <p>Understand student mobility throughout the province and its impact on student enrolment.</p>
         <a class="btn cta btn-lg" href="#" role="button">Learn more</a>
       </div>
-      <div class="col-sm-12 col-md-8">
+      <div class="col-sm-12 col-md-8 pt-5">
         <div id="aniContainer">
           <div id="animationMap"></div>
           <div id="aniControl">
@@ -75,22 +75,22 @@
   </div>
 
   <!-- defines a horizontal row then col inside -->
-  <div class="container mt-5" id="inter-map">
-    <div class="row" >
+  <div class="container  my-5" id="inter-map">
+    <div class="row">
       <!-- col = euqal col width -->
       <!-- card is also a component -->
       <!-- sm-12: entire width when mobile, md-4: 1/3 width medium window size-->
       <!-- marigin,border,padding in spacing doc -->
       <div class="col-sm-12 col-md-8">
-        <div class="col-12 mb-4" id="mapContainer">
+        <div id="mapContainer">
           <div id="interactiveMap"></div>
         </div>
       </div>
 
       <div class="col-sm-12 col-md-4">
-        <div class="mb-4" id='control'>
+        <h2 class="mb-3">Where do students go</h2>
+        <div id='control'>
           <div class="controlSection">
-            <h2>WHERE DO STUDENTS GO</h2>
             <h5>School Year</h5>
             <select name="yr_dropdown" id="yearDropdown">
               <option value="" selected>Select a school year</option>
@@ -120,14 +120,10 @@
     </div>
   </div>
 
-  <div class="container mt-5" id="graph">
-    <div class="dcr-wrapper">
-      <img src="/assets/img/bg-dcr2.png" class="img-fluid bg-2" alt="map">
-    </div>
+  <div class="container my-5" id="graph">
     <div class="row" id="graph">
       <div class="col-sm-12 col-md-4">
-        <h2>DISTRICTS WITH THE HIGHTEST
-          NET MIGRATION GROWTH</h2>
+        <h2>Districts with the highest net migration growth</h2>
         <h4>SD-05</h4>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
           dolore
@@ -142,11 +138,10 @@
     </div>
   </div>
 
-  <div class="container mt-5" id="facts">
-    <img src="/assets/img/bars.png" class="img-fluid bg-img" alt="map">
-    <div class="row" id="facts">
+  <div class="container my-5" id="facts">
+    <div class="row">
       <div class="col-12 mb-5">
-        <h2 class="text-center">FACT NUMBERS AND INDICATORS</h2>
+        <h2 class="text-center">Fact numbers and indicators</h2>
       </div>
       <div class="col-sm-12 col-md-4 fact-container">
         <img src="/assets/img/migration.png" class="img-fluid fact-img" alt="map">
@@ -157,7 +152,7 @@
       </div>
 
       <div class="col-sm-12 col-md-4 fact-container">
-        <img src="/assets/img/avg.png" class="img-fluid fact-img" alt="map">
+        <img src="/assets/img/avg.png" class="img-fluid fact-img">
         <div class="fact-info">
           <h6>Average Migration (in each distict)</h6>
           <h1 class="text-center">200</h1>
@@ -174,19 +169,20 @@
     </div>
   </div>
 
-  <img src="/assets/img/bg-dcr3.png" class="img-fluid fact-img">
-  <footer class="d-flex">
-    <div class="col-md-8 align-middle mt-4 ml-4">
-      <h4>An Expiremental Project by<br> Eucation Analytics Branch</h4>
-      <div class="footer-link">
-        <a href="#">Go to gov.bc.ca</a> |
-        <a href="#">Contact Us</a>
+  <img src="/assets/img/footer-top.png" class="footer-img">
+  <footer>
+    <div class="container">
+      <div class="col-sm-12 col-md-8">
+        <h4>An Expiremental Project by<br> Eucation Analytics Branch</h4>
+        <div class="footer-link mt-4">
+          <a href="#">Go to gov.bc.ca</a> |
+          <a href="#">Contact Us</a>
+        </div>
       </div>
-    </div>
-    <div id="footer-logo" class="col-md-3 d-flex">
-      <img src="/assets/img/bc_logo.png" alt="bc_logo" class="bc_logo">
-      <p class="copyright">© 2019 BC Ministry of Education</p>
-    </div>
+      <div id="footer-logo" class="col-sm-12 col-md-4">
+        <img src="/assets/img/bc_logo.png" alt="bc_logo" class="bc_logo">
+        <p class="copyright">© 2019 BC Ministry of Education</p>
+      </div>
     </div>
   </footer>
 
