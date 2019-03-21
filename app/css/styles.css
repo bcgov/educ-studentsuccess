@@ -7091,6 +7091,7 @@ html {
     html body #overview::before, html body #inter-map::before, html body #graph::before, html body #facts::before {
       content: "";
       display: block;
+<<<<<<< HEAD
       height: 100px;
       /* fixed header height*/
       margin-top: -100px;
@@ -7120,6 +7121,118 @@ html {
     html body .dcr-wrapper {
       display: flex;
       justify-content: flex-end;
+=======
+      height: 2px;
+      left: 50%;
+      position: absolute;
+      background: #FCBA19;
+      transition: width 0.3s ease 0s, left 0.3s ease 0s;
+      width: 0; }
+    body .navbar .navbar-nav a:hover:after {
+      width: 100%;
+      left: 0; }
+    body .navbar button {
+      border: none; }
+    body .navbar .navbar-brand {
+      color: #002663; }
+  body .intro {
+    padding-top: 5rem; }
+  body .cta {
+    margin-top: 2rem;
+    max-width: 180px;
+    background: #FCBA19;
+    border-radius: 50px;
+    padding: .5rem 2rem;
+    color: #f7f7f9;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
+  body .cta:hover {
+    color: #f7f7f9;
+    box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
+    transform: translateY(-0.025em);
+    transition: .3s ease; }
+  body .dcr-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin: 2rem 0; }
+  body .bg-img {
+    max-width: 400px;
+    height: auto; }
+  body #aniContainer #aniControl {
+    display: flex;
+    justify-content: center; }
+    body #aniContainer #aniControl #year {
+      align-self: flex-end;
+      font-weight: bold;
+      margin: 0 2rem;
+      font-size: 1.6rem; }
+    body #aniContainer #aniControl #play-control {
+      display: flex;
+      align-items: flex-end; }
+      body #aniContainer #aniControl #play-control #play-pause {
+        width: 40px;
+        height: 40px; }
+      body #aniContainer #aniControl #play-control .play {
+        background: url(../assets/img/play&pause.png) 0 0;
+        background-size: cover;
+        cursor: pointer; }
+      body #aniContainer #aniControl #play-control .pause {
+        background: url(../assets/img/play&pause.png) 40px 0;
+        background-size: cover;
+        cursor: pointer; }
+      body #aniContainer #aniControl #play-control .track,
+      body #aniContainer #aniControl #play-control .track-inset,
+      body #aniContainer #aniControl #play-control .track-overlay {
+        stroke-linecap: round; }
+      body #aniContainer #aniControl #play-control .track {
+        stroke: #000;
+        stroke-opacity: 0.3;
+        stroke-width: 10px; }
+      body #aniContainer #aniControl #play-control .track-inset {
+        stroke: #e7e7e7;
+        stroke-width: 8px; }
+      body #aniContainer #aniControl #play-control .track-overlay {
+        pointer-events: stroke;
+        stroke-width: 50px;
+        stroke: transparent;
+        cursor: pointer; }
+      body #aniContainer #aniControl #play-control .handle {
+        fill: #38598a;
+        stroke: #000;
+        stroke-opacity: 0.5;
+        stroke-width: 1px; }
+      body #aniContainer #aniControl #play-control .ticks {
+        fill: #494949;
+        font-size: 12px; }
+  body #aniContainer .dist-main,
+  body #aniContainer .dist-lm,
+  body #aniContainer .dist-svi {
+    stroke: #fff; }
+  body #aniContainer .tick {
+    font-size: 10px;
+    font-weight: 600; }
+  body #aniContainer .caption {
+    fill: #494949; }
+  body #aniContainer #ani_tt {
+    background: rgba(208, 208, 209, 0.5);
+    padding: 10px 10px;
+    border-radius: 3px;
+    color: #494949; }
+  body #inter-map {
+    /* #maincontainer {
+            display:flex;
+        } */ }
+    body #inter-map #mapContainer {
+      position: relative; }
+    body #inter-map #interactiveMap {
+      max-width: 100%;
+      height: 500px;
+      z-index: 1; }
+      body #inter-map #interactiveMap svg {
+        position: relative; }
+        body #inter-map #interactiveMap svg .goingline {
+          pointer-events: auto; }
+    body #inter-map .controlSection {
+>>>>>>> 0042e9faa682f2ccedd958901b50b3c83f7a3496
       margin: 2rem 0; }
     html body .bg-img {
       max-width: 400px;
