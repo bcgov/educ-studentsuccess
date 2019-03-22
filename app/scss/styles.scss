@@ -76,13 +76,13 @@ body {
       }
     }
 
-    .close .top {
+    .open .top {
       transform: rotate(45deg);
       top: 48%
     }
 
-    .close .middle,
-    .close .bottom {
+    .open .middle,
+    .open .bottom {
       transform: rotate(-45deg);
       top: 48%
     }
@@ -304,9 +304,10 @@ body {
 
     .dropDown {
       position: relative;
+      background: white;
       width: 100%;
       padding: 12px 15px;
-      border: 1px solid #aaa;
+      border: 2px solid $btn-color;
       box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
       border-radius: 0.5em;
       cursor: pointer;
@@ -322,11 +323,10 @@ body {
         //style
         background: white;
         border-radius: 0 0 0.5em 0.5em;
-        border: 1px solid rgba(0,0,0,0.2);
-        border-top: none;
+        border: none;
         // hide
         list-style: none;
-        transition: all 0.3s ease-out;
+        transition: 0.3s ease-out;
 
         /* Hiding */
         display: none;
@@ -334,19 +334,19 @@ body {
         overflow: auto;
       }
     
-      .list div{
-        display: block;
+      .list div {
         text-decoration: none;
         color: $font-color;
         padding: 12px 15px;
-        transition: all 0.3s ease-out;
-        // border-bottom: 1px solid #e6e8ea;
+        transition: 0.3s ease-out;
+        border: none;
       }
     
     /* Hover state */
     
       .list div:hover {
-        color: #57a9d9;
+        color: $nav-color;
+        background: $body-bg;
     } 
 
 
@@ -373,18 +373,24 @@ body {
       background:white;
 
       .list{
-        display: block;
+        display:block;
+        border: 2px solid $btn-color;
+        border-top: none;
         max-height: 150px;
-        margin: 0 -1px;
-        border-top: 1px solid rgba(0,0,0,0.2);
+        margin: 0 -2px;
       }
 
+      .list div {
+        border-top: 1px solid rgba(0,0,0,0.05);
+      }
+
+    } 
+
+    .dropDown:hover{
+      border: 2px solid $home-color;
+      box-shadow: 0 2px 0 2px rgba(0,0,0,.04); 
     }
 
-    .dropDown.active:after {
-      // border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-      max-height:600px;
-    }
 
     .dropDown:after { /* Little arrow */
       content: "";
@@ -396,11 +402,17 @@ body {
       margin-top: -3px;
       border-width: 6px 6px 0 6px;
       border-style: solid;
-      border-color: #4cbeff transparent;
+      border-color: $btn-color transparent;
   }
 
     .controlSection {
       margin-bottom: 2rem;
+    }
+
+    #distDropdown.active{
+        .list{
+          max-height: 240px;
+        }
     }
 
     .flowBtn {

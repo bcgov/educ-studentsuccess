@@ -7061,11 +7061,11 @@ html {
           top: 48%; }
         html body .navbar .icon .bottom {
           top: 78%; }
-      html body .navbar .close .top {
+      html body .navbar .open .top {
         transform: rotate(45deg);
         top: 48%; }
-      html body .navbar .close .middle,
-      html body .navbar .close .bottom {
+      html body .navbar .open .middle,
+      html body .navbar .open .bottom {
         transform: rotate(-45deg);
         top: 48%; }
       html body .navbar .navbar-nav .nav-link,
@@ -7208,9 +7208,10 @@ html {
             pointer-events: auto; }
       html body #inter-map .dropDown {
         position: relative;
+        background: white;
         width: 100%;
         padding: 12px 15px;
-        border: 1px solid #aaa;
+        border: 2px solid #38598a;
         box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
         border-radius: 0.5em;
         cursor: pointer;
@@ -7226,22 +7227,22 @@ html {
           right: 0;
           background: white;
           border-radius: 0 0 0.5em 0.5em;
-          border: 1px solid rgba(0, 0, 0, 0.2);
-          border-top: none;
+          border: none;
           list-style: none;
-          transition: all 0.3s ease-out;
+          transition: 0.3s ease-out;
           /* Hiding */
           display: none;
           max-height: 0;
           overflow: auto; }
         html body #inter-map .dropDown .list div {
-          display: block;
           text-decoration: none;
           color: #494949;
           padding: 12px 15px;
-          transition: all 0.3s ease-out; }
+          transition: 0.3s ease-out;
+          border: none; }
         html body #inter-map .dropDown .list div:hover {
-          color: #57a9d9; }
+          color: #5091CD;
+          background: #f7f7f9; }
         html body #inter-map .dropDown .list::-webkit-scrollbar {
           width: .2rem; }
         html body #inter-map .dropDown .list::-webkit-scrollbar-track {
@@ -7256,11 +7257,15 @@ html {
         background: white; }
         html body #inter-map .dropDown.active .list {
           display: block;
+          border: 2px solid #38598a;
+          border-top: none;
           max-height: 150px;
-          margin: 0 -1px;
-          border-top: 1px solid rgba(0, 0, 0, 0.2); }
-      html body #inter-map .dropDown.active:after {
-        max-height: 600px; }
+          margin: 0 -2px; }
+        html body #inter-map .dropDown.active .list div {
+          border-top: 1px solid rgba(0, 0, 0, 0.05); }
+      html body #inter-map .dropDown:hover {
+        border: 2px solid #002663;
+        box-shadow: 0 2px 0 2px rgba(0, 0, 0, 0.04); }
       html body #inter-map .dropDown:after {
         /* Little arrow */
         content: "";
@@ -7272,9 +7277,11 @@ html {
         margin-top: -3px;
         border-width: 6px 6px 0 6px;
         border-style: solid;
-        border-color: #4cbeff transparent; }
+        border-color: #38598a transparent; }
       html body #inter-map .controlSection {
         margin-bottom: 2rem; }
+      html body #inter-map #distDropdown.active .list {
+        max-height: 240px; }
       html body #inter-map .flowBtn {
         margin-top: .5rem;
         margin-right: .5rem;

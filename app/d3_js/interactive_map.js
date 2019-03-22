@@ -1,3 +1,4 @@
+$(document).ready( function() {
 //Width and height
 var width = 760;
 var height = 600;
@@ -9,7 +10,7 @@ var formatD = d3.format("+,.0f");
 //var of min & max number of students move in and out 
 var movein_min, movein_max, moveout_min, moveout_max;
 
-var colors = ["#EDF8FB", "#41083e"]; //color range based on the number of people
+var colors = ["#65a89d", "#a96a46"]; //color range based on the number of people
 
 //array used to populate dropdown menu
 var sd_list_arr = [];
@@ -152,11 +153,11 @@ function updateMap(coming, going) {
       for (let i = 0; i < sd_list_arr.length; i++) {
         let opt = sd_list_arr[i];
         console.log(sd_list_arr.length);
-        d3.select('#distDropdown')
-          .append('option')
+        d3.select('#distDropdown .list')
+          .append('div')
           .text(opt)
           //take the sd number (first 4 letters) as value
-          .attr('value', opt.substring(0, 4));
+          .attr('data-value', opt.substring(0, 4));
       };
     }
 
@@ -328,9 +329,9 @@ function updateMap(coming, going) {
             /*fill the color based on -/+ net changes*/
             var diff = d.properties.total_move_in - d.properties.total_move_out;
             if (diff > 0) {
-              return "#67a9cf";
+              return "#65a89d";
             } else {
-              return "#ef8a62";
+              return "#a96a46";
             }
 
           })
@@ -387,7 +388,7 @@ function updateMap(coming, going) {
 
 //initial/default map
 
-updateMap("../assets/raw_data/sd_coming_2018.csv", "../assets/raw_data/sd_going_2018.csv");
+// updateMap("../assets/raw_data/sd_coming_2018.csv", "../assets/raw_data/sd_going_2018.csv");
 
 function toolOver(v, thepath) {
   d3.select(thepath)
@@ -418,7 +419,7 @@ function toolMove(mx, my, data) {
   console.log(mx, my);
 
   //create the tooltip, style it and inject info
-  return tooltip.style("top", my + "px")
+  return tooltip.style("top", my + -100 + "px")
     .style("left", mx - 120 + "px")
     .html("<div id='tipDiv'><div id='tipLoc'><b>" + data.id +
       "</b></div><div id='tipInfo'>Migration in: <b>" + formatC(data.properties.total_move_in) +
@@ -607,9 +608,9 @@ function clicked(selected, flowtype) {
       var finalval = comingData[i][selDist] - goingData[i][selDist];
       if (finalval > 0) {
         //color for positive growth
-        return "#67a9cf";
+        return "#65a89d";
       } else {
-        return "#ef8a62";
+        return "#a96a46";
       }
 
     })
@@ -677,27 +678,45 @@ function resetBtn() {
 //     this.size = 0;
 //   });
 
-//swap database when select changes
-d3.select('#yearDropdown')
-  .on('change', function () {
-    var newData = d3.select(this).property('value');
-    console.log(newData);
-    //clear dropdown array
-    // sd_list_arr=[];
-    updateMap("../assets/raw_data/sd_coming_" + newData + ".csv", "../assets/raw_data/sd_going_" + newData + ".csv");
-    resetBtn();
+//dropdown selection
+$('#yearDropdown').on('click', function(et) {
+  $(this).toggleClass('active');
+  $('#distDropdown').removeClass('active');
+  //swap database when select changes
+  d3.selectAll('#yearDropdown .list div')
+    .on('click', function () {
+      //jquery, this is so bad... :(
+      $('#yearDropdown span').text($(this).text());
+      $('#yearDropdown').attr('attr', 'dropDown');
+      var newData = d3.select(this).attr('data-value');
+      console.log(newData);
+      //clear dropdown array
+      // sd_list_arr=[];
+      updateMap("../assets/raw_data/sd_coming_" + newData + ".csv", "../assets/raw_data/sd_going_" + newData + ".csv");
+      resetBtn();
+    });
   });
 
+
 //dropdown select district
-d3.select('#distDropdown')
-  .on('change', function () {
-    let targetSd = eval(d3.select(this).property('value'));
-    console.log(targetSd);
-    currentDist = targetSd;
-    //console.log(currentDist);
-    clicked(targetSd);
-    resetBtn();
-  })
+$('#distDropdown').on('click', function(et) {
+  $(this).toggleClass('active');
+  $('#yearDropdown').removeClass('active');
+
+  //or add on lick when appending the divs
+  d3.selectAll('#distDropdown .list div')
+    .on('click', function () {
+      console.log('haha');
+      $('#distDropdown span').text($(this).text());
+      $('#distDropdown').attr('attr', 'dropDown');
+      let targetSd = eval(d3.select(this).attr('data-value'));
+      console.log(targetSd);
+      currentDist = targetSd;
+      //console.log(currentDist);
+      clicked(targetSd);
+      resetBtn();
+    });
+  });
 
 //toggle migration flow
 let selectedFlow = 'all';
@@ -721,5 +740,7 @@ flowBtns.on('click', function () {
   } else if (btnFlowType == 'all') {
     clicked(currentDist);
   }
+
+});
 
 });
