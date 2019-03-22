@@ -92,19 +92,28 @@
         <div id='control'>
           <div class="controlSection">
             <h5>School Year</h5>
-            <select name="yr_dropdown" id="yearDropdown">
+            <!-- <select name="yr_dropdown" id="yearDropdown" class="dropDown">
               <option value="" selected>Select a school year</option>
               <option value="2018">2017/2018</option>
               <option value="2017">2016/2017</option>
               <option value="2016">2015/2016</option>
               <option value="2015">2014/2015</option>
               <option value="2014">2013/2014</option>
-            </select>
-
+            </select> -->
+            <div id="yearDropdown" class="dropDown" tabindex="1">
+                <span>Select a school year</span>
+                <div class="list">
+                  <div data-value="2018">2017/2018</div>
+                  <div data-value="2017">2016/2017</div>
+                  <div data-value="2016">2015/2016</div>
+                  <div data-value="2015">2014/2015</div>
+                  <div data-value="2014">2013/2014</div>
+              </div>
+            </div>
           </div>
           <div class="controlSection">
             <h5>School District</h5>
-            <select name="dist_dropdown" id="distDropdown">
+            <select name="dist_dropdown" id="distDropdown" class="dropDown">
               <option value="" selected>Select a school district</option>
             </select>
           </div>
@@ -123,9 +132,9 @@
   <div class="container my-5" id="graph">
     <div class="row" id="graph">
       <div class="col-sm-12 col-md-4">
-        <h2>Districts with the highest net migration growth</h2>
-        <h4>SD-05</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+        <h2  class="mb-3">Districts with the highest net migration growth</h2>
+        <h4 id="distName">SD-05 Southeast Kootenay</h4>
+        <p id="distInfo">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
           dolore
           magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
           commodo

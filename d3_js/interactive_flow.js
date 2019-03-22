@@ -468,7 +468,7 @@ function clicked(selected, flowtype) {
 
       var theDistrict = d3.select('#' + abb);
 
-      //here we can extract the full name of home ditrict
+      //extract the full name of home ditrict
       if (selDist == abb) {
         distName = theDistrict.nodes()[0].__data__.id;
       }

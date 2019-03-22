@@ -283,14 +283,14 @@ function ani_toolMove(mx, my, data) {
 
     if(data.id){
     //create the animation_tooltip, style it and inject info
-    return animation_tooltip.style("top", my + - 80 + "px")
-        .style("left", mx - 140 + "px")
+    return animation_tooltip.style("top", my + - 40 + "px")
+        .style("left", mx  + "px")
         .html("<div id='tipContainer'><div id='tipLocation'><b>" + data.id +
             "</b></div><div id='tipKey'>Net migration: <b>" + format((data.properties.total_move_in - data.properties.total_move_out)) +
             "</b></div><div class='tipClear'></div> </div>");
     } else {
-        return animation_tooltip.style("top", my + - 80 + "px")
-        .style("left", mx - 140 + "px")
+        return animation_tooltip.style("top", my + - 40 + "px")
+        .style("left", mx  + "px")
         .html("<div id='tipContainer'><div id='tipLocation'><b>See side maps for details</b></div><div class='tipClear'></div> </div>");
     }
 };

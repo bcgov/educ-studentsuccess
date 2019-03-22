@@ -55,7 +55,7 @@
      })
      .attr('class', function (d) { //adding a condition to higlight selected btn
          if ( 'line_'+d == district) {
-             return 'distBtn selected';
+             return 'distBtn selectedDist';
          } else {
              return 'distBtn';
          }
@@ -160,16 +160,20 @@
 
      distBtn.on('click', function (d) {
          //remove all element with .selected class
-         d3.selectAll('.selected')
-             .classed('selected', false);
+         d3.selectAll('.selectedDist')
+             .classed('selectedDist', false);
          //add selected class to button being clicked
          d3.select(this)
-             .classed('selected', true);
+             .classed('selectedDist', true);
          //set district 
          district = d;
          console.log(district);
 
          districtData = data.filter(function (d) { return d.Abbrv == district });
+
+         distName = districtData[0].District;
+
+         d3.select('#distName').text(district + ' ' + distName);
 
          districtData.forEach(function (d) {
              // d.Year = parseDate(d.Year);, this parseDate() will parse the parsed date again.
@@ -221,8 +225,7 @@
 
  function line_toolMove(mx, my, data) {
      //create the tooltip, style it and inject info
-     return tooltip_line.style("top", my + 60 + "px")
+     return tooltip_line.style("top", my + - 20 + "px")
          .style("left", mx - 10 + "px")
-         .html("<div id='nmtt'>Net migration: <b>" + formatC(data.NetMigration) +
-             "</div>");
+         .html("Net migration: <b>" + formatC(data.NetMigration));
  };

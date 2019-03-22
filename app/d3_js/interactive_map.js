@@ -15,9 +15,9 @@ var colors = ["#EDF8FB", "#41083e"]; //color range based on the number of people
 var sd_list_arr = [];
 
 var map = new L.Map("interactiveMap", {
-    center: [54, -124],
-    zoom: 5
-  })
+  center: [54, -124],
+  zoom: 5
+})
   .addLayer(new L.TileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"));
 
 //create the projection expression
@@ -34,8 +34,8 @@ var map = new L.Map("interactiveMap", {
 var path;
 
 //create scales
-var circleSize = d3.scaleLinear().range([0, 500]).domain([0, 300]);
-var lineSize = d3.scaleLinear().range([2, 25]).domain([0, 100]);
+var circleSize = d3.scaleLinear().domain([0, 300]).range([0, 700]);
+var lineSize = d3.scaleLinear().domain([0, 100]).range([2, 25]);
 
 // var fillcolor = d3.scaleLinear().range(colors).domain(immdomain);
 
@@ -253,20 +253,20 @@ function updateMap(coming, going) {
         .style("fill-opacity", ".6");
       //zoom is a leaflet event
       map.on("zoom", reset);
-      map.on("moveend", function() {
+      map.on("moveend", function () {
         console.log('pan');
-        
+
       });
       reset();
 
       function reset() {
         // console.log('reset');
-        
+
         /*have to redraw everything as coordinates changes after zooming,
           cannot preserve existing path (inflow, outflow)*/
         chartGroup.selectAll('.circ').remove().transition()
           .duration(500);
-          
+
         chartGroup.selectAll('.goingline').remove().transition()
           .duration(500);
 
@@ -274,7 +274,7 @@ function updateMap(coming, going) {
           topLeft = bounds[0],
           bottomRight = bounds[1];
 
-        var zoomScale = (bottomRight[0] - topLeft [0]);
+        var zoomScale = (bottomRight[0] - topLeft[0]);
         console.log(zoomScale);
 
 
@@ -313,7 +313,7 @@ function updateMap(coming, going) {
             var diff = d.properties.total_move_in - d.properties.total_move_out;
             //gives a minmum r if net changes = 0
             if (Math.abs(diff) < 5) {
-              return 2;
+              return 3;
             } else {
               return circleSize(Math.sqrt(Math.abs(diff) / Math.PI));
             }
@@ -328,9 +328,9 @@ function updateMap(coming, going) {
             /*fill the color based on -/+ net changes*/
             var diff = d.properties.total_move_in - d.properties.total_move_out;
             if (diff > 0) {
-              return "#65a89d";
+              return "#67a9cf";
             } else {
-              return "#a96a46";
+              return "#ef8a62";
             }
 
           })
@@ -348,7 +348,7 @@ function updateMap(coming, going) {
             var m = d3.mouse(this);
             mx = m[0];
             my = m[1];
-            console.log(mx,my);
+            console.log(mx, my);
             // d3.event.clientX & Y give the updated coordinates after panning and zooming
             // if(my>d3.event.clientY) {
             return toolMove(d3.event.clientX, d3.event.clientY, d);
@@ -364,6 +364,7 @@ function updateMap(coming, going) {
             currentDist = d;
             // console.log(currentDist);
             clicked(d);
+            resetBtn();
           })
           .transition()
           .duration(1500);
@@ -414,7 +415,7 @@ function toolMove(mx, my, data) {
     my = 40
   };
 
-  console.log(mx,my);
+  console.log(mx, my);
 
   //create the tooltip, style it and inject info
   return tooltip.style("top", my + "px")
@@ -468,19 +469,17 @@ function toolMove2(mx, my, home, end, v1, v2) {
 
 //function crates the path
 function clicked(selected, flowtype) {
-  console.log(selected);
+  // console.log(selected);
   //var coming = selected.properties;
   let selDist, distName;
   let homex, homey;
 
   // let selectedOpt = d3.select('#distDropdown').nodes()[0][0].label;
 
-
   /*
   if the selection is made by clicking we can access the following properties
   if the selection is done by dropdown, get attribute from dom element
   */
-
   if (selected.abbrev && selected.properties.SDNAME) {
     selDist = selected.abbrev;
     // console.log(selDist);
@@ -608,9 +607,9 @@ function clicked(selected, flowtype) {
       var finalval = comingData[i][selDist] - goingData[i][selDist];
       if (finalval > 0) {
         //color for positive growth
-        return "#65a89d";
+        return "#67a9cf";
       } else {
-        return "#a96a46";
+        return "#ef8a62";
       }
 
     })
@@ -625,11 +624,11 @@ function clicked(selected, flowtype) {
       var m = d3.mouse(this);
       mx = m[0];
       my = m[1];
-    if(my>d3.event.clientY){
-      return toolMove2(d3.event.clientX, d3.event.clientY, distName, d.District, comingData[i][selDist], goingData[i][selDist]);
-    } else if (my<d3.event.clientY){
-      return toolMove2(d3.event.clientX, my, distName, d.District, comingData[i][selDist], goingData[i][selDist]);
-    }
+      if (my > d3.event.clientY) {
+        return toolMove2(d3.event.clientX, d3.event.clientY, distName, d.District, comingData[i][selDist], goingData[i][selDist]);
+      } else if (my < d3.event.clientY) {
+        return toolMove2(d3.event.clientX, my, distName, d.District, comingData[i][selDist], goingData[i][selDist]);
+      }
     })
     .on("mouseleave", function (d) {
       return toolOut2(d, this);
@@ -652,6 +651,13 @@ function tweenDash() {
   };
 }
 
+//clear flow selection
+function resetBtn() {
+  let flowBtns = d3.selectAll('.flowBtn');
+  flowBtns.attr('class', 'flowBtn');
+  let defBtn = d3.select('#btn_all');
+  defBtn.classed('selected', true);;
+}
 //  d3.select(self.frameElement).style("height", "700px");
 
 
@@ -679,6 +685,7 @@ d3.select('#yearDropdown')
     //clear dropdown array
     // sd_list_arr=[];
     updateMap("../assets/raw_data/sd_coming_" + newData + ".csv", "../assets/raw_data/sd_going_" + newData + ".csv");
+    resetBtn();
   });
 
 //dropdown select district
@@ -689,6 +696,7 @@ d3.select('#distDropdown')
     currentDist = targetSd;
     //console.log(currentDist);
     clicked(targetSd);
+    resetBtn();
   })
 
 //toggle migration flow
@@ -700,12 +708,12 @@ flowBtns.on('click', function () {
   this.classList.add('selected'); //this can only apply vanllila js code
 
   let btnFlowType = this.getAttribute('value');
-  console.log(btnFlowType);
+  // console.log(btnFlowType);
 
   let currentLines = chartGroup.selectAll('.goingline');
   console.log(currentLines);
 
-  currentLines.remove();
+  // currentLines.remove();
 
   //let strokeColor = currentLines.nodes()[i].attributes.stroke.nodeValue;
   if (btnFlowType) {

@@ -22,6 +22,8 @@ body {
   font-family: 'Lato', sans-serif;
   color: $font-color;
 
+  div:focus, button:focus {outline:none;}
+
   a,
   a:hover {
     text-decoration: none;
@@ -300,12 +302,105 @@ body {
       }
     }
 
+    .dropDown {
+      position: relative;
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #aaa;
+      box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+      border-radius: 0.5em;
+      cursor: pointer;
+      transition: all 0.3s ease-out;
+      
+
+      .list{
+        position: absolute;
+        z-index:10;
+        top: 100%;
+        left: 0;
+        right: 0;
+        //style
+        background: white;
+        border-radius: 0 0 0.5em 0.5em;
+        border: 1px solid rgba(0,0,0,0.2);
+        border-top: none;
+        // hide
+        list-style: none;
+        transition: all 0.3s ease-out;
+
+        /* Hiding */
+        display: none;
+        max-height: 0;
+        overflow: auto;
+      }
+    
+      .list div{
+        display: block;
+        text-decoration: none;
+        color: $font-color;
+        padding: 12px 15px;
+        transition: all 0.3s ease-out;
+        // border-bottom: 1px solid #e6e8ea;
+      }
+    
+    /* Hover state */
+    
+      .list div:hover {
+        color: #57a9d9;
+    } 
+
+
+    .list::-webkit-scrollbar {
+      width: .2rem;
+    }
+    
+    /* Track */
+    .list::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 5px grey; 
+      border-radius: .2rem;
+    }
+     
+    /* Handle */
+    .list::-webkit-scrollbar-thumb {
+      background: $btn-color; 
+      border-radius: 10px;
+    }
+    }
+
+    .dropDown.active {
+      border-radius: 0.5em 0.5em  0 0;
+      box-shadow: none;
+      background:white;
+
+      .list{
+        display: block;
+        max-height: 150px;
+        margin: 0 -1px;
+        border-top: 1px solid rgba(0,0,0,0.2);
+      }
+
+    }
+
+    .dropDown.active:after {
+      // border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      max-height:600px;
+    }
+
+    .dropDown:after { /* Little arrow */
+      content: "";
+      width: 0;
+      height: 0;
+      position: absolute;
+      top:50%;
+      right: 15px;
+      margin-top: -3px;
+      border-width: 6px 6px 0 6px;
+      border-style: solid;
+      border-color: #4cbeff transparent;
+  }
+
     .controlSection {
       margin-bottom: 2rem;
-
-      #yearDropdown {
-        width: 286px;
-      }
     }
 
     .flowBtn {
@@ -319,6 +414,14 @@ body {
       color: $btn-color;
       font-weight: medium;
       cursor: pointer;
+    }
+
+    .flowBtn:hover{
+      color: #fff;
+      background: $btn-color;
+      box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
+      transform: translateY(-0.025em);
+      transition: .3s ease;
     }
 
     .selected {
@@ -448,7 +551,15 @@ body {
         cursor: pointer;
       }
 
-      .selected {
+      .distBtn:hover {
+          color: #fff;
+          background: $btn-color;
+          box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
+          transform: translateY(-0.025em);
+          transition: .3s ease;
+      }
+
+      .selectedDist {
         font-weight: bold;
         color: white;
         background: $btn-color;
@@ -481,13 +592,12 @@ body {
           fill: #ffab00;
           stroke: #fff;
         }
-
-        #line_tt {
-          background: $tooltip-info-bg;
-          padding: 10px 10px;
-          border-radius: 3px;
-          color: $font-color;
-        }
+      }
+      #line_tt {
+        background: $tooltip-info-bg;
+        padding: 10px 10px;
+        border-radius: 3px;
+        color: $font-color;
       }
     }
   }
@@ -526,7 +636,7 @@ body {
 
   .footer-img{
     display: block;
-    width: calc(100% + 200px) !important;
+    width: calc(100%) !important;
     height:auto;
   }
 
