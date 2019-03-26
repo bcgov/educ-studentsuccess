@@ -547,7 +547,7 @@ body {
     }
   }
 
-  // interactive line graph
+  // interactive bar+line graph
   #graph {
 
     #distContainer {
@@ -593,6 +593,21 @@ body {
         position: absolute;
         top: 0;
         left: 0;
+
+          .bar {
+            stroke: none;
+            fill: #002663;
+        }
+
+        .bar:hover {
+            fill: rgba(0, 38, 99, 0.7);
+        }
+
+        .label {
+            fill: white;
+            font-weight: 400;
+            text-anchor: middle;
+        }
 
         .line {
           fill: none;

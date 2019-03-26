@@ -55,20 +55,29 @@
 
         .bar {
             stroke: none;
-            fill: #ccc;
+            fill: #002663;
+        }
+
+        .bar:hover {
+            fill: rgba(0, 38, 99, 0.7);
+        }
+
+        .label {
+            fill: white;
+            font: 15px;
+            font-weight: 400;
+            text-anchor: middle;
         }
 
         .line {
             fill: none;
             stroke: #fcba19;
             stroke-width: 3;
-            z-index: 5;
         }
 
         .dot {
-            fill: #ffab00;
+            fill: #fcba19;
             stroke: #fff;
-            z-index: 5;
         }
 
         #line_tt {
@@ -111,13 +120,14 @@
     let line_height = 400 - line_margin.top - line_margin.bottom;
     let line_width = 600 - line_margin.left - line_margin.right;
 
-    var formatC = d3.format(",.0f");
+    let formatC = d3.format(",.0f");
+    // let formatPercent = d3.format(".0%");
 
     //parseDate is used to covert string into year format from the csv file 
     let parseDate = d3.timeParse('%Y');
 
     //scales
-    let line_xScale = d3.scalePoint().range([0, line_width]).padding(0.5);
+    let line_xScale = d3.scalePoint().range([0, line_width]).padding(0.5);;
 
     let bar_xScale = d3.scaleBand()
         .range([0, line_width]).paddingInner(0.5)
@@ -135,11 +145,11 @@
 
     let line_yAxis = d3.axisRight()
         .scale(line_yScale)
-        .ticks(5);
+        .ticks(10)
+        .tickFormat(d => d + "%");
 
     let bar_yAxis = d3.axisLeft()
-        .scale(bar_yScale)
-        .ticks(5);
+        .scale(bar_yScale);
 
 
     //lines
@@ -148,7 +158,7 @@
             return line_xScale(d.Year);
         })
         .y(function (d) {
-            return line_yScale(d.NetMigration);
+            return line_yScale(d.PercentChange);
         })
         .curve(d3.curveMonotoneX); //smooth the line
 
@@ -208,8 +218,7 @@
 
         // format the data
         districtData.forEach(function (d) {
-            d.Year = d.Year;
-            d.lineYear = parseDate(d.Year);
+            // d.Year = (parseDate(d.Year)).getFullYear();
             d.NetMigration = +d.NetMigration;
             d.PercentChange = +d.PercentChange;
         });
@@ -234,9 +243,10 @@
 
         // console.log(netMigration);
         // console.log(Object.values(netMigration[0]));
+        console.log(formatC(d3.min(districtData, function (d) { return d.NetMigration })));
 
         //draw aixs
-        line_xScale.domain(d3.extent(districtData, function (d) { return d.Year }));
+        line_xScale.domain(districtData.map(function (d) { return d.Year; }));
         bar_xScale.domain(districtData.map(function (d) { return d.Year }));
         line_yScale.domain([0, d3.max(districtData, function (d) { return d.PercentChange })]).nice();
         bar_yScale.domain([d3.min(districtData, function (d) { return d.NetMigration }) - 20, d3.max(districtData, function (d) { return d.NetMigration }) + 20]);
@@ -249,13 +259,35 @@
 
         //bar axis
         line_chartGroup.append('g')
-            .attr('class', 'yAxis')
+            .attr('class', 'yAxis2')
             .call(bar_yAxis);
 
         line_chartGroup.append('g')
             .attr('transform', 'translate(0,' + line_height + ')')
             .attr('class', 'xAxis')
             .call(bar_xAxis);
+
+
+        //draw bar graph
+        let bargraph = line_chartGroup.selectAll('.bar')
+            .data(districtData)
+            .enter().append('rect')
+            .attr('class', 'bar')
+            .attr('x', function (d) { return bar_xScale(d.Year); })
+            .attr('width', function (d) { return bar_xScale.bandwidth(); })
+            .attr('y', function (d) { return line_height - bar_yScale(d.NetMigration); })
+            .attr('height', function (d) { return bar_yScale(d.NetMigration); });
+
+        //bar labels
+        let labels = line_chartGroup.selectAll(".label")
+            .data(districtData)
+            .enter()
+            .append("text")
+            .attr("class", "label")
+            .attr("x", (function (d) { return bar_xScale(d.Year) + bar_xScale.bandwidth() / 2; }))
+            .attr("y", function (d) { return line_height - bar_yScale(d.NetMigration) + 1; })
+            .attr("dy", ".75em")
+            .text(function (d) { return d.NetMigration; });
 
         //draw line graph
         let linegraph = line_chartGroup.append('path')
@@ -268,7 +300,7 @@
             .data(districtData)
             .enter().append("circle") // Uses the enter().append() method
             .attr("class", "dot") // Assign a class for styling
-            .attr("cx", function (d) { return line_xScale(d.Year) })
+            .attr("cx", function (d) { console.log(d.Year); return line_xScale(d.Year); })
             .attr("cy", function (d) { return line_yScale(d.PercentChange) })
             .attr("r", 5)
             .on("mouseenter", function (d) {
@@ -288,17 +320,7 @@
             .on("mouseleave", function (d) {
                 return line_toolOut(d, this);
             });
-
-        //draw bar graph
-        let bargraph = line_chartGroup.selectAll('.bar')
-            .data(districtData)
-            .enter().append('rect')
-            .attr('class', 'bar')
-            .attr('x', function (d) { console.log(bar_xScale(d.Year)); return bar_xScale(d.Year); })
-            .attr('width', function (d) { return bar_xScale.bandwidth(); })
-            .attr('y', function (d) { return line_height - bar_yScale(d.NetMigration); })
-            .attr('height', function (d) { return bar_yScale(d.NetMigration); });
-
+        
         distBtn.on('click', function (d) {
             //remove all element with .selected class
             d3.selectAll('.selectedDist')
@@ -317,15 +339,22 @@
             d3.select('#distName').text(district + ' ' + distName);
 
             districtData.forEach(function (d) {
-                // d.Year = parseDate(d.Year);, this parseDate() will parse the parsed date again.
                 d.NetMigration = +d.NetMigration;
+                d.PercentChange = +d.PercentChange;
             });
 
-            line_xScale.domain(d3.extent(districtData, function (d) { return d.Year }));
-            line_yScale.domain([d3.min(districtData, function (d) { return d.NetMigration }) - 20, d3.max(districtData, function (d) { return d.NetMigration }) + 20]);
+            line_xScale.domain(districtData.map(function (d) { return d.Year; }));
+            bar_xScale.domain(districtData.map(function (d) { return d.Year }));
+            line_yScale.domain([0, d3.max(districtData, function (d) { return d.PercentChange })]).nice();
+            bar_yScale.domain([d3.min(districtData, function (d) { return d.NetMigration }) - 20, d3.max(districtData, function (d) { return d.NetMigration }) + 20]);
 
 
-            console.log(d3.extent(districtData, function (d) { return d.NetMigration }));
+            bargraph.data(districtData)
+                .transition()
+                .duration(1500)
+                .attr('y', function (d) { return line_height - bar_yScale(d.NetMigration); })
+                .attr('height', function (d) { return bar_yScale(d.NetMigration); });
+
 
             linegraph.datum(districtData)
                 .transition()
@@ -337,13 +366,18 @@
                 .transition()
                 .duration(1500)
                 .attr("cx", function (d) { return line_xScale(d.Year) })
-                .attr("cy", function (d) { return line_yScale(d.NetMigration) });
+                .attr("cy", function (d) { return line_yScale(d.PercentChange) });
 
 
             line_chartGroup.select('.yAxis')
                 .transition()
-                .duration(1500)
+                .duration(1600)
                 .call(line_yAxis);
+
+            line_chartGroup.select('.yAxis2')
+                .transition()
+                .duration(1600)
+                .call(bar_yAxis);
         });
 
     });
@@ -368,7 +402,7 @@
         //create the tooltip, style it and inject info
         return tooltip_line.style("top", my + - 20 + "px")
             .style("left", mx - 10 + "px")
-            .html("Net migration: <b>" + formatC(data.NetMigration));
+            .html("Percentage Change: <b>" + data.PercentChange + "%");
     };
 </script>
 

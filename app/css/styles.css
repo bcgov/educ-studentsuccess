@@ -7399,6 +7399,15 @@ html {
         position: absolute;
         top: 0;
         left: 0; }
+        html body #graph #lineContainer .svg-content .bar {
+          stroke: none;
+          fill: #002663; }
+        html body #graph #lineContainer .svg-content .bar:hover {
+          fill: rgba(0, 38, 99, 0.7); }
+        html body #graph #lineContainer .svg-content .label {
+          fill: white;
+          font-weight: 400;
+          text-anchor: middle; }
         html body #graph #lineContainer .svg-content .line {
           fill: none;
           stroke: #fcba19;
