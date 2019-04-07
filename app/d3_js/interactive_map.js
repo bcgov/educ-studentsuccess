@@ -419,7 +419,7 @@ function toolMove(mx, my, data) {
   console.log(mx, my);
 
   //create the tooltip, style it and inject info
-  return tooltip.style("top", my + -100 + "px")
+  return tooltip.style("top", my + "px")
     .style("left", mx - 120 + "px")
     .html("<div id='tipDiv'><div id='tipLoc'><b>" + data.id +
       "</b></div><div id='tipInfo'>Migration in: <b>" + formatC(data.properties.total_move_in) +
