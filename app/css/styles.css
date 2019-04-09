@@ -7182,7 +7182,7 @@ html {
     html body #aniContainer .caption {
       fill: #494949; }
     html body #aniContainer #ani_tt {
-      background: rgba(208, 208, 209, 0.5);
+      background: rgba(255, 255, 255, 0.7);
       padding: 10px 10px;
       border-radius: 3px;
       color: #494949; }
@@ -7201,7 +7201,8 @@ html {
       html body #inter-map #interactiveMap {
         max-width: 100%;
         height: 500px;
-        z-index: 1; }
+        z-index: 1;
+        position: relative; }
         html body #inter-map #interactiveMap svg {
           position: relative; }
           html body #inter-map #interactiveMap svg .goingline {
@@ -7244,10 +7245,10 @@ html {
           color: #5091CD;
           background: #f7f7f9; }
         html body #inter-map .dropDown .list::-webkit-scrollbar {
-          width: .2rem; }
+          width: .4rem; }
         html body #inter-map .dropDown .list::-webkit-scrollbar-track {
           box-shadow: inset 0 0 5px grey;
-          border-radius: .2rem; }
+          border-radius: .1rem; }
         html body #inter-map .dropDown .list::-webkit-scrollbar-thumb {
           background: #38598a;
           border-radius: 10px; }
@@ -7304,14 +7305,15 @@ html {
         color: #fff;
         background: #38598a;
         box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
+      html body #inter-map .leaflet-pane {
+        z-index: 0; }
       html body #inter-map #tlTip {
         pointer-events: none;
         color: white;
-        z-index: 10; }
+        position: absolute; }
       html body #inter-map #tipDiv {
         font-size: 16px;
         border-radius: 3px;
-        position: absolute;
         width: 180px;
         z-index: 100;
         background-repeat: no-repeat;
@@ -7333,7 +7335,7 @@ html {
         color: #494949;
         margin: 0px;
         padding: 5px 0px 5px 10px;
-        background: rgba(208, 208, 209, 0.5);
+        background: rgba(255, 255, 255, 0.7);
         border-radius: 0 0 3px 3px; }
       html body #inter-map #tlTip2 {
         pointer-events: none;
@@ -7362,7 +7364,7 @@ html {
         color: #494949;
         margin: 0px;
         padding: 5px 0px 5px 10px;
-        background: rgba(208, 208, 209, 0.5);
+        background: rgba(255, 255, 255, 0.7);
         border-radius: 0 0 3px 3px; }
       html body #inter-map .tipClear {
         clear: both; }
@@ -7415,8 +7417,10 @@ html {
         html body #graph #lineContainer .svg-content .dot {
           fill: #ffab00;
           stroke: #fff; }
+      html body #graph #lineContainer .yAxis .domain, html body #graph #lineContainer .yAxis2 .domain, html body #graph #lineContainer .xAxis .domain {
+        display: none; }
       html body #graph #lineContainer #line_tt {
-        background: rgba(208, 208, 209, 0.5);
+        background: rgba(255, 255, 255, 0.7);
         padding: 10px 10px;
         border-radius: 3px;
         color: #494949; }
