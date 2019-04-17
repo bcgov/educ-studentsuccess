@@ -11,6 +11,7 @@
         #distContainer {
             display: flex;
             justify-content: space-around;
+            margin-bottom: 1em;
         }
 
         .distBtn {
@@ -89,6 +90,26 @@
         #graph {
             max-width: 700px;
         }
+
+        .domain {
+            display: none;
+        }
+
+        #zero-line {
+            fill: none;
+            stroke: #ccc;
+            stroke-width: 1;
+        }
+
+        .xAxis,
+        .yAxis,
+        .yAxis2 {
+            stroke-width: 0;
+        }
+
+        .legend {
+            font-size: 9px;
+        }
     </style>
 </head>
 
@@ -100,11 +121,7 @@
                 <h4 id="distName">SD-05 Southeast Kootenay</h4>
                 <p id="distInfo">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                     incididunt ut labore et
-                    dolore
-                    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                    ea
-                    commodo
-                    consequat. Duis aute irure dolor in reprehenderit.</p>
+                    dolore.</p>
             </div>
             <div class="col-sm-12 col-md-8">
                 <div id="distContainer"></div>
@@ -148,12 +165,8 @@
     let line_yScale = d3.scaleLinear()
         .range([line_height, 0]);
 
-    /* This scale produces negative output for negatve input */
-    let bar_yScale_neg = d3.scaleLinear()
-        .range([0, line_height]);
-
-    //a reversed range, and a larger domain to accomodate negaive values.
-    let bar_yScale = d3.scaleLinear();
+    let bar_yScale = d3.scaleLinear()
+        .range([line_height, 0]);
 
     //color scale
     let color_scale = d3.scaleOrdinal()
@@ -208,7 +221,7 @@
     //canvas
     let line_svg = d3.select('#lineContainer').append('svg')
         .attr("preserveAspectRatio", "xMinYMin meet")  // This forces uniform scaling for both the x and y, aligning the midpoint of the SVG object with the midpoint of the container element.
-        .attr("viewBox", "0 0 600 600") //defines the aspect ratio, the inner scaling of object lengths and coordinates
+        .attr("viewBox", "0 0 600 400") //defines the aspect ratio, the inner scaling of object lengths and coordinates
         .attr('class', 'svg-content');
 
     let line_chartGroup = line_svg.append('g')
@@ -252,6 +265,7 @@
         //data must be grouped by year, inside data grouped by drivers 
 
         districtData.forEach(function (d) {
+            d.FORECAST_ENROLMENT = parseInt(d.FORECAST_ENROLMENT);
             d.drivers = driverNames.map(function (name) {
                 return {
                     name: name,
@@ -268,14 +282,6 @@
         bar_xScale2.domain(driverNames).rangeRound([0, bar_xScale1.bandwidth()]);
         line_yScale.domain([0, d3.max(districtData, function (d) { return d.FORECAST_ENROLMENT; })]);
 
-
-        bar_yScale_neg.domain([0, d3.max(districtData, function (d) {
-            return d3.max(d.drivers, function (d) {
-                return d.value;
-            })
-        })
-        ]);
-
         // get min and max from multi columns (drivers)
         //first find out lowest/highest population amount throught the years then finds out largest number of drivers of that year
         bar_yScale.domain([d3.min(districtData, function (d) {
@@ -286,45 +292,63 @@
             return d3.max(d.drivers, function (d) {
                 return d.value;
             });
-        })])
-            .range([line_height - bar_yScale_neg(d3.min(districtData, function (d) {
-                return d3.min(d.drivers, function (d) {
-                    return d.value;
-                })
-            })), 0]);
-
-        // bar_yScale.domain([Math.min(d3.min(districtData, function (d) { return d.DEMOGRAPHICS }),
-        //     d3.min(districtData, function (d) { return d.MIGRATION }),
-        //     d3.min(districtData, function (d) { return d.RETENTION }),
-        //     d3.min(districtData, function (d) { return d.INDEPENDENT })),
-        // Math.max(d3.max(districtData, function (d) { return d.DEMOGRAPHICS }),
-        //     d3.max(districtData, function (d) { return d.MIGRATION }),
-        //     d3.max(districtData, function (d) { return d.RETENTION }),
-        //     d3.max(districtData, function (d) { return d.INDEPENDENT }))]);
+        })]);
+        //     .range([line_height - bar_yScale_neg(d3.min(districtData, function (d) {
+        //         return d3.min(d.drivers, function (d) {
+        //             return d.value;
+        //         })
+        //     })), 0]);
 
         //line y axis
         line_chartGroup.append('g')
             .attr('class', 'yAxis')
             .attr('transform', "translate( " + line_width + ", 0 )")
-            .call(line_yAxis);
+            .call(line_yAxis)
+            .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr('fill', '#ccc')
+            .attr("y", -6)
+            .attr("dy", ".9em")
+            .style("text-anchor", "end")
+            .text("Toatal FTE in the year");
 
         //bar y axis
         line_chartGroup.append('g')
             .attr('class', 'yAxis2')
             .call(bar_yAxis)
-            .append('text')
-            .attr('transform', 'rotate(-90)')
-            .attr('y', 6)
-            .attr('dy', '.8em')
-            .style('text-anchor', 'end')
-            .text('Driver impact');
+            .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr('fill', '#ccc')
+            .attr("y", 6)
+            .attr("dy", ".9em")
+            .style("text-anchor", "end")
+            .text("Driver Impact");
 
         //bar x axis
         line_chartGroup.append('g')
-            .attr('transform', 'translate(0,' + line_height * 1.7 + ')')
+            .attr('transform', 'translate(0,' + line_height + ')')
             .attr('class', 'xAxis')
             .call(bar_xAxis);
 
+        //zero line
+
+        let zero = [
+            { 'x': 0, 'y': 0 },
+            { 'x': line_width, 'y': 0 }
+        ];
+
+        var xScale = d3.scaleLinear()
+            .domain([0, line_width]) // input
+            .range([0, line_width]);
+
+        let zero_line = d3.line()
+            .x(function (d) { return xScale(d['x']); })
+            .y(function (d) { return bar_yScale(d['y']); });
+
+        line_chartGroup.append('path')
+            .datum(zero)
+            .attr('id', 'zero-line')
+            .attr('d', zero_line);
 
         //year group
         let yrGroup = line_chartGroup.selectAll('.year')
@@ -345,8 +369,8 @@
             .attr('class', 'bar')
             .attr('x', function (d) { return bar_xScale2(d.name); })
             .attr('width', function (d) { return bar_xScale2.bandwidth(); })
-            .attr('y', function (d) { return line_height - Math.max(0, bar_yScale_neg(d.value)); })
-            .attr('height', function (d) { return Math.abs(bar_yScale_neg(d.value)) })
+            .attr('y', function (d) { return bar_yScale(Math.max(0, d.value)); })
+            .attr('height', function (d) { return Math.abs(bar_yScale(d.value) - bar_yScale(0)); })
             .style('fill', function (d) { return color_scale(d.name); });
 
         //bar labels
@@ -381,10 +405,12 @@
             })
             .on("mousemove", function (d) {
                 //gets mouse coordinates on screen
-                var m = d3.mouse(this);
-                mx = m[0];
-                my = m[1];
-                console.log(mx, my);
+                let offsetTarget = $(this).parent().parent().parent();
+                console.log(offsetTarget);
+                let offset = offsetTarget.offset();
+
+                let mx = (event.pageX - offset.left);
+                let my = (event.pageY - offset.top);
 
                 return line_toolMove(mx, my, d);
             })
@@ -392,68 +418,133 @@
                 return line_toolOut(d, this);
             });
 
-        //     distBtn.on('click', function (d) {
-        //         //remove all element with .selected class
-        //         d3.selectAll('.selectedDist')
-        //             .classed('selectedDist', false);
-        //         //add selected class to button being clicked
-        //         d3.select(this)
-        //             .classed('selectedDist', true);
-        //         //set district 
-        //         district = d;
-        //         console.log(district);
+        distBtn.on('click', function (d) {
+            //remove all element with .selected class
+            d3.selectAll('.selectedDist')
+                .classed('selectedDist', false);
+            //add selected class to button being clicked
+            d3.select(this)
+                .classed('selectedDist', true);
+            //set district 
+            district = d;
+            console.log(district);
 
-        //         districtData = data.filter(function (d) { return d.Abbrv == district });
+            let districtData = data.filter(function (d) { return d.DISTRICT == district.substring(2, district.length) });
 
-        //         distName = districtData[0].District;
+            console.log(districtData);
 
-        //         d3.select('#distName').text(district + ' ' + distName);
+            let driverNames = d3.keys(data[0]).filter(function (key) {
+                if (key !== 'DISTRICT' && key !== 'School_Year' && key !== 'FORECAST_ENROLMENT' && key !== 'drivers') {
+                    return key
+                }
+            });
 
-        //         districtData.forEach(function (d) {
-        //             d.NetMigration = +d.NetMigration;
-        //             d.PercentChange = +d.PercentChange;
-        //         });
+            console.log(driverNames);
+            //for each js object, generate a new key called drivers
+            // value is an array of js objects each has driver name and value
 
-        //         line_xScale.domain(districtData.map(function (d) { return d.Year; }));
-        //         bar_xScale.domain(districtData.map(function (d) { return d.Year }));
-        //         line_yScale.domain([0, d3.max(districtData, function (d) { return d.PercentChange })]).nice();
-        //         bar_yScale.domain([d3.min(districtData, function (d) { return d.NetMigration }) - 20, d3.max(districtData, function (d) { return d.NetMigration }) + 20]);
+            //because grouped bar chart
+            //data must be grouped by year, inside data grouped by drivers 
 
-
-        //         bargraph.data(districtData)
-        //             .transition()
-        //             .duration(1500)
-        //             .attr('y', function (d) { return line_height - bar_yScale(d.NetMigration); })
-        //             .attr('height', function (d) { return bar_yScale(d.NetMigration); });
-
-
-        //         linegraph.datum(districtData)
-        //             .transition()
-        //             .duration(1500)
-        //             .attr('d', growthLine);
-
-        //         console.log(growthLine(districtData));
-        //         dots.data(districtData)
-        //             .transition()
-        //             .duration(1500)
-        //             .attr("cx", function (d) { return line_xScale(d.Year) })
-        //             .attr("cy", function (d) { return line_yScale(d.PercentChange) });
+            districtData.forEach(function (d) {
+                d.FORECAST_ENROLMENT = parseInt(d.FORECAST_ENROLMENT);
+                d.drivers = driverNames.map(function (name) {
+                    console.log(name, +d[name]);
+                    return {
+                        name: name,
+                        value: +d[name]
+                    };
+                });
+            });
 
 
-        //         line_chartGroup.select('.yAxis')
-        //             .transition()
-        //             .duration(1600)
-        //             .call(line_yAxis);
+            d3.select('#distName').text(district);
 
-        //         line_chartGroup.select('.yAxis2')
-        //             .transition()
-        //             .duration(1600)
-        //             .call(bar_yAxis);
-        //     });
+            //set aixs
+            line_xScale.domain(districtData.map(function (d) { return d.School_Year; }));
+            bar_xScale1.domain(districtData.map(function (d) { return d.School_Year; }));
+            // set x2 axis within the bar group
+            bar_xScale2.domain(driverNames).rangeRound([0, bar_xScale1.bandwidth()]);
+            line_yScale.domain([0, d3.max(districtData, function (d) { return d.FORECAST_ENROLMENT; })]);
 
-        
+            // get min and max from multi columns (drivers)
+            //first find out lowest/highest population amount throught the years then finds out largest number of drivers of that year
+            bar_yScale.domain([d3.min(districtData, function (d) {
+                return d3.min(d.drivers, function (d) {
+                    return d.value;
+                });
+            }), d3.max(districtData, function (d) {
+                return d3.max(d.drivers, function (d) {
+                    return d.value;
+                });
+            })]);
 
-         });
+            yrGroup.data(districtData);
+            yrGroup.selectAll('.bar')
+                .data(function (d) { console.log(d.drivers); return d.drivers; })
+                .transition()
+                .duration(1500)
+                .attr('y', function (d) { return bar_yScale(Math.max(0, d.value)); })
+                .attr('height', function (d) { return Math.abs(bar_yScale(d.value) - bar_yScale(0)); });
+
+            linegraph.datum(districtData)
+                .transition()
+                .duration(1500)
+                .attr('d', growthLine);
+
+
+            dots.data(districtData)
+                .transition()
+                .duration(1500)
+                .attr("cx", function (d) { return line_xScale(d.School_Year); })
+                .attr("cy", function (d) { return line_yScale(d.FORECAST_ENROLMENT) });
+
+            zero_line.y(function (d) { return bar_yScale(d['y']); });
+            d3.select('#zero-line')
+                .transition()
+                .duration(1600)
+                .attr('d', zero_line);
+
+            line_chartGroup.select('.yAxis')
+                .transition()
+                .duration(1600)
+                .call(line_yAxis);
+
+            line_chartGroup.select('.yAxis2')
+                .transition()
+                .duration(1600)
+                .call(bar_yAxis);
+        });
+
+
+        //legends
+        let legends = ['Demographics', 'Migration', 'Retention', 'Independent']
+        let svgContainer = d3.select('.svg-content');
+        var legend = svgContainer.selectAll(".legend")
+            .data(legends)
+            .enter().append("svg")
+            .append('g')
+            .attr("class", "legend")
+            .attr("transform", function (d, i) { return "translate(" + i * 80 + ", 0)"; })
+            .style("opacity", "0");
+
+        legend.append("rect")
+            .attr("x", line_width - 240)
+            .attr("width", 18)
+            .attr("height", 18)
+            .style("fill", function (d) { return color_scale(d); });
+
+        legend.append("text")
+            .attr("x", line_width - 220)
+            .attr("y", 9)
+            .attr("dy", ".3em")
+            .style("text-anchor", "start")
+            .text(function (d) { return d; });
+
+        // legend.transition().duration(500).delay(function (d, i) { return 1300 + 100 * i; }).style("opacity", "1");
+        legend.style("opacity", "1");
+
+    });
 
     function line_toolOver(v, thepath) {
         d3.select(thepath)
@@ -474,7 +565,7 @@
     function line_toolMove(mx, my, data) {
         //create the tooltip, style it and inject info
         if (+data.School_Year > 2018) {
-            return tooltip_line.style("top", my + - 20 + "px")
+            return tooltip_line.style("top", my + 40 + "px")
                 .style("left", mx - 10 + "px")
                 .html("Forecast Enrolment: <b>" + Math.round(data.FORECAST_ENROLMENT));
         } else {

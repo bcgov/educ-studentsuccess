@@ -557,6 +557,7 @@ body {
     #distContainer {
       display: flex;
       justify-content: space-around;
+      margin-bottom: 1em;
 
       .distBtn {
         padding: 0.25rem 1rem;
@@ -598,13 +599,16 @@ body {
         top: 0;
         left: 0;
 
+        .legend {
+          font-size: 9px;
+      }
+
           .bar {
             stroke: none;
-            fill: #002663;
         }
 
         .bar:hover {
-            fill: rgba(0, 38, 99, 0.7);
+            fill: rgba(0, 38, 99, 0.7) !important;
         }
 
         .label {
@@ -615,12 +619,12 @@ body {
 
         .line {
           fill: none;
-          stroke: #fcba19;
+          stroke: $home-color;
           stroke-width: 3;
         }
 
         .dot {
-          fill: #ffab00;
+          fill: $home-color;
           stroke: #fff;
         }
       }
@@ -630,7 +634,15 @@ body {
         .domain {
           display: none;
         }
+        stroke-width: 0;
       }
+
+      #zero-line {
+        fill: none;
+        stroke: #ccc;
+        stroke-width: 1;
+    }
+
 
       #line_tt {
         background: $tooltip-info-bg;

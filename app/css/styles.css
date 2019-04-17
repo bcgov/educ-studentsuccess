@@ -7370,7 +7370,8 @@ html {
         clear: both; }
     html body #graph #distContainer {
       display: flex;
-      justify-content: space-around; }
+      justify-content: space-around;
+      margin-bottom: 1em; }
       html body #graph #distContainer .distBtn {
         padding: 0.25rem 1rem;
         border: 2px solid #38598a;
@@ -7401,24 +7402,31 @@ html {
         position: absolute;
         top: 0;
         left: 0; }
+        html body #graph #lineContainer .svg-content .legend {
+          font-size: 9px; }
         html body #graph #lineContainer .svg-content .bar {
-          stroke: none;
-          fill: #002663; }
+          stroke: none; }
         html body #graph #lineContainer .svg-content .bar:hover {
-          fill: rgba(0, 38, 99, 0.7); }
+          fill: rgba(0, 38, 99, 0.7) !important; }
         html body #graph #lineContainer .svg-content .label {
           fill: white;
           font-weight: 400;
           text-anchor: middle; }
         html body #graph #lineContainer .svg-content .line {
           fill: none;
-          stroke: #fcba19;
+          stroke: #002663;
           stroke-width: 3; }
         html body #graph #lineContainer .svg-content .dot {
-          fill: #ffab00;
+          fill: #002663;
           stroke: #fff; }
-      html body #graph #lineContainer .yAxis .domain, html body #graph #lineContainer .yAxis2 .domain, html body #graph #lineContainer .xAxis .domain {
-        display: none; }
+      html body #graph #lineContainer .yAxis, html body #graph #lineContainer .yAxis2, html body #graph #lineContainer .xAxis {
+        stroke-width: 0; }
+        html body #graph #lineContainer .yAxis .domain, html body #graph #lineContainer .yAxis2 .domain, html body #graph #lineContainer .xAxis .domain {
+          display: none; }
+      html body #graph #lineContainer #zero-line {
+        fill: none;
+        stroke: #ccc;
+        stroke-width: 1; }
       html body #graph #lineContainer #line_tt {
         background: rgba(255, 255, 255, 0.7);
         padding: 10px 10px;
