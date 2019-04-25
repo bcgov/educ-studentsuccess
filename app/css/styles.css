@@ -7126,6 +7126,80 @@ html {
     html body .bg-img {
       max-width: 400px;
       height: auto; }
+    html body .controlSection {
+      margin-bottom: 2rem; }
+    html body .dropDown {
+      position: relative;
+      background: white;
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #38598a;
+      box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+      border-radius: 0.5em;
+      cursor: pointer;
+      transition: all 0.3s ease-out;
+      /* Hover state */
+      /* Track */
+      /* Handle */ }
+      html body .dropDown .list {
+        position: absolute;
+        z-index: 10;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        border-radius: 0 0 0.5em 0.5em;
+        border: none;
+        list-style: none;
+        transition: 0.3s ease-out;
+        /* Hiding */
+        display: none;
+        max-height: 0;
+        overflow: auto; }
+      html body .dropDown .list div {
+        text-decoration: none;
+        color: #494949;
+        padding: 12px 15px;
+        transition: 0.3s ease-out;
+        border: none; }
+      html body .dropDown .list div:hover {
+        color: #5091CD;
+        background: #f7f7f9; }
+      html body .dropDown .list::-webkit-scrollbar {
+        width: .4rem; }
+      html body .dropDown .list::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey;
+        border-radius: .1rem; }
+      html body .dropDown .list::-webkit-scrollbar-thumb {
+        background: #38598a;
+        border-radius: 10px; }
+    html body .dropDown.active {
+      border-radius: 0.5em 0.5em  0 0;
+      box-shadow: none;
+      background: white; }
+      html body .dropDown.active .list {
+        display: block;
+        border: 2px solid #38598a;
+        border-top: none;
+        max-height: 150px;
+        margin: 0 -2px; }
+      html body .dropDown.active .list div {
+        border-top: 1px solid rgba(0, 0, 0, 0.05); }
+    html body .dropDown:hover {
+      border: 2px solid #002663;
+      box-shadow: 0 2px 0 2px rgba(0, 0, 0, 0.04); }
+    html body .dropDown:after {
+      /* Little arrow */
+      content: "";
+      width: 0;
+      height: 0;
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      margin-top: -3px;
+      border-width: 6px 6px 0 6px;
+      border-style: solid;
+      border-color: #38598a transparent; }
     html body #aniContainer #aniControl {
       display: flex;
       justify-content: center; }
@@ -7207,80 +7281,6 @@ html {
           position: relative; }
           html body #inter-map #interactiveMap svg .goingline {
             pointer-events: auto; }
-      html body #inter-map .dropDown {
-        position: relative;
-        background: white;
-        width: 100%;
-        padding: 12px 15px;
-        border: 2px solid #38598a;
-        box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
-        border-radius: 0.5em;
-        cursor: pointer;
-        transition: all 0.3s ease-out;
-        /* Hover state */
-        /* Track */
-        /* Handle */ }
-        html body #inter-map .dropDown .list {
-          position: absolute;
-          z-index: 10;
-          top: 100%;
-          left: 0;
-          right: 0;
-          background: white;
-          border-radius: 0 0 0.5em 0.5em;
-          border: none;
-          list-style: none;
-          transition: 0.3s ease-out;
-          /* Hiding */
-          display: none;
-          max-height: 0;
-          overflow: auto; }
-        html body #inter-map .dropDown .list div {
-          text-decoration: none;
-          color: #494949;
-          padding: 12px 15px;
-          transition: 0.3s ease-out;
-          border: none; }
-        html body #inter-map .dropDown .list div:hover {
-          color: #5091CD;
-          background: #f7f7f9; }
-        html body #inter-map .dropDown .list::-webkit-scrollbar {
-          width: .4rem; }
-        html body #inter-map .dropDown .list::-webkit-scrollbar-track {
-          box-shadow: inset 0 0 5px grey;
-          border-radius: .1rem; }
-        html body #inter-map .dropDown .list::-webkit-scrollbar-thumb {
-          background: #38598a;
-          border-radius: 10px; }
-      html body #inter-map .dropDown.active {
-        border-radius: 0.5em 0.5em  0 0;
-        box-shadow: none;
-        background: white; }
-        html body #inter-map .dropDown.active .list {
-          display: block;
-          border: 2px solid #38598a;
-          border-top: none;
-          max-height: 150px;
-          margin: 0 -2px; }
-        html body #inter-map .dropDown.active .list div {
-          border-top: 1px solid rgba(0, 0, 0, 0.05); }
-      html body #inter-map .dropDown:hover {
-        border: 2px solid #002663;
-        box-shadow: 0 2px 0 2px rgba(0, 0, 0, 0.04); }
-      html body #inter-map .dropDown:after {
-        /* Little arrow */
-        content: "";
-        width: 0;
-        height: 0;
-        position: absolute;
-        top: 50%;
-        right: 15px;
-        margin-top: -3px;
-        border-width: 6px 6px 0 6px;
-        border-style: solid;
-        border-color: #38598a transparent; }
-      html body #inter-map .controlSection {
-        margin-bottom: 2rem; }
       html body #inter-map #distDropdown.active .list {
         max-height: 240px; }
       html body #inter-map .flowBtn {
@@ -7368,28 +7368,22 @@ html {
         border-radius: 0 0 3px 3px; }
       html body #inter-map .tipClear {
         clear: both; }
-    html body #graph #distContainer {
-      display: flex;
-      justify-content: space-around;
-      margin-bottom: 1em; }
-      html body #graph #distContainer .distBtn {
-        padding: 0.25rem 1rem;
-        border: 2px solid #38598a;
-        border-radius: 50px;
-        color: #38598a;
-        font-weight: medium;
-        cursor: pointer; }
-      html body #graph #distContainer .distBtn:hover {
-        color: #fff;
-        background: #38598a;
-        box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
-        transform: translateY(-0.025em);
-        transition: .3s ease; }
-      html body #graph #distContainer .selectedDist {
-        font-weight: bold;
-        color: white;
-        background: #38598a;
-        box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
+    html body #graph .reportBtn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border: 2px solid #38598a;
+      border-radius: 50px;
+      background: #fff;
+      color: #38598a;
+      cursor: pointer; }
+    html body #graph .reportBtn:hover {
+      color: #fff;
+      background: #38598a;
+      box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
+      transform: translateY(-0.025em);
+      transition: .3s ease; }
+    html body #graph #predictors-distDropdown.active .list {
+      max-height: 240px; }
     html body #graph #lineContainer {
       display: inline-block;
       position: relative;

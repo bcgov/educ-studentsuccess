@@ -93,13 +93,13 @@
           <div class="controlSection">
             <h5>School Year</h5>
             <div id="yearDropdown" class="dropDown" tabindex="1">
-                <span>Select a school year</span>
-                <div class="list">
-                  <div data-value="2018">2017/2018</div>
-                  <div data-value="2017">2016/2017</div>
-                  <div data-value="2016">2015/2016</div>
-                  <div data-value="2015">2014/2015</div>
-                  <div data-value="2014">2013/2014</div>
+              <span>Select a school year</span>
+              <div class="list">
+                <div data-value="2018">2017/2018</div>
+                <div data-value="2017">2016/2017</div>
+                <div data-value="2016">2015/2016</div>
+                <div data-value="2015">2014/2015</div>
+                <div data-value="2014">2013/2014</div>
               </div>
             </div>
           </div>
@@ -108,7 +108,7 @@
             <div id="distDropdown" class="dropDown" tabindex="1">
               <span>Select a school district</span>
               <div class="list"></div>
-              </div>
+            </div>
           </div>
           <div class="controlSection">
             <h5>Migration Flow</h5>
@@ -124,19 +124,42 @@
 
   <div class="container my-5" id="graph">
     <div class="row">
-      <div class="col-sm-12 col-md-4">
-        <h2  class="mb-3">Districts with the highest net migration growth</h2>
-        <h4 id="distName">SD-05 Southeast Kootenay</h4>
-        <p id="distInfo">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-          dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo
-          consequat. Duis aute irure dolor in reprehenderit.</p>
+
+      <div class="col-12">
+        <h2 class="mb-3">Key Predictors and Impact</h2>
+        <p id="distInfo">The Ministry of Education District Enrolment Forecast Model (DEFM) has been developed based on
+          the Cohort Survival Method approach. The DEFM is based on four enrolment drivers: migration, demographics,
+          independent/public school transition, and continuous student retention.</p>
       </div>
       <div class="col-sm-12 col-md-8">
-        <div id="distContainer"></div>
         <div id="lineContainer"></div>
       </div>
+
+      <div class="col-sm-12 col-md-4">
+        <div id='prdictors-control'>
+          <div class="controlSection">
+            <h4 id="distName">SD05-Southeast Kootenay</h4>
+          </div>
+          <div class="controlSection">
+            <h5>Time Range</h5>
+            <div id="predictors-brush"></div>
+          </div>
+          <div class="controlSection">
+            <h5>School District</h5>
+            <div id="predictors-distDropdown" class="dropDown" tabindex="1">
+              <span>Select a school district</span>
+              <div class="list"></div>
+            </div>
+          </div>
+          <div class="controlSection">
+            <h5>District Reports</h5>
+            <a class="reportBtn"
+            href="https://www2.gov.bc.ca/gov/content/education-training/k-12/administration/program-management/reporting-on-k-12/district-reports/southeast-kootenay"
+              target="_blank">View Reports</a>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 

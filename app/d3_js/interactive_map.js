@@ -701,10 +701,9 @@ $(document).ready(function () {
     $(this).toggleClass('active');
     $('#yearDropdown').removeClass('active');
 
-    //or add on lick when appending the divs
+    //or add on click when appending the divs
     d3.selectAll('#distDropdown .list div')
       .on('click', function () {
-        console.log('haha');
         $('#distDropdown span').text($(this).text());
         $('#distDropdown').attr('attr', 'dropDown');
         let targetSd = eval(d3.select(this).attr('data-value'));
