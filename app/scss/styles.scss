@@ -325,13 +325,12 @@ body {
         }
     
         .track {
-          stroke: #000;
           stroke-opacity: 0.3;
           stroke-width: 10px;
         }
     
         .track-inset {
-          stroke: #e7e7e7;
+          stroke: #bbb;
           stroke-width: 8px;
         }
     
@@ -343,12 +342,17 @@ body {
         }
     
         .handle {
-          fill: $btn-color;
-          stroke: #000;
+          fill: #38598a;
+          stroke: #494949;
           stroke-opacity: 0.5;
-          stroke-width: 1px;
+          stroke-width: 1.25px;
+          cursor: pointer;
         }
 
+        .handle.active {
+          fill: #002663;
+        }
+        
         .ticks {
           fill: $font-color;
           font-size: 12px;
@@ -647,11 +651,8 @@ body {
       }
     }
 
-    /* slider ------------------------------ */
+/* slider ------------------------------ */
 
-.slider-holder{
-  width: 700px;
-}
 .ticks {
   font-size: 12px;
 }

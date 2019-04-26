@@ -7227,11 +7227,10 @@ html {
         html body #aniContainer #aniControl #play-control .track-overlay {
           stroke-linecap: round; }
         html body #aniContainer #aniControl #play-control .track {
-          stroke: #000;
           stroke-opacity: 0.3;
           stroke-width: 10px; }
         html body #aniContainer #aniControl #play-control .track-inset {
-          stroke: #e7e7e7;
+          stroke: #bbb;
           stroke-width: 8px; }
         html body #aniContainer #aniControl #play-control .track-overlay {
           pointer-events: stroke;
@@ -7240,9 +7239,12 @@ html {
           cursor: pointer; }
         html body #aniContainer #aniControl #play-control .handle {
           fill: #38598a;
-          stroke: #000;
+          stroke: #494949;
           stroke-opacity: 0.5;
-          stroke-width: 1px; }
+          stroke-width: 1.25px;
+          cursor: pointer; }
+        html body #aniContainer #aniControl #play-control .handle.active {
+          fill: #002663; }
         html body #aniContainer #aniControl #play-control .ticks {
           fill: #494949;
           font-size: 12px; }
@@ -7428,8 +7430,6 @@ html {
           padding: 10px 10px;
           border-radius: 3px;
           color: #494949; }
-      html body #graph .slider-holder {
-        width: 700px; }
       html body #graph .ticks {
         font-size: 12px; }
       html body #graph .track,
