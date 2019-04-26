@@ -60,8 +60,13 @@ let growthLine = d3.line()
 
 //distirct controls
 let targetDistrict = 'SD05';
-let districts = ["SD05", "SD06", "SD08", "SD10", "SD19"];
 let defaultPageLoad = true;
+
+//range slider domain
+let minYr, maxYr;
+//preset year range when start
+let yr1 = 2014;
+let yr2 = 2019;
 
 //canvas
 let line_svg = d3.select('#lineContainer').append('svg')
@@ -84,15 +89,22 @@ let tooltip_line = d3.select("#lineContainer")
 
 
 
+function updateGraph(yr1, yr2) {
+
 d3.csv('../assets/raw_data/predictors.csv', function (error, data) {
     if (error) {
         throw error;
     }
 
-    let districtData = data.filter(function (d) { return d.ABBREV == targetDistrict });
+    let districtData = data.filter(function (d) { return (d.ABBREV == targetDistrict)&&(+d.SCHOOL_YEAR>=yr1 && +d.SCHOOL_YEAR<=yr2) });
+
+    console.log(districtData);
 
     //array used to populate dropdown menu
     let sd_arr = [];
+
+    //range array
+    let range_arr = [];
 
     //get the array of keys (drivers)
     let driverNames = d3.keys(data[0]).filter(function (key) {
@@ -125,13 +137,26 @@ d3.csv('../assets/raw_data/predictors.csv', function (error, data) {
         let sd_num = data[i].ABBREV;
         let sd_name = data[i].DISTRICT;
         let option = sd_num + '-' + sd_name;
+        //covert school year string to num
+        let year = +data[i].SCHOOL_YEAR;
         //check if it's already exist
         if (sd_arr.indexOf(option) === -1) {
             sd_arr.push(option);
         }
+
+        //check if it's already exist
+        if (range_arr.indexOf(year) === -1) {
+            range_arr.push(year);
+        }
     }
 
     console.log(sd_arr);
+
+    //starting year, min val of the array
+    minYr = Math.min(...range_arr);
+    //ending year
+    maxYr = Math.max(...range_arr);
+
 
     //populate dropdown menu
     for (let i = 0; i < sd_arr.length; i++) {
@@ -397,7 +422,6 @@ d3.csv('../assets/raw_data/predictors.csv', function (error, data) {
             });
     });
 
-
     //legends
     let legends = ['Demographics', 'Migration', 'Retention', 'Independent']
     let svgContainer = d3.select('#lineContainer .svg-content');
@@ -425,7 +449,8 @@ d3.csv('../assets/raw_data/predictors.csv', function (error, data) {
     // legend.transition().duration(500).delay(function (d, i) { return 1300 + 100 * i; }).style("opacity", "1");
     legend.style("opacity", "1");
 
-});
+    });
+}
 
 function line_toolOver(v, thepath) {
     d3.select(thepath)
@@ -440,7 +465,7 @@ function line_toolOut(m, thepath) {
         .attr("style", "fill:#002663")
         .attr("cursor", "pointer");
     return tooltip_line.style("visibility", "hidden");
-};
+}
 
 
 function line_toolMove(mx, my, data) {
@@ -454,15 +479,104 @@ function line_toolMove(mx, my, data) {
             .style("left", mx - 10 + "px")
             .html("Total Enrolment: <b>" + Math.round(data.FORECAST_ENROLMENT));
     }
-};
+}
 
 
 //range slider(brush)
-function setupSlider(v1,v2,updateGraph, color) {
+function setupSlider(v1,v2,updateGraph) {
     let sliderVals = [v1,v2];
     let width = 320,
         height = 50;
     let svg = d3.select('#predictors-brush').append('svg')
                 .attr('width', width+30)
                 .attr('height', height);
+
+    let xScale = d3.scaleLinear()
+                   .domain([minYr,maxYr])
+                   .range([0,width]);
+    
+    console.log(minYr, maxYr);
+
+    let xMin = xScale(minYr),
+        xMax = xScale(maxYr);
+
+    let rangeSlider = svg.append('g')
+                   .attr('class', 'slider')
+                   .attr('transform','translate(5,20)');
+
+    console.log(sliderVals[0]);
+    rangeSlider.append('line')
+               .attr('class','track')
+               .attr('x1', 10+xScale.range()[0])
+               .attr('x2', 10+xScale.range()[1]);
+
+    let selectRange = rangeSlider.append('line')
+                                .attr('class', 'sel-range')
+                                .attr('x1', 10+xScale(sliderVals[0]))
+                                .attr('x2', 10+xScale(sliderVals[1]));
+
+    rangeSlider.insert('g', '.track-overlay')
+               .attr('class', 'ticks')
+               .attr('transform', 'translate(10,24)')
+               .selectAll('text')
+               .data(xScale.ticks(10))
+               .enter().append('text')
+               .attr('x', xScale)
+               .attr('text-anchor', 'middle')
+               .text(function(d) {return d;})
+
+    let handle = rangeSlider.selectAll('rect')
+                            .data([0,1])
+                            .enter()
+                            .append('rect', '.track-overlay')
+                            .attr('class', 'handle')
+                            .attr('y', -8)
+                            .attr('x', function(d) {return xScale(sliderVals[d]);})
+                            .attr('rx', 3)
+                            .attr('height', 20)
+                            .attr('width',16)
+                            .call(
+                                d3.drag()
+                                  .on('start', startDrag)
+                                  .on('drag', drag)
+                                  .on('end', endDrag)
+                            );
+    
+    function startDrag(d) {
+        d3.select(this).raise().classed('active', true);
+    }
+
+    function drag(d) {
+        let x1 = d3.event.xScale;
+        if(x1>xMax){
+            x1=xMax
+          }else if(x1<xMin){
+            x1=xMin
+          }
+        d3.select(this).attr('x',x1);
+
+        let x2 = xScale(sliderVals[d==0?1:0]);
+        selectRange.attr('x1', 10+x1)
+                   .attr('x2', 10+x2);
+
+    }
+
+    function endDrag(d) {
+        let endVal = Math.round(xScale.invert(d3.event.x))
+        let elem = d3.select(this)
+        sliderVals[d] = endVal;
+        let v1 = Math.min(sliderVals[0], sliderVals[1]);
+        let v2 = Math.max(sliderVals[0], sliderVals[1]);
+        elem.classed('active', false)
+            .attr('x',xScale(endVal));
+        
+        selectRange.attr('x1', 10+xScale(v1))
+                   .attr('x2', 10+xScale(v2));
+        
+        updateGraph(v1,v2);
+    }
 }
+
+//render graph set up slider
+setupSlider(yr1,yr2,updateGraph);
+updateGraph(yr1,yr2);
