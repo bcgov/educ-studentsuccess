@@ -7368,64 +7368,92 @@ html {
         border-radius: 0 0 3px 3px; }
       html body #inter-map .tipClear {
         clear: both; }
-    html body #graph .reportBtn {
-      display: inline-block;
-      padding: 0.5rem 1rem;
-      border: 2px solid #38598a;
-      border-radius: 50px;
-      background: #fff;
-      color: #38598a;
-      cursor: pointer; }
-    html body #graph .reportBtn:hover {
-      color: #fff;
-      background: #38598a;
-      box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
-      transform: translateY(-0.025em);
-      transition: .3s ease; }
-    html body #graph #predictors-distDropdown.active .list {
-      max-height: 240px; }
-    html body #graph #lineContainer {
-      display: inline-block;
-      position: relative;
-      width: 100%;
-      padding-bottom: 30rem;
-      vertical-align: top;
-      overflow: hidden; }
-      html body #graph #lineContainer .svg-content {
+    html body #graph {
+      /* slider ------------------------------ */ }
+      html body #graph .reportBtn {
         display: inline-block;
-        position: absolute;
-        top: 0;
-        left: 0; }
-        html body #graph #lineContainer .svg-content .legend {
-          font-size: 9px; }
-        html body #graph #lineContainer .svg-content .bar {
-          stroke: none; }
-        html body #graph #lineContainer .svg-content .bar:hover {
-          fill: rgba(0, 38, 99, 0.7) !important; }
-        html body #graph #lineContainer .svg-content .label {
-          fill: white;
-          font-weight: 400;
-          text-anchor: middle; }
-        html body #graph #lineContainer .svg-content .line {
+        padding: 0.5rem 1rem;
+        border: 2px solid #38598a;
+        border-radius: 50px;
+        background: #fff;
+        color: #38598a;
+        cursor: pointer; }
+      html body #graph .reportBtn:hover {
+        color: #fff;
+        background: #38598a;
+        box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
+        transform: translateY(-0.025em);
+        transition: .3s ease; }
+      html body #graph #predictors-distDropdown.active .list {
+        max-height: 240px; }
+      html body #graph #lineContainer {
+        display: inline-block;
+        position: relative;
+        width: 100%;
+        padding-bottom: 30rem;
+        vertical-align: top;
+        overflow: hidden; }
+        html body #graph #lineContainer .svg-content {
+          display: inline-block;
+          position: absolute;
+          top: 0;
+          left: 0; }
+          html body #graph #lineContainer .svg-content .legend {
+            font-size: 9px; }
+          html body #graph #lineContainer .svg-content .bar {
+            stroke: none; }
+          html body #graph #lineContainer .svg-content .bar:hover {
+            fill: rgba(0, 38, 99, 0.7) !important; }
+          html body #graph #lineContainer .svg-content .label {
+            fill: white;
+            font-weight: 400;
+            text-anchor: middle; }
+          html body #graph #lineContainer .svg-content .line {
+            fill: none;
+            stroke: #002663;
+            stroke-width: 3; }
+          html body #graph #lineContainer .svg-content .dot {
+            fill: #002663;
+            stroke: #fff; }
+        html body #graph #lineContainer .yAxis, html body #graph #lineContainer .yAxis2, html body #graph #lineContainer .xAxis {
+          stroke-width: 0; }
+          html body #graph #lineContainer .yAxis .domain, html body #graph #lineContainer .yAxis2 .domain, html body #graph #lineContainer .xAxis .domain {
+            display: none; }
+        html body #graph #lineContainer #zero-line {
           fill: none;
-          stroke: #002663;
-          stroke-width: 3; }
-        html body #graph #lineContainer .svg-content .dot {
-          fill: #002663;
-          stroke: #fff; }
-      html body #graph #lineContainer .yAxis, html body #graph #lineContainer .yAxis2, html body #graph #lineContainer .xAxis {
-        stroke-width: 0; }
-        html body #graph #lineContainer .yAxis .domain, html body #graph #lineContainer .yAxis2 .domain, html body #graph #lineContainer .xAxis .domain {
-          display: none; }
-      html body #graph #lineContainer #zero-line {
-        fill: none;
-        stroke: #ccc;
-        stroke-width: 1; }
-      html body #graph #lineContainer #line_tt {
-        background: rgba(255, 255, 255, 0.7);
-        padding: 10px 10px;
-        border-radius: 3px;
-        color: #494949; }
+          stroke: #ccc;
+          stroke-width: 1; }
+        html body #graph #lineContainer #line_tt {
+          background: rgba(255, 255, 255, 0.7);
+          padding: 10px 10px;
+          border-radius: 3px;
+          color: #494949; }
+      html body #graph .slider-holder {
+        width: 700px; }
+      html body #graph .ticks {
+        font-size: 12px; }
+      html body #graph .track,
+      html body #graph .track-inset,
+      html body #graph .track-overlay {
+        stroke-linecap: round; }
+      html body #graph .track {
+        stroke: #bbb;
+        stroke-width: 10px; }
+      html body #graph .track-overlay {
+        pointer-events: stroke;
+        stroke-width: 50px;
+        cursor: crosshair; }
+      html body #graph .sel-range {
+        stroke: #5091CD;
+        stroke-width: 8px; }
+      html body #graph .handle {
+        fill: #38598a;
+        stroke: #494949;
+        stroke-opacity: 0.5;
+        stroke-width: 1.25px;
+        cursor: pointer; }
+      html body #graph .handle.active {
+        fill: #002663; }
     html body #facts {
       background-image: url(../assets/img/bg-dcr3.png);
       background-size: 30% auto;
