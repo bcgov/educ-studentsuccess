@@ -7034,7 +7034,6 @@ html {
     html body .nav-bg {
       background: #fff; }
     html body .navbar {
-      padding: 1rem 2rem;
       box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.1); }
       html body .navbar a {
         display: inline-block;
@@ -7042,8 +7041,8 @@ html {
       html body .navbar .navbar-toggler {
         padding: 0; }
       html body .navbar .icon {
-        width: 30px;
-        height: 30px;
+        width: 24px;
+        height: 24px;
         position: relative;
         cursor: pointer; }
         html body .navbar .icon .line {
@@ -7089,7 +7088,7 @@ html {
         border: none; }
       html body .navbar .navbar-brand {
         color: #002663;
-        font-size: 1.4rem; }
+        font-size: 1rem; }
     html body #overview::before, html body #inter-map::before, html body #graph::before, html body #facts::before {
       content: "";
       display: block;

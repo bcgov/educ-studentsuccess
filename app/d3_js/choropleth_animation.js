@@ -24,12 +24,12 @@ let projection1 = d3.geoAlbers()
 let projection_LM = d3.geoAlbers()
     .rotate([122, 0, 0])
     .scale(6500)
-    .translate([ani_width * 0.2, ani_height * 5.15]);
+    .translate([ani_width * 0.2, ani_height * 5.12]);
 
 let projection_SVI = d3.geoAlbers()
     .rotate([122, 0, 0])
     .scale(6000)
-    .translate([ani_width * 0.5, ani_height * 4.26]);
+    .translate([ani_width * 0.5, ani_height * 4.08]);
 
 
 //Define path generators
@@ -59,6 +59,23 @@ let mapGroup_lm = svg_map.append('g')
 
 let mapGroup_svi = svg_map.append('g')
     .attr('class', 'sviMap');
+
+//side map legend
+mapGroup_svi.append('text')
+    .attr("x", 100)
+    .attr("y", 230)
+    .attr('font-size', '10px')
+    .attr('font-weight', 'bold')
+    .attr("text-anchor", "middle")
+    .text('Southern Vancouver Island');
+
+mapGroup_lm.append('text')
+    .attr("x", 100)
+    .attr("y", 380)
+    .attr('font-size', '10px')
+    .attr('font-weight', 'bold')
+    .attr("text-anchor", "middle")
+    .text('Lower Mainland');
 
 //initialize html animation_tooltip
 let animation_tooltip = d3.select("#aniContainer")
@@ -130,7 +147,7 @@ function update(year) {
 
     colorIn.domain([0, maxMove]);
     colorOut.domain([minMove, 0]);
-    
+
 
     d3.json("../assets/geo_json/sd_geo_grouped.json", function (json) {
         loadJson(csv_data, json, mapGroup, ani_path, 'dist-main');
@@ -214,7 +231,7 @@ function loadJson(csv_data, json, map, path, pathClass) {
             if (diff > 0) {
                 return colorIn(diff);
             } else {
-                if(isNaN(diff)) {return '#e6e6e6';} // for lower mainland and southern vancouver island
+                if (isNaN(diff)) { return '#e6e6e6'; } // for lower mainland and southern vancouver island
                 return colorOut(diff);
             }
         });
@@ -281,17 +298,17 @@ function ani_toolMove(mx, my, data) {
         my = 40
     };
 
-    if(data.id){
-    //create the animation_tooltip, style it and inject info
-    return animation_tooltip.style("top", my + - 40 + "px")
-        .style("left", mx  + "px")
-        .html("<div id='tipContainer'><div id='tipLocation'><b>" + data.id +
-            "</b></div><div id='tipKey'>Net migration: <b>" + format((data.properties.total_move_in - data.properties.total_move_out)) +
-            "</b></div><div class='tipClear'></div> </div>");
+    if (data.id) {
+        //create the animation_tooltip, style it and inject info
+        return animation_tooltip.style("top", my + - 40 + "px")
+            .style("left", mx + "px")
+            .html("<div id='tipContainer'><div id='tipLocation'><b>" + data.id +
+                "</b></div><div id='tipKey'>Net migration: <b>" + format((data.properties.total_move_in - data.properties.total_move_out)) +
+                "</b></div><div class='tipClear'></div> </div>");
     } else {
         return animation_tooltip.style("top", my + - 40 + "px")
-        .style("left", mx  + "px")
-        .html("<div id='tipContainer'><div id='tipLocation'><b>See side maps for details</b></div><div class='tipClear'></div> </div>");
+            .style("left", mx + "px")
+            .html("<div id='tipContainer'><div id='tipLocation'><b>See side maps for details</b></div><div class='tipClear'></div> </div>");
     }
 };
 
@@ -301,15 +318,15 @@ function ani_toolMove(mx, my, data) {
 //Create SVG element for slider
 let svg_slider = d3.select("#slider")
     .append("svg")
-    .attr("width", ani_width-100)
+    .attr("width", ani_width - 50)
     .attr("height", 50);
 
 let sliderGroup = svg_slider.append("g")
-    .attr('transform', 'translate(25, 20)');;
+    .attr('transform', 'translate(35, 20)');;
 
 let moving = false;
 let currentValue = 0;
-let targetValue = ani_width-margin.left;
+let targetValue = ani_width - margin.left;
 
 let years = [2013, 2018];
 let step = 1;
@@ -324,7 +341,7 @@ let playButton = d3.select("#play-pause");
 //scales
 let xScale = d3.scaleLinear()
     .domain(years)
-    .range([0, targetValue-50])
+    .range([0, targetValue])
     .clamp(true);
 
 
@@ -339,7 +356,7 @@ sliderGroup.append("line")
     .attr("class", "track-overlay")
     .call(d3.drag()
         .on("start.interrupt", function () { sliderGroup.interrupt(); })
-        .on("start drag", function () {
+        .on("end", function () {
             console.log('dragged');
             currentValue = d3.event.x;
             inputYear(currentValue);
@@ -349,7 +366,7 @@ sliderGroup.append("line")
 //create track overlay
 sliderGroup.insert("g", ".track-overlay")
     .attr("class", "ticks")
-    .attr("transform", "translate(0," + 18 + ")")
+    .attr("transform", "translate(0, 18)")
     .selectAll("text")
     .data(xScale.ticks(6))
     .enter()
@@ -362,11 +379,11 @@ sliderGroup.insert("g", ".track-overlay")
 //slider handle
 let handle = sliderGroup.insert("rect", ".track-overlay")
     .attr("class", "handle")
-    .attr('rx', 2)
-    .attr('ry', 2)
-    .attr('x', -5)
+    .attr('rx', 3)
+    .attr('ry', 3)
+    .attr('x', -8)
     .attr('y', -10)
-    .attr("width", 10)
+    .attr("width", 16)
     .attr("height", 20);
 
 // let label = slider.append("text")
@@ -404,7 +421,7 @@ function inputYear(val) {
     }
 
     // update position and text of label according to slider scale
-    handle.attr("x", cx - 5);
+    handle.attr("x", cx - 8);
     yearText.html("<span>Year:  " + xVal + "</span>");
     update(xVal);
 }
@@ -428,7 +445,6 @@ playButton.on('click', function () {
 //loop back
 function play() {
     currentValue = currentValue + (targetValue / 100);
-    inputYear(currentValue);
     if (currentValue > targetValue) {
         moving = false;
         currentValue = 0;
@@ -437,4 +453,5 @@ function play() {
         playButton.attr('class', 'play');
         console.log("Slider moving: " + moving);
     }
+    inputYear(currentValue);
 }

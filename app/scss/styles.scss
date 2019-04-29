@@ -34,7 +34,6 @@ body {
   }
 
   .navbar {
-    padding: 1rem 2rem;
     box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.1);
 
     a {
@@ -47,8 +46,8 @@ body {
     }
 
     .icon {
-      width: 30px;
-      height: 30px;
+      width: 24px;
+      height: 24px;
       position: relative;
       cursor: pointer;
 
@@ -121,7 +120,7 @@ body {
 
     .navbar-brand {
       color: $home-color;
-      font-size: 1.4rem;
+      font-size: 1rem;
     }
   }
 
