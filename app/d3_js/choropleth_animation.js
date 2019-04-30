@@ -60,6 +60,14 @@ let mapGroup_lm = svg_map.append('g')
 let mapGroup_svi = svg_map.append('g')
     .attr('class', 'sviMap');
 
+mapGroup.append('text')
+    .attr("x", 260)
+    .attr("y", 380)
+    .attr('font-size', '10px')
+    .attr('font-weight', 'bold')
+    .attr("text-anchor", "middle")
+    .text('Conseil Scolaire Francophone');
+
 //side map legend
 mapGroup_svi.append('text')
     .attr("x", 100)
@@ -141,7 +149,7 @@ function update(year) {
     //d3.csv() in queue, here csv_data is same as the data in d3.csv(xxx,function (data) {})
     let csv_data = data[year];
 
-    //as vancouver is a outlier, +100 helps differentiate differences
+    //since vancouver is a outlier, +200 helps differentiate color differences
     let minMove = d3.min(csv_data, function (d) { return d.total_move_in - d.total_move_out }) + 200;
     let maxMove = d3.max(csv_data, function (d) { return d.total_move_in - d.total_move_out });
 
@@ -160,8 +168,9 @@ function update(year) {
     d3.json("../assets/geo_json/southern_vancouver_island.json", function (json) {
         loadJson(csv_data, json, mapGroup_svi, ani_path_svi, 'dist-svi');
     });
-
 }
+
+
 
 
 
@@ -300,13 +309,13 @@ function ani_toolMove(mx, my, data) {
 
     if (data.id) {
         //create the animation_tooltip, style it and inject info
-        return animation_tooltip.style("top", my + - 40 + "px")
+        return animation_tooltip.style("top", my + - 20 + "px")
             .style("left", mx + "px")
             .html("<div id='tipContainer'><div id='tipLocation'><b>" + data.id +
                 "</b></div><div id='tipKey'>Net migration: <b>" + format((data.properties.total_move_in - data.properties.total_move_out)) +
                 "</b></div><div class='tipClear'></div> </div>");
     } else {
-        return animation_tooltip.style("top", my + - 40 + "px")
+        return animation_tooltip.style("top", my + - 20 + "px")
             .style("left", mx + "px")
             .html("<div id='tipContainer'><div id='tipLocation'><b>See side maps for details</b></div><div class='tipClear'></div> </div>");
     }
@@ -386,18 +395,15 @@ let handle = sliderGroup.insert("rect", ".track-overlay")
     .attr("width", 16)
     .attr("height", 20);
 
-// let label = slider.append("text")
-//     .attr("class", "label")
-//     .attr("text-anchor", "middle")
-//     .text(formatDate(startDate))
-//     .attr("transform", "translate(0," + (-25) + ")")
-
+//flag for checking update() year input
+let yrCheck = 0;
 function inputYear(val) {
-    console.log(val);
+    // console.log(val);
 
     let x = xScale.invert(val);
 
     let index = null, midPoint, cx, xVal;
+
     if (step) {
         // if step has a value, compute the midpoint based on range values and reposition the slider based on the mouse position
         for (var i = 0; i < yearValues.length; i++) {
@@ -423,7 +429,12 @@ function inputYear(val) {
     // update position and text of label according to slider scale
     handle.attr("x", cx - 8);
     yearText.html("<span>Year:  " + xVal + "</span>");
-    update(xVal);
+
+    //verify that a method was called with certain year input, call update() with unique each year value once
+    if (yrCheck != xVal) {
+        update(xVal);
+        yrCheck = xVal;
+    }
 }
 
 //play animation
@@ -445,13 +456,13 @@ playButton.on('click', function () {
 //loop back
 function play() {
     currentValue = currentValue + (targetValue / 100);
+    inputYear(currentValue);
     if (currentValue > targetValue) {
         moving = false;
         currentValue = 0;
         clearInterval(timer);
         // reset after looping
         playButton.attr('class', 'play');
-        console.log("Slider moving: " + moving);
+        // console.log("Slider moving: " + moving);
     }
-    inputYear(currentValue);
 }
