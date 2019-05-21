@@ -364,12 +364,9 @@ sliderGroup.append("line")
     .select(function () { return this.parentNode.appendChild(this.cloneNode(true)); })
     .attr("class", "track-overlay")
     .call(d3.drag()
-        .on("start.interrupt", function () { sliderGroup.interrupt(); })
-        .on("end", function () {
-            console.log('dragged');
-            currentValue = d3.event.x;
-            inputYear(currentValue);
-        })
+        .on("start.interrupt", startDrag)
+        .on("drag", drag)
+        .on("end", end)
     );
 
 //create track overlay
@@ -386,14 +383,46 @@ sliderGroup.insert("g", ".track-overlay")
     .text(function (d) { return d; });
 
 //slider handle
-let handle = sliderGroup.insert("rect", ".track-overlay")
+let handle = sliderGroup.selectAll("rect")
+    .data([0,1])
+    .enter()
+    .append('rect','.track-overlay')
     .attr("class", "handle")
     .attr('rx', 3)
     .attr('ry', 3)
     .attr('x', -8)
     .attr('y', -10)
     .attr("width", 16)
-    .attr("height", 20);
+    .attr("height", 20)
+     .call(d3.drag()
+        .on("start.interrupt", startDrag)
+        .on("drag", drag)
+        .on("end", end));
+
+    function startDrag(d) {
+        sliderGroup.interrupt();
+        d3.select(this).raise().classed('active', true);
+    }
+
+    function drag(d) {
+        let x = d3.event.x;
+        let xMin = xScale(years[0]),
+            xMax = xScale(years[1]);
+        if (x > xMax) {
+            x = xMax - 10;
+        } else if (x < xMin) {
+            x = xMin;
+        }
+        // console.log(x);
+        handle.attr('x', x);
+    }
+
+    function end(d) {
+            // console.log('dragged');
+            currentValue = d3.event.x;
+            d3.select(this).classed('active', false);
+            inputYear(currentValue);
+    }
 
 //flag for checking update() year input
 let yrCheck = 0;
