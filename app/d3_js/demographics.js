@@ -34,37 +34,48 @@ let demo_chartGroup = demo_svg.append('g')
     .attr('class', 'chartGroup')
     .attr("transform", "translate(" + demo_margin.left + "," + demo_margin.top + ")");
 
-let defaultDistrict = ['SD35', 'SD10', 'SD05'];
-console.log(defaultDistrict[0]);
+let defaultDistrict = ['SD05', 'SD06', 'SD10', 'SD08'];
 
+for (let dist of defaultDistrict) {
+    console.log(dist);
+}
 
 d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
     if (error) {
         throw error;
     }
 
-    for (let dist of defaultDistrict) {
-    //ditrict = 'line_' + d.Abbrv, so need to substring()
-    let districtData = data.filter(function (d) { return d.DISTRICT == dist.substring(2, dist.length)  });
+    //array of all selected district
+    let districtData = [];
 
-    // format the data
-    districtData.forEach(function (d) {
-        d.SCHOOL_YEAR = (parDate(d.SCHOOL_YEAR)).getFullYear();
-        d.NEW_KINDERGARTEN = +d.NEW_KINDERGARTEN;
-        d.GRADUATES = +d.GRADUATES;
-        d.NET = +d.NET;
-    });
+    for (let dist of defaultDistrict) {
+
+        let district = data.filter(function (d) { return d.DISTRICT == dist.substring(2, dist.length) });
+
+        // format the data
+        district.forEach(function (d) {
+            d.SCHOOL_YEAR = (parDate(d.SCHOOL_YEAR)).getFullYear();
+            d.NEW_KINDERGARTEN = +d.NEW_KINDERGARTEN;
+            d.GRADUATES = +d.GRADUATES;
+            d.NET = +d.NET;
+        });
+        // concat method doesn't change the original array, need to reassign it.
+        districtData = districtData.concat(district);
+    }
+    console.log(districtData);
 
     let defaultType = 'NEW_KINDERGARTEN';
 
-    function demoUpdate(type) {
-
+    function demoClear() {
         //clear existing line
-        let existingPath = d3.select("#demoContainer .line");
+        let existingPath = d3.selectAll("#demoContainer .line");
         existingPath.exit();
         existingPath.transition()
             .duration(500)
             .remove();
+    }
+
+    function demoUpdate(type) {
 
         //line generator
         let demoLine = d3.line()
@@ -76,30 +87,40 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
             })
             .curve(d3.curveMonotoneX);
 
-        //set scale domain
+        for (let dist of defaultDistrict) {
+
+            let district = data.filter(function (d) { return d.DISTRICT == dist.substring(2, dist.length) });
+
+            //set scale domain 
+            demo_xScale.domain(district.map(function (d) { return d.SCHOOL_YEAR; }));
+
+            demo_yScale.domain([Math.min(0, d3.min(district, function (d) { return d[type]; })),
+            Math.max(0, d3.max(district, function (d) { return d[type]; }))]);
+
+            let demo_line = demo_chartGroup.append('path')
+                .datum(district)
+                .attr('class', 'line')
+                .attr('d', demoLine)
+                .attr('fill', 'none')
+                .attr("stroke-width", "2")
+                .attr('stroke', '#4c4c4c');
+
+            //animate path
+            let totalLength = demo_line.node().getTotalLength();
+            console.log(totalLength);
+
+            demo_line.attr("stroke-dasharray", totalLength + " " + totalLength)
+                .attr("stroke-dashoffset", totalLength)
+                .transition()
+                .duration(1500)
+                .attr("stroke-dashoffset", 0);
+        }
+
+        //reset scale domain combined axes
         demo_xScale.domain(districtData.map(function (d) { return d.SCHOOL_YEAR; }));
-        //check if 
 
         demo_yScale.domain([Math.min(0, d3.min(districtData, function (d) { return d[type]; })),
         Math.max(0, d3.max(districtData, function (d) { return d[type]; }))]);
-
-        let demo_line = demo_chartGroup.append('path')
-            .datum(districtData)
-            .attr('class', 'line')
-            .attr('d', demoLine)
-            .attr('fill', 'none')
-            .attr("stroke-width", "2")
-            .attr('stroke', '#4c4c4c');
-
-        //animate path
-        let totalLength = demo_line.node().getTotalLength();
-        console.log(totalLength);
-
-        demo_line.attr("stroke-dasharray", totalLength + " " + totalLength)
-            .attr("stroke-dashoffset", totalLength)
-            .transition()
-            .duration(1500)
-            .attr("stroke-dashoffset", 0);
 
         if ($('#demoContainer .yAxis').length) {
 
@@ -165,12 +186,12 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
     }
 
     demoUpdate(defaultType);
-}
 
     //radio selection
     $("#demo-radio input[type='radio']").change(function () {
         var radioValue = $("input[name='demo-type']:checked").val();
         if (radioValue) {
+            demoClear();
             demoUpdate(radioValue);
         }
     });
