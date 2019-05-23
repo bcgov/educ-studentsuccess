@@ -56,7 +56,7 @@
       <div class="col-sm-12 col-md-4 intro">
         <h2 class="dispaly-4 font-weight-bold">Student Migration</h2>
         <p>Understand student mobility throughout the province and its impact on student enrolment.</p>
-        <a class="btn cta btn-lg" href="#" role="button">Learn more</a>
+        <a class="btn ctaBtn btn-lg" href="#" role="button">Learn more</a>
       </div>
       <div class="col-sm-12 col-md-8 pt-5">
         <div id="aniContainer">
@@ -146,6 +146,29 @@
           <div id="demoContainer"></div>
         </div>
         <div class="col-sm-12 col-md-4">
+            <div id='demographics-control'>
+                <button type="button" class="ghostBtn" data-toggle="modal" data-target="#demoModal">Select District(s)</button>
+                
+                <div id="demoModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Select Districts</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="ghostBtn" data-dismiss="modal">Close</button>
+                          <button id="demo-save" type="button" class="flatBtn">Save changes</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+              </div>
           </div>
     </div>
   </div>
@@ -180,7 +203,7 @@
               </div>
               <div class="controlSection">
                 <h5>District Reports</h5>
-                <a class="reportBtn"
+                <a class="ghostBtn"
                   href="https://www2.gov.bc.ca/gov/content/education-training/k-12/administration/program-management/reporting-on-k-12/district-reports/southeast-kootenay"
                   target="_blank">View Reports</a>
               </div>
@@ -252,9 +275,9 @@
       <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
       <script src="/js/transforming_menu.js"></script>
       <script src="/d3_js/choropleth_animation.js"></script>
-      <script src="/d3_js/demographics.js"></script>
       <script src="/d3_js/interactive_map.js"></script>
       <script src="/d3_js/interactive_bars_line.js"></script>
+      <script src="/d3_js/demographics.js"></script>
 
 </body>
 

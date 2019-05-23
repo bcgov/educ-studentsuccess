@@ -469,7 +469,7 @@ $(document).ready(function () {
 
   //function crates the path
   function clicked(selected, flowtype) {
-    // console.log(selected);
+    console.log(selected);
     //var coming = selected.properties;
     let selDist, distName;
     let homex, homey;

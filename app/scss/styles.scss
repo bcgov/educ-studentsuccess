@@ -124,6 +124,60 @@ body {
     }
   }
 
+  /**********shared********/
+  .ghostBtn{
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border: 2px solid $btn-color;
+    border-radius: 50px;
+    background: #fff;
+    color: $btn-color;
+    cursor: pointer;
+  }
+
+  .ghostBtn:hover{
+      color: #fff;
+      background: $btn-color;
+      box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
+      transform: translateY(-0.025em);
+      transition: .3s ease;
+  }
+
+  .flatBtn{
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    border: 2px solid $btn-color;
+    color: #fff;
+    background: $btn-color;
+    cursor: pointer;
+  }
+
+  .flatBtn:hover{
+      color: #fff;
+      border: 2px solid #00305d;
+      background: #00305d;
+      transition: .3s ease;
+  }
+
+  .ctaBtn {
+    margin-top: 2rem;
+    max-width: 180px;
+    background: $cta-yellow;
+    border-radius: 50px;
+    padding: .5rem 2rem;
+    color: $body-bg;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05);
+  }
+
+  .ctaBtn:hover {
+    color: $body-bg;
+    box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
+    transform: translateY(-0.025em);
+    transition: .3s ease;
+  }
+
+/*********sections********/
   #overview::before, #inter-map::before, #graph::before, #facts::before {
     content:"";
     display:block;
@@ -142,23 +196,6 @@ body {
 
   .intro {
     padding-top: 5rem;
-  }
-
-  .cta {
-    margin-top: 2rem;
-    max-width: 180px;
-    background: $cta-yellow;
-    border-radius: 50px;
-    padding: .5rem 2rem;
-    color: $body-bg;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05);
-  }
-
-  .cta:hover {
-    color: $body-bg;
-    box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
-    transform: translateY(-0.025em);
-    transition: .3s ease;
   }
 
 }
@@ -435,8 +472,6 @@ body {
     .flowBtn:hover{
       color: #fff;
       background: $btn-color;
-      box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
-      transform: translateY(-0.025em);
       transition: .3s ease;
     }
 
@@ -556,24 +591,6 @@ body {
 
   // interactive bar+line graph
   #graph {
-
-      .reportBtn{
-        display: inline-block;
-        padding: 0.5rem 1rem;
-        border: 2px solid $btn-color;
-        border-radius: 50px;
-        background: #fff;
-        color: $btn-color;
-        cursor: pointer;
-      }
-
-      .reportBtn:hover{
-          color: #fff;
-          background: $btn-color;
-          box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
-          transform: translateY(-0.025em);
-          transition: .3s ease;
-      }
 
       #predictors-distDropdown.active{
         .list{
@@ -700,9 +717,12 @@ body {
         .domain {
           display: none;
         }
-    }
-      .xAxis {
         stroke-width: 0;
+    }
+      .yAxis {
+        .domain{
+          stroke:#ccc;
+        }
       }
 
       .gridline{
@@ -710,6 +730,15 @@ body {
         shape-rendering: crispEdges;
         stroke-opacity: .5;
         }
+  }
+
+  #demographics-control{
+    .modal-body{
+      display: grid;
+      grid-template-columns: repeat(4, 1.2fr);
+      grid-gap: 10px;
+      font-size: 12px;
+    }
   }
 }
 

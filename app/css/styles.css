@@ -7025,7 +7025,9 @@ html {
   html body {
     background: #f7f7f9;
     font-family: 'Lato', sans-serif;
-    color: #494949; }
+    color: #494949;
+    /**********shared********/
+    /*********sections********/ }
     html body div:focus, html body button:focus {
       outline: none; }
     html body a,
@@ -7089,6 +7091,46 @@ html {
       html body .navbar .navbar-brand {
         color: #002663;
         font-size: 1rem; }
+    html body .ghostBtn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border: 2px solid #38598a;
+      border-radius: 50px;
+      background: #fff;
+      color: #38598a;
+      cursor: pointer; }
+    html body .ghostBtn:hover {
+      color: #fff;
+      background: #38598a;
+      box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
+      transform: translateY(-0.025em);
+      transition: .3s ease; }
+    html body .flatBtn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      border: 2px solid #38598a;
+      color: #fff;
+      background: #38598a;
+      cursor: pointer; }
+    html body .flatBtn:hover {
+      color: #fff;
+      border: 2px solid #00305d;
+      background: #00305d;
+      transition: .3s ease; }
+    html body .ctaBtn {
+      margin-top: 2rem;
+      max-width: 180px;
+      background: #FCBA19;
+      border-radius: 50px;
+      padding: .5rem 2rem;
+      color: #f7f7f9;
+      box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
+    html body .ctaBtn:hover {
+      color: #f7f7f9;
+      box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
+      transform: translateY(-0.025em);
+      transition: .3s ease; }
     html body #overview::before, html body #inter-map::before, html body #graph::before, html body #facts::before {
       content: "";
       display: block;
@@ -7105,19 +7147,6 @@ html {
       padding-bottom: 6rem; }
       html body #overview .intro {
         padding-top: 5rem; }
-      html body #overview .cta {
-        margin-top: 2rem;
-        max-width: 180px;
-        background: #FCBA19;
-        border-radius: 50px;
-        padding: .5rem 2rem;
-        color: #f7f7f9;
-        box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
-      html body #overview .cta:hover {
-        color: #f7f7f9;
-        box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
-        transform: translateY(-0.025em);
-        transition: .3s ease; }
     html body .dcr-wrapper {
       display: flex;
       justify-content: flex-end;
@@ -7298,8 +7327,6 @@ html {
       html body #inter-map .flowBtn:hover {
         color: #fff;
         background: #38598a;
-        box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
-        transform: translateY(-0.025em);
         transition: .3s ease; }
       html body #inter-map .selected {
         font-weight: bold;
@@ -7371,20 +7398,6 @@ html {
         clear: both; }
     html body #graph {
       /* slider ------------------------------ */ }
-      html body #graph .reportBtn {
-        display: inline-block;
-        padding: 0.5rem 1rem;
-        border: 2px solid #38598a;
-        border-radius: 50px;
-        background: #fff;
-        color: #38598a;
-        cursor: pointer; }
-      html body #graph .reportBtn:hover {
-        color: #fff;
-        background: #38598a;
-        box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
-        transform: translateY(-0.025em);
-        transition: .3s ease; }
       html body #graph #predictors-distDropdown.active .list {
         max-height: 240px; }
       html body #graph #lineContainer {
@@ -7453,14 +7466,21 @@ html {
         cursor: pointer; }
       html body #graph .handle.active {
         fill: #002663; }
-    html body #demographics #demoContainer .xAxis .domain {
-      display: none; }
     html body #demographics #demoContainer .xAxis {
       stroke-width: 0; }
+      html body #demographics #demoContainer .xAxis .domain {
+        display: none; }
+    html body #demographics #demoContainer .yAxis .domain {
+      stroke: #ccc; }
     html body #demographics #demoContainer .gridline {
       stroke: #ccc;
       shape-rendering: crispEdges;
       stroke-opacity: .5; }
+    html body #demographics #demographics-control .modal-body {
+      display: grid;
+      grid-template-columns: repeat(4, 1.2fr);
+      grid-gap: 10px;
+      font-size: 12px; }
     html body #facts {
       background-image: url(../assets/img/bg-dcr3.png);
       background-size: 30% auto;

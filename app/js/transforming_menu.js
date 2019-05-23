@@ -21,8 +21,6 @@ $(document).on('click', function(et) {
   }
 });
 
-
-
 $(document).on('click', function(et) {
   if (!$(et.target).closest('.icon').length) {
     $('body').find('.icon').removeClass('open');

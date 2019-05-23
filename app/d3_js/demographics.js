@@ -4,16 +4,12 @@ let demo_margin = { top: 50, right: 50, bottom: 50, left: 50 };
 let demo_height = 400 - demo_margin.top - demo_margin.bottom;
 let demo_width = 600 - demo_margin.left - demo_margin.right;
 
-//parseDate is used to covert string into year format from the csv file 
-let parDate = d3.timeParse('%Y');
-
 //scales
 let demo_xScale = d3.scalePoint().range([0, demo_width]).padding(0.5);
 let demo_yScale = d3.scaleLinear().range([demo_height, 0]);
 
-//color scale
-// let demo_color = d3.scaleOrdinal()
-//     .range(['#edc948', '#b07aa1', '#76b7b2', '#9c755f', '#f28e2b']);
+//create color scale
+let demo_color = d3.scaleOrdinal(d3.schemeCategory20);
 
 //axes
 let demo_xAxis = d3.axisBottom()
@@ -54,7 +50,7 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
 
         // format the data
         district.forEach(function (d) {
-            d.SCHOOL_YEAR = (parDate(d.SCHOOL_YEAR)).getFullYear();
+            d.SCHOOL_YEAR = (parseDate(d.SCHOOL_YEAR)).getFullYear();
             d.NEW_KINDERGARTEN = +d.NEW_KINDERGARTEN;
             d.GRADUATES = +d.GRADUATES;
             d.NET = +d.NET;
@@ -62,7 +58,7 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
         // concat method doesn't change the original array, need to reassign it.
         districtData = districtData.concat(district);
     }
-    console.log(districtData);
+    // console.log(districtData);
 
     let defaultType = 'NEW_KINDERGARTEN';
 
@@ -103,11 +99,11 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
                 .attr('d', demoLine)
                 .attr('fill', 'none')
                 .attr("stroke-width", "2")
-                .attr('stroke', '#4c4c4c');
+                .attr('stroke', demo_color(dist));
 
             //animate path
             let totalLength = demo_line.node().getTotalLength();
-            console.log(totalLength);
+            // console.log(totalLength);
 
             demo_line.attr("stroke-dasharray", totalLength + " " + totalLength)
                 .attr("stroke-dashoffset", totalLength)
@@ -158,7 +154,14 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
             //axes
             demo_chartGroup.append('g')
                 .attr('class', 'yAxis')
-                .call(demo_yAxis);
+                .call(demo_yAxis)
+                .append("text")
+                .attr("transform", "rotate(-90)")
+                .attr('fill', '#4c4c4c')
+                .attr("y", 6)
+                .attr("dy", ".8em")
+                .style("text-anchor", "end")
+                .text("Headcount");
 
             demo_chartGroup.append('g')
                 .attr('class', 'xAxis')
@@ -187,6 +190,8 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
 
     demoUpdate(defaultType);
 
+    /******control******/
+
     //radio selection
     $("#demo-radio input[type='radio']").change(function () {
         var radioValue = $("input[name='demo-type']:checked").val();
@@ -194,6 +199,20 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
             demoClear();
             demoUpdate(radioValue);
         }
+    });
+    
+    //populate checkbox list in modal, sd_arr (list of districts) is a global array from predictors section
+    $.each(sd_arr,function(index,dist){
+        let checkbox="<div class='demoCheckbox'><input type='checkbox' id="+dist.substring(2, 4)+" value="+dist.substring(0, 4)+"><label for="+dist+">"+dist.substring(2, dist.length)+"</label></div>"
+        $(".modal-body").append($(checkbox));
+    })
+
+    $('#demo-save').click(function(){
+        let selectedDist = [];
+        $(".demoCheckbox input:checkbox:checked").map(function(e) {
+            selectedDist.push($(this).val());
+        });
+        console.log(selectedDist);
     });
 
 });
