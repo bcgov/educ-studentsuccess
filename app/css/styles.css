@@ -7453,6 +7453,14 @@ html {
         cursor: pointer; }
       html body #graph .handle.active {
         fill: #002663; }
+    html body #demographics #demoContainer .xAxis .domain {
+      display: none; }
+    html body #demographics #demoContainer .xAxis {
+      stroke-width: 0; }
+    html body #demographics #demoContainer .gridline {
+      stroke: #ccc;
+      shape-rendering: crispEdges;
+      stroke-opacity: .5; }
     html body #facts {
       background-image: url(../assets/img/bg-dcr3.png);
       background-size: 30% auto;

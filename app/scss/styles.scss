@@ -601,7 +601,7 @@ body {
           font-size: 9px;
       }
 
-          .bar {
+        .bar {
             stroke: none;
         }
 
@@ -692,6 +692,26 @@ body {
 
 
   }
+
+  //demographics 
+  #demographics{
+    #demoContainer{
+       .xAxis {
+        .domain {
+          display: none;
+        }
+    }
+      .xAxis {
+        stroke-width: 0;
+      }
+
+      .gridline{
+        stroke: #ccc;
+        shape-rendering: crispEdges;
+        stroke-opacity: .5;
+        }
+  }
+}
 
   //facts
   #facts {

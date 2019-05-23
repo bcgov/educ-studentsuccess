@@ -122,110 +122,139 @@
     </div>
   </div>
 
-  <div class="container my-5" id="graph">
+  <div class="container my-5" id="demographics">
     <div class="row">
-
-      <div class="col-12">
-        <h2 class="mb-3">Key Predictors and Impact</h2>
-        <p id="distInfo">The Ministry of Education District Enrolment Forecast Model (DEFM) has been developed based on
-          the Cohort Survival Method approach. The DEFM is based on four enrolment drivers: migration, demographics,
-          independent/public school transition, and continuous student retention.</p>
+      <div class="col-8 mx-auto">
+        <h2 class="text-center mb-3">Demogrpahics</h2>
+        <p>The demographics driver provides an indication or whether more kindergarten students are entering schools
+          relative to those leaving through graduation. If the net demographic value is positive, it is indicating that
+          more five year olds are entering the system relative to the number of grade 12 students that are graduating.
+        </p>
       </div>
       <div class="col-sm-12 col-md-8">
-        <div id="lineContainer"></div>
-      </div>
+          <form id="demo-radio">
+              <label class="radio-inline">
+                <input type="radio" name="demo-type" value="NEW_KINDERGARTEN" checked>New to kindergarten
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="demo-type" value="GRADUATES">Graduates
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="demo-type" value="NET">Net change
+              </label>
+            </form>
+          <div id="demoContainer"></div>
+        </div>
+        <div class="col-sm-12 col-md-4">
+          </div>
+    </div>
+  </div>
 
-      <div class="col-sm-12 col-md-4">
-        <div id='prdictors-control'>
-          <div class="controlSection">
-            <h4 id="distName">SD05-Southeast Kootenay</h4>
+      <div class="container my-5" id="graph">
+        <div class="row">
+          <div class="col-8 mx-auto">
+            <h2 class="text-center mb-3">Key Predictors and Impact</h2>
+            <p>The Ministry of Education District Enrolment Forecast Model (DEFM) has been developed based on
+              the Cohort Survival Method approach. The DEFM is based on four enrolment drivers: migration, demographics,
+              independent/public school transition, and continuous student retention.</p>
           </div>
-          <div class="controlSection">
-            <h5>Time Range</h5>
-            <div id="predictors-brush"></div>
+          <div class="col-sm-12 col-md-8">
+            <div id="lineContainer"></div>
           </div>
-          <div class="controlSection">
-            <h5>School District</h5>
-            <div id="predictors-distDropdown" class="dropDown">
-              <span>Select a school district</span>
-              <div class="list"></div>
+
+          <div class="col-sm-12 col-md-4">
+            <div id='prdictors-control'>
+              <div class="controlSection">
+                <h4 id="distName">SD05-Southeast Kootenay</h4>
+              </div>
+              <div class="controlSection">
+                <h5>Time Range</h5>
+                <div id="predictors-brush"></div>
+              </div>
+              <div class="controlSection">
+                <h5>School District</h5>
+                <div id="predictors-distDropdown" class="dropDown">
+                  <span>Select a school district</span>
+                  <div class="list"></div>
+                </div>
+              </div>
+              <div class="controlSection">
+                <h5>District Reports</h5>
+                <a class="reportBtn"
+                  href="https://www2.gov.bc.ca/gov/content/education-training/k-12/administration/program-management/reporting-on-k-12/district-reports/southeast-kootenay"
+                  target="_blank">View Reports</a>
+              </div>
             </div>
           </div>
-          <div class="controlSection">
-            <h5>District Reports</h5>
-            <a class="reportBtn"
-            href="https://www2.gov.bc.ca/gov/content/education-training/k-12/administration/program-management/reporting-on-k-12/district-reports/southeast-kootenay"
-              target="_blank">View Reports</a>
+
+        </div>
+      </div>
+
+      <div class="container my-5" id="facts">
+        <div class="row">
+          <div class="col-12 mb-5">
+            <h2 class="text-center">Fact numbers and indicators</h2>
+          </div>
+          <div class="col-sm-12 col-md-4 fact-container">
+            <img src="/assets/img/migration.png" class="img-fluid fact-img" alt="map">
+            <div class="fact-info">
+              <h6>Total Migration (Year 2017/18)</h6>
+              <h1 class="text-center">7000</h1>
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-4 fact-container">
+            <img src="/assets/img/avg.png" class="img-fluid fact-img">
+            <div class="fact-info">
+              <h6>Average Migration (in each distict)</h6>
+              <h1 class="text-center">200</h1>
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-4 fact-container">
+            <img src="/assets/img/schoolbag.png" class="img-fluid fact-img" alt="map">
+            <div class="fact-info">
+              <h6>Current Full-time Equivlent </h6>
+              <h1 class="text-center">552,600</h1>
+            </div>
           </div>
         </div>
       </div>
 
-    </div>
-  </div>
-
-  <div class="container my-5" id="facts">
-    <div class="row">
-      <div class="col-12 mb-5">
-        <h2 class="text-center">Fact numbers and indicators</h2>
-      </div>
-      <div class="col-sm-12 col-md-4 fact-container">
-        <img src="/assets/img/migration.png" class="img-fluid fact-img" alt="map">
-        <div class="fact-info">
-          <h6>Total Migration (Year 2017/18)</h6>
-          <h1 class="text-center">7000</h1>
+      <img src="/assets/img/footer-top.png" class="footer-img">
+      <footer>
+        <div class="container">
+          <div class="col-sm-12 col-md-8">
+            <h4>An Expiremental Project by<br> Eucation Analytics Branch</h4>
+            <div class="footer-link mt-4">
+              <a href="#">Go to gov.bc.ca</a> |
+              <a href="#">Contact Us</a>
+            </div>
+          </div>
+          <div id="footer-logo" class="col-sm-12 col-md-4">
+            <img src="/assets/img/bc_logo.png" alt="bc_logo" class="bc_logo">
+            <p class="copyright">© 2019 BC Ministry of Education</p>
+          </div>
         </div>
-      </div>
+      </footer>
 
-      <div class="col-sm-12 col-md-4 fact-container">
-        <img src="/assets/img/avg.png" class="img-fluid fact-img">
-        <div class="fact-info">
-          <h6>Average Migration (in each distict)</h6>
-          <h1 class="text-center">200</h1>
-        </div>
-      </div>
-
-      <div class="col-sm-12 col-md-4 fact-container">
-        <img src="/assets/img/schoolbag.png" class="img-fluid fact-img" alt="map">
-        <div class="fact-info">
-          <h6>Current Full-time Equivlent </h6>
-          <h1 class="text-center">552,600</h1>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <img src="/assets/img/footer-top.png" class="footer-img">
-  <footer>
-    <div class="container">
-      <div class="col-sm-12 col-md-8">
-        <h4>An Expiremental Project by<br> Eucation Analytics Branch</h4>
-        <div class="footer-link mt-4">
-          <a href="#">Go to gov.bc.ca</a> |
-          <a href="#">Contact Us</a>
-        </div>
-      </div>
-      <div id="footer-logo" class="col-sm-12 col-md-4">
-        <img src="/assets/img/bc_logo.png" alt="bc_logo" class="bc_logo">
-        <p class="copyright">© 2019 BC Ministry of Education</p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="/js/jquery.min.js"></script>
-  <script src="/js/popper.min.js"></script>
-  <script src="/js/bootstrap.min.js"></script>
-  <!-- MDB core JavaScript -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.4/js/mdb.min.js"></script>
-  <script src="https://d3js.org/d3.v4.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/d3-queue/3.0.4/d3-queue.min.js"></script>
-  <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
-  <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
-  <script src="/js/transforming_menu.js"></script>
-  <script src="/d3_js/choropleth_animation.js"></script>
-  <script src="/d3_js/interactive_map.js"></script>
-  <script src="/d3_js/interactive_bars_line.js"></script>
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="/js/jquery.min.js"></script>
+      <script src="/js/popper.min.js"></script>
+      <script src="/js/bootstrap.min.js"></script>
+      <!-- MDB core JavaScript -->
+      <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.4/js/mdb.min.js"></script>
+      <script src="https://d3js.org/d3.v4.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/d3-queue/3.0.4/d3-queue.min.js"></script>
+      <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+      <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+      <script src="/js/transforming_menu.js"></script>
+      <script src="/d3_js/choropleth_animation.js"></script>
+      <script src="/d3_js/demographics.js"></script>
+      <script src="/d3_js/interactive_map.js"></script>
+      <script src="/d3_js/interactive_bars_line.js"></script>
 
 </body>
 

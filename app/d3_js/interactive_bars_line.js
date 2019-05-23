@@ -210,11 +210,6 @@ function updateGraph(yr1, yr2) {
                 return d.value;
             });
         })]);
-        //     .range([line_height - bar_yScale_neg(d3.min(districtData, function (d) {
-        //         return d3.min(d.drivers, function (d) {
-        //             return d.value;
-        //         })
-        //     })), 0]);
 
         //line y axis
         line_chartGroup.append('g')
