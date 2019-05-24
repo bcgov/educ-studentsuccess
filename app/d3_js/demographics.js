@@ -46,7 +46,7 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
     }
 
     //array of selected district (objects), used to draw lines
-    let defaultDistrict = ['SD05', 'SD06', 'SD10', 'SD08'];
+    let defaultDistrict = ['SD23-Central Okanagan', 'SD35-Langley', 'SD61-Greater Victoria', 'SD73-Kamloops - Thompson'];
 
     let defaultType = 'NEW_KINDERGARTEN';
 
@@ -56,6 +56,13 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
         existingPath.exit();
         existingPath.transition()
             .duration(500)
+            .remove();
+        //clear existing legends
+        let existingLegend = d3.selectAll("#demo-legend .legend");
+        console.log(existingLegend);
+        existingLegend.exit();
+        existingLegend.transition()
+            .duration(100)
             .remove();
     }
 
@@ -67,7 +74,7 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
         for (let dist of selectedDistricts) {
 
             let district = data.filter(function (d) {
-                return d.DISTRICT == dist.substring(2, dist.length)
+                return d.DISTRICT == dist.substring(2, 4)
             });
 
             // format the data
@@ -86,7 +93,7 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
         // use for loop for positioning the legend
         for (let i = 0; i < selectedDistricts.length; i++) {
             let district = data.filter(function (d) {
-                return d.DISTRICT == selectedDistricts[i].substring(2, selectedDistricts[i].length)
+                return d.DISTRICT == selectedDistricts[i].substring(2, 4)
             });
 
             console.log(district);
@@ -139,6 +146,8 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
                 .attr("x", 30)
                 .attr("y", 15 + i * 20)
                 .text(selectedDistricts[i]);
+            
+            console.log(selectedDistricts[i]);
 
             //animate path
             let totalLength = demo_line.node().getTotalLength();
@@ -246,10 +255,11 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
             demoUpdate(radioValue, defaultDistrict);
         }
     });
-
+    console.log(sd_arr);
     //populate checkbox list in modal, sd_arr (list of districts) is a global array from predictors section
+    //value= '" + dist + "' has to be quoted like this, since val contains space
     $.each(sd_arr, function (index, dist) {
-        let checkbox = "<div class='checkbox'><label><input type='checkbox' id=" + dist.substring(2, 4) + " value=" + dist.substring(0, 4) + ">" + dist.substring(2, dist.length) + "</label></div>"
+        let checkbox = "<div class='checkbox'><label><input type='checkbox' id=" + dist.substring(2, 4) + " value= '" + dist + "'>" + dist.substring(2, dist.length) + "</label></div>"
         $(".modal-body").append($(checkbox));
     })
 
