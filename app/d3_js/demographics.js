@@ -1,5 +1,10 @@
 //margin
-let demo_margin = { top: 50, right: 50, bottom: 50, left: 50 };
+let demo_margin = {
+    top: 50,
+    right: 50,
+    bottom: 50,
+    left: 50
+};
 //height and width
 let demo_height = 400 - demo_margin.top - demo_margin.bottom;
 let demo_width = 600 - demo_margin.left - demo_margin.right;
@@ -22,7 +27,7 @@ let demo_yAxis = d3.axisLeft()
 //canvas
 let demo_svg = d3.select('#demoContainer')
     .append('svg')
-    .attr("preserveAspectRatio", "xMinYMin meet")  // This forces uniform scaling for both the x and y, aligning the midpoint of the SVG object with the midpoint of the container element.
+    .attr("preserveAspectRatio", "xMinYMin meet") // This forces uniform scaling for both the x and y, aligning the midpoint of the SVG object with the midpoint of the container element.
     .attr("viewBox", "0 0 600 400") //defines the aspect ratio, the inner scaling of object lengths and coordinates
     .attr('class', 'svg-content');
 
@@ -35,35 +40,13 @@ let legendContainer = d3.select('#demo-legend')
     .append('g')
     .attr('class', 'legendContainer');
 
-let defaultDistrict = ['SD05', 'SD06', 'SD10', 'SD08'];
-
-for (let dist of defaultDistrict) {
-    console.log(dist);
-}
-
 d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
     if (error) {
         throw error;
     }
 
-    //array of all selected district
-    let districtData = [];
-
-    for (let dist of defaultDistrict) {
-
-        let district = data.filter(function (d) { return d.DISTRICT == dist.substring(2, dist.length) });
-
-        // format the data
-        district.forEach(function (d) {
-            d.SCHOOL_YEAR = (parseDate(d.SCHOOL_YEAR)).getFullYear();
-            d.NEW_KINDERGARTEN = +d.NEW_KINDERGARTEN;
-            d.GRADUATES = +d.GRADUATES;
-            d.NET = +d.NET;
-        });
-        // concat method doesn't change the original array, need to reassign it.
-        districtData = districtData.concat(district);
-    }
-    // console.log(districtData);
+    //array of selected district (objects), used to draw lines
+    let defaultDistrict = ['SD05', 'SD06', 'SD10', 'SD08'];
 
     let defaultType = 'NEW_KINDERGARTEN';
 
@@ -76,28 +59,61 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
             .remove();
     }
 
-    function demoUpdate(type) {
+    function demoUpdate(type, selectedDistricts) {
 
-        //line generator
-        let demoLine = d3.line()
-            .x(function (d) {
-                return demo_xScale(d.SCHOOL_YEAR);
-            })
-            .y(function (d) {
-                return demo_yScale(d[type]);
-            })
-            .curve(d3.curveMonotoneX);
+
+        //array of all selected, used to set axes
+        let districtData = [];
+        for (let dist of selectedDistricts) {
+
+            let district = data.filter(function (d) {
+                return d.DISTRICT == dist.substring(2, dist.length)
+            });
+
+            // format the data
+            district.forEach(function (d) {
+                d.SCHOOL_YEAR = (parseDate(d.SCHOOL_YEAR)).getFullYear();
+                d.NEW_KINDERGARTEN = +d.NEW_KINDERGARTEN;
+                d.GRADUATES = +d.GRADUATES;
+                d.NET = +d.NET;
+            });
+            // concat method doesn't change the original array, need to reassign it.
+            districtData = districtData.concat(district);
+        }
+        console.log(districtData);
 
         // for (let dist of defaultDistrict) {
         // use for loop for positioning the legend
-        for (let i=0; i < defaultDistrict.length; i++) {
-            let district = data.filter(function (d) { return d.DISTRICT == defaultDistrict[i].substring(2, defaultDistrict[i].length) });
+        for (let i = 0; i < selectedDistricts.length; i++) {
+            let district = data.filter(function (d) {
+                return d.DISTRICT == selectedDistricts[i].substring(2, selectedDistricts[i].length)
+            });
 
-            //set scale domain 
-            demo_xScale.domain(district.map(function (d) { return d.SCHOOL_YEAR; }));
+            console.log(district);
 
-            demo_yScale.domain([Math.min(0, d3.min(district, function (d) { return d[type]; })),
-            Math.max(0, d3.max(district, function (d) { return d[type]; }))]);
+            //set scale domain (combined districtData[])
+            demo_xScale.domain(districtData.map(function (d) {
+                return d.SCHOOL_YEAR;
+            }));
+
+            demo_yScale.domain([Math.min(0, d3.min(districtData, function (d) {
+                    return d[type];
+                })),
+                Math.max(0, d3.max(districtData, function (d) {
+                    return d[type];
+                }))
+            ]);
+
+            //line generator 
+            let demoLine = d3.line()
+                .x(function (d) {
+                    return demo_xScale(d.SCHOOL_YEAR);
+                })
+                .y(function (d) {
+                    return demo_yScale(d[type]);
+                })
+                .curve(d3.curveMonotoneX);
+
 
             //draw line
             let demo_line = demo_chartGroup.append('path')
@@ -106,23 +122,23 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
                 .attr('d', demoLine)
                 .attr('fill', 'none')
                 .attr("stroke-width", "2")
-                .attr('stroke', demo_color(defaultDistrict[i]));
+                .attr('stroke', demo_color(selectedDistricts[i]));
 
             // draw legend
             let legend = legendContainer.append('g')
-                           .attr('class', 'legend');
+                .attr('class', 'legend');
 
-                           legend.append("rect")
+            legend.append("rect")
                 .attr("x", 10)
                 .attr("y", i * 20)
                 .attr("width", 18)
                 .attr("height", 18)
-                .style("fill", demo_color(defaultDistrict[i]));
+                .style("fill", demo_color(selectedDistricts[i]));
 
-                legend.append("text")
+            legend.append("text")
                 .attr("x", 30)
-                .attr("y", 15+i * 20)
-                .text(defaultDistrict[i]);
+                .attr("y", 15 + i * 20)
+                .text(selectedDistricts[i]);
 
             //animate path
             let totalLength = demo_line.node().getTotalLength();
@@ -135,11 +151,18 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
                 .attr("stroke-dashoffset", 0);
         }
 
-        //reset scale domain combined axes
-        demo_xScale.domain(districtData.map(function (d) { return d.SCHOOL_YEAR; }));
+        // //reset scale domain for combined axes
+        // demo_xScale.domain(districtData.map(function (d) {
+        //     return d.SCHOOL_YEAR;
+        // }));
 
-        demo_yScale.domain([Math.min(0, d3.min(districtData, function (d) { return d[type]; })),
-        Math.max(0, d3.max(districtData, function (d) { return d[type]; }))]);
+        // demo_yScale.domain([Math.min(0, d3.min(districtData, function (d) {
+        //         return d[type];
+        //     })),
+        //     Math.max(0, d3.max(districtData, function (d) {
+        //         return d[type];
+        //     }))
+        // ]);
 
         if ($('#demoContainer .yAxis').length) {
 
@@ -211,7 +234,7 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
         }
     }
 
-    demoUpdate(defaultType);
+    demoUpdate(defaultType, defaultDistrict);
 
     /******control******/
 
@@ -220,32 +243,33 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
         var radioValue = $("input[name='demo-type']:checked").val();
         if (radioValue) {
             demoClear();
-            demoUpdate(radioValue);
+            demoUpdate(radioValue, defaultDistrict);
         }
     });
 
     //populate checkbox list in modal, sd_arr (list of districts) is a global array from predictors section
     $.each(sd_arr, function (index, dist) {
-        let checkbox = "<div class='demoCheckbox'><input type='checkbox' id=" + dist.substring(2, 4) + " value=" + dist.substring(0, 4) + "><label for=" + dist + ">" + dist.substring(2, dist.length) + "</label></div>"
+        let checkbox = "<div class='checkbox'><label><input type='checkbox' id=" + dist.substring(2, 4) + " value=" + dist.substring(0, 4) + ">" + dist.substring(2, dist.length) + "</label></div>"
         $(".modal-body").append($(checkbox));
     })
 
     //set the selection limit
-    $('.demoCheckbox input:checkbox').on('change', function (e) {
-        if ($('.demoCheckbox input:checkbox:checked').length > 10) {
-            //this.checked = false; OR
+    $('.checkbox input:checkbox').on('change', function (e) {
+        if ($('.checkbox input:checkbox:checked').length > 10) {
+            //this.checked = false; OR 
             $(this).prop('checked', false);
             console.log('Please select no more than 10 districts');
         }
     });
 
     $('#demo-save').click(function () {
-
-        let selectedDist = [];
-        $(".demoCheckbox input:checkbox:checked").map(function (e) {
-            selectedDist.push($(this).val());
+        defaultDistrict = [];
+        $(".checkbox  input:checkbox:checked").map(function (e) {
+            defaultDistrict.push($(this).val());
         });
-        console.log(selectedDist);
+        console.log(defaultDistrict);
+        demoClear();
+        demoUpdate(defaultType, defaultDistrict);
     });
 
 });
