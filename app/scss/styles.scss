@@ -604,15 +604,10 @@ body {
       display: inline-block;
       position: relative;
       width: 100%;
-      padding-bottom: 30rem;
       vertical-align: top;
       overflow: hidden;
 
       .svg-content {
-        display: inline-block;
-        position: absolute;
-        top: 0;
-        left: 0;
 
         .legend {
           font-size: 9px;

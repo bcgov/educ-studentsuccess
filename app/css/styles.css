@@ -7404,31 +7404,25 @@ html {
         display: inline-block;
         position: relative;
         width: 100%;
-        padding-bottom: 30rem;
         vertical-align: top;
         overflow: hidden; }
-        html body #graph #lineContainer .svg-content {
-          display: inline-block;
-          position: absolute;
-          top: 0;
-          left: 0; }
-          html body #graph #lineContainer .svg-content .legend {
-            font-size: 9px; }
-          html body #graph #lineContainer .svg-content .bar {
-            stroke: none; }
-          html body #graph #lineContainer .svg-content .bar:hover {
-            fill: rgba(0, 38, 99, 0.7) !important; }
-          html body #graph #lineContainer .svg-content .label {
-            fill: white;
-            font-weight: 400;
-            text-anchor: middle; }
-          html body #graph #lineContainer .svg-content .line {
-            fill: none;
-            stroke: #002663;
-            stroke-width: 3; }
-          html body #graph #lineContainer .svg-content .dot {
-            fill: #002663;
-            stroke: #fff; }
+        html body #graph #lineContainer .svg-content .legend {
+          font-size: 9px; }
+        html body #graph #lineContainer .svg-content .bar {
+          stroke: none; }
+        html body #graph #lineContainer .svg-content .bar:hover {
+          fill: rgba(0, 38, 99, 0.7) !important; }
+        html body #graph #lineContainer .svg-content .label {
+          fill: white;
+          font-weight: 400;
+          text-anchor: middle; }
+        html body #graph #lineContainer .svg-content .line {
+          fill: none;
+          stroke: #002663;
+          stroke-width: 3; }
+        html body #graph #lineContainer .svg-content .dot {
+          fill: #002663;
+          stroke: #fff; }
         html body #graph #lineContainer .yAxis, html body #graph #lineContainer .yAxis2, html body #graph #lineContainer .xAxis {
           stroke-width: 0; }
           html body #graph #lineContainer .yAxis .domain, html body #graph #lineContainer .yAxis2 .domain, html body #graph #lineContainer .xAxis .domain {
