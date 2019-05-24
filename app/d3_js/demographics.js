@@ -30,6 +30,11 @@ let demo_chartGroup = demo_svg.append('g')
     .attr('class', 'chartGroup')
     .attr("transform", "translate(" + demo_margin.left + "," + demo_margin.top + ")");
 
+let legendContainer = d3.select('#demo-legend')
+    .append('svg')
+    .append('g')
+    .attr('class', 'legendContainer');
+
 let defaultDistrict = ['SD05', 'SD06', 'SD10', 'SD08'];
 
 for (let dist of defaultDistrict) {
@@ -83,9 +88,10 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
             })
             .curve(d3.curveMonotoneX);
 
-        for (let dist of defaultDistrict) {
-
-            let district = data.filter(function (d) { return d.DISTRICT == dist.substring(2, dist.length) });
+        // for (let dist of defaultDistrict) {
+        // use for loop for positioning the legend
+        for (let i=0; i < defaultDistrict.length; i++) {
+            let district = data.filter(function (d) { return d.DISTRICT == defaultDistrict[i].substring(2, defaultDistrict[i].length) });
 
             //set scale domain 
             demo_xScale.domain(district.map(function (d) { return d.SCHOOL_YEAR; }));
@@ -93,13 +99,30 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
             demo_yScale.domain([Math.min(0, d3.min(district, function (d) { return d[type]; })),
             Math.max(0, d3.max(district, function (d) { return d[type]; }))]);
 
+            //draw line
             let demo_line = demo_chartGroup.append('path')
                 .datum(district)
                 .attr('class', 'line')
                 .attr('d', demoLine)
                 .attr('fill', 'none')
                 .attr("stroke-width", "2")
-                .attr('stroke', demo_color(dist));
+                .attr('stroke', demo_color(defaultDistrict[i]));
+
+            // draw legend
+            let legend = legendContainer.append('g')
+                           .attr('class', 'legend');
+
+                           legend.append("rect")
+                .attr("x", 10)
+                .attr("y", i * 20)
+                .attr("width", 18)
+                .attr("height", 18)
+                .style("fill", demo_color(defaultDistrict[i]));
+
+                legend.append("text")
+                .attr("x", 30)
+                .attr("y", 15+i * 20)
+                .text(defaultDistrict[i]);
 
             //animate path
             let totalLength = demo_line.node().getTotalLength();
@@ -200,16 +223,26 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
             demoUpdate(radioValue);
         }
     });
-    
+
     //populate checkbox list in modal, sd_arr (list of districts) is a global array from predictors section
-    $.each(sd_arr,function(index,dist){
-        let checkbox="<div class='demoCheckbox'><input type='checkbox' id="+dist.substring(2, 4)+" value="+dist.substring(0, 4)+"><label for="+dist+">"+dist.substring(2, dist.length)+"</label></div>"
+    $.each(sd_arr, function (index, dist) {
+        let checkbox = "<div class='demoCheckbox'><input type='checkbox' id=" + dist.substring(2, 4) + " value=" + dist.substring(0, 4) + "><label for=" + dist + ">" + dist.substring(2, dist.length) + "</label></div>"
         $(".modal-body").append($(checkbox));
     })
 
-    $('#demo-save').click(function(){
+    //set the selection limit
+    $('.demoCheckbox input:checkbox').on('change', function (e) {
+        if ($('.demoCheckbox input:checkbox:checked').length > 10) {
+            //this.checked = false; OR
+            $(this).prop('checked', false);
+            console.log('Please select no more than 10 districts');
+        }
+    });
+
+    $('#demo-save').click(function () {
+
         let selectedDist = [];
-        $(".demoCheckbox input:checkbox:checked").map(function(e) {
+        $(".demoCheckbox input:checkbox:checked").map(function (e) {
             selectedDist.push($(this).val());
         });
         console.log(selectedDist);

@@ -445,7 +445,7 @@ function updateGraph(yr1, yr2) {
         //legends
         let legends = ['Demographics', 'Migration', 'Retention', 'Independent']
         let svgContainer = d3.select('#lineContainer .svg-content');
-        var legend = svgContainer.selectAll(".legend")
+        let legend = svgContainer.selectAll(".legend")
             .data(legends)
             .enter().append("svg")
             .append('g')
