@@ -7470,6 +7470,18 @@ html {
       stroke: #ccc;
       shape-rendering: crispEdges;
       stroke-opacity: .5; }
+    html body #demographics #demoContainer .demo_overlay {
+      fill: none;
+      pointer-events: all; }
+    html body #demographics #demoContainer .demott_line {
+      stroke: #002663;
+      stroke-dasharray: 2,5;
+      stroke-width: 2;
+      opacity: 0.5;
+      z-index: 5; }
+    html body #demographics #demographics-control #demo-radio {
+      display: flex;
+      flex-direction: column; }
     html body #demographics #demographics-control .modal-body {
       display: grid;
       grid-template-columns: repeat(4, 1.2fr);

@@ -132,22 +132,24 @@
         </p>
       </div>
       <div class="col-sm-12 col-md-8">
-          <form id="demo-radio">
-              <label class="radio-inline">
-                <input type="radio" name="demo-type" value="NEW_KINDERGARTEN" checked>New to kindergarten
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="demo-type" value="GRADUATES">Graduates
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="demo-type" value="NET">Net change
-              </label>
-            </form>
           <div id="demoContainer"></div>
         </div>
         <div class="col-sm-12 col-md-4">
-            <div id="demographics-control" class="mb-3">
-                <button type="button" class="ghostBtn" data-toggle="modal" data-target="#demoModal">Select District(s)</button>
+            <div id="demographics-control" class="my-4">
+
+                <form id="demo-radio">
+                    <label class="radio">
+                      <input type="radio" name="demo-type" value="NEW_KINDERGARTEN" checked>New to kindergarten
+                    </label>
+                    <label class="radio">
+                      <input type="radio" name="demo-type" value="GRADUATES">Graduates
+                    </label>
+                    <label class="radio">
+                      <input type="radio" name="demo-type" value="NET">Net change
+                    </label>
+                  </form>
+
+                <button type="button" class="ghostBtn mt-3" data-toggle="modal" data-target="#demoModal">Select District(s)</button>
                 
                 <div id="demoModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">

@@ -725,9 +725,27 @@ body {
         shape-rendering: crispEdges;
         stroke-opacity: .5;
         }
+
+        .demo_overlay {
+          fill: none;
+          pointer-events: all;
+        }
+
+        .demott_line {
+          stroke: $tooltip-bg;
+          stroke-dasharray: 2,5;
+          stroke-width: 2;
+          opacity: 0.5;
+          z-index: 5;
+      }
+    
   }
 
   #demographics-control{
+    #demo-radio{
+      display:flex;
+      flex-direction:column;
+    }
     .modal-body{
       display: grid;
       grid-template-columns: repeat(4, 1.2fr);

@@ -1,6 +1,6 @@
 //margin
 let demo_margin = {
-    top: 50,
+    top: 10,
     right: 50,
     bottom: 50,
     left: 50
@@ -37,6 +37,7 @@ let demo_chartGroup = demo_svg.append('g')
 
 let legendContainer = d3.select('#demo-legend')
     .append('svg')
+    .attr('height', '200')
     .append('g')
     .attr('class', 'legendContainer');
 
@@ -87,7 +88,47 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
             // concat method doesn't change the original array, need to reassign it.
             districtData = districtData.concat(district);
         }
-        console.log(districtData);
+
+        //tooltips
+        let demott = demo_chartGroup.append('g')
+            .attr('class', 'demott')
+            .style('display', 'none');
+        //tt line
+        demott.append('line')
+            .attr('class', 'demott_line')
+            .attr("y1", 0)
+            .attr("y2", demo_height);
+        //tt info rect
+        demott.append('rect')
+            .attr('class', 'demott_rect')
+            .attr("x", 8)
+            .attr("y", "-5")
+            .attr("width", 22).attr("height", '0.75em');
+
+        //overlay, to triger tt
+        demo_svg.append('rect')
+            .attr("transform", "translate(" + demo_margin.left + "," + demo_margin.top + ")")
+            .attr("class", "demo_overlay")
+            .attr("width", demo_width)
+            .attr("height", demo_height)
+            .on("mouseover", function () { demott.style("display", null); })
+            .on("mouseout", function () { demott.style("display", "none"); })
+            .on("mousemove", scalePointPosition);
+        
+        // custom invert function
+        function scalePointPosition() {
+            let xPos = d3.mouse(this)[0];
+            let domain = demo_xScale.domain(); 
+            let range = demo_xScale.range();
+            let rangePoints = d3.range(range[0], range[1], demo_xScale.step())
+            let currentPos = domain[d3.bisect(rangePoints, xPos) -1];
+            console.log(currentPos);
+
+            demott.select(".demott_line").attr("x1", demo_xScale(currentPos));
+            demott.select(".demott_line").attr("x2", demo_xScale(currentPos));
+            demott.select(".demott_rect").attr("x", demo_xScale(currentPos));
+            demott.selectAll(".demott_circle").attr("cx", demo_xScale(currentPos));
+        }
 
         // for (let dist of defaultDistrict) {
         // use for loop for positioning the legend
@@ -104,11 +145,11 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
             }));
 
             demo_yScale.domain([Math.min(0, d3.min(districtData, function (d) {
-                    return d[type];
-                })),
-                Math.max(0, d3.max(districtData, function (d) {
-                    return d[type];
-                }))
+                return d[type];
+            })),
+            Math.max(0, d3.max(districtData, function (d) {
+                return d[type];
+            }))
             ]);
 
             //line generator 
@@ -146,7 +187,7 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
                 .attr("x", 30)
                 .attr("y", 15 + i * 20)
                 .text(selectedDistricts[i]);
-            
+
             console.log(selectedDistricts[i]);
 
             //animate path
@@ -158,20 +199,15 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
                 .transition()
                 .duration(1500)
                 .attr("stroke-dashoffset", 0);
+
+            //tooltips circle
+            demott.append('circle')
+                .attr('class','demott_circle')
+                .attr('r', '5')
+                .attr('cy', demo_xScale(district[i].SCHOOL_YEAR))
+                .attr('cy', demo_yScale(district[i][type]))
+                .style('fill', demo_color(selectedDistricts[i]));
         }
-
-        // //reset scale domain for combined axes
-        // demo_xScale.domain(districtData.map(function (d) {
-        //     return d.SCHOOL_YEAR;
-        // }));
-
-        // demo_yScale.domain([Math.min(0, d3.min(districtData, function (d) {
-        //         return d[type];
-        //     })),
-        //     Math.max(0, d3.max(districtData, function (d) {
-        //         return d[type];
-        //     }))
-        // ]);
 
         if ($('#demoContainer .yAxis').length) {
 
@@ -241,6 +277,9 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
                 .attr("y2", 0);
 
         }
+
+
+
     }
 
     demoUpdate(defaultType, defaultDistrict);
@@ -249,17 +288,22 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
 
     //radio selection
     $("#demo-radio input[type='radio']").change(function () {
-        var radioValue = $("input[name='demo-type']:checked").val();
+        let radioValue = $("input[name='demo-type']:checked").val();
         if (radioValue) {
             demoClear();
             demoUpdate(radioValue, defaultDistrict);
         }
     });
-    console.log(sd_arr);
+
     //populate checkbox list in modal, sd_arr (list of districts) is a global array from predictors section
     //value= '" + dist + "' has to be quoted like this, since val contains space
     $.each(sd_arr, function (index, dist) {
-        let checkbox = "<div class='checkbox'><label><input type='checkbox' id=" + dist.substring(2, 4) + " value= '" + dist + "'>" + dist.substring(2, dist.length) + "</label></div>"
+        let checkbox;
+        if (dist == 'SD23-Central Okanagan' || dist == 'SD35-Langley' || dist == 'SD61-Greater Victoria' || dist == 'SD73-Kamloops - Thompson') {
+            checkbox = "<div class='checkbox'><label><input type='checkbox' id=" + dist.substring(2, 4) + " value= '" + dist + "' checked>" + dist.substring(5, dist.length) + "</label></div>"
+        } else {
+            checkbox = "<div class='checkbox'><label><input type='checkbox' id=" + dist.substring(2, 4) + " value= '" + dist + "'>" + dist.substring(5, dist.length) + "</label></div>"
+        }
         $(".modal-body").append($(checkbox));
     })
 
@@ -277,9 +321,10 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
         $(".checkbox  input:checkbox:checked").map(function (e) {
             defaultDistrict.push($(this).val());
         });
-        console.log(defaultDistrict);
+        let radioValue = $("input[name='demo-type']:checked").val()
+        console.log(radioValue);
         demoClear();
-        demoUpdate(defaultType, defaultDistrict);
+        demoUpdate(radioValue, defaultDistrict);
     });
 
 });
