@@ -53,7 +53,7 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
 
     function demoClear() {
         //clear existing line
-        let existingPath = d3.selectAll("#demoContainer .line");
+        let existingPath = d3.selectAll("#demoContainer .demo_line");
         existingPath.exit();
         existingPath.transition()
             .duration(500)
@@ -64,6 +64,12 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
         existingLegend.exit();
         existingLegend.transition()
             .duration(100)
+            .remove();
+
+        //clear tooltips 
+        demo_chartGroup.selectAll(".demott_circle")    
+            .remove();
+        demo_chartGroup.selectAll(".demott_rect")
             .remove();
     }
 
@@ -93,17 +99,12 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
         let demott = demo_chartGroup.append('g')
             .attr('class', 'demott')
             .style('display', 'none');
+
         //tt line
         demott.append('line')
             .attr('class', 'demott_line')
             .attr("y1", 0)
             .attr("y2", demo_height);
-        //tt info rect
-        demott.append('rect')
-            .attr('class', 'demott_rect')
-            .attr("x", 8)
-            .attr("y", "-5")
-            .attr("width", 22).attr("height", '0.75em');
 
         //overlay, to triger tt
         demo_svg.append('rect')
@@ -111,23 +112,44 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
             .attr("class", "demo_overlay")
             .attr("width", demo_width)
             .attr("height", demo_height)
-            .on("mouseover", function () { demott.style("display", null); })
-            .on("mouseout", function () { demott.style("display", "none"); })
-            .on("mousemove", scalePointPosition);
-        
-        // custom invert function
-        function scalePointPosition() {
+            .on("mouseover", function () {
+                demott.style("display", null);
+            })
+            .on("mouseout", function () {
+                demott.style("display", "none");
+                demo_chartGroup.select(".demott_rect")
+                    .style('display', 'none');
+                demo_chartGroup.selectAll(".demott_circle")
+                    .style('display', 'none');
+            })
+            .on("mousemove", showDemott);
+
+        // custom invert function for point scale + tooltips
+        function showDemott() {
             let xPos = d3.mouse(this)[0];
-            let domain = demo_xScale.domain(); 
+            let domain = demo_xScale.domain();
             let range = demo_xScale.range();
             let rangePoints = d3.range(range[0], range[1], demo_xScale.step())
-            let currentPos = domain[d3.bisect(rangePoints, xPos) -1];
-            console.log(currentPos);
+            let currentPos = domain[d3.bisect(rangePoints, xPos) - 1];
 
-            demott.select(".demott_line").attr("x1", demo_xScale(currentPos));
-            demott.select(".demott_line").attr("x2", demo_xScale(currentPos));
-            demott.select(".demott_rect").attr("x", demo_xScale(currentPos));
-            demott.selectAll(".demott_circle").attr("cx", demo_xScale(currentPos));
+            if (currentPos) {
+                demott.select(".demott_line").attr("x1", demo_xScale(currentPos));
+                demott.select(".demott_line").attr("x2", demo_xScale(currentPos));
+                demo_chartGroup.selectAll(".demott_circle")
+                    .style('display', 'none');
+                // select circles for the current year (mouse over)
+                demo_chartGroup.selectAll("circle[cx='" + demo_xScale(currentPos) + "']")
+                    .style('display', null);
+
+                if (currentPos == 2018) {
+                    demo_chartGroup.select(".demott_rect")
+                        .attr("x", demo_xScale(currentPos) - 140)
+                } else {
+                    demo_chartGroup.select(".demott_rect")
+                        .attr("x", demo_xScale(currentPos) + 10)
+                        .style('display', null);
+                }
+            }
         }
 
         // for (let dist of defaultDistrict) {
@@ -145,11 +167,11 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
             }));
 
             demo_yScale.domain([Math.min(0, d3.min(districtData, function (d) {
-                return d[type];
-            })),
-            Math.max(0, d3.max(districtData, function (d) {
-                return d[type];
-            }))
+                    return d[type];
+                })),
+                Math.max(0, d3.max(districtData, function (d) {
+                    return d[type];
+                }))
             ]);
 
             //line generator 
@@ -166,7 +188,7 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
             //draw line
             let demo_line = demo_chartGroup.append('path')
                 .datum(district)
-                .attr('class', 'line')
+                .attr('class', 'demo_line')
                 .attr('d', demoLine)
                 .attr('fill', 'none')
                 .attr("stroke-width", "2")
@@ -201,13 +223,17 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
                 .attr("stroke-dashoffset", 0);
 
             //tooltips circle
-            demott.append('circle')
-                .attr('class','demott_circle')
-                .attr('r', '5')
-                .attr('cy', demo_xScale(district[i].SCHOOL_YEAR))
-                .attr('cy', demo_yScale(district[i][type]))
-                .style('fill', demo_color(selectedDistricts[i]));
+            for (let dist of district) {
+                demo_chartGroup.append('circle')
+                    .attr('class', 'demott_circle')
+                    .attr('r', '5')
+                    .attr('cx', demo_xScale(dist.SCHOOL_YEAR))
+                    .attr('cy', demo_yScale(dist[type]))
+                    .style('fill', demo_color(selectedDistricts[i]))
+                    .style('display', 'none');
+            }
         }
+
 
         if ($('#demoContainer .yAxis').length) {
 
@@ -279,7 +305,14 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
         }
 
 
-
+        //tt info rect, since z-index doesnt work for svg elments, draw later
+        demo_chartGroup.append('rect')
+            .attr('class', 'demott_rect')
+            .attr('rx', '8')
+            .attr("y", '2em')
+            .attr("width", '8em')
+            .attr("height", '10em')
+            .style("display", "none");
     }
 
     demoUpdate(defaultType, defaultDistrict);

@@ -519,14 +519,6 @@ body {
       border-radius: 3px 3px 0 0;
     }
 
-    // #tipCount {
-    //   font-weight: bold;
-    //   font-size: 32px;
-    //   letter-spacing: -1px;
-    //   margin: 0px;
-    //   padding: 0px 10px 10px 10px;
-    //   color: red;
-    // }
 
     #tipInfo {
       font-weight: normal;
@@ -730,13 +722,18 @@ body {
           fill: none;
           pointer-events: all;
         }
-
+      
         .demott_line {
           stroke: $tooltip-bg;
           stroke-dasharray: 2,5;
           stroke-width: 2;
           opacity: 0.5;
-          z-index: 5;
+      } 
+
+        .demott_rect {
+          stroke: #ccc;
+          fill: white;
+          opacity: 0.9;
       }
     
   }

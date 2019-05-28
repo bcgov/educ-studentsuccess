@@ -7477,8 +7477,11 @@ html {
       stroke: #002663;
       stroke-dasharray: 2,5;
       stroke-width: 2;
-      opacity: 0.5;
-      z-index: 5; }
+      opacity: 0.5; }
+    html body #demographics #demoContainer .demott_rect {
+      stroke: #ccc;
+      fill: white;
+      opacity: 0.9; }
     html body #demographics #demographics-control #demo-radio {
       display: flex;
       flex-direction: column; }
