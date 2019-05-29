@@ -700,6 +700,7 @@ body {
   //demographics 
   #demographics{
     #demoContainer{
+     
        .xAxis {
         .domain {
           display: none;
@@ -731,9 +732,16 @@ body {
       } 
 
         .demott_rect {
-          stroke: #ccc;
-          fill: white;
+          position: absolute;
+          z-index:10;
+          top:2em;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+          width:8em;
+          height: 10em;
+          background: white;
           opacity: 0.9;
+          pointer-events: none;
       }
     
   }

@@ -28,7 +28,7 @@ let demo_yAxis = d3.axisLeft()
 let demo_svg = d3.select('#demoContainer')
     .append('svg')
     .attr("preserveAspectRatio", "xMinYMin meet") // This forces uniform scaling for both the x and y, aligning the midpoint of the SVG object with the midpoint of the container element.
-    .attr("viewBox", "0 0 600 400") //defines the aspect ratio, the inner scaling of object lengths and coordinates
+    .attr("viewBox", "0 0 600 400") //define the aspect ratio, the inner scaling of object lengths and coordinates
     .attr('class', 'svg-content');
 
 let demo_chartGroup = demo_svg.append('g')
@@ -67,9 +67,9 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
             .remove();
 
         //clear tooltips 
-        demo_chartGroup.selectAll(".demott_circle")    
+        demo_chartGroup.selectAll(".demott_circle")
             .remove();
-        demo_chartGroup.selectAll(".demott_rect")
+        d3.selectAll(".demott_rect")
             .remove();
     }
 
@@ -106,6 +106,11 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
             .attr("y1", 0)
             .attr("y2", demo_height);
 
+        //tt info rect, since z-index doesnt work for svg elments, draw later
+        d3.select('#demoContainer').append('div')
+            .attr('class', 'demott_rect')
+            .style('display', 'none');
+
         //overlay, to triger tt
         demo_svg.append('rect')
             .attr("transform", "translate(" + demo_margin.left + "," + demo_margin.top + ")")
@@ -114,13 +119,19 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
             .attr("height", demo_height)
             .on("mouseover", function () {
                 demott.style("display", null);
+                let rectHovered = $('.demott_rect').is(":hover");
+                if (rectHovered) {
+                    demott.style("display", null);
+                }
             })
-            .on("mouseout", function () {
+            .on("mouseleave", function () {
+
                 demott.style("display", "none");
-                demo_chartGroup.select(".demott_rect")
+                d3.selectAll(".demott_rect")
                     .style('display', 'none');
                 demo_chartGroup.selectAll(".demott_circle")
                     .style('display', 'none');
+
             })
             .on("mousemove", showDemott);
 
@@ -141,13 +152,18 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
                 demo_chartGroup.selectAll("circle[cx='" + demo_xScale(currentPos) + "']")
                     .style('display', null);
 
+                //difference btween contianer div and svg canvas
+                let bbox = document.getElementById('demoContainer').getBoundingClientRect();
+                let svgSacle = bbox.width / 600;
                 if (currentPos == 2018) {
-                    demo_chartGroup.select(".demott_rect")
-                        .attr("x", demo_xScale(currentPos) - 140)
+                    d3.select(".demott_rect").style('left', (demo_xScale(currentPos) * svgSacle - 60) + 'px')
+                        .style('display', null)
+                        .html("<div id='tipLoc'><b>Year: </b>" + currentPos +"</div>");
+
                 } else {
-                    demo_chartGroup.select(".demott_rect")
-                        .attr("x", demo_xScale(currentPos) + 10)
-                        .style('display', null);
+                    d3.select(".demott_rect").style('left', (demo_xScale(currentPos) * svgSacle + 85) + 'px')
+                        .style('display', null)
+                        .html("<div id='tipLoc'><b>Year: </b>" + currentPos +"</div>");
                 }
             }
         }
@@ -167,11 +183,11 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
             }));
 
             demo_yScale.domain([Math.min(0, d3.min(districtData, function (d) {
-                    return d[type];
-                })),
-                Math.max(0, d3.max(districtData, function (d) {
-                    return d[type];
-                }))
+                return d[type];
+            })),
+            Math.max(0, d3.max(districtData, function (d) {
+                return d[type];
+            }))
             ]);
 
             //line generator 
@@ -181,8 +197,7 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
                 })
                 .y(function (d) {
                     return demo_yScale(d[type]);
-                })
-                .curve(d3.curveMonotoneX);
+                });
 
 
             //draw line
@@ -303,16 +318,6 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
                 .attr("y2", 0);
 
         }
-
-
-        //tt info rect, since z-index doesnt work for svg elments, draw later
-        demo_chartGroup.append('rect')
-            .attr('class', 'demott_rect')
-            .attr('rx', '8')
-            .attr("y", '2em')
-            .attr("width", '8em')
-            .attr("height", '10em')
-            .style("display", "none");
     }
 
     demoUpdate(defaultType, defaultDistrict);
