@@ -119,10 +119,6 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
             .attr("height", demo_height)
             .on("mouseover", function () {
                 demott.style("display", null);
-                let rectHovered = $('.demott_rect').is(":hover");
-                if (rectHovered) {
-                    demott.style("display", null);
-                }
             })
             .on("mouseleave", function () {
 
@@ -134,14 +130,15 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
 
             })
             .on("mousemove", showDemott);
-
+        
+            let currentPos;
         // custom invert function for point scale + tooltips
         function showDemott() {
             let xPos = d3.mouse(this)[0];
             let domain = demo_xScale.domain();
             let range = demo_xScale.range();
             let rangePoints = d3.range(range[0], range[1], demo_xScale.step())
-            let currentPos = domain[d3.bisect(rangePoints, xPos) - 1];
+            currentPos = domain[d3.bisect(rangePoints, xPos) - 1];
 
             if (currentPos) {
                 demott.select(".demott_line").attr("x1", demo_xScale(currentPos));
@@ -153,17 +150,19 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
                     .style('display', null);
 
                 //difference btween contianer div and svg canvas
-                let bbox = document.getElementById('demoContainer').getBoundingClientRect();
-                let svgSacle = bbox.width / 600;
+                let oBox = document.getElementById('demoContainer').getBoundingClientRect();
+                let svgSacle = oBox.width / 600;
                 if (currentPos == 2018) {
                     d3.select(".demott_rect").style('left', (demo_xScale(currentPos) * svgSacle - 60) + 'px')
                         .style('display', null)
-                        .html("<div id='tipLoc'><b>Year: </b>" + currentPos +"</div>");
-
+                        .html(function() {return "<div class='tipHeader'><b>Year: </b>" + currentPos +"</div>"});
                 } else {
                     d3.select(".demott_rect").style('left', (demo_xScale(currentPos) * svgSacle + 85) + 'px')
                         .style('display', null)
-                        .html("<div id='tipLoc'><b>Year: </b>" + currentPos +"</div>");
+                        .html(function() { 
+                            let content = "<div class='tipHeader'><b>Year: </b>" + currentPos +"</div>"; 
+                            for(let d of defaultDistrict){ content += "<div class='tipInfo'>"+d+"</div>"}
+                            return content;});
                 }
             }
         }
@@ -223,9 +222,12 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
             legend.append("text")
                 .attr("x", 30)
                 .attr("y", 15 + i * 20)
-                .text(selectedDistricts[i]);
-
-            console.log(selectedDistricts[i]);
+                .text(selectedDistricts[i]);   
+            
+            //tooltips info
+            d3.select('.demott')
+                       .append('div')
+                       .text(selectedDistricts[i]);
 
             //animate path
             let totalLength = demo_line.node().getTotalLength();

@@ -7483,12 +7483,20 @@ html {
       z-index: 10;
       top: 2em;
       border-radius: 5px;
-      border: 1px solid #ccc;
       width: 8em;
       height: 10em;
       background: white;
       opacity: 0.9;
       pointer-events: none; }
+      html body #demographics #demoContainer .demott_rect .tipHeader {
+        color: white;
+        padding: 5px 10px;
+        background: #002663;
+        font-size: 12px;
+        border-radius: 5px 5px 0 0; }
+      html body #demographics #demoContainer .demott_rect .tipInfo {
+        color: #002663;
+        font-size: 8px; }
     html body #demographics #demographics-control #demo-radio {
       display: flex;
       flex-direction: column; }
