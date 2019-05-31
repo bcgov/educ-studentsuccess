@@ -7460,6 +7460,8 @@ html {
         cursor: pointer; }
       html body #graph .handle.active {
         fill: #002663; }
+    html body #demographics #demoContainer .demo_line {
+      stroke-linecap: round; }
     html body #demographics #demoContainer .xAxis {
       stroke-width: 0; }
       html body #demographics #demoContainer .xAxis .domain {
@@ -7484,19 +7486,22 @@ html {
       top: 2em;
       border-radius: 5px;
       width: 8em;
-      height: 10em;
       background: white;
       opacity: 0.9;
       pointer-events: none; }
       html body #demographics #demoContainer .demott_rect .tipHeader {
         color: white;
-        padding: 5px 10px;
+        padding: 5px;
         background: #002663;
+        font-weight: bold;
         font-size: 12px;
         border-radius: 5px 5px 0 0; }
       html body #demographics #demoContainer .demott_rect .tipInfo {
+        margin-left: 5px;
         color: #002663;
-        font-size: 8px; }
+        font-size: 10px; }
+        html body #demographics #demoContainer .demott_rect .tipInfo .tipNum {
+          color: #494949; }
     html body #demographics #demographics-control #demo-radio {
       display: flex;
       flex-direction: column; }

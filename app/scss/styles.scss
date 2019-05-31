@@ -700,6 +700,10 @@ body {
   //demographics 
   #demographics{
     #demoContainer{
+
+      .demo_line {
+        stroke-linecap: round;
+      }
      
        .xAxis {
         .domain {
@@ -737,22 +741,26 @@ body {
           top:2em;
           border-radius: 5px;
           width:8em;
-          height: 10em;
           background: white;
           opacity: 0.9;
           pointer-events: none;
 
           .tipHeader {
             color: white;
-            padding: 5px 10px;
+            padding: 5px;
             background: $tooltip-bg;
+            font-weight: bold;
             font-size: 12px;
             border-radius: 5px 5px 0 0;
           }
 
           .tipInfo {
+            margin-left: 5px;
             color:$tooltip-bg;
-            font-size:8px;
+            font-size:10px;
+            .tipNum{
+              color:$font-color;
+            }
           }
       }
     

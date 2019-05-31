@@ -95,6 +95,7 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
             districtData = districtData.concat(district);
         }
 
+        console.log(districtData);
         //tooltips
         let demott = demo_chartGroup.append('g')
             .attr('class', 'demott')
@@ -152,17 +153,22 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
                 //difference btween contianer div and svg canvas
                 let oBox = document.getElementById('demoContainer').getBoundingClientRect();
                 let svgSacle = oBox.width / 600;
-                if (currentPos == 2018) {
-                    d3.select(".demott_rect").style('left', (demo_xScale(currentPos) * svgSacle - 60) + 'px')
-                        .style('display', null)
-                        .html(function() {return "<div class='tipHeader'><b>Year: </b>" + currentPos +"</div>"});
-                } else {
-                    d3.select(".demott_rect").style('left', (demo_xScale(currentPos) * svgSacle + 85) + 'px')
+                d3.select(".demott_rect")
                         .style('display', null)
                         .html(function() { 
                             let content = "<div class='tipHeader'><b>Year: </b>" + currentPos +"</div>"; 
-                            for(let d of defaultDistrict){ content += "<div class='tipInfo'>"+d+"</div>"}
+                            for(let d of selectedDistricts){ 
+                                for (let d2 of districtData) {
+                                if (d2.DISTRICT==d.substring(2,4)&&d2.SCHOOL_YEAR==currentPos)
+                                content += "<div class='tipInfo'>"+d.substring(5, d.length)+ ": <span class='tipNum'>"+d2[type]+"</span></div>"
+                                }
+                            }
                             return content;});
+
+                if (currentPos == 2018) {
+                    d3.select(".demott_rect").style('left', (demo_xScale(currentPos) * svgSacle - 60) + 'px');
+                } else {
+                    d3.select(".demott_rect").style('left', (demo_xScale(currentPos) * svgSacle + 85) + 'px');;
                 }
             }
         }
@@ -349,10 +355,10 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
 
     //set the selection limit
     $('.checkbox input:checkbox').on('change', function (e) {
-        if ($('.checkbox input:checkbox:checked').length > 10) {
+        if ($('.checkbox input:checkbox:checked').length > 8) {
             //this.checked = false; OR 
             $(this).prop('checked', false);
-            console.log('Please select no more than 10 districts');
+            console.log('Please select no more than 8 districts');
         }
     });
 
