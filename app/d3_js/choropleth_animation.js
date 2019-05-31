@@ -325,7 +325,7 @@ function ani_toolMove(mx, my, data) {
 //slider
 
 //Create SVG element for slider
-let svg_slider = d3.select("#slider")
+let svg_slider = d3.select("#ani-slider")
     .append("svg")
     .attr("width", ani_width - 50)
     .attr("height", 50);

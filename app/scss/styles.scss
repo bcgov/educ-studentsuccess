@@ -68,6 +68,7 @@ body {
 
       .middle {
         top: 48%;
+        width: 50%;
       }
 
       .bottom {
@@ -80,6 +81,9 @@ body {
       top: 48%
     }
 
+    .open .middle{
+      display:none;
+    }
     .open .middle,
     .open .bottom {
       transform: rotate(-45deg);

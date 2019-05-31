@@ -7059,12 +7059,15 @@ html {
         html body .navbar .icon .top {
           top: 18%; }
         html body .navbar .icon .middle {
-          top: 48%; }
+          top: 48%;
+          width: 50%; }
         html body .navbar .icon .bottom {
           top: 78%; }
       html body .navbar .open .top {
         transform: rotate(45deg);
         top: 48%; }
+      html body .navbar .open .middle {
+        display: none; }
       html body .navbar .open .middle,
       html body .navbar .open .bottom {
         transform: rotate(-45deg);

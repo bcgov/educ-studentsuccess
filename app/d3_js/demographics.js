@@ -153,6 +153,7 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
                 //difference btween contianer div and svg canvas
                 let oBox = document.getElementById('demoContainer').getBoundingClientRect();
                 let svgSacle = oBox.width / 600;
+
                 d3.select(".demott_rect")
                         .style('display', null)
                         .html(function() { 
@@ -160,10 +161,19 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
                             for(let d of selectedDistricts){ 
                                 for (let d2 of districtData) {
                                 if (d2.DISTRICT==d.substring(2,4)&&d2.SCHOOL_YEAR==currentPos)
-                                content += "<div class='tipInfo'>"+d.substring(5, d.length)+ ": <span class='tipNum'>"+d2[type]+"</span></div>"
+                                content += "<div class='tipInfo' data-num='"+d2[type]+"'>"+d.substring(5, d.length)+ ": <span class='tipNum'>"+d2[type]+"</span></div>"
                                 }
                             }
                             return content;});
+
+                //sort html elements based on value
+                let tipBox = $('.demott_rect');
+                console.log(tipBox.find('.tipInfo'));
+                tipBox.find('.tipInfo').sort(function(a,b){
+                    return +b.getAttribute('data-num') - +a.getAttribute('data-num')
+                })
+                .appendTo(tipBox);
+
 
                 if (currentPos == 2018) {
                     d3.select(".demott_rect").style('left', (demo_xScale(currentPos) * svgSacle - 60) + 'px');
