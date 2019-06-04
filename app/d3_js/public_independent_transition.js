@@ -33,9 +33,13 @@ tsliderGroup.append("line")
     .attr("class", "track")
     .attr("x1", tslider_xScale.range()[0])
     .attr("x2", tslider_xScale.range()[1])
-    .select(function () { return this.parentNode.appendChild(this.cloneNode(true)); })
+    .select(function () {
+        return this.parentNode.appendChild(this.cloneNode(true));
+    })
     .attr("class", "track-inset")
-    .select(function () { return this.parentNode.appendChild(this.cloneNode(true)); })
+    .select(function () {
+        return this.parentNode.appendChild(this.cloneNode(true));
+    })
     .attr("class", "track-overlay")
     .call(d3.drag()
         .on("start.interrupt", tslider_startDrag)
@@ -54,7 +58,9 @@ tsliderGroup.insert("g", ".track-overlay")
     .attr("x", tslider_xScale)
     .attr("y", 10)
     .attr("text-anchor", "middle")
-    .text(function (d) { return d; });
+    .text(function (d) {
+        return d;
+    });
 
 //slider handle
 let tslider_handle = tsliderGroup.selectAll("rect")
@@ -100,12 +106,14 @@ function tslider_end(d) {
 
 //flag for checking update() year input
 let tslider_yrCheck = 0;
+
 function tslider_inputYear(val) {
     // console.log(val);
 
     let x = tslider_xScale.invert(val);
 
-    let index = null, midPoint, cx, xVal;
+    let index = null,
+        midPoint, cx, xVal;
 
     if (step) {
         // if step has a value, compute the midpoint based on range values and reposition the slider based on the mouse position
@@ -133,14 +141,23 @@ function tslider_inputYear(val) {
     tslider_handle.attr("x", cx - 8);
 
     //verify that a method was called with certain year input, call update() with unique each year value once
-    // if (tslider_yrCheck != xVal) {
-    //     tslider_update(xVal);
-    //     tslider_yrCheck = xVal;
-    // }
+    if (tslider_yrCheck != xVal) {
+        tslider_update(xVal);
+        tslider_yrCheck = xVal;
+    }
 }
 
+
+
+
+
 //trans_margin 
-let trans_margin = { top: 50, right: 50, bottom: 50, left: 50 };
+let trans_margin = {
+    top: 50,
+    right: 50,
+    bottom: 50,
+    left: 50
+};
 
 //height and width
 let trans_height = 400 - trans_margin.top - trans_margin.bottom;
@@ -152,3 +169,28 @@ let trans_yScale = d3.scaleLinear()
 let trans_xScale = d3.scaleBand()
     .range([0, width])
     .padding(0.2);
+
+let trans_yAxis = d3.axisLeft()
+    .scale(trans_yScale);
+
+let trans_xAxis = d3.axisBottom()
+    .scale(trans_xScale);
+
+//canvas
+let trans_svg  = d3.select('#transition_container').append('svg')
+    .attr("preserveAspectRatio", "xMinYMin meet")  // This forces uniform scaling for both the x and y, aligning the midpoint of the SVG object with the midpoint of the container element.
+    .attr("viewBox", "0 0 600 400") //defines the aspect ratio, the inner scaling of object lengths and coordinates
+    .attr('class', 'svg-content');
+
+let trans_chartGroup = trans_svg.append('g')
+    .attr('class', 'chartGroup')
+    .attr('transform', 'translate(' + trans_margin.left + ',' + trans_margin.top + ')');
+
+
+//initialize html tooltip
+let trans_tooltip = d3.select("#transition_container")
+    .append("div")
+    .attr("id", "line_tt")
+    .style("z-index", "10")
+    .style("position", "absolute")
+    .style("visibility", "hidden");
