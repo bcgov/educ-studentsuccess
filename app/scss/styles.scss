@@ -181,6 +181,47 @@ body {
     transition: .3s ease;
   }
 
+  .track,
+  .track-inset,
+  .track-overlay {
+    stroke-opacity: 0.3;
+    stroke-linecap: round;
+  }
+
+  .track {
+    stroke-opacity: 0.3;
+    stroke-width: 10px;
+  }
+
+  .track-inset {
+    stroke: #bbb;
+    stroke-width: 8px;
+  }
+
+  .track-overlay {
+    pointer-events: stroke;
+    stroke-width: 50px;
+    stroke: transparent;
+    cursor: pointer;
+  }
+
+  .handle {
+    fill: #38598a;
+    stroke: #494949;
+    stroke-opacity: 0.5;
+    stroke-width: 1.25px;
+    cursor: pointer;
+  }
+
+  .handle.active {
+    fill: #002663;
+  }
+  
+  .ticks {
+    fill: $font-color;
+    font-size: 12px;
+}
+
 /*********sections********/
   #overview::before, #inter-map::before, #graph::before, #facts::before {
     content:"";
@@ -357,46 +398,6 @@ body {
           background-size: cover;
           cursor: pointer;
       }    
-       
-        .track,
-        .track-inset,
-        .track-overlay {
-          stroke-linecap: round;
-        }
-    
-        .track {
-          stroke-opacity: 0.3;
-          stroke-width: 10px;
-        }
-    
-        .track-inset {
-          stroke: #bbb;
-          stroke-width: 8px;
-        }
-    
-        .track-overlay {
-          pointer-events: stroke;
-          stroke-width: 50px;
-          stroke: transparent;
-          cursor: pointer;
-        }
-    
-        .handle {
-          fill: #38598a;
-          stroke: #494949;
-          stroke-opacity: 0.5;
-          stroke-width: 1.25px;
-          cursor: pointer;
-        }
-
-        .handle.active {
-          fill: #002663;
-        }
-        
-        .ticks {
-          fill: $font-color;
-          font-size: 12px;
-      }
     }
   }
   
@@ -780,6 +781,50 @@ body {
       grid-template-columns: repeat(4, 1.2fr);
       grid-gap: 10px;
       font-size: 12px;
+    }
+  }
+}
+
+//public independent
+#transition{
+  #trans_control{
+    display: flex;
+    h6{
+      font-weight: bold;
+      margin: 0;
+      padding: 1em 0 0 1em;
+    }
+  #trans_slider {
+    fill: $font-color;
+    font-size: 12px;
+    padding: 0;
+    }
+  }
+  #graph_container {
+    display: flex;
+    flex-wrap: wrap;
+    #public_school_icon, #independent_school_icon{
+      
+    }
+    #trans_rate{
+      max-width: 200px;
+      background: url(../assets/img/trans_icon.png);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      position: relative;
+      #pub_to_ind{
+        color:#4EBDEB;
+        font-weight: bold;
+      }
+       #ind_to_pub {
+        position: absolute;
+        left:0;
+        right:0;
+        bottom: 0;
+        color:#D42D75;
+        font-weight: bold;
+      }
     }
   }
 }
