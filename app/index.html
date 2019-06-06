@@ -55,7 +55,7 @@
     <!-- Jumbotron / hero section, a component -->
     <div class="row mb-5">
       <div class="col-sm-12 col-md-4 intro">
-        <h2 class="dispaly-4 font-weight-bold">Student Migration</h2>
+          <h2 class="section_header mb-3"><span>Student Migration</span></h2>
         <p>Understand student mobility throughout the province and its impact on student enrolment.</p>
         <a class="btn ctaBtn btn-lg" href="#" role="button">Learn more</a>
       </div>
@@ -89,7 +89,7 @@
       </div>
 
       <div class="col-sm-12 col-md-4">
-        <h2 class="mb-3">Where do students go</h2>
+        <h2 class="text-center mb-3">Where do students go</h2>
         <div id='control'>
           <div class="controlSection">
             <h5>School Year</h5>
@@ -126,7 +126,7 @@
   <div class="container my-5" id="demographics">
     <div class="row">
       <div class="col-8 mx-auto">
-        <h2 class="text-center mb-3">Demographics</h2>
+        <h2 class="section_header text-center mb-3"><span>Demographics</span></h2>
         <p>The demographics driver provides an indication or whether more kindergarten students are entering schools
           relative to those leaving through graduation. If the net demographic value is positive, it is indicating that
           more five year olds are entering the system relative to the number of grade 12 students that are graduating.
@@ -183,7 +183,7 @@
   <div class="container my-5" id="graph">
     <div class="row">
       <div class="col-8 mx-auto">
-        <h2 class="text-center mb-3">Key Predictors and Impact</h2>
+        <h2 class="section_header text-center mb-3"><span>Key Predictors and Impact</span></h2>
         <p>The Ministry of Education District Enrolment Forecast Model (DEFM) has been developed based on
           the Cohort Survival Method approach. The DEFM is based on four enrolment drivers: migration, demographics,
           independent/public school transition, and continuous student retention.</p>
@@ -223,7 +223,7 @@
   <div class="container my-5" id="transition">
     <div class="row">
       <div class="col-8 mx-auto">
-        <h2 class="text-center mb-3">Public and Independent Transition</h2>
+        <h2 class="section_header text-center mb-3"><span>Public and Independent Transition</span></h2>
         <p>The transition driver measures how many students move from independent schools to public schools as a net
           positive inflow, and independent to public schools as a negative outflow.</p>
       </div>
@@ -233,6 +233,7 @@
           <div id="trans_slider" class="col-9">
           </div>
         </div>
+
         <div id="graph_container" class="mt-5">
           <div class="col-4">
             <img id="public_school_icon" class="img-fluid" src="/assets/img/public.png" alt="public school">
@@ -251,7 +252,17 @@
       </div>
 
       <div class="col-sm-12 col-md-6">
-        <h6 class="text-center">Top Switched (public to independent)</h6>
+          <form id="trans_radio">
+              <label class="radio">
+                <input type="radio" name="trans-type" value="ENTER_PUBLIC" checked>Public entered
+              </label>
+              <label class="radio">
+                <input type="radio" name="trans-type" value="LEAVE_PUBLIC">Public left
+              </label>
+              <label class="radio">
+                <input type="radio" name="trans-type" value="NET_INDEPENDENT">Net change
+              </label>
+            </form>
         <div id="transition_container"></div>
       </div>
     </div>
@@ -259,31 +270,10 @@
 
   <div class="container my-5" id="facts">
     <div class="row">
-      <div class="col-12 mb-5">
-        <h2 class="text-center">Fact numbers and indicators</h2>
-      </div>
-      <div class="col-sm-12 col-md-4 fact-container">
-        <img src="/assets/img/migration.png" class="img-fluid fact-img" alt="map">
-        <div class="fact-info">
-          <h6>Total Migration (Year 2017/18)</h6>
-          <h1 class="text-center">7000</h1>
-        </div>
-      </div>
-
-      <div class="col-sm-12 col-md-4 fact-container">
-        <img src="/assets/img/avg.png" class="img-fluid fact-img">
-        <div class="fact-info">
-          <h6>Average Migration (in each distict)</h6>
-          <h1 class="text-center">200</h1>
-        </div>
-      </div>
-
-      <div class="col-sm-12 col-md-4 fact-container">
-        <img src="/assets/img/schoolbag.png" class="img-fluid fact-img" alt="map">
-        <div class="fact-info">
-          <h6>Current Full-time Equivlent </h6>
-          <h1 class="text-center">552,600</h1>
-        </div>
+      <div class="col-8 mx-auto mb-5 text-center">
+        <h2 class="section_header mb-4"><span>BC School Enrolment Booklet</span></h2>
+        <p>For more data at the provincial and district levels. Please view the detailed 2019/2020 BC School Enrolment Booklet.</p>
+        <a class="btn ctaBtn btn-lg" href="#" role="button">Download</a>
       </div>
     </div>
   </div>
