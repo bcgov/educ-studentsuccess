@@ -7551,6 +7551,8 @@ html {
           bottom: 0;
           color: #D42D75;
           font-weight: bold; }
+    html body #transition #transition_container .trans_bar {
+      fill: #002663; }
     html body #facts {
       background-image: url(../assets/img/bg-dcr3.png);
       background-size: 30% auto;

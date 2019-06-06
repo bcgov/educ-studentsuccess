@@ -1,5 +1,48 @@
-//slider
+//trans_margin 
+let trans_margin = {
+    top: 50,
+    right: 50,
+    bottom: 50,
+    left: 50
+};
 
+//height and width
+let trans_height = 400 - trans_margin.top - trans_margin.bottom;
+let trans_width = 600 - trans_margin.left - trans_margin.right;
+
+let trans_yScale = d3.scaleLinear()
+    .range([trans_height, 0]);
+
+let trans_xScale = d3.scaleBand()
+    .range([0, trans_width])
+    .padding(0.4);
+
+let trans_yAxis = d3.axisLeft()
+    .scale(trans_yScale);
+
+let trans_xAxis = d3.axisBottom()
+    .scale(trans_xScale);
+
+//canvas
+let trans_svg = d3.select('#transition_container').append('svg')
+    .attr("preserveAspectRatio", "xMinYMin meet")  // This forces uniform scaling for both the x and y, aligning the midpoint of the SVG object with the midpoint of the container element.
+    .attr("viewBox", "0 0 600 400") //defines the aspect ratio, the inner scaling of object lengths and coordinates
+    .attr('class', 'svg-content');
+
+let trans_chartGroup = trans_svg.append('g')
+    .attr('class', 'chartGroup')
+    .attr('transform', 'translate(' + trans_margin.left + ',' + trans_margin.top + ')');
+
+
+//initialize html tooltip
+let trans_tooltip = d3.select("#transition_container")
+    .append("div")
+    .attr("id", "line_tt")
+    .style("z-index", "10")
+    .style("position", "absolute")
+    .style("visibility", "hidden");
+
+//slider
 //Create SVG element for slider
 let tslider_width = $('#trans_slider').width() * .85;
 
@@ -106,7 +149,7 @@ function tslider_end(d) {
 //flag for checking update() year input
 let tslider_yrCheck = 0;
 
-
+let trans_type = 'ENTER_PUBLIC';
 
 function tslider_inputYear(val) {
     // console.log(val);
@@ -115,6 +158,7 @@ function tslider_inputYear(val) {
 
     let index = null,
         midPoint, cx, xVal;
+    
 
     if (step) {
         // if step has a value, compute the midpoint based on range values and reposition the slider based on the mouse position
@@ -143,222 +187,160 @@ function tslider_inputYear(val) {
 
     //verify that a method was called with certain year input, call update() with unique each year value once
     if (tslider_yrCheck != xVal) {
-        tslider_update(xVal);
+        transUpdate(xVal, trans_type);
         tslider_yrCheck = xVal;
     }
 }
 
+transUpdate(2013, trans_type)
 
-function tslider_update(year) {
-    //trans_margin 
-    let trans_margin = {
-        top: 50,
-        right: 50,
-        bottom: 50,
-        left: 50
-    };
+function transClear() {
+    //clear existing trans_bars
+    let existingBar = trans_chartGroup.selectAll(".trans_bar");
+    existingBar.transition()
+        .duration(500)
+        .remove();
+}
 
-    //height and width
-    let trans_height = 400 - trans_margin.top - trans_margin.bottom;
-    let trans_width = 600 - trans_margin.left - trans_margin.right;
-
-    let trans_yScale = d3.scaleLinear()
-        .range([trans_height, 0]);
-
-    let trans_xScale = d3.scaleBand()
-        .range([0, trans_width])
-        .padding(0.3);
-
-    let trans_yAxis = d3.axisLeft()
-        .scale(trans_yScale);
-
-    let trans_xAxis = d3.axisBottom()
-        .scale(trans_xScale);
-
-    //canvas
-    let trans_svg = d3.select('#transition_container').append('svg')
-        .attr("preserveAspectRatio", "xMinYMin meet")  // This forces uniform scaling for both the x and y, aligning the midpoint of the SVG object with the midpoint of the container element.
-        .attr("viewBox", "0 0 600 400") //defines the aspect ratio, the inner scaling of object lengths and coordinates
-        .attr('class', 'svg-content');
-
-    let trans_chartGroup = trans_svg.append('g')
-        .attr('class', 'chartGroup')
-        .attr('transform', 'translate(' + trans_margin.left + ',' + trans_margin.top + ')');
-
-
-    //initialize html tooltip
-    let trans_tooltip = d3.select("#transition_container")
-        .append("div")
-        .attr("id", "line_tt")
-        .style("z-index", "10")
-        .style("position", "absolute")
-        .style("visibility", "hidden");
+function transUpdate(year, type) {
 
     d3.csv('../assets/raw_data/transition_district.csv', function (error, data) {
         if (error) {
             throw error;
         }
 
-        function transClear() {
-            //clear existing trans_bars
-            let existingBar = d3.selectAll("#transition_container .trans_bar");
-            existingBar.exit();
-            existingBar.transition()
-                .duration(500)
-                .remove();
+        let districtData = data.filter(function (d) { return +d.SCHOOL_YEAR == year });
 
-            //clear tooltips 
-            // trans_chartGroup.selectAll(".demott_circle")
-            //     .remove();
-            // d3.selectAll(".demott_rect")
-            //     .remove();
-        }
+        //format data
+        districtData.forEach(function (d) {
+            d.ENTER_PUBLIC = +d.ENTER_PUBLIC;
+            d.LEAVE_PUBLIC = +d.LEAVE_PUBLIC;
+            d.NET_INDEPENDENT = +d.NET_INDEPENDENT;
+        });
 
-        function transUpdate(type) {
-
-            let districtData = data.filter(function (d) { return +d.SCHOOL_YEAR == year });
-
-            //format data
-            districtData.forEach(function (d) {
-                d.ENTER_PUBLIC = +d.ENTER_PUBLIC;
-                d.LEAVE_PUBLIC = +d.LEAVE_PUBLIC;
-                d.NET_INDEPENDENT = +d.NET_INDEPENDENT;
-            });
-
-            //sort array of object based on # of enter, leave, and net
-            districtData.sort(function (a, b) {
-                //# of leave is negative, reverse sort
-                if (type == 'LEAVE_PUBLIC') {
-                    return a[type] - b[type];
-                } else {
-                    return b[type] - a[type];
-                }
-            });
-
-            //top 5 district
-            let districtData_top5 = districtData.slice(0, 5);
-
-            //set scale domain
-            trans_xScale.domain(districtData_top5.map(function (d) {
-                return d.DISTRICT;
-            }));
-
-            trans_yScale.domain([Math.min(0, d3.min(districtData_top5, function (d) {
-                return d[type];
-            })),
-            Math.max(0, d3.max(districtData_top5, function (d) {
-                return d[type];
-            }))]);
-
-
-            console.log(districtData_top5);
-            for (let d of districtData_top5) {
-                console.log(d[type]);
-
-                console.log(Math.abs(trans_yScale(d[type]) - trans_yScale(0)));
+        //sort array of object based on # of enter, leave, and net
+        districtData.sort(function (a, b) {
+            //# of leave is negative, reverse sort
+            if (type == 'LEAVE_PUBLIC') {
+                return a[type] - b[type];
+            } else {
+                return b[type] - a[type];
             }
+        });
+
+        //top 5 district
+        let districtData_top5 = districtData.slice(0, 5);
+
+        //set scale domain
+        trans_xScale.domain(districtData_top5.map(function (d) {
+            return d.DISTRICT;
+        }));
+
+        trans_yScale.domain([Math.min(0, d3.min(districtData_top5, function (d) {
+            return d[type];
+        })),
+        Math.max(0, d3.max(districtData_top5, function (d) {
+            return d[type];
+        }))]);
+
+        //draw 
+        if ($('#transition_container .yAxis').length) {
+
+            //set transition
+            let tran = d3.transition()
+                .duration(1500);
 
             //draw trans_bars
+
+            trans_chartGroup.selectAll('.trans_bar')
+                .data(districtData_top5)
+                .transition(tran)
+                .attr('y', function (d) { return trans_yScale(Math.max(0, d[type])); })
+                .attr('height', function (d) { return Math.abs(trans_yScale(d[type]) - trans_yScale(0)); });
+
+            d3.select("#transition_container .yAxis")
+                .transition(tran)
+                .call(trans_yAxis);
+
+            d3.select("#transition_container .xAxis")
+                .transition(tran)
+                .call(trans_xAxis);
+
+            //grid line
+            d3.selectAll("g.yAxis g.tick")
+                .append("line")
+                .attr("class", "gridline")
+                .attr("x1", 0)
+                .attr("y1", 0)
+                .attr("x2", trans_width)
+                .attr("y2", 0);
+
+            d3.selectAll("g.xAxis g.tick")
+                .append("line")
+                .attr("class", "gridline")
+                .attr("x1", 0)
+                .attr("y1", trans_height)
+                .attr("x2", 0)
+                .attr("y2", 0);
+
+        } else {
+
+            //draw trans_bars
+
             trans_chartGroup.selectAll('.trans_bar')
                 .data(districtData_top5)
                 .enter().append('rect')
                 .attr('class', 'trans_bar')
                 .attr('x', function (d) { return trans_xScale(d.DISTRICT); })
-                .attr('y', function (d) {
-                    if (d[type] > 0) {
-                        return trans_yScale(d[type]);
-                    } else {
-                        return trans_yScale(0);
-                    }
-                })
+                .attr('y', function (d) { return trans_yScale(Math.max(0, d[type])); })
                 .attr('width', trans_xScale.bandwidth())
-                .attr('height', function (d) { return Math.abs(trans_yScale(d[type]) - trans_yScale(0)); })
-                .style('fill', '#FCBA19');
+                .attr('height', function (d) { return Math.abs(trans_yScale(d[type]) - trans_yScale(0)); });
 
+            //axes
+            trans_chartGroup.append('g')
+                .attr('class', 'yAxis')
+                .call(trans_yAxis)
+                .append("text")
+                .attr("transform", "rotate(-90)")
+                .attr('fill', '#4c4c4c')
+                .attr("y", 6)
+                .attr("dy", ".8em")
+                .style("text-anchor", "end")
+                .text("FTE");
 
-            //draw axes
-            if ($('#transition_container .yAxis').length) {
+            trans_chartGroup.append('g')
+                .attr('class', 'xAxis')
+                .attr('transform', 'translate(0,' + trans_height + ')')
+                .call(trans_xAxis);
 
-                //set transition
-                let tran = d3.transition()
-                    .duration(1500);
+            //grid line
+            d3.selectAll("g.yAxis g.tick")
+                .append("line")
+                .attr("class", "gridline")
+                .attr("x1", 0)
+                .attr("y1", 0)
+                .attr("x2", trans_width)
+                .attr("y2", 0);
 
-                d3.select("#transition_container .yAxis")
-                    .transition(tran)
-                    .call(trans_yAxis);
-
-                d3.select("#transition_container .xAxis")
-                    .transition(tran)
-                    .call(trans_xAxis);
-
-                //grid line
-                d3.selectAll("g.yAxis g.tick")
-                    .append("line")
-                    .attr("class", "gridline")
-                    .attr("x1", 0)
-                    .attr("y1", 0)
-                    .attr("x2", trans_width)
-                    .attr("y2", 0);
-
-                d3.selectAll("g.xAxis g.tick")
-                    .append("line")
-                    .attr("class", "gridline")
-                    .attr("x1", 0)
-                    .attr("y1", trans_height)
-                    .attr("x2", 0)
-                    .attr("y2", 0);
-
-            } else {
-
-                //axes
-                trans_chartGroup.append('g')
-                    .attr('class', 'yAxis')
-                    .call(trans_yAxis)
-                    .append("text")
-                    .attr("transform", "rotate(-90)")
-                    .attr('fill', '#4c4c4c')
-                    .attr("y", 6)
-                    .attr("dy", ".8em")
-                    .style("text-anchor", "end")
-                    .text("FTE");
-
-                trans_chartGroup.append('g')
-                    .attr('class', 'xAxis')
-                    .attr('transform', 'translate(0,' + trans_height + ')')
-                    .call(trans_xAxis);
-
-                //grid line
-                d3.selectAll("g.yAxis g.tick")
-                    .append("line")
-                    .attr("class", "gridline")
-                    .attr("x1", 0)
-                    .attr("y1", 0)
-                    .attr("x2", trans_width)
-                    .attr("y2", 0);
-
-                d3.selectAll("g.xAxis g.tick")
-                    .append("line")
-                    .attr("class", "gridline")
-                    .attr("x1", 0)
-                    .attr("y1", -trans_height)
-                    .attr("x2", 0)
-                    .attr("y2", 0);
-
-            }
+            d3.selectAll("g.xAxis g.tick")
+                .append("line")
+                .attr("class", "gridline")
+                .attr("x1", 0)
+                .attr("y1", -trans_height)
+                .attr("x2", 0)
+                .attr("y2", 0);
 
         }
 
-        let defaultType = 'ENTER_PUBLIC';
-        transUpdate(defaultType);
-
-        //radio selection
-        $("#trans_radio input[type='radio']").change(function () {
-            let radioValue = $("input[name='trans-type']:checked").val();
-            console.log(radioValue);
-            if (radioValue) {
-                transClear();
-                transUpdate(radioValue);
-            }
-        });
     });
 }
+
+//radio selection
+$("#trans_radio input[type='radio']").change(function () {
+    let radioValue = $("input[name='trans-type']:checked").val();
+    trans_type = radioValue;
+    if (radioValue) {
+        transClear();
+        transUpdate(2013, radioValue);
+    }
+});

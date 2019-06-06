@@ -801,8 +801,9 @@ body {
   }
 }
 
-//public independent
+//public independent transition
 #transition{
+
   #trans_control{
     display: flex;
     h6{
@@ -810,18 +811,17 @@ body {
       margin: 0;
       padding: 1em 0 0 1em;
     }
+
   #trans_slider {
     fill: $font-color;
     font-size: 12px;
     padding: 0;
     }
   }
+  
   #graph_container {
     display: flex;
     flex-wrap: wrap;
-    #public_school_icon, #independent_school_icon{
-      
-    }
     #trans_rate{
       max-width: 200px;
       background: url(../assets/img/trans_icon.png);
@@ -841,6 +841,12 @@ body {
         color:#D42D75;
         font-weight: bold;
       }
+    }
+  }
+
+  #transition_container {
+    .trans_bar {
+      fill: $tooltip-bg;
     }
   }
 }
