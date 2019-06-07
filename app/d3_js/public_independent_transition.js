@@ -186,12 +186,35 @@ function tslider_inputYear(val) {
 
     //verify that a method was called with certain year input, call update() with unique each year value once
     if (tslider_yrCheck != xVal) {
+        graphUpdate(xVal);
         transUpdate(xVal, trans_type);
         tslider_yrCheck = xVal;
     }
 }
 
-transUpdate(2013, trans_type)
+graphUpdate(2013);
+transUpdate(2013, trans_type);
+
+function graphUpdate(year) {
+
+    d3.csv('../assets/raw_data/transition_provincial.csv', function (error, data) {
+        if (error) {
+            throw error;
+        }
+        let yrData = data.filter(function (d) { return +d.SCHOOL_YEAR == year });
+
+        yrData.forEach(function (d) {
+            d.RATE_PtoI = +d.RATE_PtoI;
+            d.RATE_ItoP = +d.RATE_ItoP;
+        });
+        
+        d3.select('#pub_to_ind').text(yrData.map(function (d) {
+            return d.RATE_PtoI + '%' ;}));
+        d3.select('#ind_to_pub').text(yrData.map(function (d) {
+            return d.RATE_ItoP + '%' ;}));
+        
+    });
+}
 
 function transClear() {
     //clear existing trans_bars
@@ -304,8 +327,8 @@ function transUpdate(year, type) {
                 .on('click', function (d) {
                     let xpos = d3.mouse(this)[0];
                     let ypos = d3.mouse(this)[1];
-    
-                    d3.selectAll('.trans_bar').style('fill','#002663');
+
+                    d3.selectAll('.trans_bar').style('fill', '#002663');
                     d3.select(this).style('fill', '#FCBA19')
                     showTranstt(d.DISTRICT, year, d[type], type, xpos, ypos);
                 });
@@ -393,4 +416,4 @@ function showTranstt(sd, yr, num, type, xpos, ypos) {
             content += "<div class='trans_link'><a class='ssLink' href='https://studentsuccess.gov.bc.ca/school-district/0" + sd + "/report/student-satisfaction' target='_blank'>Student Satisfaction<i class='fas fa-angle-right ml-1'></i></a></div>";
             return content;
         })
-    }
+}
