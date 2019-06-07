@@ -7505,7 +7505,8 @@ html {
       stroke-opacity: .5; }
     html body #demographics #demoContainer .demo_overlay {
       fill: none;
-      pointer-events: all; }
+      pointer-events: all;
+      cursor: pointer; }
     html body #demographics #demoContainer .demott_line {
       stroke: #002663;
       stroke-dasharray: 2,5;
@@ -7572,7 +7573,8 @@ html {
           color: #D42D75;
           font-weight: bold; }
     html body #transition #transition_container .trans_bar {
-      fill: #002663; }
+      fill: #002663;
+      cursor: pointer; }
     html body #transition #transition_container .yAxis, html body #transition #transition_container .xAxis {
       stroke-width: 0; }
       html body #transition #transition_container .yAxis .domain, html body #transition #transition_container .xAxis .domain {
@@ -7580,7 +7582,8 @@ html {
     html body #transition #transition_container #trans_tt .trans_link {
       margin: 0.5em; }
       html body #transition #transition_container #trans_tt .trans_link .ssLink {
-        font-size: 14px; }
+        font-size: 14px;
+        line-height: 0.1em; }
     html body #facts {
       background-image: url(../assets/img/bg-dcr3.png);
       background-size: 30% auto;

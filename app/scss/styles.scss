@@ -768,6 +768,7 @@ body {
         .demo_overlay {
           fill: none;
           pointer-events: all;
+          cursor: pointer;
         }
       
         .demott_line {
@@ -868,6 +869,7 @@ body {
   #transition_container {
     .trans_bar {
       fill: $tooltip-bg;
+      cursor: pointer;
     }
 
     .yAxis, .xAxis {
@@ -882,6 +884,7 @@ body {
         margin:0.5em;
         .ssLink{
         font-size: 14px;
+        line-height: 0.1em;
       }
     }
     }

@@ -304,10 +304,11 @@ function transUpdate(year, type) {
                 .on('click', function (d) {
                     let xpos = d3.mouse(this)[0];
                     let ypos = d3.mouse(this)[1];
+    
+                    d3.selectAll('.trans_bar').style('fill','#002663');
                     d3.select(this).style('fill', '#FCBA19')
                     showTranstt(d.DISTRICT, year, d[type], type, xpos, ypos);
-                })
-                ;
+                });
 
             //axes
             trans_chartGroup.append('g')
@@ -345,6 +346,12 @@ function transUpdate(year, type) {
 
         }
 
+        //click on anything else close tooltip
+        document.addEventListener('click', function (e) {
+            if (e.target.closest('.trans_bar')) return;
+            d3.select('#trans_tt').style('display', 'none');
+            d3.selectAll('.trans_bar').style('fill', '#002663');
+        })
 
     });
 }
@@ -363,27 +370,27 @@ function showTranstt(sd, yr, num, type, xpos, ypos) {
 
     if (xpos < 40) {
         xpos = 40
-      };
-  
-      if (ypos < 40) {
+    };
+
+    if (ypos < 40) {
         ypos = 40
-      };
+    };
 
     d3.select('#trans_tt')
         .style("top", ypos + "px")
-        .style("left", xpos + "px")
+        .style("left", xpos + 30 + "px")
         .style('display', null)
         .html(function () {
             let content = "<div class='tipHeader'><b>District " + sd + "</b></div>";
             if (type == 'ENTER_PUBLIC') {
-                content += "<div class='tipInfo'> In " + yr + ", " + num + " students entered from independent schools.</span></div>"
+                content += "<div class='tipInfo'>" + parseInt(num) + " students entered from independent schools in " + yr + ".</div>"
             } else if (type == 'Leave_PUBLIC') {
-                content += "<div class='tipInfo'> In " + yr + ", " + num + " students left for independent schools.</span></div>"
+                content += "<div class='tipInfo'>" + parseInt(num) + " students left for independent schools in " + yr + ".</div>"
             } else {
-                content += "<div class='tipInfo'> In " + yr + ", " + num + " students (Net inflow) entered from independent schools.</span></div>"
+                content += "<div class='tipInfo'>" + parseInt(num) + " students (Net inflow) entered from independent schools in " + yr + ".</div>"
             }
             content += "<div class='trans_link'><a class='ssLink' href='https://studentsuccess.gov.bc.ca/school-district/0" + sd + "/report/fsa' target='_blank'>Foundation Skills Assessment<i class='fas fa-angle-right ml-1'></i></a></div>";
             content += "<div class='trans_link'><a class='ssLink' href='https://studentsuccess.gov.bc.ca/school-district/0" + sd + "/report/student-satisfaction' target='_blank'>Student Satisfaction<i class='fas fa-angle-right ml-1'></i></a></div>";
             return content;
         })
-}
+    }
