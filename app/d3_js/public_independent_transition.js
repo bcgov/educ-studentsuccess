@@ -228,12 +228,13 @@ function transUpdate(year, type) {
             }
         });
 
+        console.log(sd_arr);
         //top 5 district
         let districtData_top5 = districtData.slice(0, 5);
 
         //set scale domain
         trans_xScale.domain(districtData_top5.map(function (d) {
-            return d.DISTRICT;
+            return d.DISTRICT;    
         }));
 
         trans_yScale.domain([Math.min(0, d3.min(districtData_top5, function (d) {
@@ -242,6 +243,14 @@ function transUpdate(year, type) {
         Math.max(0, d3.max(districtData_top5, function (d) {
             return d[type];
         }))]);
+
+        //add ditrict name to ticks using sd_arr[] from predictors section
+        trans_xAxis.tickFormat(function(d) {
+            for( let sd of sd_arr ) {
+                if(d == sd.substring(2,4))
+                return sd.substring(5, sd.lengt);
+            }
+        })
 
         //draw 
         if ($('#transition_container .yAxis').length) {
@@ -286,7 +295,6 @@ function transUpdate(year, type) {
         } else {
 
             //draw trans_bars
-
             trans_chartGroup.selectAll('.trans_bar')
                 .data(districtData_top5)
                 .enter().append('rect')
