@@ -7168,6 +7168,26 @@ html {
     html body .ticks {
       fill: #494949;
       font-size: 12px; }
+    html body .tt_container {
+      position: absolute;
+      z-index: 10;
+      top: 2em;
+      border-radius: 5px;
+      width: 10em;
+      background: white;
+      opacity: 0.9;
+      pointer-events: inherit; }
+    html body .tipHeader {
+      color: white;
+      padding: 5px;
+      background: #002663;
+      font-weight: bold;
+      font-size: 16px;
+      border-radius: 5px 5px 0 0; }
+    html body .tipInfo {
+      margin: 0.5em;
+      color: #002663;
+      font-size: 14px; }
     html body #overview::before, html body #inter-map::before, html body #graph::before, html body #facts::before {
       content: "";
       display: block;
@@ -7553,6 +7573,14 @@ html {
           font-weight: bold; }
     html body #transition #transition_container .trans_bar {
       fill: #002663; }
+    html body #transition #transition_container .yAxis, html body #transition #transition_container .xAxis {
+      stroke-width: 0; }
+      html body #transition #transition_container .yAxis .domain, html body #transition #transition_container .xAxis .domain {
+        display: none; }
+    html body #transition #transition_container #trans_tt .trans_link {
+      margin: 0.5em; }
+      html body #transition #transition_container #trans_tt .trans_link .ssLink {
+        font-size: 14px; }
     html body #facts {
       background-image: url(../assets/img/bg-dcr3.png);
       background-size: 30% auto;

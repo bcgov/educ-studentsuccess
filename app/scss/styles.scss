@@ -131,11 +131,6 @@ body {
 
   /**********shared********/
   .section_header{
-    // background:
-    // linear-gradient(to bottom, $section-header 0%, $section-header 100%);
-    // background-position: 0 100%;
-    // background-repeat: repeat-x;
-    // background-size: 4px 30%;
     background-size:100% 100%;
     span{
     background-image: linear-gradient(180deg,transparent 65%,$section-header 0);
@@ -236,6 +231,32 @@ body {
   .ticks {
     fill: $font-color;
     font-size: 12px;
+}
+
+ .tt_container{
+  position: absolute;
+  z-index:10;
+  top:2em;
+  border-radius: 5px;
+  width:10em;
+  background: white;
+  opacity: 0.9;
+  pointer-events: inherit;
+ }
+
+ .tipHeader {
+  color: white;
+  padding: 5px;
+  background: $tooltip-bg;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 5px 5px 0 0;
+}
+
+.tipInfo {
+  margin: 0.5em;
+  color:$tooltip-bg;
+  font-size:14px;
 }
 
 /*********sections********/
@@ -847,6 +868,22 @@ body {
   #transition_container {
     .trans_bar {
       fill: $tooltip-bg;
+    }
+
+    .yAxis, .xAxis {
+      .domain {
+        display: none;
+      }
+      stroke-width: 0;
+    }
+
+    #trans_tt{
+      .trans_link{
+        margin:0.5em;
+        .ssLink{
+        font-size: 14px;
+      }
+    }
     }
   }
 }

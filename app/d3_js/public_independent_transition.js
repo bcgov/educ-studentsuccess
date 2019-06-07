@@ -37,10 +37,9 @@ let trans_chartGroup = trans_svg.append('g')
 //initialize html tooltip
 let trans_tooltip = d3.select("#transition_container")
     .append("div")
-    .attr("id", "line_tt")
-    .style("z-index", "10")
-    .style("position", "absolute")
-    .style("visibility", "hidden");
+    .attr("class", "tt_container")
+    .attr("id", "trans_tt")
+    .style("display", "none");
 
 //slider
 //Create SVG element for slider
@@ -158,7 +157,7 @@ function tslider_inputYear(val) {
 
     let index = null,
         midPoint, cx, xVal;
-    
+
 
     if (step) {
         // if step has a value, compute the midpoint based on range values and reposition the slider based on the mouse position
@@ -228,13 +227,12 @@ function transUpdate(year, type) {
             }
         });
 
-        console.log(sd_arr);
         //top 5 district
         let districtData_top5 = districtData.slice(0, 5);
 
         //set scale domain
         trans_xScale.domain(districtData_top5.map(function (d) {
-            return d.DISTRICT;    
+            return d.DISTRICT;
         }));
 
         trans_yScale.domain([Math.min(0, d3.min(districtData_top5, function (d) {
@@ -245,10 +243,10 @@ function transUpdate(year, type) {
         }))]);
 
         //add ditrict name to ticks using sd_arr[] from predictors section
-        trans_xAxis.tickFormat(function(d) {
-            for( let sd of sd_arr ) {
-                if(d == sd.substring(2,4))
-                return sd.substring(5, sd.lengt);
+        trans_xAxis.tickFormat(function (d) {
+            for (let sd of sd_arr) {
+                if (d == sd.substring(2, 4))
+                    return sd.substring(5, sd.lengt);
             }
         })
 
@@ -302,7 +300,14 @@ function transUpdate(year, type) {
                 .attr('x', function (d) { return trans_xScale(d.DISTRICT); })
                 .attr('y', function (d) { return trans_yScale(Math.max(0, d[type])); })
                 .attr('width', trans_xScale.bandwidth())
-                .attr('height', function (d) { return Math.abs(trans_yScale(d[type]) - trans_yScale(0)); });
+                .attr('height', function (d) { return Math.abs(trans_yScale(d[type]) - trans_yScale(0)); })
+                .on('click', function (d) {
+                    let xpos = d3.mouse(this)[0];
+                    let ypos = d3.mouse(this)[1];
+                    d3.select(this).style('fill', '#FCBA19')
+                    showTranstt(d.DISTRICT, year, d[type], type, xpos, ypos);
+                })
+                ;
 
             //axes
             trans_chartGroup.append('g')
@@ -340,6 +345,7 @@ function transUpdate(year, type) {
 
         }
 
+
     });
 }
 
@@ -352,3 +358,32 @@ $("#trans_radio input[type='radio']").change(function () {
         transUpdate(2013, radioValue);
     }
 });
+
+function showTranstt(sd, yr, num, type, xpos, ypos) {
+
+    if (xpos < 40) {
+        xpos = 40
+      };
+  
+      if (ypos < 40) {
+        ypos = 40
+      };
+
+    d3.select('#trans_tt')
+        .style("top", ypos + "px")
+        .style("left", xpos + "px")
+        .style('display', null)
+        .html(function () {
+            let content = "<div class='tipHeader'><b>District " + sd + "</b></div>";
+            if (type == 'ENTER_PUBLIC') {
+                content += "<div class='tipInfo'> In " + yr + ", " + num + " students entered from independent schools.</span></div>"
+            } else if (type == 'Leave_PUBLIC') {
+                content += "<div class='tipInfo'> In " + yr + ", " + num + " students left for independent schools.</span></div>"
+            } else {
+                content += "<div class='tipInfo'> In " + yr + ", " + num + " students (Net inflow) entered from independent schools.</span></div>"
+            }
+            content += "<div class='trans_link'><a class='ssLink' href='https://studentsuccess.gov.bc.ca/school-district/0" + sd + "/report/fsa' target='_blank'>Foundation Skills Assessment<i class='fas fa-angle-right ml-1'></i></a></div>";
+            content += "<div class='trans_link'><a class='ssLink' href='https://studentsuccess.gov.bc.ca/school-district/0" + sd + "/report/student-satisfaction' target='_blank'>Student Satisfaction<i class='fas fa-angle-right ml-1'></i></a></div>";
+            return content;
+        })
+}
