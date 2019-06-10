@@ -267,7 +267,7 @@
     </div>
   </div>
 
-  <div class="container my-5" id="Retention">
+  <div class="container my-5" id="retention">
     <div class="row">
       <div class="col-8 mx-auto">
         <h2 class="section_header text-center mb-3"><span>Full-time to Part-time Retention</span></h2>
@@ -275,12 +275,21 @@
           vise-versa. If net retention is positive then students are increasing their course load on average. If net
           retention is negative then on average, students are decreasing their course load.</p>
       </div>
-      <div class="col-sm-12 col-md-6">
-        
-       
+      <div class="col-sm-12 col-md-8">
+        <div id="retention_control">
+          <div class="controlSection">
+            <h5>School District</h5>
+            <div id="distDropdown" class="dropDown" tabindex="1">
+              <span>Select a school district</span>
+              <div class="list"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="retention_container"></div>
       </div>
 
-      <div class="col-sm-12 col-md-6">
+      <div class="col-sm-12 col-md-4">
         
       </div>
       
@@ -332,6 +341,7 @@
   <script src="/d3_js/interactive_bars_line.js"></script>
   <script src="/d3_js/demographics.js"></script>
   <script src="/d3_js/public_independent_transition.js"></script>
+  <script src="/d3_js/retention.js"></script>
 
 </body>
 
