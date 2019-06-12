@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Intraprovincial Student Migration</title>
+  <title>BC Enrolment Booklet</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -23,7 +23,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-light sticky-top nav-bg">
     <div class="container">
-      <a class="navbar-brand" href="#">Student Migration</a>
+      <a class="navbar-brand" href="#">Enrolment Booklet</a>
 
       <!-- hamburger menu -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
@@ -36,32 +36,154 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#overview">Overview</a>
+            <a class="nav-link" href="#overview">The Model</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#inter-map">Map</a>
+            <a class="nav-link" href="#demographics">Demographics</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#graph">Graph</a>
+            <a class="nav-link" href="#overview">Migration</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#facts">Facts</a>
+            <a class="nav-link" href="#transition">Transition</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#retention">Retention</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
+
+  <div class="container mt-5" id='intro'>
+    <!-- Jumbotron / hero section, a component -->
+    <div class="row mb-5">
+      <div class="col-sm-12 col-md-4 intro">
+        <h2 class="section_header mb-3"><span>Enrolment Model</span></h2>
+        <p>Student enrolment is influenced by four main drivers: demographics, migration, independent to public, and
+          retention.</p>
+        <a class="btn ctaBtn btn-lg" href="#" role="button">Learn more</a>
+      </div>
+      <div class="col-sm-12 col-md-8 pt-5">
+        <img src="/assets/img/infographic.png" class="img-fluid" alt="overview img">
+      </div>
+    </div>
+  </div>
+
+  <div class="container my-5" id="graph">
+    <div class="row">
+      <div class="col-8 mx-auto">
+        <h2 class="section_header text-center mb-3"><span>Key Predictors and Impact</span></h2>
+        <p>The Ministry of Education District Enrolment Forecast Model (DEFM) has been developed based on
+          the Cohort Survival Method approach. The DEFM is based on four enrolment drivers: migration, demographics,
+          independent/public school transition, and continuous student retention.</p>
+      </div>
+      <div class="col-sm-12 col-md-8">
+        <div id="lineContainer"></div>
+      </div>
+
+      <div class="col-sm-12 col-md-4">
+        <div id='prdictors-control'>
+          <div class="controlSection">
+            <h4 id="distName">SD05-Southeast Kootenay</h4>
+          </div>
+          <div class="controlSection">
+            <h5>Time Range</h5>
+            <div id="predictors-brush"></div>
+          </div>
+          <div class="controlSection">
+            <h5>School District</h5>
+            <div id="predictors-distDropdown" class="dropDown">
+              <span>Select a school district</span>
+              <div class="list"></div>
+            </div>
+          </div>
+          <div class="controlSection">
+            <h5>District Reports</h5>
+            <a class="ghostBtn reportBtn"
+              href="https://www2.gov.bc.ca/gov/content/education-training/k-12/administration/program-management/reporting-on-k-12/district-reports/southeast-kootenay"
+              target="_blank">View Reports<i class="fas fa-angle-right ml-3"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container my-5" id="demographics">
+    <div class="row">
+      <div class="col-8 mx-auto">
+        <h2 class="section_header text-center mb-3"><span>Demographics</span></h2>
+        <p>The demographics driver provides an indication or whether more kindergarten students are entering schools
+          relative to those leaving through graduation. If the net demographic value is positive, it is indicating that
+          more five year olds are entering the system relative to the number of grade 12 students that are graduating.
+        </p>
+      </div>
+      <div class="col-sm-12 col-md-8">
+        <div id="demoContainer"></div>
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <div id="demographics-control" class="my-4">
+
+          <form id="demo-radio">
+            <label class="radio">
+              <input type="radio" name="demo-type" value="NEW_KINDERGARTEN" checked>New to kindergarten
+            </label>
+            <label class="radio">
+              <input type="radio" name="demo-type" value="GRADUATES">Graduates
+            </label>
+            <label class="radio">
+              <input type="radio" name="demo-type" value="NET">Net change
+            </label>
+          </form>
+
+          <button type="button" class="ghostBtn mt-3" data-toggle="modal" data-target="#demoModal">Select Districts<i
+              class="fas fa-plus ml-3"></i></button>
+
+          <div id="demoModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Select Districts</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="ghostBtn" data-dismiss="modal">Close</button>
+                  <button id="demo-save" type="button" class="flatBtn" data-dismiss="modal">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div id="demo-legend"></div>
+      </div>
+    </div>
+  </div>
+
   <div class="container" id='overview'>
     <!-- Jumbotron / hero section, a component -->
     <div class="row mb-5">
       <div class="col-sm-12 col-md-4 intro">
         <h2 class="section_header mb-3"><span>Student Migration</span></h2>
-        <p>Understand student mobility throughout the province and its impact on student enrolment.</p>
-        <a class="btn ctaBtn btn-lg" href="#" role="button">Learn more</a>
+        <p>The migration driver provides a measure of how many students are entering or leaving a district. If net
+          migration is positive then more people are entering the district than leaving it.</p>
+        <p>District-out: Grade K to 11 BC Public school students who were enroled in different school districts in
+          subsequent years.</p>
+        <p>District-in: Grade 1 to 12 BC Public school students who were enroled in different school districts in
+          subsequent years.
+        </p>
+        <img class="img-fluid" src="/assets/img/migration_drc.png"
+              alt="migration img">
       </div>
       <div class="col-sm-12 col-md-8 pt-5">
         <div id="aniContainer">
-          <div id="animationMap"></div>
+          <div id="animationMap" class="mb-5"></div>
           <div id="aniControl">
             <div id='play-control'>
               <div id="play-pause" class="play"></div>
@@ -123,102 +245,6 @@
     </div>
   </div>
 
-  <div class="container my-5" id="demographics">
-    <div class="row">
-      <div class="col-8 mx-auto">
-        <h2 class="section_header text-center mb-3"><span>Demographics</span></h2>
-        <p>The demographics driver provides an indication or whether more kindergarten students are entering schools
-          relative to those leaving through graduation. If the net demographic value is positive, it is indicating that
-          more five year olds are entering the system relative to the number of grade 12 students that are graduating.
-        </p>
-      </div>
-      <div class="col-sm-12 col-md-8">
-        <div id="demoContainer"></div>
-      </div>
-      <div class="col-sm-12 col-md-4">
-        <div id="demographics-control" class="my-4">
-
-          <form id="demo-radio">
-            <label class="radio">
-              <input type="radio" name="demo-type" value="NEW_KINDERGARTEN" checked>New to kindergarten
-            </label>
-            <label class="radio">
-              <input type="radio" name="demo-type" value="GRADUATES">Graduates
-            </label>
-            <label class="radio">
-              <input type="radio" name="demo-type" value="NET">Net change
-            </label>
-          </form>
-
-          <button type="button" class="ghostBtn mt-3" data-toggle="modal" data-target="#demoModal">Select Districts<i
-              class="fas fa-plus ml-3"></i></button>
-
-          <div id="demoModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Select Districts</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="ghostBtn" data-dismiss="modal">Close</button>
-                  <button id="demo-save" type="button" class="flatBtn" data-dismiss="modal">Save changes</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <div id="demo-legend"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="container my-5" id="graph">
-    <div class="row">
-      <div class="col-8 mx-auto">
-        <h2 class="section_header text-center mb-3"><span>Key Predictors and Impact</span></h2>
-        <p>The Ministry of Education District Enrolment Forecast Model (DEFM) has been developed based on
-          the Cohort Survival Method approach. The DEFM is based on four enrolment drivers: migration, demographics,
-          independent/public school transition, and continuous student retention.</p>
-      </div>
-      <div class="col-sm-12 col-md-8">
-        <div id="lineContainer"></div>
-      </div>
-
-      <div class="col-sm-12 col-md-4">
-        <div id='prdictors-control'>
-          <div class="controlSection">
-            <h4 id="distName">SD05-Southeast Kootenay</h4>
-          </div>
-          <div class="controlSection">
-            <h5>Time Range</h5>
-            <div id="predictors-brush"></div>
-          </div>
-          <div class="controlSection">
-            <h5>School District</h5>
-            <div id="predictors-distDropdown" class="dropDown">
-              <span>Select a school district</span>
-              <div class="list"></div>
-            </div>
-          </div>
-          <div class="controlSection">
-            <h5>District Reports</h5>
-            <a class="ghostBtn reportBtn"
-              href="https://www2.gov.bc.ca/gov/content/education-training/k-12/administration/program-management/reporting-on-k-12/district-reports/southeast-kootenay"
-              target="_blank">View Reports<i class="fas fa-angle-right ml-3"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class="container my-5" id="transition">
     <div class="row">
       <div class="col-8 mx-auto">
@@ -277,11 +303,13 @@
       </div>
       <div class="col-sm-12 col-md-8">
         <div id="retention_control">
-          <div class="controlSection">
-            <h5>School District</h5>
-            <div id="distDropdown" class="dropDown" tabindex="1">
-              <span>Select a school district</span>
-              <div class="list"></div>
+          <div class="row">
+            <div class="controlSection col-8">
+              <h5>School District</h5>
+              <div id="retention_distDropdown" class="dropDown" tabindex="1">
+                <span>Select a school district</span>
+                <div class="list"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -289,10 +317,10 @@
         <div id="retention_container"></div>
       </div>
 
-      <div class="col-sm-12 col-md-4">
-        
+      <div class="col-sm-12 col-md-4 d-flex flex-wrap align-items-center">
+        <img src="/assets/img/retention_dcr.png" alt="retention_dcr">
       </div>
-      
+
     </div>
   </div>
 

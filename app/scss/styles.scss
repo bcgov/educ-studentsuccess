@@ -267,14 +267,16 @@ body {
     margin-top:-100px; /* negative fixed header height */
   }
 
-  #overview {
+  #intro {
+    background-image: url(../assets/img/bg-dcr.png);
+    background-size:40% auto;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-attachment: scroll;
+    padding-bottom:10rem;
+  }
 
-  background-image: url(../assets/img/bg-dcr.png);
-  background-size:40% auto;
-  background-repeat: no-repeat;
-  background-position: left bottom;
-  background-attachment: scroll;
-  padding-bottom: 6rem;
+  #overview {
 
   .intro {
     padding-top: 5rem;
@@ -885,6 +887,50 @@ body {
   }
 }
 
+//retention
+#retention {
+#retention_control{
+  .controlSelection {
+    margin-bottom: 0;
+    #retention_distDropdown{
+        .list {
+          max-height: 300px;
+      }
+    }
+  }
+  .legendContainer {
+    max-height:100px;
+  }
+}
+#retention_container {
+
+  .prov_retention_line{
+    stroke-linecap: round;
+    stroke:$tooltip-bg;
+  }
+  .dist_retention_line{
+    stroke-linecap: round;
+    stroke:$cta-yellow;
+  }
+  .xAxis, .yAxis_prov{
+    .domain {
+      display: none;
+    }
+    stroke-width: 0;
+}
+  .yAxis_dist {
+    .domain{
+      display:none;
+    }
+  }
+
+  .gridline{
+    stroke: #ccc;
+    shape-rendering: crispEdges;
+    stroke-opacity: .5;
+    }
+  }
+}
   //facts
   #facts {
     background-image: url(../assets/img/bg-dcr3.png);
