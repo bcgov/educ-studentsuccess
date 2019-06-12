@@ -60,10 +60,10 @@ let retention_chartGroup = retention_svg.append('g')
 
 let retention_legend = d3.select('#retention_control .row')
     .append('svg')
-    .attr('class', 'legendContainer col-4')
-    .append('g');
+    .attr('class', 'retention_legend col-4')
+    .append('g')
+    .attr('class', 'legend');
 
-console.log(sd_arr);
 //populate dropdown menu
 for (let i = 0; i < sd_arr.length; i++) {
     let opt = sd_arr[i];
@@ -74,27 +74,33 @@ for (let i = 0; i < sd_arr.length; i++) {
         .attr('data-value', opt.substring(0, 4));
 };
 
-// function retentionClear() {
-//     //clear existing line
-//     let existingPath = d3.selectAll('#demoContainer .demo_line');
-//     existingPath.exit();
-//     existingPath.transition()
-//         .duration(500)
-//         .remove();
-//     //clear existing legends
-//     let existingLegend = d3.selectAll('#demo-legend .legend');
-//     console.log(existingLegend);
-//     existingLegend.exit();
-//     existingLegend.transition()
-//         .duration(100)
-//         .remove();
+function retentionClear() {
+    //clear existing line
+    let provLine = d3.selectAll('#retention_container .prov_retention_line');
+    provLine.exit();
+    provLine.transition()
+        .duration(500)
+        .remove();
 
-//     //clear tooltips 
-//     demo_chartGroup.selectAll('.demott_circle')
-//         .remove();
-//     d3.selectAll('.demott_rect')
-//         .remove();
-// }
+    let distLine = d3.selectAll('#retention_container .dist_retention_line');
+    distLine.exit();
+    distLine.transition()
+        .duration(500)
+        .remove();
+
+    //clear existing legends
+    let existingLegend = d3.selectAll('#retention_legend .legend');
+    existingLegend.exit();
+    existingLegend.transition()
+        .duration(100)
+        .remove();
+
+    //clear tooltips 
+    // demo_chartGroup.selectAll('.demott_circle')
+    //     .remove();
+    // d3.selectAll('.demott_rect')
+    //     .remove();
+}
 
 d3.csv('../assets/raw_data/retention_provincial.csv', function (error, data) {
     if (error) {
@@ -141,6 +147,41 @@ d3.csv('../assets/raw_data/retention_provincial.csv', function (error, data) {
                 return d.DIST_NET_RETENTION;
             })]);
 
+            //tooltips
+            let retentiontt = retention_chartGroup.append('g')
+                .attr('class', 'retentiontt')
+                .style('display', 'none');
+
+            //tt line
+            retentiontt.append('line')
+                .attr('class', 'retentiontt_line')
+                .attr("y1", 0)
+                .attr("y2", retention_height);
+
+            //tt info rect, since z-index doesnt work for svg elments, draw later
+            d3.select('#retention_container').append('div')
+                .attr('class', 'retentiontt_rect')
+                .style('display', 'none');
+
+            //overlay, to triger tt
+            retention_svg.append('rect')
+                .attr("transform", "translate(" + retention_margin.left + "," + retention_margin.top + ")")
+                .attr("class", "retention_overlay")
+                .attr("width", retention_width)
+                .attr("height", retention_height)
+                .on("mouseover", function () {
+                    retentiontt.style("display", null);
+                })
+                .on("mouseleave", function () {
+
+                    retentiontt.style("display", "none");
+                    d3.selectAll(".retentiontt_rect")
+                        .style('display', 'none');
+                    retention_chartGroup.selectAll(".retentiontt_circle")
+                        .style('display', 'none');
+
+                })
+                .on("mousemove", showRetentiontt);
 
             //draw liens
             let prov_retention_line = retention_chartGroup.append('path')
@@ -198,22 +239,26 @@ d3.csv('../assets/raw_data/retention_provincial.csv', function (error, data) {
                 .attr('y', 65)
                 .text('Southeast Kootenay');
 
-            if ($('#retention_container .yAxis').length) {
+            if ($('#retention_container .yAxis_dist').length) {
 
                 //set transition
                 let tran = d3.transition()
                     .duration(1500);
 
-                d3.select('#retention_container .yAxis')
+                d3.select('#retention_container .yAxis_dist')
                     .transition(tran)
-                    .call(retention_yAxis);
+                    .call(retention_yAxis_dist);
+
+                d3.select('#retention_container .yAxis_prov')
+                    .transition(tran)
+                    .call(retention_yAxis_prov);
 
                 d3.select('#retention_container .xAxis')
                     .transition(tran)
                     .call(retention_xAxis);
 
                 //grid line
-                d3.selectAll('g.yAxis g.tick')
+                d3.selectAll('g.yAxis_dist g.tick')
                     .append('line')
                     .attr('class', 'gridline')
                     .attr('x1', 0)
@@ -221,7 +266,7 @@ d3.csv('../assets/raw_data/retention_provincial.csv', function (error, data) {
                     .attr('x2', retention_width)
                     .attr('y2', 0);
 
-                d3.selectAll('g.xAxis g.tick')
+                d3.selectAll('g.xAxis_dist g.tick')
                     .append('line')
                     .attr('class', 'gridline')
                     .attr('x1', 0)
@@ -294,14 +339,16 @@ d3.csv('../assets/raw_data/retention_provincial.csv', function (error, data) {
         $(this).toggleClass('active');
 
         //or add on click when appending the divs
-        d3.selectAll('retention_distDropdown .list div')
+        d3.selectAll('#retention_distDropdown .list div')
             .on('click', function () {
-                $('#retention_distDropdown').text($(this).text());
+                $('#retention_distDropdown span').text($(this).text());
                 $('#retention_distDropdown').attr('attr', 'dropDown');
 
                 //reset target district 
-                targetDistrict = d3.select(this).attr('data-value');
+                targetDistrict = d3.select(this).attr('data-value').substring(2, 4);
+                retentionClear();
+                retentionUpdate(targetDistrict);
             });
-        });
-
     });
+
+});

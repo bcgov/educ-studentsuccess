@@ -60,7 +60,7 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
             .remove();
         //clear existing legends
         let existingLegend = d3.selectAll("#demo-legend .legend");
-        console.log(existingLegend);
+     
         existingLegend.exit();
         existingLegend.transition()
             .duration(100)
@@ -168,7 +168,7 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
 
                 //sort html elements based on value
                 let tipBox = $('.demott_rect');
-                console.log(tipBox.find('.tipInfo'));
+ 
                 tipBox.find('.tipInfo').sort(function(a,b){
                     return +b.getAttribute('data-num') - +a.getAttribute('data-num')
                 })

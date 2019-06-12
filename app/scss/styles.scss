@@ -892,10 +892,10 @@ body {
 #retention_control{
   .controlSelection {
     margin-bottom: 0;
-    #retention_distDropdown{
-        .list {
-          max-height: 300px;
-      }
+  }
+  #retention_distDropdown.active{
+    .list{
+      max-height: 240px;
     }
   }
   .legendContainer {

@@ -7581,8 +7581,8 @@ html {
         line-height: 0.1em; }
     html body #retention #retention_control .controlSelection {
       margin-bottom: 0; }
-      html body #retention #retention_control .controlSelection #retention_distDropdown .list {
-        max-height: 300px; }
+    html body #retention #retention_control #retention_distDropdown.active .list {
+      max-height: 240px; }
     html body #retention #retention_control .legendContainer {
       max-height: 100px; }
     html body #retention #retention_container .prov_retention_line {
