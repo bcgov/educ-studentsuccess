@@ -903,6 +903,7 @@ body {
   }
 }
 #retention_container {
+   position: relative;
 
   .prov_retention_line{
     stroke-linecap: round;
@@ -929,6 +930,48 @@ body {
     shape-rendering: crispEdges;
     stroke-opacity: .5;
     }
+
+    .retention_overlay {
+      fill: none;
+      pointer-events: all;
+      cursor: pointer;
+    }
+  
+    .retentiontt_line {
+      stroke: $tooltip-bg;
+      stroke-dasharray: 2,5;
+      stroke-width: 2;
+      opacity: 0.5;
+  } 
+
+    .retentiontt_rect {
+      position: absolute;
+      z-index:10;
+      top:8em;
+      border-radius: 5px;
+      width:8em;
+      background: white;
+      opacity: 0.9;
+      pointer-events: none;
+
+      .tipHeader {
+        color: white;
+        padding: 5px;
+        background: $tooltip-bg;
+        font-weight: bold;
+        font-size: 12px;
+        border-radius: 5px 5px 0 0;
+      }
+
+      .tipInfo {
+        margin-left: 5px;
+        color:$tooltip-bg;
+        font-size:10px;
+        .tipNum{
+          color:$font-color;
+        }
+      }
+  }
   }
 }
   //facts

@@ -58,11 +58,9 @@ let retention_chartGroup = retention_svg.append('g')
     .attr('class', 'chartGroup')
     .attr('transform', 'translate(' + retention_margin.left + ',' + retention_margin.top + ')');
 
-let retention_legend = d3.select('#retention_control .row')
+let r_legendContainer = d3.select('#retention_control .row')
     .append('svg')
-    .attr('class', 'retention_legend col-4')
-    .append('g')
-    .attr('class', 'legend');
+    .attr('class', 'retention_legend col-4');
 
 //populate dropdown menu
 for (let i = 0; i < sd_arr.length; i++) {
@@ -89,17 +87,17 @@ function retentionClear() {
         .remove();
 
     //clear existing legends
-    let existingLegend = d3.selectAll('#retention_legend .legend');
+    let existingLegend = d3.selectAll('.retention_legend .legend');
     existingLegend.exit();
     existingLegend.transition()
         .duration(100)
         .remove();
 
     //clear tooltips 
-    // demo_chartGroup.selectAll('.demott_circle')
-    //     .remove();
-    // d3.selectAll('.demott_rect')
-    //     .remove();
+    retention_chartGroup.selectAll('.rententiontt_circle')
+        .remove();
+    d3.selectAll('.rententiontt_rect')
+        .remove();
 }
 
 d3.csv('../assets/raw_data/retention_provincial.csv', function (error, data) {
@@ -107,12 +105,13 @@ d3.csv('../assets/raw_data/retention_provincial.csv', function (error, data) {
         throw error;
     }
 
+    let targetSd = 'Southeast Kootenay';
+
     let provData = data;
     provData.forEach(function (d) {
         d.SCHOOL_YEAR = (parseDate(d.SCHOOL_YEAR)).getFullYear()
         d.PROV_NET_RETENTION = +d.PROV_NET_RETENTION;
     })
-
 
 
     function retentionUpdate(dist) {
@@ -123,7 +122,7 @@ d3.csv('../assets/raw_data/retention_provincial.csv', function (error, data) {
             }
 
             let districtData = data.filter(function (d) {
-                return +d.DISTRICT == dist
+                return +d.DISTRICT == dist;
             });
 
             districtData.forEach(function (d) {
@@ -131,7 +130,6 @@ d3.csv('../assets/raw_data/retention_provincial.csv', function (error, data) {
                 d.DIST_NET_RETENTION = +d.DIST_NET_RETENTION;
             });
 
-            console.log(districtData);
             //set scale domain
             retention_xScale.domain(districtData.map(function (d) {
                 return d.SCHOOL_YEAR;
@@ -183,6 +181,63 @@ d3.csv('../assets/raw_data/retention_provincial.csv', function (error, data) {
                 })
                 .on("mousemove", showRetentiontt);
 
+            let currentPos;
+            // custom invert function for point scale + tooltips
+            function showRetentiontt() {
+                let xPos = d3.mouse(this)[0];
+                let domain = retention_xScale.domain();
+                let range = retention_xScale.range();
+                let rangePoints = d3.range(range[0], range[1], retention_xScale.step())
+                currentPos = domain[d3.bisect(rangePoints, xPos) - 1];
+
+                console.log(currentPos);
+
+                if (currentPos) {
+                    retentiontt.select(".retentiontt_line").attr("x1", retention_xScale(currentPos));
+                    retentiontt.select(".retentiontt_line").attr("x2", retention_xScale(currentPos));
+                    retention_chartGroup.selectAll(".retentiontt_circle")
+                        .style('display', 'none');
+                    // select circles for the current year (mouse over)
+                    retention_chartGroup.selectAll("circle[cx='" + retention_xScale(currentPos) + "']")
+                        .style('display', null);
+
+                    //difference btween contianer div and svg canvas
+                    let oBox = document.getElementById('retention_container').getBoundingClientRect();
+                    let svgSacle = oBox.width / 600;
+
+                    d3.select(".retentiontt_rect")
+                        .style('display', null)
+                        .html(function () {
+                            let content = "<div class='tipHeader'><b>Year: </b>" + currentPos + "</div>";
+                            for (let d of provData) {
+                                if (d.SCHOOL_YEAR == currentPos)
+                                    content += "<div class='tipInfo' data-num='" + d.PROV_NET_RETENTION + "'>Province: <span class='tipNum'>" + d.PROV_NET_RETENTION + "</span></div>";
+                            }
+                            for (let d2 of districtData) {
+                                if ((d2.SCHOOL_YEAR == currentPos) && (d2.DISTRICT = dist))
+                                    content += "<div class='tipInfo' data-num='" + d2.DIST_NET_RETENTION + "'>" + targetSd + ": <span class='tipNum'>" + d2.DIST_NET_RETENTION + "</span></div>";
+                            }
+
+                            return content;
+                        });
+
+                    //sort html elements based on value
+                    let tipBox = $('.retentiontt_rect');
+
+                    tipBox.find('.tipInfo').sort(function (a, b) {
+                        return +b.getAttribute('data-num') - +a.getAttribute('data-num')
+                    })
+                        .appendTo(tipBox);
+
+
+                    if (currentPos == 2018) {
+                        d3.select(".retentiontt_rect").style('left', (retention_xScale(currentPos) * svgSacle - 100) + 'px');
+                    } else {
+                        d3.select(".retentiontt_rect").style('left', (retention_xScale(currentPos) * svgSacle + 50) + 'px');;
+                    }
+                }
+            }
+
             //draw liens
             let prov_retention_line = retention_chartGroup.append('path')
                 .datum(provData)
@@ -215,6 +270,9 @@ d3.csv('../assets/raw_data/retention_provincial.csv', function (error, data) {
                 .attr("stroke-dashoffset", 0);
 
             //legends
+            let retention_legend = r_legendContainer.append('g')
+                .attr('class', 'legend');
+
             retention_legend.append('rect')
                 .attr('x', 10)
                 .attr('y', 20)
@@ -237,7 +295,31 @@ d3.csv('../assets/raw_data/retention_provincial.csv', function (error, data) {
             retention_legend.append('text')
                 .attr('x', 30)
                 .attr('y', 65)
-                .text('Southeast Kootenay');
+                .text(targetSd);
+
+            //tooltips circle
+            for (let dist of districtData) {
+                retention_chartGroup.append('circle')
+                    .attr('class', 'retentiontt_circle')
+                    .attr('r', '5')
+                    .attr('cx', retention_xScale(dist.SCHOOL_YEAR))
+                    .attr('cy', retention_yScale_dist(dist.DIST_NET_RETENTION))
+                    .style('fill', '#FCBA19')
+                    .style('display', 'none');
+            }
+
+            //tooltips circle
+            for (let prov of provData) {
+                retention_chartGroup.append('circle')
+                    .attr('class', 'retentiontt_circle')
+                    .attr('r', '5')
+                    .attr('cx', retention_xScale(prov.SCHOOL_YEAR))
+                    .attr('cy', retention_yScale_prov(prov.PROV_NET_RETENTION))
+                    .style('fill', '#002663')
+                    .style('display', 'none');
+            }
+
+
 
             if ($('#retention_container .yAxis_dist').length) {
 
@@ -345,6 +427,7 @@ d3.csv('../assets/raw_data/retention_provincial.csv', function (error, data) {
                 $('#retention_distDropdown').attr('attr', 'dropDown');
 
                 //reset target district 
+                targetSd = $(this).text();
                 targetDistrict = d3.select(this).attr('data-value').substring(2, 4);
                 retentionClear();
                 retentionUpdate(targetDistrict);

@@ -159,7 +159,7 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
                         .html(function() { 
                             let content = "<div class='tipHeader'><b>Year: </b>" + currentPos +"</div>"; 
                             for(let d of selectedDistricts){ 
-                                for (let d2 of districtData) {
+                             for (let d2 of districtData) {
                                 if (d2.DISTRICT==d.substring(2,4)&&d2.SCHOOL_YEAR==currentPos)
                                 content += "<div class='tipInfo' data-num='"+d2[type]+"'>"+d.substring(5, d.length)+ ": <span class='tipNum'>"+d2[type]+"</span></div>"
                                 }
