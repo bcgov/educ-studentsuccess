@@ -36,13 +36,13 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#overview">The Model</a>
+            <a class="nav-link" href="#enrolment_model">The Model</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#demographics">Demographics</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#overview">Migration</a>
+            <a class="nav-link" href="#migration_overview">Migration</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#transition">Transition</a>
@@ -70,7 +70,7 @@
     </div>
   </div>
 
-  <div class="container my-5" id="graph">
+  <div class="container my-5" id="enrolment_model">
     <div class="row">
       <div class="col-8 mx-auto">
         <h2 class="section_header text-center mb-3"><span>Key Predictors and Impact</span></h2>
@@ -127,12 +127,15 @@
           <form id="demo-radio">
             <label class="radio">
               <input type="radio" name="demo-type" value="NEW_KINDERGARTEN" checked>New to kindergarten
+              <span class="checkmark"></span>
             </label>
             <label class="radio">
               <input type="radio" name="demo-type" value="GRADUATES">Graduates
+              <span class="checkmark"></span>
             </label>
             <label class="radio">
               <input type="radio" name="demo-type" value="NET">Net change
+              <span class="checkmark"></span>
             </label>
           </form>
 
@@ -166,8 +169,7 @@
     </div>
   </div>
 
-  <div class="container" id='overview'>
-    <!-- Jumbotron / hero section, a component -->
+  <div class="container" id='migration_overview'>
     <div class="row mb-5">
       <div class="col-sm-12 col-md-4 intro">
         <h2 class="section_header mb-3"><span>Student Migration</span></h2>
@@ -197,13 +199,9 @@
     </div>
   </div>
 
-  <!-- defines a horizontal row then col inside -->
+
   <div class="container  my-5" id="inter-map">
     <div class="row">
-      <!-- col = euqal col width -->
-      <!-- card is also a component -->
-      <!-- sm-12: entire width when mobile, md-4: 1/3 width medium window size-->
-      <!-- marigin,border,padding in spacing doc -->
       <div class="col-sm-12 col-md-8">
         <div id="mapContainer">
           <div id="interactiveMap"></div>
@@ -280,12 +278,15 @@
         <form id="trans_radio">
           <label class="radio">
             <input type="radio" name="trans-type" value="ENTER_PUBLIC" checked>Public entered
+            <span class="checkmark"></span>
           </label>
           <label class="radio">
             <input type="radio" name="trans-type" value="LEAVE_PUBLIC">Public left
+            <span class="checkmark"></span>
           </label>
           <label class="radio">
             <input type="radio" name="trans-type" value="NET_INDEPENDENT">Net change
+            <span class="checkmark"></span>
           </label>
         </form>
         <div id="transition_container"></div>
@@ -368,7 +369,7 @@
   <script src="/d3_js/interactive_map.js"></script>
   <script src="/d3_js/interactive_bars_line.js"></script>
   <script src="/d3_js/demographics.js"></script>
-  <script src="/d3_js/public_independent_transition.js"></script>
+  <script src="/d3_js/transition.js"></script>
   <script src="/d3_js/retention.js"></script>
 
 </body>

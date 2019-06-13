@@ -7188,6 +7188,41 @@ html {
       margin: 0.5em;
       color: #002663;
       font-size: 14px; }
+    html body .radio {
+      position: relative;
+      padding-left: 1.5em;
+      color: #38598a;
+      cursor: pointer; }
+      html body .radio input {
+        position: absolute;
+        opacity: 0; }
+      html body .radio .checkmark {
+        position: absolute;
+        top: 0.1em;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        border: 3px solid #38598a;
+        border-radius: 50%; }
+      html body .radio .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none; }
+      html body .radio input:checked {
+        color: #002663; }
+      html body .radio input:checked ~ .checkmark:after {
+        display: block; }
+      html body .radio .checkmark:after {
+        top: 3px;
+        left: 3px;
+        width: .5em;
+        height: .5em;
+        border-radius: 50%;
+        background: #002663; }
+    html body .radio:hover {
+      color: #002663; }
+      html body .radio:hover .checkmark {
+        border: 3px solid #002663; }
     html body #overview::before, html body #inter-map::before, html body #graph::before, html body #facts::before {
       content: "";
       display: block;
@@ -7202,8 +7237,17 @@ html {
       background-position: left bottom;
       background-attachment: scroll;
       padding-bottom: 10rem; }
-    html body #overview .intro {
+    html body #migration_overview .intro {
       padding-top: 5rem; }
+    html body #migration_overview #tipContainer {
+      position: absolute;
+      z-index: 10;
+      top: 2em;
+      border-radius: 5px;
+      width: 10em;
+      background: white;
+      opacity: 0.9;
+      pointer-events: none; }
     html body .dcr-wrapper {
       display: flex;
       justify-content: flex-end;
@@ -7317,12 +7361,6 @@ html {
     html body #aniContainer .caption {
       fill: #494949; }
     html body #inter-map {
-      background-image: url(../assets/img/bg-dcr2.png);
-      background-size: 30% auto;
-      background-repeat: no-repeat;
-      background-position: right bottom;
-      background-attachment: scroll;
-      padding-bottom: 8rem;
       /* #maincontainer {
             display:flex;
         } */ }
@@ -7422,69 +7460,75 @@ html {
         border-radius: 0 0 3px 3px; }
       html body #inter-map .tipClear {
         clear: both; }
-    html body #graph {
+    html body #enrolment_model {
+      background-image: url(../assets/img/bg-dcr2.png);
+      background-size: 30% auto;
+      background-repeat: no-repeat;
+      background-position: right bottom;
+      background-attachment: scroll;
+      padding-bottom: 8rem;
       /* slider ------------------------------ */ }
-      html body #graph #predictors-distDropdown.active .list {
+      html body #enrolment_model #predictors-distDropdown.active .list {
         max-height: 240px; }
-      html body #graph #lineContainer {
+      html body #enrolment_model #lineContainer {
         display: inline-block;
         position: relative;
         width: 100%;
         vertical-align: top;
         overflow: hidden; }
-        html body #graph #lineContainer .svg-content .legend {
+        html body #enrolment_model #lineContainer .svg-content .legend {
           font-size: 9px; }
-        html body #graph #lineContainer .svg-content .bar {
+        html body #enrolment_model #lineContainer .svg-content .bar {
           stroke: none; }
-        html body #graph #lineContainer .svg-content .bar:hover {
+        html body #enrolment_model #lineContainer .svg-content .bar:hover {
           fill: rgba(0, 38, 99, 0.7) !important; }
-        html body #graph #lineContainer .svg-content .label {
+        html body #enrolment_model #lineContainer .svg-content .label {
           fill: white;
           font-weight: 400;
           text-anchor: middle; }
-        html body #graph #lineContainer .svg-content .line {
+        html body #enrolment_model #lineContainer .svg-content .line {
           fill: none;
           stroke: #002663;
           stroke-width: 3; }
-        html body #graph #lineContainer .svg-content .dot {
+        html body #enrolment_model #lineContainer .svg-content .dot {
           fill: #002663;
           stroke: #fff; }
-        html body #graph #lineContainer .yAxis, html body #graph #lineContainer .yAxis2, html body #graph #lineContainer .xAxis {
+        html body #enrolment_model #lineContainer .yAxis, html body #enrolment_model #lineContainer .yAxis2, html body #enrolment_model #lineContainer .xAxis {
           stroke-width: 0; }
-          html body #graph #lineContainer .yAxis .domain, html body #graph #lineContainer .yAxis2 .domain, html body #graph #lineContainer .xAxis .domain {
+          html body #enrolment_model #lineContainer .yAxis .domain, html body #enrolment_model #lineContainer .yAxis2 .domain, html body #enrolment_model #lineContainer .xAxis .domain {
             display: none; }
-        html body #graph #lineContainer #zero-line {
+        html body #enrolment_model #lineContainer #zero-line {
           fill: none;
           stroke: #ccc;
           stroke-width: 1; }
-        html body #graph #lineContainer #line_tt {
+        html body #enrolment_model #lineContainer #line_tt {
           background: rgba(255, 255, 255, 0.7);
           padding: 10px 10px;
           border-radius: 3px;
           color: #494949; }
-      html body #graph .ticks {
+      html body #enrolment_model .ticks {
         font-size: 12px; }
-      html body #graph .track,
-      html body #graph .track-inset,
-      html body #graph .track-overlay {
+      html body #enrolment_model .track,
+      html body #enrolment_model .track-inset,
+      html body #enrolment_model .track-overlay {
         stroke-linecap: round; }
-      html body #graph .track {
+      html body #enrolment_model .track {
         stroke: #bbb;
         stroke-width: 10px; }
-      html body #graph .track-overlay {
+      html body #enrolment_model .track-overlay {
         pointer-events: stroke;
         stroke-width: 50px;
         cursor: crosshair; }
-      html body #graph .sel-range {
+      html body #enrolment_model .sel-range {
         stroke: #5091CD;
         stroke-width: 8px; }
-      html body #graph .handle {
+      html body #enrolment_model .handle {
         fill: #38598a;
         stroke: #494949;
         stroke-opacity: 0.5;
         stroke-width: 1.25px;
         cursor: pointer; }
-      html body #graph .handle.active {
+      html body #enrolment_model .handle.active {
         fill: #002663; }
     html body #demographics #demoContainer .demo_line {
       stroke-linecap: round; }
@@ -7493,8 +7537,11 @@ html {
       html body #demographics #demoContainer .xAxis .domain {
         display: none; }
     html body #demographics #demoContainer .yAxis .domain {
-      stroke: #ccc; }
-    html body #demographics #demoContainer .gridline {
+      display: none; }
+    html body #demographics #demoContainer .yAxis line {
+      display: none; }
+    html body #demographics #demoContainer .yAxis .gridline {
+      display: inline-block;
       stroke: #ccc;
       shape-rendering: crispEdges;
       stroke-opacity: .5; }
@@ -7570,6 +7617,9 @@ html {
     html body #transition #transition_container .trans_bar {
       fill: #002663;
       cursor: pointer; }
+    html body #transition #transition_container .label {
+      text-anchor: middle;
+      fill: white; }
     html body #transition #transition_container .yAxis, html body #transition #transition_container .xAxis {
       stroke-width: 0; }
       html body #transition #transition_container .yAxis .domain, html body #transition #transition_container .xAxis .domain {
@@ -7599,7 +7649,10 @@ html {
           display: none; }
       html body #retention #retention_container .yAxis_dist .domain {
         display: none; }
-      html body #retention #retention_container .gridline {
+      html body #retention #retention_container .yAxis_dist line {
+        display: none; }
+      html body #retention #retention_container .yAxis_dist .gridline {
+        display: inline-block;
         stroke: #ccc;
         shape-rendering: crispEdges;
         stroke-opacity: .5; }

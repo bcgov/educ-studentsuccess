@@ -207,12 +207,14 @@ function graphUpdate(year) {
             d.RATE_PtoI = +d.RATE_PtoI;
             d.RATE_ItoP = +d.RATE_ItoP;
         });
-        
+
         d3.select('#pub_to_ind').text(yrData.map(function (d) {
-            return d.RATE_PtoI + '%' ;}));
+            return d.RATE_PtoI + '%';
+        }));
         d3.select('#ind_to_pub').text(yrData.map(function (d) {
-            return d.RATE_ItoP + '%' ;}));
-        
+            return d.RATE_ItoP + '%';
+        }));
+
     });
 }
 
@@ -220,6 +222,11 @@ function transClear() {
     //clear existing trans_bars
     let existingBar = trans_chartGroup.selectAll(".trans_bar");
     existingBar.transition()
+        .duration(500)
+        .remove();
+
+    trans_chartGroup.selectAll('.label')
+        .transition()
         .duration(500)
         .remove();
 }
@@ -281,12 +288,24 @@ function transUpdate(year, type) {
                 .duration(1500);
 
             //draw trans_bars
-
             trans_chartGroup.selectAll('.trans_bar')
                 .data(districtData_top5)
                 .transition(tran)
                 .attr('y', function (d) { return trans_yScale(Math.max(0, d[type])); })
                 .attr('height', function (d) { return Math.abs(trans_yScale(d[type]) - trans_yScale(0)); });
+
+            //labels
+            trans_chartGroup.selectAll(".label")
+                .data(districtData_top5)
+                .transition(tran)
+                .attr("y", function (d) { if (d[type]>0) {return trans_yScale(Math.max(0, d[type]));} else{
+                    return trans_yScale(d[type]);
+                } })
+                .attr("dy", function (d) { if (d[type]>0) {return '1em'} else{
+                    return '-.75em';
+                }})
+                .text(function (d) { return Math.round(d[type]); });
+
 
             d3.select("#transition_container .yAxis")
                 .transition(tran)
@@ -332,6 +351,21 @@ function transUpdate(year, type) {
                     d3.select(this).style('fill', '#FCBA19')
                     showTranstt(d.DISTRICT, year, d[type], type, xpos, ypos);
                 });
+
+            //labels
+            trans_chartGroup.selectAll(".text")
+                .data(districtData_top5)
+                .enter()
+                .append("text")
+                .attr("class", "label")
+                .attr("x", (function (d) { return trans_xScale(d.DISTRICT) + trans_xScale.bandwidth() / 2; }))
+                .attr("y", function (d) { if (d[type]>0) {return trans_yScale(Math.max(0, d[type]));} else{
+                    return trans_yScale(d[type]);
+                } })
+                .attr("dy", function (d) { if (d[type]>0) {return '1em'} else{
+                    return '-1em';
+                }})
+                .text(function (d) { return Math.round(d[type]); });
 
             //axes
             trans_chartGroup.append('g')

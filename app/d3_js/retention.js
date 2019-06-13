@@ -94,9 +94,9 @@ function retentionClear() {
         .remove();
 
     //clear tooltips 
-    retention_chartGroup.selectAll('.rententiontt_circle')
+    retention_chartGroup.selectAll('.retentiontt_circle')
         .remove();
-    d3.selectAll('.rententiontt_rect')
+    d3.selectAll('.retentiontt_rect')
         .remove();
 }
 
@@ -428,6 +428,7 @@ d3.csv('../assets/raw_data/retention_provincial.csv', function (error, data) {
 
                 //reset target district 
                 targetSd = $(this).text();
+                targetSd = targetSd.substring(5, targetSd.length);
                 targetDistrict = d3.select(this).attr('data-value').substring(2, 4);
                 retentionClear();
                 retentionUpdate(targetDistrict);

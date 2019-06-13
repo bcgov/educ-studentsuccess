@@ -225,7 +225,7 @@ body {
   }
 
   .handle.active {
-    fill: #002663;
+    fill: $home-color;
   }
   
   .ticks {
@@ -259,6 +259,56 @@ body {
   font-size:14px;
 }
 
+.radio {
+  position: relative;
+  padding-left: 1.5em;
+  color:  $btn-color;
+  cursor: pointer; 
+
+  input{
+    position: absolute;
+    opacity: 0; 
+  }
+
+  .checkmark {
+    position: absolute;
+    top: 0.1em;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    border: 3px solid $btn-color;
+    border-radius: 50%;
+  }
+
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  input:checked { color: $home-color; }
+
+  input:checked ~ .checkmark:after {
+    display: block;
+  }
+  .checkmark:after {
+   top: 3px;
+   left: 3px;
+   width: .5em;
+   height: .5em;
+   border-radius: 50%;
+   background: $home-color;
+ }
+}
+
+.radio:hover {
+  color: $home-color;
+  .checkmark {
+    border: 3px solid $home-color;
+  }
+}
+
+
+
 /*********sections********/
   #overview::before, #inter-map::before, #graph::before, #facts::before {
     content:"";
@@ -276,10 +326,20 @@ body {
     padding-bottom:10rem;
   }
 
-  #overview {
+  #migration_overview {
 
   .intro {
     padding-top: 5rem;
+  }
+  #tipContainer{
+    position: absolute;
+    z-index:10;
+    top:2em;
+    border-radius: 5px;
+    width:10em;
+    background: white;
+    opacity: 0.9;
+    pointer-events: none;
   }
 
 }
@@ -459,14 +519,6 @@ body {
 
   // interactive map style
   #inter-map {
-
-    background-image: url(../assets/img/bg-dcr2.png);
-    background-size:30% auto;
-    background-repeat: no-repeat;
-    background-position: right bottom;
-    background-attachment: scroll;
-    padding-bottom: 8rem;
-
    
     #mapContainer {
       position: relative;
@@ -620,7 +672,13 @@ body {
   }
 
   // interactive bar+line graph
-  #graph {
+  #enrolment_model {
+    background-image: url(../assets/img/bg-dcr2.png);
+    background-size:30% auto;
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-attachment: scroll;
+    padding-bottom: 8rem;
 
       #predictors-distDropdown.active{
         .list{
@@ -751,15 +809,20 @@ body {
     }
       .yAxis {
         .domain{
-          stroke:#ccc;
+          display: none;
         }
+        line{
+          display:none;
+        }
+        .gridline{
+          display: inline-block;
+          stroke: #ccc;
+          shape-rendering: crispEdges;
+          stroke-opacity: .5;
+          }
       }
 
-      .gridline{
-        stroke: #ccc;
-        shape-rendering: crispEdges;
-        stroke-opacity: .5;
-        }
+
 
         .demo_overlay {
           fill: none;
@@ -868,6 +931,11 @@ body {
       cursor: pointer;
     }
 
+    .label{
+      text-anchor: middle;
+      fill: white;
+    }
+
     .yAxis, .xAxis {
       .domain {
         display: none;
@@ -919,17 +987,20 @@ body {
     }
     stroke-width: 0;
 }
-  .yAxis_dist {
-    .domain{
-      display:none;
-    }
+.yAxis_dist {
+  .domain{
+    display: none;
   }
-
+  line{
+    display:none;
+  }
   .gridline{
+    display: inline-block;
     stroke: #ccc;
     shape-rendering: crispEdges;
     stroke-opacity: .5;
     }
+}
 
     .retention_overlay {
       fill: none;
