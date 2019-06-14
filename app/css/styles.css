@@ -7208,8 +7208,11 @@ html {
         content: "";
         position: absolute;
         display: none; }
-      html body .radio input:checked {
-        color: #002663; }
+      html body .radio input:checked ~ * {
+        color: #002663;
+        font-weight: bold; }
+      html body .radio input:checked ~ .checkmark {
+        border: 3px solid #002663; }
       html body .radio input:checked ~ .checkmark:after {
         display: block; }
       html body .radio .checkmark:after {
@@ -7584,6 +7587,22 @@ html {
       grid-template-columns: repeat(4, 1.2fr);
       grid-gap: 10px;
       font-size: 12px; }
+      html body #demographics #demographics-control .modal-body .checkbox span {
+        vertical-align: middle;
+        margin-left: 0.3em; }
+      html body #demographics #demographics-control .modal-body .checkbox .demo_checkbox {
+        -webkit-appearance: none;
+        border: 2px solid #ccc;
+        padding: 6px;
+        border-radius: 3px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+        display: inline-block;
+        position: relative;
+        vertical-align: middle; }
+      html body #demographics #demographics-control .modal-body .checkbox .demo_checkbox:checked {
+        border: 2px solid #002663; }
+      html body #demographics #demographics-control .modal-body .checkbox .demo_checkbox:checked ~ * {
+        color: #002663; }
     html body #transition #trans_control {
       display: flex; }
       html body #transition #trans_control h6 {
@@ -7594,6 +7613,9 @@ html {
         fill: #494949;
         font-size: 12px;
         padding: 0; }
+    html body #transition #trans_radio {
+      display: flex;
+      justify-content: space-around; }
     html body #transition #graph_container {
       display: flex;
       flex-wrap: wrap; }
@@ -7621,9 +7643,12 @@ html {
       text-anchor: middle;
       fill: white; }
     html body #transition #transition_container .yAxis, html body #transition #transition_container .xAxis {
-      stroke-width: 0; }
+      stroke-width: 0;
+      color: #494949; }
       html body #transition #transition_container .yAxis .domain, html body #transition #transition_container .xAxis .domain {
         display: none; }
+    html body #transition #transition_container .xAxis {
+      font-weight: bold; }
     html body #transition #transition_container #trans_tt .trans_link {
       margin: 0.5em; }
       html body #transition #transition_container #trans_tt .trans_link .ssLink {

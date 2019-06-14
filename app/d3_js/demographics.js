@@ -356,9 +356,9 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
     $.each(sd_arr, function (index, dist) {
         let checkbox;
         if (dist == 'SD23-Central Okanagan' || dist == 'SD35-Langley' || dist == 'SD61-Greater Victoria' || dist == 'SD73-Kamloops - Thompson') {
-            checkbox = "<div class='checkbox'><label><input type='checkbox' id=" + dist.substring(2, 4) + " value= '" + dist + "' checked>" + dist.substring(5, dist.length) + "</label></div>"
+            checkbox = "<div class='checkbox'><label><input type='checkbox' id=" + dist.substring(2, 4) + " class='demo_checkbox' value= '" + dist + "' checked><span>" + dist.substring(2, dist.length) + "</span></label></div>"
         } else {
-            checkbox = "<div class='checkbox'><label><input type='checkbox' id=" + dist.substring(2, 4) + " value= '" + dist + "'>" + dist.substring(5, dist.length) + "</label></div>"
+            checkbox = "<div class='checkbox'><label><input type='checkbox' id=" + dist.substring(2, 4) + " class='demo_checkbox' value= '" + dist + "'><span>" + dist.substring(2, dist.length) + "</span></label></div>"
         }
         $(".modal-body").append($(checkbox));
     })

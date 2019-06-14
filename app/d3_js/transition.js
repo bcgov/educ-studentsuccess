@@ -416,6 +416,7 @@ function transUpdate(year, type) {
 //radio selection
 $("#trans_radio input[type='radio']").change(function () {
     let radioValue = $("input[name='trans-type']:checked").val();
+    $("input[name='trans-type']:checked").parent().css('color','#002663');
     trans_type = radioValue;
     if (radioValue) {
         transClear();
