@@ -10,6 +10,8 @@ $btn-color: #38598a;
 $tooltip-bg: #002663;
 $tooltip-info-bg:rgba(255, 255, 255, 0.7);
 $section-header:rgba(252,186,25, 0.5);
+$err-color: #d8292f;
+
 
 //Bootstrap sass files
 @import"node_modules/bootstrap/scss/bootstrap";
@@ -887,29 +889,50 @@ body {
       grid-gap: 10px;
       font-size: 12px;
     .checkbox{
+
       span{
-        vertical-align:middle;
+        vertical-align: middle;
         margin-left: 0.3em;
+        cursor: pointer;
       }
       .demo_checkbox{
           -webkit-appearance: none;
           border: 2px solid #ccc;
-          padding:6px;
+          padding: 6px;
           border-radius: 3px;
           box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
           display: inline-block;
           position: relative;
-          vertical-align:middle;
+          vertical-align: middle;
+          cursor: pointer;
       }
 
-      .demo_checkbox:checked{
+      .demo_checkbox:hover, .demo_checkbox:checked{
         border: 2px solid $tooltip-bg;
       }
 
       .demo_checkbox:checked ~ * {
         color: $tooltip-bg;
       }
+
+      .demo_checkbox:checked:after{
+        content: '';
+        position: absolute;
+        left: 4px;
+        top: 1px;
+        width: 5px;
+        height: 10px;
+        border: solid $home-color;
+        border-radius: 5px;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
      }
+    }
+      #demoModal_msg{
+        margin-right: auto;
     }
   }
 }

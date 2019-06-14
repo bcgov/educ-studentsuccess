@@ -365,10 +365,11 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
 
     //set the selection limit
     $('.checkbox input:checkbox').on('change', function (e) {
+        $('#demoModal_msg').css('color', '#494949');
         if ($('.checkbox input:checkbox:checked').length > 8) {
             //this.checked = false; OR 
             $(this).prop('checked', false);
-            console.log('Please select no more than 8 districts');
+            $('#demoModal_msg').css('color', '#d8292f');
         }
     });
 

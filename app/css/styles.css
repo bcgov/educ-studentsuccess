@@ -7589,7 +7589,8 @@ html {
       font-size: 12px; }
       html body #demographics #demographics-control .modal-body .checkbox span {
         vertical-align: middle;
-        margin-left: 0.3em; }
+        margin-left: 0.3em;
+        cursor: pointer; }
       html body #demographics #demographics-control .modal-body .checkbox .demo_checkbox {
         -webkit-appearance: none;
         border: 2px solid #ccc;
@@ -7598,11 +7599,27 @@ html {
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
         display: inline-block;
         position: relative;
-        vertical-align: middle; }
-      html body #demographics #demographics-control .modal-body .checkbox .demo_checkbox:checked {
+        vertical-align: middle;
+        cursor: pointer; }
+      html body #demographics #demographics-control .modal-body .checkbox .demo_checkbox:hover, html body #demographics #demographics-control .modal-body .checkbox .demo_checkbox:checked {
         border: 2px solid #002663; }
       html body #demographics #demographics-control .modal-body .checkbox .demo_checkbox:checked ~ * {
         color: #002663; }
+      html body #demographics #demographics-control .modal-body .checkbox .demo_checkbox:checked:after {
+        content: '';
+        position: absolute;
+        left: 4px;
+        top: 1px;
+        width: 5px;
+        height: 10px;
+        border: solid #002663;
+        border-radius: 5px;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg); }
+    html body #demographics #demographics-control #demoModal_msg {
+      margin-right: auto; }
     html body #transition #trans_control {
       display: flex; }
       html body #transition #trans_control h6 {
