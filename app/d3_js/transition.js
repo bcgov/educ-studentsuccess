@@ -43,7 +43,7 @@ let trans_tooltip = d3.select("#transition_container")
 
 //slider
 //Create SVG element for slider
-let tslider_width = $('#trans_slider').width() * .85;
+let tslider_width = $('#trans_slider').width();
 
 let tslider_slider = d3.select("#trans_slider")
     .append("svg")
@@ -51,7 +51,7 @@ let tslider_slider = d3.select("#trans_slider")
     .attr("height", 50);
 
 let tsliderGroup = tslider_slider.append("g")
-    .attr('transform', 'translate(35, 20)');;
+    .attr('transform', 'translate(20, 20)');;
 
 let tslider_moving = false;
 let tslider_currentValue = 0;
@@ -62,11 +62,11 @@ let tslider_years = [2013, 2018];
 let tslider_step = 1;
 
 // array useful for step sliders
-let tslider_yearValues = d3.range(years[0], years[1], step || 1).concat(years[1]);
+let tslider_yearValues = d3.range(tslider_years[0], tslider_years[1], tslider_step || 1).concat(tslider_years[1]);
 
 //scales
 let tslider_xScale = d3.scaleLinear()
-    .domain(years)
+    .domain(tslider_years)
     .range([0, tslider_targetValue])
     .clamp(true);
 

@@ -21,9 +21,15 @@ html {
 
 body {
 
-  background: $body-bg;
+  background-color: $body-bg;
   font-family: 'Lato', sans-serif;
   color: $font-color;
+
+    background-image: url(../assets/img/bg-dcr.png), url(../assets/img/bg-dcr2.png);
+    background-size:34% auto, 28% auto;
+    background-repeat: no-repeat, no-repeat;
+    background-position: left 8%, right 23%;
+    background-attachment: scroll, scroll;
 
   div:focus, button:focus {outline:none;}
 
@@ -156,7 +162,7 @@ body {
       color: #fff;
       background: $btn-color;
       box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
-      transform: translateY(-0.025em);
+      // transform: translateY(-0.025em);
       transition: .3s ease;
   }
 
@@ -250,7 +256,7 @@ body {
   color: white;
   padding: 5px;
   background: $tooltip-bg;
-  font-weight: bold;
+  font-style: italic;
   font-size: 16px;
   border-radius: 5px 5px 0 0;
 }
@@ -327,19 +333,21 @@ body {
     margin-top:-100px; /* negative fixed header height */
   }
 
+
   #intro {
-    background-image: url(../assets/img/bg-dcr.png);
-    background-size:40% auto;
-    background-repeat: no-repeat;
-    background-position: left bottom;
-    background-attachment: scroll;
-    padding-bottom:10rem;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    .intro_header{
+      color:$home-color;
+    }
   }
 
   #migration_overview {
+    padding-top: 5rem;
+    margin-bottom: 5rem;
 
   .intro {
-    padding-top: 5rem;
+    padding-top: 2rem;
   }
   #tipContainer{
     position: absolute;
@@ -476,21 +484,16 @@ body {
 
   #aniContainer {
 
-    #aniControl {
-      display: flex;
+    #ani_control {
+      align-items: center;
       justify-content: center;
   
-       #year {
-         align-self: flex-end; 
+       #ani_year {
          font-weight: bold;
-         margin: 0 2rem;
          font-size: 1.6rem;
+         vertical-align: middle;
        }
         
-        #play-control {
-          display: flex;
-          align-items: flex-end;
-
         #play-pause {
           width: 40px;
           height:40px;
@@ -507,7 +510,7 @@ body {
           background-size: cover;
           cursor: pointer;
       }    
-    }
+    
   }
   
     .dist-main,
@@ -527,8 +530,9 @@ body {
 
   }
 
-  // interactive map style
+  // interactive map 
   #inter-map {
+    margin-bottom: 5rem;
    
     #mapContainer {
       position: relative;
@@ -576,7 +580,6 @@ body {
     }
 
     .selected {
-      font-weight: bold;
       color: #fff;
       background: $btn-color;
       box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05);
@@ -609,7 +612,6 @@ body {
 
     #tipLoc {
       font-weight: normal;
-      font-family: Georgia;
       font-style: Italic;
       color: white;
       margin: 0px;
@@ -647,7 +649,6 @@ body {
 
     #tipLoc2 {
       font-weight: normal;
-      font-family: Georgia;
       font-style: Italic;
       color: white;
       margin: 0px;
@@ -683,12 +684,8 @@ body {
 
   // interactive bar+line graph
   #enrolment_model {
-    background-image: url(../assets/img/bg-dcr2.png);
-    background-size:30% auto;
-    background-repeat: no-repeat;
-    background-position: right bottom;
-    background-attachment: scroll;
-    padding-bottom: 8rem;
+    margin-bottom: 5rem;
+    padding-top: 5rem;
 
       #predictors-distDropdown.active{
         .list{
@@ -805,6 +802,8 @@ body {
 
   //demographics 
   #demographics{
+    padding-top: 5rem;
+
     #demoContainer{
 
       .demo_line {
@@ -862,6 +861,7 @@ body {
             padding: 5px;
             background: $tooltip-bg;
             font-weight: bold;
+            font-style: italic;
             font-size: 12px;
             border-radius: 5px 5px 0 0;
           }
@@ -939,6 +939,8 @@ body {
 
 //public independent transition
 #transition{
+  padding-top: 5rem;
+  margin-bottom: 5rem;
 
   #trans_control{
     display: flex;
@@ -1022,6 +1024,9 @@ body {
 
 //retention
 #retention {
+  padding-top: 5rem;
+  margin-bottom: 5rem;
+
 #retention_control{
   .controlSelection {
     margin-bottom: 0;
@@ -1095,6 +1100,7 @@ body {
         padding: 5px;
         background: $tooltip-bg;
         font-weight: bold;
+        font-style: italic;
         font-size: 12px;
         border-radius: 5px 5px 0 0;
       }
@@ -1112,12 +1118,6 @@ body {
 }
   //facts
   #facts {
-    background-image: url(../assets/img/bg-dcr3.png);
-    background-size:30% auto;
-    background-repeat: no-repeat;
-    background-position: left top;
-    background-attachment: scroll;
-    padding-top: 6rem;
 
     .fact-container {
       margin: 2rem 0;

@@ -55,14 +55,14 @@
     </div>
   </nav>
 
-  <div class="container mt-5" id='intro'>
+  <div class="container" id='intro'>
     <!-- Jumbotron / hero section, a component -->
-    <div class="row mb-5">
+    <div class="row">
       <div class="col-sm-12 col-md-4 intro">
-        <h2 class="section_header mb-3"><span>Enrolment Model</span></h2>
+        <h2 class="intro_header mb-3">Enrolment Model</h2>
         <p>Student enrolment is influenced by four main drivers: demographics, migration, independent to public, and
           retention.</p>
-        <a class="btn ctaBtn btn-lg" href="#" role="button">Learn more</a>
+        <a class="btn ctaBtn btn-lg" href="#enrolment_model" role="button">Learn more</a>
       </div>
       <div class="col-sm-12 col-md-8 pt-5">
         <img src="/assets/img/infographic.png" class="img-fluid" alt="overview img">
@@ -70,7 +70,7 @@
     </div>
   </div>
 
-  <div class="container my-5" id="enrolment_model">
+  <div class="container" id="enrolment_model">
     <div class="row">
       <div class="col-8 mx-auto">
         <h2 class="section_header text-center mb-3"><span>Key Predictors and Impact</span></h2>
@@ -109,7 +109,7 @@
     </div>
   </div>
 
-  <div class="container my-5" id="demographics">
+  <div class="container" id="demographics">
     <div class="row">
       <div class="col-8 mx-auto">
         <h2 class="section_header text-center mb-3"><span>Demographics</span></h2>
@@ -187,12 +187,10 @@
       <div class="col-sm-12 col-md-8 pt-5">
         <div id="aniContainer">
           <div id="animationMap" class="mb-5"></div>
-          <div id="aniControl">
-            <div id='play-control'>
+          <div id="ani_control" class="row">
               <div id="play-pause" class="play"></div>
-              <div id="ani-slider"></div>
-            </div>
-            <div id="year">
+              <div id="ani-slider" class="col-6"></div>
+            <div id="ani_year">
             </div>
           </div>
         </div>
@@ -201,7 +199,7 @@
   </div>
 
 
-  <div class="container  my-5" id="inter-map">
+  <div class="container" id="inter-map">
     <div class="row">
       <div class="col-sm-12 col-md-8">
         <div id="mapContainer">
@@ -210,7 +208,7 @@
       </div>
 
       <div class="col-sm-12 col-md-4">
-        <h2 class="text-center mb-3">Where do students go</h2>
+        <h2 class="mb-3">Where do students go</h2>
         <div id='control'>
           <div class="controlSection">
             <h5>School Year</h5>
@@ -244,7 +242,7 @@
     </div>
   </div>
 
-  <div class="container my-5" id="transition">
+  <div class="container" id="transition">
     <div class="row">
       <div class="col-8 mx-auto">
         <h2 class="section_header text-center mb-3"><span>Public and Independent Transition</span></h2>
@@ -366,9 +364,9 @@
   <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
   <script src="/js/transforming_menu.js"></script>
-  <script src="/d3_js/choropleth_animation.js"></script>
-  <script src="/d3_js/interactive_map.js"></script>
-  <script src="/d3_js/interactive_bars_line.js"></script>
+  <script src="/d3_js/migration_overview.js"></script>
+  <script src="/d3_js/migration_interactive_map.js"></script>
+  <script src="/d3_js/enrolment_model.js"></script>
   <script src="/d3_js/demographics.js"></script>
   <script src="/d3_js/transition.js"></script>
   <script src="/d3_js/retention.js"></script>
