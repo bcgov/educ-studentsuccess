@@ -128,8 +128,8 @@ function tslider_startDrag(d) {
 
 function tslider_drag(d) {
     let x = d3.event.x;
-    let xMin = tslider_xScale(years[0]),
-        xMax = tslider_xScale(years[1]);
+    let xMin = tslider_xScale(tslider_years[0]),
+        xMax = tslider_xScale(tslider_years[1]);
     if (x > xMax) {
         x = xMax - 10;
     } else if (x < xMin) {
@@ -159,10 +159,10 @@ function tslider_inputYear(val) {
         midPoint, cx, xVal;
 
 
-    if (step) {
+    if (tslider_step) {
         // if step has a value, compute the midpoint based on range values and reposition the slider based on the mouse position
         for (var i = 0; i < tslider_yearValues.length; i++) {
-            if (x >= yearValues[i] && x <= tslider_yearValues[i + 1]) {
+            if (x >= tslider_yearValues[i] && x <= tslider_yearValues[i + 1]) {
                 index = i;
                 break;
             }
