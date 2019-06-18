@@ -7026,11 +7026,11 @@ html {
     background-color: #f7f7f9;
     font-family: 'Lato', sans-serif;
     color: #494949;
-    background-image: url(../assets/img/bg-dcr.png), url(../assets/img/bg-dcr2.png);
-    background-size: 34% auto, 28% auto;
-    background-repeat: no-repeat, no-repeat;
-    background-position: left 8%, right 23%;
-    background-attachment: scroll, scroll;
+    background-image: url(../assets/img/bg-dcr.png), url(../assets/img/bg-dcr2.png), url(../assets/img/bg-dcr3.png);
+    background-size: 34% auto, 28% auto, 24% auto;
+    background-repeat: no-repeat, no-repeat, no-repeat;
+    background-position: left 8%, right 23%, left 92\%;
+    background-attachment: scroll, scroll, scroll;
     /**********shared********/
     /*********sections********/ }
     html body div:focus, html body button:focus {
@@ -7734,19 +7734,19 @@ html {
             font-size: 10px; }
             html body #retention #retention_container .retentiontt_rect .tipInfo .tipNum {
               color: #494949; }
-    html body #facts .fact-container {
+    html body #booklet .fact-container {
       margin: 2rem 0;
       position: relative;
       height: 280px;
       display: flex;
       flex-direction: column;
       align-items: center; }
-      html body #facts .fact-container .fact-img {
+      html body #booklet .fact-container .fact-img {
         max-width: 160px;
         max-height: 120px;
         height: auto;
         align-content: center; }
-      html body #facts .fact-container .fact-info {
+      html body #booklet .fact-container .fact-info {
         position: absolute;
         bottom: 2rem; }
     html body .footer-img {

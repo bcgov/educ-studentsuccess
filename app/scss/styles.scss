@@ -25,11 +25,11 @@ body {
   font-family: 'Lato', sans-serif;
   color: $font-color;
 
-    background-image: url(../assets/img/bg-dcr.png), url(../assets/img/bg-dcr2.png);
-    background-size:34% auto, 28% auto;
-    background-repeat: no-repeat, no-repeat;
-    background-position: left 8%, right 23%;
-    background-attachment: scroll, scroll;
+    background-image: url(../assets/img/bg-dcr.png), url(../assets/img/bg-dcr2.png), url(../assets/img/bg-dcr3.png);
+    background-size:34% auto, 28% auto, 24% auto;
+    background-repeat: no-repeat, no-repeat, no-repeat;
+    background-position: left 8%, right 23%, left 92%;
+    background-attachment: scroll, scroll, scroll;
 
   div:focus, button:focus {outline:none;}
 
@@ -1116,28 +1116,9 @@ body {
   }
   }
 }
-  //facts
-  #facts {
+  //booklet
+  #booklet {
 
-    .fact-container {
-      margin: 2rem 0;
-      position: relative;
-      height: 280px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      .fact-img {
-        max-width: 160px;
-        max-height: 120px;
-        height: auto;
-        align-content: center;
-      }
-
-      .fact-info {
-        position: absolute;
-        bottom: 2rem;
-      }
 
     }
   }
