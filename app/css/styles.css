@@ -7466,7 +7466,7 @@ html {
       margin-bottom: 5rem;
       padding-top: 5rem;
       /* slider ------------------------------ */ }
-      html body #enrolment_model #predictors-distDropdown.active .list {
+      html body #enrolment_model #model_distDropdown.active .list {
         max-height: 240px; }
       html body #enrolment_model #lineContainer {
         display: inline-block;

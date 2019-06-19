@@ -44,154 +44,165 @@ let trans_tooltip = d3.select("#transition_container")
 //slider
 //Create SVG element for slider
 let tslider_width = $('#trans_slider').width();
+transition_slider();
 
-let tslider_slider = d3.select("#trans_slider")
-    .append("svg")
-    .attr("width", tslider_width)
-    .attr("height", 50);
+$(window).resize(function() {
+    d3.select('#trans_slider svg').remove();
+    tslider_width = $('#trans_slider').width();
+    transition_slider();
+});
 
-let tsliderGroup = tslider_slider.append("g")
-    .attr('transform', 'translate(20, 20)');;
+function transition_slider() {
 
-let tslider_moving = false;
-let tslider_currentValue = 0;
-let tslider_targetValue = tslider_width - 50;
+    let tslider_slider = d3.select("#trans_slider")
+        .append("svg")
+        .attr("width", tslider_width)
+        .attr("height", 50);
+
+    let tsliderGroup = tslider_slider.append("g")
+        .attr('transform', 'translate(20, 20)');;
+
+    let tslider_moving = false;
+    let tslider_currentValue = 0;
+    let tslider_targetValue = tslider_width - 50;
 
 
-let tslider_years = [2013, 2018];
-let tslider_step = 1;
+    let tslider_years = [2013, 2018];
+    let tslider_step = 1;
 
-// array useful for step sliders
-let tslider_yearValues = d3.range(tslider_years[0], tslider_years[1], tslider_step || 1).concat(tslider_years[1]);
+    // array useful for step sliders
+    let tslider_yearValues = d3.range(tslider_years[0], tslider_years[1], tslider_step || 1).concat(tslider_years[1]);
 
-//scales
-let tslider_xScale = d3.scaleLinear()
-    .domain(tslider_years)
-    .range([0, tslider_targetValue])
-    .clamp(true);
+    //scales
+    let tslider_xScale = d3.scaleLinear()
+        .domain(tslider_years)
+        .range([0, tslider_targetValue])
+        .clamp(true);
 
-//create track
-tsliderGroup.append("line")
-    .attr("class", "track")
-    .attr("x1", tslider_xScale.range()[0])
-    .attr("x2", tslider_xScale.range()[1])
-    .select(function () {
-        return this.parentNode.appendChild(this.cloneNode(true));
-    })
-    .attr("class", "track-inset")
-    .select(function () {
-        return this.parentNode.appendChild(this.cloneNode(true));
-    })
-    .attr("class", "track-overlay")
-    .call(d3.drag()
-        .on("start.interrupt", tslider_startDrag)
-        .on("drag", tslider_drag)
-        .on("end", tslider_end)
-    );
+    //create track
+    tsliderGroup.append("line")
+        .attr("class", "track")
+        .attr("x1", tslider_xScale.range()[0])
+        .attr("x2", tslider_xScale.range()[1])
+        .select(function () {
+            return this.parentNode.appendChild(this.cloneNode(true));
+        })
+        .attr("class", "track-inset")
+        .select(function () {
+            return this.parentNode.appendChild(this.cloneNode(true));
+        })
+        .attr("class", "track-overlay")
+        .call(d3.drag()
+            .on("start.interrupt", tslider_startDrag)
+            .on("drag", tslider_drag)
+            .on("end", tslider_end)
+        );
 
-//create track overlay
-tsliderGroup.insert("g", ".track-overlay")
-    .attr("class", "ticks")
-    .attr("transform", "translate(0, 18)")
-    .selectAll("text")
-    .data(tslider_xScale.ticks(6))
-    .enter()
-    .append("text")
-    .attr("x", tslider_xScale)
-    .attr("y", 10)
-    .attr("text-anchor", "middle")
-    .text(function (d) {
-        return d;
-    });
+    //create track overlay
+    tsliderGroup.insert("g", ".track-overlay")
+        .attr("class", "ticks")
+        .attr("transform", "translate(0, 18)")
+        .selectAll("text")
+        .data(tslider_xScale.ticks(6))
+        .enter()
+        .append("text")
+        .attr("x", tslider_xScale)
+        .attr("y", 10)
+        .attr("text-anchor", "middle")
+        .text(function (d) {
+            return d;
+        });
 
-//slider handle
-let tslider_handle = tsliderGroup.selectAll("rect")
-    .data([0, 1])
-    .enter()
-    .append('rect', '.track-overlay')
-    .attr("class", "handle")
-    .attr('rx', 3)
-    .attr('ry', 3)
-    .attr('x', -8)
-    .attr('y', -10)
-    .attr("width", 16)
-    .attr("height", 20)
-    .call(d3.drag()
-        .on("start.interrupt", tslider_startDrag)
-        .on("drag", tslider_drag)
-        .on("end", tslider_end));
+    //slider handle
+    let tslider_handle = tsliderGroup.selectAll("rect")
+        .data([0, 1])
+        .enter()
+        .append('rect', '.track-overlay')
+        .attr("class", "handle")
+        .attr('rx', 3)
+        .attr('ry', 3)
+        .attr('x', -8)
+        .attr('y', -10)
+        .attr("width", 16)
+        .attr("height", 20)
+        .call(d3.drag()
+            .on("start.interrupt", tslider_startDrag)
+            .on("drag", tslider_drag)
+            .on("end", tslider_end));
 
-function tslider_startDrag(d) {
-    tsliderGroup.interrupt();
-    d3.select(this).raise().classed('active', true);
-}
-
-function tslider_drag(d) {
-    let x = d3.event.x;
-    let xMin = tslider_xScale(tslider_years[0]),
-        xMax = tslider_xScale(tslider_years[1]);
-    if (x > xMax) {
-        x = xMax - 10;
-    } else if (x < xMin) {
-        x = xMin;
+    function tslider_startDrag(d) {
+        tsliderGroup.interrupt();
+        d3.select(this).raise().classed('active', true);
     }
-    tslider_handle.attr('x', x);
-}
 
-function tslider_end(d) {
-    // console.log('dragged');
-    currentValue = d3.event.x;
-    d3.select(this).classed('active', false);
-    tslider_inputYear(currentValue);
-}
+    function tslider_drag(d) {
+        let x = d3.event.x;
+        let xMin = tslider_xScale(tslider_years[0]),
+            xMax = tslider_xScale(tslider_years[1]);
+        if (x > xMax) {
+            x = xMax - 10;
+        } else if (x < xMin) {
+            x = xMin;
+        }
+        tslider_handle.attr('x', x);
+    }
 
-//flag for checking update() year input
-let tslider_yrCheck = 0;
+    function tslider_end(d) {
+        // console.log('dragged');
+        currentValue = d3.event.x;
+        d3.select(this).classed('active', false);
+        tslider_inputYear(currentValue);
+    }
+
+    //flag for checking update() year input
+    let tslider_yrCheck = 0;
+
+    let trans_type = 'ENTER_PUBLIC';
+
+    function tslider_inputYear(val) {
+        // console.log(val);
+
+        let x = tslider_xScale.invert(val);
+
+        let index = null,
+            midPoint, cx, xVal;
+
+
+        if (tslider_step) {
+            // if step has a value, compute the midpoint based on range values and reposition the slider based on the mouse position
+            for (var i = 0; i < tslider_yearValues.length; i++) {
+                if (x >= tslider_yearValues[i] && x <= tslider_yearValues[i + 1]) {
+                    index = i;
+                    break;
+                }
+            }
+            midPoint = (tslider_yearValues[index] + tslider_yearValues[index + 1]) / 2;
+            if (x < midPoint) {
+                cx = tslider_xScale(tslider_yearValues[index]);
+                xVal = tslider_yearValues[index];
+            } else {
+                cx = tslider_xScale(tslider_yearValues[index + 1]);
+                xVal = tslider_yearValues[index + 1];
+            }
+        } else {
+            // if step is null or 0, return the drag value as is
+            cx = tslider_xScale(x);
+            xVal = x.toFixed(3);
+        }
+
+        // update position and text of label according to slider scale
+        tslider_handle.attr("x", cx - 8);
+
+        //verify that a method was called with certain year input, call update() with unique each year value once
+        if (tslider_yrCheck != xVal) {
+            graphUpdate(xVal);
+            transUpdate(xVal, trans_type);
+            tslider_yrCheck = xVal;
+        }
+    }
+}
 
 let trans_type = 'ENTER_PUBLIC';
-
-function tslider_inputYear(val) {
-    // console.log(val);
-
-    let x = tslider_xScale.invert(val);
-
-    let index = null,
-        midPoint, cx, xVal;
-
-
-    if (tslider_step) {
-        // if step has a value, compute the midpoint based on range values and reposition the slider based on the mouse position
-        for (var i = 0; i < tslider_yearValues.length; i++) {
-            if (x >= tslider_yearValues[i] && x <= tslider_yearValues[i + 1]) {
-                index = i;
-                break;
-            }
-        }
-        midPoint = (tslider_yearValues[index] + tslider_yearValues[index + 1]) / 2;
-        if (x < midPoint) {
-            cx = tslider_xScale(tslider_yearValues[index]);
-            xVal = tslider_yearValues[index];
-        } else {
-            cx = tslider_xScale(tslider_yearValues[index + 1]);
-            xVal = tslider_yearValues[index + 1];
-        }
-    } else {
-        // if step is null or 0, return the drag value as is
-        cx = tslider_xScale(x);
-        xVal = x.toFixed(3);
-    }
-
-    // update position and text of label according to slider scale
-    tslider_handle.attr("x", cx - 8);
-
-    //verify that a method was called with certain year input, call update() with unique each year value once
-    if (tslider_yrCheck != xVal) {
-        graphUpdate(xVal);
-        transUpdate(xVal, trans_type);
-        tslider_yrCheck = xVal;
-    }
-}
-
 graphUpdate(2013);
 transUpdate(2013, trans_type);
 
@@ -298,12 +309,16 @@ function transUpdate(year, type) {
             trans_chartGroup.selectAll(".label")
                 .data(districtData_top5)
                 .transition(tran)
-                .attr("y", function (d) { if (d[type]>0) {return trans_yScale(Math.max(0, d[type]));} else{
-                    return trans_yScale(d[type]);
-                } })
-                .attr("dy", function (d) { if (d[type]>0) {return '1em'} else{
-                    return '-.75em';
-                }})
+                .attr("y", function (d) {
+                    if (d[type] > 0) { return trans_yScale(Math.max(0, d[type])); } else {
+                        return trans_yScale(d[type]);
+                    }
+                })
+                .attr("dy", function (d) {
+                    if (d[type] > 0) { return '1em' } else {
+                        return '-.75em';
+                    }
+                })
                 .text(function (d) { return Math.round(d[type]); });
 
 
@@ -359,12 +374,16 @@ function transUpdate(year, type) {
                 .append("text")
                 .attr("class", "label")
                 .attr("x", (function (d) { return trans_xScale(d.DISTRICT) + trans_xScale.bandwidth() / 2; }))
-                .attr("y", function (d) { if (d[type]>0) {return trans_yScale(Math.max(0, d[type]));} else{
-                    return trans_yScale(d[type]);
-                } })
-                .attr("dy", function (d) { if (d[type]>0) {return '1em'} else{
-                    return '-1em';
-                }})
+                .attr("y", function (d) {
+                    if (d[type] > 0) { return trans_yScale(Math.max(0, d[type])); } else {
+                        return trans_yScale(d[type]);
+                    }
+                })
+                .attr("dy", function (d) {
+                    if (d[type] > 0) { return '1em' } else {
+                        return '-1em';
+                    }
+                })
                 .text(function (d) { return Math.round(d[type]); });
 
             //axes
@@ -416,7 +435,7 @@ function transUpdate(year, type) {
 //radio selection
 $("#trans_radio input[type='radio']").change(function () {
     let radioValue = $("input[name='trans-type']:checked").val();
-    $("input[name='trans-type']:checked").parent().css('color','#002663');
+    $("input[name='trans-type']:checked").parent().css('color', '#002663');
     trans_type = radioValue;
     if (radioValue) {
         transClear();

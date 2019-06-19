@@ -59,7 +59,7 @@ let growthLine = d3.line()
 
 
 //distirct controls
-let targetDistrict = 'SD05';
+let targetDistrict = 'SD99';
 let defaultPageLoad = true;
 
 //array used to populate dropdown menu
@@ -93,48 +93,90 @@ let tooltip_line = d3.select("#lineContainer")
     .style("position", "absolute")
     .style("visibility", "hidden");
 
+d3.csv('../assets/raw_data/predictors.csv', function (error, data) {
+    if (error) {
+        throw error;
+    }
 
+    //get the array of keys (drivers)
+    let driverNames = d3.keys(data[0]).filter(function (key) {
+        if (key !== 'ABBREV' && key !== 'DISTRICT' && key !== 'SCHOOL_YEAR' && key !== 'LAST_YEAR_ENROLMENT') {
+            return key;
+        }
+    });
 
-function updateGraph(yr1, yr2) {
+    console.log(driverNames);
 
-    line_chartGroup.selectAll('.year').remove().transition()
-      .duration(500);
+    //populate once
+    if (sd_arr.length == 0) {
+        //push unique values into dropdown array
+        for (let i = 0; i < data.length; i++) {
+            //get both school district numbers and names
+            let sd_num = data[i].ABBREV;
+            let sd_name = data[i].DISTRICT;
+            let option = sd_num + '-' + sd_name;
+            //covert school year string to num
+            let year = +data[i].SCHOOL_YEAR;
+            //check if it's already exist
+            if ((sd_arr.indexOf(option) === -1)&&option!='SD99-Province') {
+                sd_arr.push(option);
+            }
 
-    line_chartGroup.selectAll('.xAxis').remove().transition()
-      .duration(500);
-
-    line_chartGroup.selectAll('.yAxis').remove().transition()
-      .duration(500);
-
-    line_chartGroup.selectAll('.yAxis2').remove().transition()
-      .duration(500);
-    
-    line_chartGroup.selectAll('.dot').remove().transition()
-      .duration(500);
-    
-    line_chartGroup.selectAll('.line').remove().transition()
-      .duration(500);
-
-    line_chartGroup.select('#zero-line').remove().transition()
-      .duration(500);
-
-    d3.csv('../assets/raw_data/predictors.csv', function (error, data) {
-        if (error) {
-            throw error;
+            //check if it's already exist
+            if (range_arr.indexOf(year) === -1) {
+                range_arr.push(year);
+            }
         }
 
+
+        //starting year, min val of the array
+        minYr = Math.min(...range_arr);
+        //ending year
+        maxYr = Math.max(...range_arr);
+
+        //populate dropdown menu
+        let dropDown = d3.select('#model_distDropdown .list');
+        dropDown.append('div')
+                .text('SD99-Province')
+                .attr('data-value', 'SD99')
+        for (let i = 0; i < sd_arr.length; i++) {
+            let opt = sd_arr[i];
+                dropDown
+                .append('div')
+                .text(opt)
+                //take the sd number (first 4 letters) as value
+                .attr('data-value', opt.substring(0, 4));
+        };
+    }
+
+    function modelClear() {
+        line_chartGroup.selectAll('.year').remove().transition()
+            .duration(500);
+
+        line_chartGroup.selectAll('.xAxis').remove().transition()
+            .duration(500);
+
+        line_chartGroup.selectAll('.yAxis').remove().transition()
+            .duration(500);
+
+        line_chartGroup.selectAll('.yAxis2').remove().transition()
+            .duration(500);
+
+        line_chartGroup.selectAll('.dot').remove().transition()
+            .duration(500);
+
+        line_chartGroup.selectAll('.line').remove().transition()
+            .duration(500);
+
+        line_chartGroup.select('#zero-line').remove().transition()
+            .duration(500);
+    }
+
+    function updateGraph(yr1, yr2) {
+
+        modelClear();
+
         let districtData = data.filter(function (d) { return (d.ABBREV == targetDistrict) && (+d.SCHOOL_YEAR >= yr1 && +d.SCHOOL_YEAR <= yr2) });
-
-        console.log(districtData);
-
-        //get the array of keys (drivers)
-        let driverNames = d3.keys(data[0]).filter(function (key) {
-            if (key !== 'ABBREV' && key !== 'DISTRICT' && key !== 'SCHOOL_YEAR' && key !== 'LAST_YEAR_ENROLMENT') {
-                return key
-            }
-        });
-
-        console.log(driverNames);
 
         //for each js object, generate a new key called drivers
         // value is an array of js objects each has driver name and value
@@ -151,46 +193,6 @@ function updateGraph(yr1, yr2) {
                 };
             });
         });
-    
-        //populate once
-    if (sd_arr.length == 0) {
-        //push unique values into dropdown array
-        for (let i = 0; i < data.length; i++) {
-            //get both school district numbers and names
-            let sd_num = data[i].ABBREV;
-            let sd_name = data[i].DISTRICT;
-            let option = sd_num + '-' + sd_name;
-            //covert school year string to num
-            let year = +data[i].SCHOOL_YEAR;
-            //check if it's already exist
-            if (sd_arr.indexOf(option) === -1) {
-                sd_arr.push(option);
-            }
-
-            //check if it's already exist
-            if (range_arr.indexOf(year) === -1) {
-                range_arr.push(year);
-            }
-        }
-
-        // console.log(sd_arr);
-
-        //starting year, min val of the array
-        minYr = Math.min(...range_arr);
-        //ending year
-        maxYr = Math.max(...range_arr);
-
-
-        //populate dropdown menu
-        for (let i = 0; i < sd_arr.length; i++) {
-            let opt = sd_arr[i];
-            d3.select('#predictors-distDropdown .list')
-                .append('div')
-                .text(opt)
-                //take the sd number (first 4 letters) as value
-                .attr('data-value', opt.substring(0, 4));
-        };
-    }
 
         //set aixs
         line_xScale.domain(districtData.map(function (d) { return d.SCHOOL_YEAR; }));
@@ -318,7 +320,7 @@ function updateGraph(yr1, yr2) {
             .on("mousemove", function (d) {
                 //gets mouse coordinates on screen
                 let offsetTarget = $(this).parent().parent().parent().parent();
-                console.log(offsetTarget);
+                
                 let offset = offsetTarget.offset();
 
                 let mx = (event.pageX - offset.left);
@@ -332,52 +334,44 @@ function updateGraph(yr1, yr2) {
 
         //dropdown select district
         //removes event handlers from selected elements as updateGraph
-        $('#predictors-distDropdown').unbind().on('click', function (et) {
+        $('#model_distDropdown').unbind().on('click', function (et) {
             console.log('clicked');
             $(this).toggleClass('active');
             // $('#yearDropdown').removeClass('active');
 
             //or add on click when appending the divs
-            d3.selectAll('#predictors-distDropdown .list div')
+            d3.selectAll('#model_distDropdown .list div')
                 .on('click', function () {
-                    $('#predictors-distDropdown span').text($(this).text());
-                    $('#predictors-distDropdown').attr('attr', 'dropDown');
+                    $('#model_distDropdown span').text($(this).text());
+                    $('#model_distDropdown').attr('attr', 'dropDown');
 
-                    //remove all element with .selected class
-                    //  d3.selectAll('.selectedDist')
-                    //      .classed('selectedDist', false);
-                    //add selected class to button being clicked
-                    //  d3.select(this)
-                    //      .classed('selectedDist', true);
+                     //reset target district 
+                     targetDistrict = d3.select(this).attr('data-value');
 
-                    //reset target district 
-                    targetDistrict = d3.select(this).attr('data-value');
-
-                    let districtData = data.filter(function (d) { return d.ABBREV == targetDistrict  && (+d.SCHOOL_YEAR >= yr1 && +d.SCHOOL_YEAR <= yr2)});
-                    let distName = $(this).text();
-
-                    let driverNames = d3.keys(data[0]).filter(function (key) {
-                        if (key !== 'ABBREV' && key !== 'DISTRICT' && key !== 'SCHOOL_YEAR' && key !== 'LAST_YEAR_ENROLMENT' && key !== 'drivers') {
-                            return key
-                        }
-                    });
-
-                    //for each js object, generate a new key called drivers
-                    // value is an array of js objects each has driver name and value
-
-                    //because grouped bar chart
-                    //data must be grouped by year, inside data grouped by drivers 
-
-                    districtData.forEach(function (d) {
-                        d.LAST_YEAR_ENROLMENT = parseInt(d.LAST_YEAR_ENROLMENT);
-                        d.drivers = driverNames.map(function (name) {
-                            return {
-                                name: name,
-                                value: +d[name]
-                            };
-                        });
-                    });
-
+                     let districtData = data.filter(function (d) { return d.ABBREV == targetDistrict  && (+d.SCHOOL_YEAR >= yr1 && +d.SCHOOL_YEAR <= yr2)});
+                     let distName = $(this).text();
+ 
+                     let driverNames = d3.keys(data[0]).filter(function (key) {
+                         if (key !== 'ABBREV' && key !== 'DISTRICT' && key !== 'SCHOOL_YEAR' && key !== 'LAST_YEAR_ENROLMENT' && key !== 'drivers') {
+                             return key
+                         }
+                     });
+ 
+                     //for each js object, generate a new key called drivers
+                     // value is an array of js objects each has driver name and value
+ 
+                     //because grouped bar chart
+                     //data must be grouped by year, inside data grouped by drivers 
+ 
+                     districtData.forEach(function (d) {
+                         d.LAST_YEAR_ENROLMENT = parseInt(d.LAST_YEAR_ENROLMENT);
+                         d.drivers = driverNames.map(function (name) {
+                             return {
+                                 name: name,
+                                 value: +d[name]
+                             };
+                         });
+                     });
 
                     d3.select('#distName').text(distName);
                     //replace space with dash and covert to lower case '/ /g' is a regex (regular expression). The flag g means global. It causes all matches to be replaced.
@@ -469,8 +463,117 @@ function updateGraph(yr1, yr2) {
         // legend.transition().duration(500).delay(function (d, i) { return 1300 + 100 * i; }).style("opacity", "1");
         legend.style("opacity", "1");
 
+    }
+
+    let model_slider_width = $('#model_control').width();
+    //render graph set up slider
+    updateGraph(yr1, yr2);
+    setupSlider(yr1, yr2);
+    $(window).resize( function() {
+        d3.select('#model_slider svg').remove();
+        model_slider_width = $('#model_control').width();
+        setupSlider(yr1, yr2);
     });
-}
+
+
+    //range slider(brush)
+    function setupSlider(v1, v2) {
+        let sliderVals = [v1, v2];
+
+        let svg = d3.select('#model_slider').append('svg')
+            .attr('width', model_slider_width)
+            .attr('height', 50);
+
+        let xScale = d3.scaleLinear()
+            .domain([minYr, maxYr])
+            .range([0, model_slider_width - 30])
+            .clamp(true);
+
+        let xMin = xScale(minYr),
+            xMax = xScale(maxYr);
+
+        let rangeSlider = svg.append('g')
+            .attr('class', 'slider')
+            .attr('transform', 'translate(5,20)');
+
+        rangeSlider.append('line')
+            .attr('class', 'track')
+            .attr('x1', 10 + xScale.range()[0])
+            .attr('x2', 10 + xScale.range()[1]);
+
+        console.log(sliderVals[1]);
+        let selectRange = rangeSlider.append('line')
+            .attr('class', 'sel-range')
+            .attr('x1', xScale(sliderVals[0]))
+            .attr('x2', xScale(sliderVals[1]));
+
+        rangeSlider.insert('g', '.track-overlay')
+            .attr('class', 'ticks')
+            .attr('transform', 'translate(8,24)')
+            .selectAll('text')
+            .data(xScale.ticks(6))
+            .enter().append('text')
+            .attr('x', xScale)
+            .attr('text-anchor', 'middle')
+            .text(function (d) { return d; })
+
+        let handle = rangeSlider.selectAll('rect')
+            .data([0, 1])
+            .enter()
+            .append('rect', '.track-overlay')
+            .attr('class', 'handle')
+            .attr('y', -10)
+            .attr('x', function (d) { return xScale(sliderVals[d]); })
+            .attr('rx', 3)
+            .attr('height', 20)
+            .attr('width', 16)
+            .call(
+                d3.drag()
+                    .on('start', startDrag)
+                    .on('drag', drag)
+                    .on('end', endDrag)
+            );
+
+        function startDrag(d) {
+            d3.select(this).raise().classed('active', true);
+        }
+
+        function drag(d) {
+            let x1 = d3.event.x;
+            if (x1 > xMax) {
+                x1 = xMax
+            } else if (x1 < xMin) {
+                x1 = xMin
+            }
+            d3.select(this).attr('x', x1);
+
+            let x2 = xScale(sliderVals[d == 0 ? 1 : 0]);
+            selectRange.attr('x1', 10 + x1)
+                .attr('x2', 10 + x2);
+
+        }
+
+        function endDrag(d) {
+            let endVal = Math.round(xScale.invert(d3.event.x))
+            let elem = d3.select(this)
+            sliderVals[d] = endVal;
+            let v1 = Math.min(sliderVals[0], sliderVals[1]);
+            let v2 = Math.max(sliderVals[0], sliderVals[1]);
+
+            elem.classed('active', false)
+                .attr('x', xScale(endVal));
+
+            selectRange.attr('x1', 10 + xScale(v1))
+                .attr('x2', 10 + xScale(v2));
+
+            $('#model_distDropdown').removeClass('.active');
+
+            updateGraph(v1, v2);
+        }
+    }
+});
+
+
 
 function line_toolOver(v, thepath) {
     d3.select(thepath)
@@ -500,107 +603,3 @@ function line_toolMove(mx, my, data) {
             .html("Total Enrolment: <b>" + Math.round(data.LAST_YEAR_ENROLMENT));
     }
 }
-
-minYr = 2013;
-maxYr = 2018;
-
-//range slider(brush)
-function setupSlider(v1, v2, updateGraph) {
-    let sliderVals = [v1, v2];
-    let width = 260,
-        height = 50;
-    let svg = d3.select('#predictors-brush').append('svg')
-        .attr('width', width + 30)
-        .attr('height', height);
-
-    let xScale = d3.scaleLinear()
-        .domain([minYr, maxYr])
-        .range([0, width])
-        .clamp(true);
-
-    console.log(minYr, maxYr);
-
-    let xMin = xScale(minYr),
-        xMax = xScale(maxYr);
-
-    let rangeSlider = svg.append('g')
-        .attr('class', 'slider')
-        .attr('transform', 'translate(5,20)');
-
-    rangeSlider.append('line')
-        .attr('class', 'track')
-        .attr('x1', 10 + xScale.range()[0])
-        .attr('x2', 10 + xScale.range()[1]);
-
-    let selectRange = rangeSlider.append('line')
-        .attr('class', 'sel-range')
-        .attr('x1', 10 + xScale(sliderVals[0]))
-        .attr('x2', 10 + xScale(sliderVals[1]));
-
-    rangeSlider.insert('g', '.track-overlay')
-        .attr('class', 'ticks')
-        .attr('transform', 'translate(8,24)')
-        .selectAll('text')
-        .data(xScale.ticks(6))
-        .enter().append('text')
-        .attr('x', xScale)
-        .attr('text-anchor', 'middle')
-        .text(function (d) { return d; })
-
-    let handle = rangeSlider.selectAll('rect')
-        .data([0, 1])
-        .enter()
-        .append('rect', '.track-overlay')
-        .attr('class', 'handle')
-        .attr('y', -10)
-        .attr('x', function (d) { return xScale(sliderVals[d]); })
-        .attr('rx', 3)
-        .attr('height', 20)
-        .attr('width', 16)
-        .call(
-            d3.drag()
-                .on('start', startDrag)
-                .on('drag', drag)
-                .on('end', endDrag)
-        );
-
-    function startDrag(d) {
-        d3.select(this).raise().classed('active', true);
-    }
-
-    function drag(d) {
-        let x1 = d3.event.x;
-        if (x1 > xMax) {
-            x1 = xMax
-        } else if (x1 < xMin) {
-            x1 = xMin
-        }
-        d3.select(this).attr('x', x1);
-
-        let x2 = xScale(sliderVals[d == 0 ? 1 : 0]);
-        selectRange.attr('x1', 10 + x1)
-            .attr('x2', 10 + x2);
-
-    }
-
-    function endDrag(d) {
-        let endVal = Math.round(xScale.invert(d3.event.x))
-        let elem = d3.select(this)
-        sliderVals[d] = endVal;
-        let v1 = Math.min(sliderVals[0], sliderVals[1]);
-        let v2 = Math.max(sliderVals[0], sliderVals[1]);
-        elem.classed('active', false)
-            .attr('x', xScale(endVal));
-
-        selectRange.attr('x1', 10 + xScale(v1))
-            .attr('x2', 10 + xScale(v2));
-        
-        $('#predictors-distDropdown').removeClass('.active');
-
-        updateGraph(v1, v2);
-    }
-}
-
-//render graph set up slider
-updateGraph(yr1, yr2);
-setupSlider(yr1, yr2, updateGraph);
