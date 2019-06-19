@@ -54,8 +54,7 @@ let growthLine = d3.line()
     })
     .y(function (d) {
         return line_yScale(d.LAST_YEAR_ENROLMENT);
-    })
-    .curve(d3.curveMonotoneX); //smooth the line
+    }); //smooth the line
 
 
 //distirct controls
@@ -118,7 +117,7 @@ d3.csv('../assets/raw_data/predictors.csv', function (error, data) {
             //covert school year string to num
             let year = +data[i].SCHOOL_YEAR;
             //check if it's already exist
-            if ((sd_arr.indexOf(option) === -1)&&option!='SD99-Province') {
+            if ((sd_arr.indexOf(option) === -1) && option != 'SD99-Province') {
                 sd_arr.push(option);
             }
 
@@ -137,11 +136,11 @@ d3.csv('../assets/raw_data/predictors.csv', function (error, data) {
         //populate dropdown menu
         let dropDown = d3.select('#model_distDropdown .list');
         dropDown.append('div')
-                .text('SD99-Province')
-                .attr('data-value', 'SD99')
+            .text('SD99-Province')
+            .attr('data-value', 'SD99')
         for (let i = 0; i < sd_arr.length; i++) {
             let opt = sd_arr[i];
-                dropDown
+            dropDown
                 .append('div')
                 .text(opt)
                 //take the sd number (first 4 letters) as value
@@ -320,7 +319,7 @@ d3.csv('../assets/raw_data/predictors.csv', function (error, data) {
             .on("mousemove", function (d) {
                 //gets mouse coordinates on screen
                 let offsetTarget = $(this).parent().parent().parent().parent();
-                
+
                 let offset = offsetTarget.offset();
 
                 let mx = (event.pageX - offset.left);
@@ -345,40 +344,44 @@ d3.csv('../assets/raw_data/predictors.csv', function (error, data) {
                     $('#model_distDropdown span').text($(this).text());
                     $('#model_distDropdown').attr('attr', 'dropDown');
 
-                     //reset target district 
-                     targetDistrict = d3.select(this).attr('data-value');
+                    //reset target district 
+                    targetDistrict = d3.select(this).attr('data-value');
 
-                     let districtData = data.filter(function (d) { return d.ABBREV == targetDistrict  && (+d.SCHOOL_YEAR >= yr1 && +d.SCHOOL_YEAR <= yr2)});
-                     let distName = $(this).text();
- 
-                     let driverNames = d3.keys(data[0]).filter(function (key) {
-                         if (key !== 'ABBREV' && key !== 'DISTRICT' && key !== 'SCHOOL_YEAR' && key !== 'LAST_YEAR_ENROLMENT' && key !== 'drivers') {
-                             return key
-                         }
-                     });
- 
-                     //for each js object, generate a new key called drivers
-                     // value is an array of js objects each has driver name and value
- 
-                     //because grouped bar chart
-                     //data must be grouped by year, inside data grouped by drivers 
- 
-                     districtData.forEach(function (d) {
-                         d.LAST_YEAR_ENROLMENT = parseInt(d.LAST_YEAR_ENROLMENT);
-                         d.drivers = driverNames.map(function (name) {
-                             return {
-                                 name: name,
-                                 value: +d[name]
-                             };
-                         });
-                     });
+                    let districtData = data.filter(function (d) { return d.ABBREV == targetDistrict && (+d.SCHOOL_YEAR >= yr1 && +d.SCHOOL_YEAR <= yr2) });
+                    let distName = $(this).text();
+
+                    let driverNames = d3.keys(data[0]).filter(function (key) {
+                        if (key !== 'ABBREV' && key !== 'DISTRICT' && key !== 'SCHOOL_YEAR' && key !== 'LAST_YEAR_ENROLMENT' && key !== 'drivers') {
+                            return key
+                        }
+                    });
+
+                    //for each js object, generate a new key called drivers
+                    // value is an array of js objects each has driver name and value
+
+                    //because grouped bar chart
+                    //data must be grouped by year, inside data grouped by drivers 
+
+                    districtData.forEach(function (d) {
+                        d.LAST_YEAR_ENROLMENT = parseInt(d.LAST_YEAR_ENROLMENT);
+                        d.drivers = driverNames.map(function (name) {
+                            return {
+                                name: name,
+                                value: +d[name]
+                            };
+                        });
+                    });
 
                     d3.select('#distName').text(distName);
-                    //replace space with dash and covert to lower case '/ /g' is a regex (regular expression). The flag g means global. It causes all matches to be replaced.
-                    let sdLink = distName.substring(5, distName.length).replace(/ - /g, ' ').replace(/ /g, '-').toLocaleLowerCase();
-                    //set dynamic href for each sd
-                    d3.select('a.reportBtn').attr('href', 'https://www2.gov.bc.ca/gov/content/education-training/k-12/administration/program-management/reporting-on-k-12/district-reports/' + sdLink);
 
+                    if (distName == 'SD99-Province') {
+                        d3.select('a.reportBtn').attr('href', 'https://www2.gov.bc.ca/gov/content/education-training/k-12/administration/program-management/reporting-on-k-12/district-reports');
+                    } else {
+                        //replace space with dash and covert to lower case '/ /g' is a regex (regular expression). The flag g means global. It causes all matches to be replaced.
+                        let sdLink = distName.substring(5, distName.length).replace(/ - /g, ' ').replace(/ /g, '-').toLocaleLowerCase();
+                        //set dynamic href for each sd
+                        d3.select('a.reportBtn').attr('href', 'https://www2.gov.bc.ca/gov/content/education-training/k-12/administration/program-management/reporting-on-k-12/district-reports/' + sdLink);
+                    }
                     //set aixs
                     line_xScale.domain(districtData.map(function (d) { return d.SCHOOL_YEAR; }));
                     bar_xScale1.domain(districtData.map(function (d) { return d.SCHOOL_YEAR; }));
@@ -469,7 +472,7 @@ d3.csv('../assets/raw_data/predictors.csv', function (error, data) {
     //render graph set up slider
     updateGraph(yr1, yr2);
     setupSlider(yr1, yr2);
-    $(window).resize( function() {
+    $(window).resize(function () {
         d3.select('#model_slider svg').remove();
         model_slider_width = $('#model_control').width();
         setupSlider(yr1, yr2);
