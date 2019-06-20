@@ -41,7 +41,7 @@ let legendContainer = d3.select('#demo-legend')
     .append('g')
     .attr('class', 'legendContainer');
 
-d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
+d3.csv('../assets/raw_data/demographics.csv', function (error, data) {
     if (error) {
         throw error;
     }
@@ -351,7 +351,7 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
         }
     });
 
-    //populate checkbox list in modal, sd_arr (list of districts) is a global array from predictors section
+    //checkbox list in modal, sd_arr (list of districts) is a global array from predictors section
     //value= '" + dist + "' has to be quoted like this, since val contains space
     $.each(sd_arr, function (index, dist) {
         let checkbox;
@@ -373,7 +373,11 @@ d3.csv('../assets/raw_data/demo_test.csv', function (error, data) {
         }
     });
 
-    $('#demo-save').click(function () {
+    $('#demo_deselect').click(function() {
+        $('.demo_checkbox').prop("checked", false);
+    });
+
+    $('#demo_save').click(function () {
         defaultDistrict = [];
         $(".checkbox  input:checkbox:checked").map(function (e) {
             defaultDistrict.push($(this).val());

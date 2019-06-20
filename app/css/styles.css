@@ -7029,7 +7029,7 @@ html {
     background-image: url(../assets/img/bg-dcr.png), url(../assets/img/bg-dcr2.png), url(../assets/img/bg-dcr3.png);
     background-size: 34% auto, 28% auto, 24% auto;
     background-repeat: no-repeat, no-repeat, no-repeat;
-    background-position: left 8%, right 23%, left 91%;
+    background-position: left 8%, right 21%, left 91%;
     background-attachment: scroll, scroll, scroll;
     /**********shared********/
     /*********sections********/ }
@@ -7617,7 +7617,13 @@ html {
           -ms-transform: rotate(45deg);
           transform: rotate(45deg); }
       html body #demographics #demographics-control #demoModal_msg {
-        margin-right: auto; }
+        margin-left: 1rem;
+        align-self: center; }
+      html body #demographics #demographics-control #demo_deselect {
+        margin-right: auto;
+        font-weight: bold;
+        color: #5091CD;
+        cursor: pointer; }
     html body #transition {
       padding-top: 5rem;
       margin-bottom: 5rem; }
