@@ -7499,11 +7499,29 @@ html {
           fill: none;
           stroke: #ccc;
           stroke-width: 1; }
-        html body #enrolment_model #lineContainer #line_tt {
-          background: rgba(255, 255, 255, 0.7);
-          padding: 10px 10px;
-          border-radius: 3px;
-          color: #494949; }
+        html body #enrolment_model #lineContainer .modeltt_rect {
+          position: absolute;
+          z-index: 10;
+          top: 2em;
+          border-radius: 5px;
+          width: 8em;
+          background: white;
+          opacity: 0.9;
+          pointer-events: none; }
+          html body #enrolment_model #lineContainer .modeltt_rect .tipHeader {
+            color: white;
+            padding: 5px;
+            background: #002663;
+            font-weight: bold;
+            font-style: italic;
+            font-size: 12px;
+            border-radius: 5px 5px 0 0; }
+          html body #enrolment_model #lineContainer .modeltt_rect .tipInfo {
+            margin-left: 5px;
+            color: #002663;
+            font-size: 12px; }
+            html body #enrolment_model #lineContainer .modeltt_rect .tipInfo .tipNum {
+              color: #494949; }
       html body #enrolment_model .ticks {
         font-size: 12px; }
       html body #enrolment_model .track,

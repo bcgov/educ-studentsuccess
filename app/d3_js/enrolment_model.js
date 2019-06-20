@@ -87,10 +87,8 @@ let line_chartGroup = line_svg.append('g')
 //initialize html tooltip
 let tooltip_line = d3.select("#lineContainer")
     .append("div")
-    .attr("id", "line_tt")
-    .style("z-index", "10")
-    .style("position", "absolute")
-    .style("visibility", "hidden");
+    .attr("class", "modeltt_rect")
+    .style('display', 'none');
 
 d3.csv('../assets/raw_data/predictors.csv', function (error, data) {
     if (error) {
@@ -223,7 +221,7 @@ d3.csv('../assets/raw_data/predictors.csv', function (error, data) {
             .attr("y", -6)
             .attr("dy", ".9em")
             .style("text-anchor", "end")
-            .text("Toatal FTE in the year");
+            .text("Founded FTE in the year");
 
         //bar y axis
         line_chartGroup.append('g')
@@ -583,26 +581,25 @@ function line_toolOver(v, thepath) {
         //in v4+ use the "long forms"
         .attr("style", "fill:#FCBA19")
         .attr("cursor", "pointer");
-    return tooltip_line.style("visibility", "visible");
+    return tooltip_line.style('display', null);
 };
 
 function line_toolOut(m, thepath) {
     d3.select(thepath)
         .attr("style", "fill:#002663")
         .attr("cursor", "pointer");
-    return tooltip_line.style("visibility", "hidden");
+    return tooltip_line.style('display', 'none');
 }
 
 
 function line_toolMove(mx, my, data) {
     //create the tooltip, style it and inject info
-    if (+data.SCHOOL_YEAR > 2018) {
-        return tooltip_line.style("top", my + 40 + "px")
-            .style("left", mx - 10 + "px")
-            .html("Forecast Enrolment: <b>" + Math.round(data.LAST_YEAR_ENROLMENT));
-    } else {
-        return tooltip_line.style("top", my + - 20 + "px")
-            .style("left", mx - 10 + "px")
-            .html("Total Enrolment: <b>" + Math.round(data.LAST_YEAR_ENROLMENT));
-    }
+
+    return tooltip_line.style("top", my + "px")
+        .style("left", mx - 10 + "px")
+        .html(function () {
+            let content = "<div class='tipHeader'><b>Year: </b>" + data.SCHOOL_YEAR + "</div>";
+            content += "<div class='tipInfo'>Total Enrolment: <span class='tipNum'>" + Math.round(data.LAST_YEAR_ENROLMENT) + "</span></div>"
+            return content;
+        }); 
 }

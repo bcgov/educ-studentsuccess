@@ -749,12 +749,35 @@ body {
     }
 
 
-      #line_tt {
-        background: $tooltip-info-bg;
-        padding: 10px 10px;
-        border-radius: 3px;
-        color: $font-color;
+    .modeltt_rect {
+      position: absolute;
+      z-index:10;
+      top:2em;
+      border-radius: 5px;
+      width:8em;
+      background: white;
+      opacity: 0.9;
+      pointer-events: none;
+
+      .tipHeader {
+        color: white;
+        padding: 5px;
+        background: $tooltip-bg;
+        font-weight: bold;
+        font-style: italic;
+        font-size: 12px;
+        border-radius: 5px 5px 0 0;
       }
+
+      .tipInfo {
+        margin-left: 5px;
+        color:$tooltip-bg;
+        font-size:12px;
+        .tipNum{
+          color:$font-color;
+        }
+      }
+  }
     }
 
 /* slider ------------------------------ */
