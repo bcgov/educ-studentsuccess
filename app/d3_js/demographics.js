@@ -47,7 +47,7 @@ d3.csv('../assets/raw_data/demographics.csv', function (error, data) {
     }
 
     //array of selected district (objects), used to draw lines
-    let defaultDistrict = ['SD23-Central Okanagan', 'SD35-Langley', 'SD61-Greater Victoria', 'SD73-Kamloops - Thompson'];
+    let defaultDistrict = ['SD99-Province'];
 
     let defaultType = 'NEW_KINDERGARTEN';
 
@@ -60,7 +60,7 @@ d3.csv('../assets/raw_data/demographics.csv', function (error, data) {
             .remove();
         //clear existing legends
         let existingLegend = d3.selectAll("#demo-legend .legend");
-     
+
         existingLegend.exit();
         existingLegend.transition()
             .duration(100)
@@ -131,8 +131,8 @@ d3.csv('../assets/raw_data/demographics.csv', function (error, data) {
 
             })
             .on("mousemove", showDemott);
-        
-            let currentPos;
+
+        let currentPos;
         // custom invert function for point scale + tooltips
         function showDemott() {
             let xPos = d3.mouse(this)[0];
@@ -155,24 +155,25 @@ d3.csv('../assets/raw_data/demographics.csv', function (error, data) {
                 let svgSacle = oBox.width / 600;
 
                 d3.select(".demott_rect")
-                        .style('display', null)
-                        .html(function() { 
-                            let content = "<div class='tipHeader'><b>Year: </b>" + currentPos +"</div>"; 
-                            for(let d of selectedDistricts){ 
-                             for (let d2 of districtData) {
-                                if (d2.DISTRICT==d.substring(2,4)&&d2.SCHOOL_YEAR==currentPos)
-                                content += "<div class='tipInfo' data-num='"+d2[type]+"'>"+d.substring(5, d.length)+ ": <span class='tipNum'>"+d2[type]+"</span></div>"
-                                }
+                    .style('display', null)
+                    .html(function () {
+                        let content = "<div class='tipHeader'><b>Year: </b>" + currentPos + "</div>";
+                        for (let d of selectedDistricts) {
+                            for (let d2 of districtData) {
+                                if (d2.DISTRICT == d.substring(2, 4) && d2.SCHOOL_YEAR == currentPos)
+                                    content += "<div class='tipInfo' data-num='" + d2[type] + "'>" + d.substring(5, d.length) + ": <span class='tipNum'>" + d2[type] + "</span></div>"
                             }
-                            return content;});
+                        }
+                        return content;
+                    });
 
                 //sort html elements based on value
                 let tipBox = $('.demott_rect');
- 
-                tipBox.find('.tipInfo').sort(function(a,b){
+
+                tipBox.find('.tipInfo').sort(function (a, b) {
                     return +b.getAttribute('data-num') - +a.getAttribute('data-num')
                 })
-                .appendTo(tipBox);
+                    .appendTo(tipBox);
 
 
                 if (currentPos == 2018) {
@@ -183,19 +184,40 @@ d3.csv('../assets/raw_data/demographics.csv', function (error, data) {
             }
         }
 
-        // for (let dist of defaultDistrict) {
+        
+
         // use for loop for positioning the legend
         for (let i = 0; i < selectedDistricts.length; i++) {
             let district = data.filter(function (d) {
                 return d.DISTRICT == selectedDistricts[i].substring(2, 4)
             });
 
-            console.log(district);
-
-            //set scale domain (combined districtData[])
-            demo_xScale.domain(districtData.map(function (d) {
+             //set scale domain (combined districtData[])
+             demo_xScale.domain(districtData.map(function (d) {
                 return d.SCHOOL_YEAR;
             }));
+
+            if ((selectedDistricts[i] == 'SD99-Province')) {
+                let radioValue = $("input[name='demo-type']:checked").val();
+           
+                if (radioValue != 'NET') {
+                    demo_yScale.domain([Math.min(35000, d3.min(districtData, function (d) {
+                        return d[type];
+                    })),
+                    Math.max(-35000, d3.max(districtData, function (d) {
+                        return d[type];
+                    }))
+                    ]);
+                } else{
+                    demo_yScale.domain([Math.min(0, d3.min(districtData, function (d) {
+                        return d[type];
+                    })),
+                    Math.max(0, d3.max(districtData, function (d) {
+                        return d[type];
+                    }))
+                    ]);
+                }
+            } else {
 
             demo_yScale.domain([Math.min(0, d3.min(districtData, function (d) {
                 return d[type];
@@ -204,7 +226,7 @@ d3.csv('../assets/raw_data/demographics.csv', function (error, data) {
                 return d[type];
             }))
             ]);
-
+        }
             //line generator 
             let demoLine = d3.line()
                 .x(function (d) {
@@ -238,12 +260,12 @@ d3.csv('../assets/raw_data/demographics.csv', function (error, data) {
             legend.append("text")
                 .attr("x", 30)
                 .attr("y", 15 + i * 20)
-                .text(selectedDistricts[i]);   
-            
+                .text(selectedDistricts[i]);
+
             //tooltips info
             d3.select('.demott')
-                       .append('div')
-                       .text(selectedDistricts[i]);
+                .append('div')
+                .text(selectedDistricts[i]);
 
             //animate path
             let totalLength = demo_line.node().getTotalLength();
@@ -354,14 +376,11 @@ d3.csv('../assets/raw_data/demographics.csv', function (error, data) {
     //checkbox list in modal, sd_arr (list of districts) is a global array from predictors section
     //value= '" + dist + "' has to be quoted like this, since val contains space
     $.each(sd_arr, function (index, dist) {
-        let checkbox;
-        if (dist == 'SD23-Central Okanagan' || dist == 'SD35-Langley' || dist == 'SD61-Greater Victoria' || dist == 'SD73-Kamloops - Thompson') {
-            checkbox = "<div class='checkbox'><label><input type='checkbox' id=" + dist.substring(2, 4) + " class='demo_checkbox' value= '" + dist + "' checked><span>" + dist.substring(2, dist.length) + "</span></label></div>"
-        } else {
-            checkbox = "<div class='checkbox'><label><input type='checkbox' id=" + dist.substring(2, 4) + " class='demo_checkbox' value= '" + dist + "'><span>" + dist.substring(2, dist.length) + "</span></label></div>"
-        }
+        let checkbox = "<div class='checkbox'><label><input type='checkbox' id=" + dist.substring(2, 4) + " class='demo_checkbox' value= '" + dist + "'><span>" + dist.substring(2, dist.length) + "</span></label></div>"
         $(".modal-body").append($(checkbox));
     })
+
+    $(".modal-body").append("<div class='checkbox'><label><input type='checkbox' id='99' class='demo_checkbox' value= 'SD99-Province' checked><span>99-Province</span></label></div>");
 
     //set the selection limit
     $('.checkbox input:checkbox').on('change', function (e) {
@@ -373,7 +392,7 @@ d3.csv('../assets/raw_data/demographics.csv', function (error, data) {
         }
     });
 
-    $('#demo_deselect').click(function() {
+    $('#demo_deselect').click(function () {
         $('.demo_checkbox').prop("checked", false);
     });
 
