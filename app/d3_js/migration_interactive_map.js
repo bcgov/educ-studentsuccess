@@ -357,7 +357,7 @@ $(document).ready(function () {
             .on("click", function (d) {
 
               currentDist = d;
-              // console.log(currentDist);
+              $('#distDropdown span').text($(this).attr('id')+'-'+d.id);
               clicked(d);
               resetBtn();
             })
