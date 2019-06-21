@@ -663,6 +663,12 @@ body {
       #flow_text {
         display: flex;
         justify-content: space-between;
+        p:first-child {
+          color: $outflow_color;
+        }
+        p:last-child {
+          color: $inflow_color;
+        }
       }
 
       .selected {

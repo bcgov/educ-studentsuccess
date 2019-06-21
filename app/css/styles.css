@@ -7459,6 +7459,10 @@ html {
       html body #flow_map #control #flow_text {
         display: flex;
         justify-content: space-between; }
+        html body #flow_map #control #flow_text p:first-child {
+          color: #a96a46; }
+        html body #flow_map #control #flow_text p:last-child {
+          color: #65a89d; }
       html body #flow_map #control .selected {
         color: #fff;
         background: #38598a;

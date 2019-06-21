@@ -161,7 +161,7 @@ d3.csv('../assets/raw_data/demographics.csv', function (error, data) {
                         for (let d of selectedDistricts) {
                             for (let d2 of districtData) {
                                 if (d2.DISTRICT == d.substring(2, 4) && d2.SCHOOL_YEAR == currentPos)
-                                    content += "<div class='tipInfo' data-num='" + d2[type] + "'>" + d.substring(5, d.length) + ": <span class='tipNum'>" + d2[type] + "</span></div>"
+                                    content += "<div class='tipInfo' data-num='" + d2[type] + "'>" + d.substring(5, d.length) + ": <span class='tipNum'>" + d2[type].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span></div>"
                             }
                         }
                         return content;

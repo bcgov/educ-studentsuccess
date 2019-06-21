@@ -599,7 +599,7 @@ function line_toolMove(mx, my, data) {
         .style("left", mx - 10 + "px")
         .html(function () {
             let content = "<div class='tipHeader'><b>Year: </b>" + data.SCHOOL_YEAR + "</div>";
-            content += "<div class='tipInfo'>Total Enrolment: <span class='tipNum'>" + Math.round(data.LAST_YEAR_ENROLMENT) + "</span></div>"
+            content += "<div class='tipInfo'>Total Enrolment: <span class='tipNum'>" + Math.round(data.LAST_YEAR_ENROLMENT).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span></div>"
             return content;
         }); 
 }
