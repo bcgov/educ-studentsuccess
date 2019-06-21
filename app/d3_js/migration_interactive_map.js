@@ -1,81 +1,78 @@
 $(document).ready(function () {
   //Width and height
-  var width = 760;
-  var height = 600;
-  var centered;
+  let width = 760;
+  let height = 600;
+  let centered;
 
-  var formatC = d3.format(",.0f");
-  var formatD = d3.format("+,.0f");
+  let formatC = d3.format(",.0f");
+  let formatD = d3.format("+,.0f");
 
-  //var of min & max number of students move in and out 
-  var movein_min, movein_max, moveout_min, moveout_max;
+  //let of min & max number of students move in and out 
+  let movein_min, movein_max, moveout_min, moveout_max;
 
-  var colors = ["#65a89d", "#a96a46"]; //color range based on the number of people
+  let colors = ["#65a89d", "#a96a46"]; //color range based on the number of people
 
   //array used to populate dropdown menu
-  var sd_list_arr = [];
+  let sd_list_arr = [];
 
-  var map = new L.Map("interactiveMap", {
+  let map = new L.Map("interactiveMap", {
     center: [54, -124],
     zoom: 5
   })
     .addLayer(new L.TileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"));
 
   //create the projection expression
-  // var projection = d3.geoAlbers()
+  // let projection = d3.geoAlbers()
   //   .rotate([122, 0, 0])
   //   .scale(2200)
   //   .translate([width * .57, height * 1.4]);
   // .fitSize([width, height], json);
 
   //Define path generator
-  // var path = d3.geoPath()
+  // let path = d3.geoPath()
   //   .projection(projection);
 
-  var path;
+  let path;
 
   //create scales
-  var circleSize = d3.scaleLinear().domain([0, 300]).range([0, 700]);
-  var lineSize = d3.scaleLinear().domain([0, 100]).range([2, 25]);
+  let circleSize = d3.scaleLinear().domain([0, 300]).range([0, 700]);
+  let lineSize = d3.scaleLinear().domain([0, 100]).range([2, 25]);
 
-  // var fillcolor = d3.scaleLinear().range(colors).domain(immdomain);
+  // let fillcolor = d3.scaleLinear().range(colors).domain(immdomain);
 
 
   //Create SVG element
-  // var svg = d3.select("#interactiveMap")
+  // let svg = d3.select("#interactiveMap")
   //   .append("svg")
   //   .attr("width", width)
   //   .attr("height", height);
 
-  var svg = d3.select(map.getPanes().overlayPane).append("svg");
+  let svg = d3.select(map.getPanes().overlayPane).append("svg");
 
-  var chartGroup = svg.append("g").attr("class", "leaflet-zoom-hide");
+  let chartGroup = svg.append("g").attr("class", "leaflet-zoom-hide");
 
 
-  var fp = d3.format(".1f"); // format number, 1 place after decimal
+  let fp = d3.format(".1f"); // format number, 1 place after decimal
 
   //initialize html tooltip
-  var tooltip = d3.select("#interactiveMap")
+  let tooltip = d3.select("#interactiveMap")
     .append("div")
     .attr("id", "tlTip")
     .style("z-index", "10")
     .style("position", "absolute")
     .style("visibility", "hidden");
 
-  var tooltip2 = d3.select("#interactiveMap")
+  let tooltip2 = d3.select("#interactiveMap")
     .append("div")
     .attr("id", "tlTip2")
     .style("z-index", "10")
     .style("position", "absolute")
     .style("visibility", "hidden");
 
-  // var chartGroup = svg.append("g");
-
-
-  var comingData, goingData;
-
-  var currentDist;
-
+  // let chartGroup = svg.append("g");
+  let comingData, goingData;
+  let currentDist;
+  let currentFlowType='all';
 
   //the BIG function that wraps around the d3 pattern (bind, add, update, remove)
   function updateMap(coming, going) {
@@ -93,17 +90,16 @@ $(document).ready(function () {
       let num_coming_arr = [];
 
       //loop through the csv, length is the total number of rows(districts)
-      for (var i = 0; i < data.length; i++) {
+      for (let i = 0; i < data.length; i++) {
         //for...in statement iterates over all non-Symbol, enumerable properties (columns) of an object(each row)
-        for (var stu_num in data[i]) {
-          var stu_num = parseFloat(data[i][stu_num]); //parseFloat() parses a string and returns a floating point number
+        for (let stu_num in data[i]) {
+          stu_num = parseFloat(data[i][stu_num]); //parseFloat() parses a string and returns a floating point number
           //filter out all NaN
           if (!isNaN(stu_num)) {
             num_coming_arr.push(stu_num);
           }
         }
       }
-
       /*
            num__coming_arr is not a number, cannot pass into Math.max() directly
            instead, pass an array of arguments:
@@ -127,12 +123,12 @@ $(document).ready(function () {
       let num_going_arr = [];
 
       //loop through the csv, length is the total number of rows(states)
-      for (var i = 0; i < data.length; i++) {
+      for (let i = 0; i < data.length; i++) {
         //for...in statement iterates over all non-Symbol, enumerable properties (columns) of an object(each row)
-        for (var stu_num in data[i]) {
+        for (let stu_num in data[i]) {
 
           //filter out last two colums (totals)
-          var stu_num = parseFloat(data[i][stu_num]); //parseFloat() parses a string and returns a floating point number
+          stu_num = parseFloat(data[i][stu_num]); //parseFloat() parses a string and returns a floating point number
           //filter out all NaN
           if (!isNaN(stu_num)) {
             num_going_arr.push(stu_num);
@@ -140,8 +136,8 @@ $(document).ready(function () {
         }
 
         //get both school district numbers and names
-        var sd_num = data[i].Abbrev;
-        var sd_name = data[i].District;
+        let sd_num = data[i].Abbrev;
+        let sd_name = data[i].District;
 
         sd_list_arr.push(sd_num + '-' + sd_name);
       }
@@ -165,9 +161,9 @@ $(document).ready(function () {
       /* 
       problem here:
       JavaScript engine called hoisting. The parser will read through the entire function before running it, 
-      and any variable declarations (i.e. using the var keyword) will be executed as if they were at the top of the containing scope.
+      and any letiable declarations (i.e. using the let keyword) will be executed as if they were at the top of the containing scope.
    
-      so move.... var is declared throughout the entire scope, 
+      so move.... let is declared throughout the entire scope, 
       but its value is undefined until the following statments run.
       CANNOT USE for the domain[] on top :(
    
@@ -185,34 +181,34 @@ $(document).ready(function () {
       });
 
       /////////////////////////////////////
-      var indomain = [moveout_min, moveout_max]; //domain of min-max 
-      var outdomain = [movein_min, movein_max];
-      var fillcolor = d3.scaleLinear().range(colors).domain(indomain);
+      let indomain = [moveout_min, moveout_max]; //domain of min-max 
+      let outdomain = [movein_min, movein_max];
+      let fillcolor = d3.scaleLinear().range(colors).domain(indomain);
       ////////////////////////////////////
 
       d3.json("../assets/geo_json/sd_geo.json", function (error, json) {
         if (error) throw error;
 
         //convert json to svg
-        var transform = d3.geoTransform({
+        let transform = d3.geoTransform({
           point: projectPoint
         });
         path = d3.geoPath().projection(transform);
 
         //loop through the csv, length is the total number of rows(districts)
-        for (var i = 0; i < data.length; i++) {
-          var dataDistrict = data[i].District; //district names in csv data
-          var tempObj = {}; //crate a temp object
+        for (let i = 0; i < data.length; i++) {
+          let dataDistrict = data[i].District; //district names in csv data
+          let tempObj = {}; //crate a temp object
 
           //for...in statement iterates over all non-Symbol, enumerable properties (columns) of an object(each row)
-          for (var propt in data[i]) {
-            var valz = parseFloat(data[i][propt]); //parseFloat() parses a string and returns a floating point number
+          for (let propt in data[i]) {
+            let valz = parseFloat(data[i][propt]); //parseFloat() parses a string and returns a floating point number
             tempObj[propt] = valz;
           }
           //Find the corresponding district inside the GeoJSON
-          for (var j = 0; j < json.features.length; j++) {
+          for (let j = 0; j < json.features.length; j++) {
 
-            var jsonDistrict = json.features[j].properties.SDNAME; //state names in json file
+            let jsonDistrict = json.features[j].properties.SDNAME; //state names in json file
 
             if (dataDistrict == jsonDistrict) {
 
@@ -224,7 +220,7 @@ $(document).ready(function () {
               json.features[j].ind = i;
 
               //loop all propt in this temp object
-              for (var propt in tempObj) {
+              for (let propt in tempObj) {
                 //check if it's a number
                 if (!isNaN(tempObj[propt])) {
                   //add properties&vals to json
@@ -238,7 +234,7 @@ $(document).ready(function () {
         }
 
         //Bind data and create one path per GeoJSON feature
-        var feature = chartGroup.selectAll("path")
+        let feature = chartGroup.selectAll("path")
           .data(json.features)
           .enter()
           .append("path")
@@ -256,9 +252,6 @@ $(document).ready(function () {
         map.on("zoom", reset);
         map.on("moveend", function () {
           console.log('pan');
-
-
-
         });
         reset();
 
@@ -273,11 +266,11 @@ $(document).ready(function () {
           chartGroup.selectAll('.goingline').remove().transition()
             .duration(500);
 
-          var bounds = path.bounds(json),
+          let bounds = path.bounds(json),
             topLeft = bounds[0],
             bottomRight = bounds[1];
 
-          var zoomScale = (bottomRight[0] - topLeft[0]);
+          let zoomScale = (bottomRight[0] - topLeft[0]);
           console.log(zoomScale);
 
 
@@ -296,12 +289,12 @@ $(document).ready(function () {
             .data(json.features)
             .enter().append("circle")
             .attr("cx", function (d) {
-              var ctroid;
+              let ctroid;
               ctroid = path.centroid(d)[0]; // get the centroid x
               return ctroid;
             })
             .attr("cy", function (d) {
-              var ctroid;
+              let ctroid;
               ctroid = path.centroid(d)[1]; // get the centroid y
               return ctroid;
             })
@@ -311,7 +304,7 @@ $(document).ready(function () {
               /*total_move_in and totale_emm are columns from csv file
               got added to json features through :    
               json.features[j].properties[propt] = tempObj[propt];*/
-              var diff = d.properties.total_move_in - d.properties.total_move_out;
+              let diff = d.properties.total_move_in - d.properties.total_move_out;
               //gives a minmum r if net changes = 0
               if (Math.abs(diff) < 5) {
                 return 3;
@@ -327,7 +320,7 @@ $(document).ready(function () {
             })
             .attr("fill", function (d) {
               /*fill the color based on -/+ net changes*/
-              var diff = d.properties.total_move_in - d.properties.total_move_out;
+              let diff = d.properties.total_move_in - d.properties.total_move_out;
               if (diff > 0) {
                 return "#65a89d";
               } else {
@@ -349,10 +342,11 @@ $(document).ready(function () {
               let offsetTarget = $(this).parent().parent().parent().parent().parent();
               let offset = offsetTarget.offset();
 
-              var mx = (event.pageX - offset.left);
-              var my = (event.pageY - offset.top);
+              let mx = (event.pageX - offset.left);
+              let my = (event.pageY - offset.top);
 
-              console.log(mx, my);
+              //console.log(mx, my);
+
               // d3.event.clientX & Y give the updated coordinates after panning and zooming
               // if(my>d3.event.clientY) {
               return toolMove(mx, my, d);
@@ -377,7 +371,7 @@ $(document).ready(function () {
         to a different output geometry (such as polygons in projected screen coordinates). 
         */
         function projectPoint(x, y) {
-          var point = map.latLngToLayerPoint(new L.LatLng(y, x));
+          let point = map.latLngToLayerPoint(new L.LatLng(y, x));
           this.stream.point(point.x, point.y);
         }
 
@@ -388,7 +382,7 @@ $(document).ready(function () {
 
   //initial/default map
 
-  // updateMap("../assets/raw_data/sd_coming_2018.csv", "../assets/raw_data/sd_going_2018.csv");
+  updateMap("../assets/raw_data/sd_coming_2018.csv", "../assets/raw_data/sd_going_2018.csv");
 
   function toolOver(v, thepath) {
     d3.select(thepath)
@@ -447,7 +441,7 @@ $(document).ready(function () {
   };
 
   function toolMove2(mx, my, home, end, v1, v2) {
-    // var diff = v1 - v2;
+    // let diff = v1 - v2;
 
     if (mx < 40) {
       mx = 40
@@ -470,7 +464,7 @@ $(document).ready(function () {
   //function crates the path
   function clicked(selected, flowtype) {
     console.log(selected);
-    //var coming = selected.properties;
+    //let coming = selected.properties;
     let selDist, distName;
     let homex, homey;
 
@@ -482,7 +476,7 @@ $(document).ready(function () {
     */
     if (selected.abbrev && selected.properties.SDNAME) {
       selDist = selected.abbrev;
-      // console.log(selDist);
+
       //sleDist is the SD number, distName is for displaying purpose
       distName = selected.properties.SDNAME;
 
@@ -501,7 +495,7 @@ $(document).ready(function () {
       homex = +(selected.getAttribute('cx'));
       homey = +(selected.getAttribute('cy'));
     }
-    console.log(homex, homey);
+    console.log(selDist);
 
     /*
      d3.selectAll(".circ")
@@ -515,6 +509,20 @@ $(document).ready(function () {
       .attr("stroke-dasharray", 0)
       .remove()
 
+    //for top 5 flow
+    let flow_arr = [];
+
+    goingData.forEach(function (d, i) {
+      let finalval = comingData[i][selDist] - goingData[i][selDist];
+      flow_arr.push(finalval);
+    })
+
+    let topFlow = flow_arr.sort(function (a, b) {
+      return b - a;
+    });
+
+    let top_5_flow = topFlow.slice(0, 5);
+    let bottom_5_flow = topFlow.slice(-5);
 
     chartGroup.selectAll(".goingline")
       //bind going data
@@ -525,22 +533,21 @@ $(document).ready(function () {
       .attr("d", function (d, i) {
         // console.log(d); // it's all obejcts in goingData
         //data points here are from .csv, case sensitive!!!
-        var abb = d.Abbrev;
+        let abb = d.Abbrev;
 
-        // console.log(abb);
+        console.log(d);
 
         /*
         net changes btw going and coming
         the csv coming and going is based on column: e.g. going or coming number of students to the ditrict in title row 
         */
-        var finalval = comingData[i][selDist] - goingData[i][selDist];
-        // console.log(finalval);
+        let finalval = comingData[i][selDist] - goingData[i][selDist];
         /*
         select the district (destination, id has been assigned)
         the id here is the id of the circle of destination (circle)
         */
 
-        var theDistrict = d3.select('#' + abb);
+        let theDistrict = d3.select('#' + abb);
 
         //here we can extract the full name of home ditrict
         if (selDist == abb) {
@@ -559,34 +566,60 @@ $(document).ready(function () {
          */
 
         //coordinates of the path destination
-        var destx = path.centroid(theDistrict.nodes()[0].__data__)[0];
-        var desty = path.centroid(theDistrict.nodes()[0].__data__)[1];
+        let destx = path.centroid(theDistrict.nodes()[0].__data__)[0];
+        let desty = path.centroid(theDistrict.nodes()[0].__data__)[1];
 
-        if (flowtype && flowtype == 'inflow') {
-          if (!isNaN(finalval) && (finalval > 0)) {
-            return "M" + destx + "," + desty + " Q" + Number((destx + homex)) / 2 + " " + (desty + homey) / 1.5 + " " + homex + " " + homey;
-          }
-
-        } else if (flowtype && flowtype == 'outflow') {
-          if (!isNaN(finalval) && (finalval < 0)) {
-            return "M" + homex + "," + homey + " Q" + (destx + homex) / 2 + " " + (desty + homey) / 2.5 + " " + destx + " " + desty;
-          }
-        } else {
-          //validate and check the net changes, and exclude path with no migration change
-          if (!isNaN(finalval) && (comingData[i][selDist] != 0 || goingData[i][selDist] != 0)) {
-            //extract the district name from the __data__ obejct
-            console.log(theDistrict.nodes()[0].__data__.id);
-
-            //if theres changes meanig movements btw home distric and dest district
-            if (finalval > 0) {
+        if ($('#flat_switch').is(':checked')) {
+          console.log('switch on');
+          if (flowtype && flowtype == 'inflow') {
+            if (!isNaN(finalval) && (finalval > 0) && (top_5_flow.includes(finalval))) {
               return "M" + destx + "," + desty + " Q" + Number((destx + homex)) / 2 + " " + (desty + homey) / 1.5 + " " + homex + " " + homey;
+            }
 
-            } else {
+          } else if (flowtype && flowtype == 'outflow') {
+            if (!isNaN(finalval) && (finalval < 0) && (bottom_5_flow.includes(finalval))) {
               return "M" + homex + "," + homey + " Q" + (destx + homex) / 2 + " " + (desty + homey) / 2.5 + " " + destx + " " + desty;
+            }
+          } else {
+            //validate and check the net changes, and exclude path with no migration change
+            if (!isNaN(finalval) && (comingData[i][selDist] != 0 || goingData[i][selDist] != 0) && (top_5_flow.includes(finalval) || bottom_5_flow.includes(finalval))) {
+              //extract the district name from the __data__ obejct
+              console.log(theDistrict.nodes()[0].__data__.id);
+
+              //if theres changes meanig movements btw home distric and dest district
+              if (finalval > 0) {
+                return "M" + destx + "," + desty + " Q" + Number((destx + homex)) / 2 + " " + (desty + homey) / 1.5 + " " + homex + " " + homey;
+              } else if (finalval < 0) {
+                return "M" + homex + "," + homey + " Q" + (destx + homex) / 2 + " " + (desty + homey) / 2.5 + " " + destx + " " + desty;
+              }
+            }
+          }
+
+        } else {
+          if (flowtype && flowtype == 'inflow') {
+            if (!isNaN(finalval) && (finalval > 0) && (top_5_flow)) {
+              return "M" + destx + "," + desty + " Q" + Number((destx + homex)) / 2 + " " + (desty + homey) / 1.5 + " " + homex + " " + homey;
+            }
+
+          } else if (flowtype && flowtype == 'outflow') {
+            if (!isNaN(finalval) && (finalval < 0)) {
+              return "M" + homex + "," + homey + " Q" + (destx + homex) / 2 + " " + (desty + homey) / 2.5 + " " + destx + " " + desty;
+            }
+          } else {
+            //validate and check the net changes, and exclude path with no migration change
+            if (!isNaN(finalval) && (comingData[i][selDist] != 0 || goingData[i][selDist] != 0)) {
+              //extract the district name from the __data__ obejct
+              console.log(theDistrict.nodes()[0].__data__.id);
+
+              //if theres changes meanig movements btw home distric and dest district
+              if (finalval > 0) {
+                return "M" + destx + "," + desty + " Q" + Number((destx + homex)) / 2 + " " + (desty + homey) / 1.5 + " " + homex + " " + homey;
+              } else if (finalval < 0) {
+                return "M" + homex + "," + homey + " Q" + (destx + homex) / 2 + " " + (desty + homey) / 2.5 + " " + destx + " " + desty;
+              }
             }
           }
         }
-
       })
 
       //the drawing annimation
@@ -596,15 +629,15 @@ $(document).ready(function () {
 
       //prob:stroke-width is fixed at 0.5?????
       .attr("stroke-width", function (d, i) {
-        console.log(comingData[i][selDist], goingData[i][selDist]);
-        var finalval = comingData[i][selDist] - goingData[i][selDist];
+
+        let finalval = comingData[i][selDist] - goingData[i][selDist];
 
         return lineSize(parseFloat(Math.abs(finalval)));
 
       })
       //stroke color
       .attr("stroke", function (d, i) {
-        var finalval = comingData[i][selDist] - goingData[i][selDist];
+        let finalval = comingData[i][selDist] - goingData[i][selDist];
         if (finalval > 0) {
           //color for positive growth
           return "#65a89d";
@@ -643,7 +676,7 @@ $(document).ready(function () {
   }
 
   function tweenDash() {
-    var l = this.getTotalLength(),
+    let l = this.getTotalLength(),
       i = d3.interpolateString("0," + l, l + "," + l);
     return function (t) {
       return i(t);
@@ -656,25 +689,12 @@ $(document).ready(function () {
     flowBtns.attr('class', 'flowBtn');
     let defBtn = d3.select('#btn_all');
     defBtn.classed('selected', true);;
+    currentFlowType='all';
   }
   //  d3.select(self.frameElement).style("height", "700px");
 
 
   /*control panel*/
-
-  //limit the size of the drop down
-  // let distSelect = d3.select('#distDropdown');
-  // distSelect.on('click', function () {
-  //   if (this.options.length > 10) {
-  //     this.size = 10;
-  //   }
-  // })
-  //   .on('change', function () {
-  //     this.size = 0;
-  //   })
-  //   .on('blur', function () {
-  //     this.size = 0;
-  //   });
 
   //dropdown selection
   $('#yearDropdown').on('click', function (et) {
@@ -686,8 +706,7 @@ $(document).ready(function () {
         //jquery, this is so bad... :(
         $('#yearDropdown span').text($(this).text());
         $('#yearDropdown').attr('attr', 'dropDown');
-        var newData = d3.select(this).attr('data-value');
-        console.log(newData);
+        let newData = d3.select(this).attr('data-value');
         //clear dropdown array
         // sd_list_arr=[];
         updateMap("../assets/raw_data/sd_coming_" + newData + ".csv", "../assets/raw_data/sd_going_" + newData + ".csv");
@@ -701,7 +720,7 @@ $(document).ready(function () {
     $(this).toggleClass('active');
     $('#yearDropdown').removeClass('active');
 
-    //or add on click when appending the divs
+    //or add click listener when appending the divs
     d3.selectAll('#distDropdown .list div')
       .on('click', function () {
         $('#distDropdown span').text($(this).text());
@@ -719,25 +738,38 @@ $(document).ready(function () {
   let selectedFlow = 'all';
   let flowBtns = d3.selectAll('.flowBtn');
   flowBtns.on('click', function () {
-
+    console.log(currentDist);
     flowBtns.attr('class', 'flowBtn'); // this gets called everytime when a new click happens
     this.classList.add('selected'); //this can only apply vanllila js code
 
-    let btnFlowType = this.getAttribute('value');
+    currentFlowType = this.getAttribute('value');
     // console.log(btnFlowType);
 
-    let currentLines = chartGroup.selectAll('.goingline');
-    console.log(currentLines);
+    // let currentLines = chartGroup.selectAll('.goingline');
+    // console.log(currentLines);
 
-    // currentLines.remove();
+    // // currentLines.remove();
 
     //let strokeColor = currentLines.nodes()[i].attributes.stroke.nodeValue;
-    if (btnFlowType) {
-      clicked(currentDist, btnFlowType);
-    } else if (btnFlowType == 'all') {
+    if (currentFlowType) {
+      clicked(currentDist, currentFlowType);
+    } else if (currentFlowType == 'all') {
       clicked(currentDist);
     }
 
   });
+
+  //top 5 swtich
+  //.checked doesn't work on jquery object, use either way to 
+  $('#flat_switch').change(function () {
+    // console.log(document.querySelector('#flat_switch').checked);
+    // console.log($('#flat_switch').is(':checked'));
+    if (currentFlowType) {
+      clicked(currentDist, currentFlowType);
+    } else if (currentFlowType == 'all') {
+      clicked(currentDist);
+    }
+  });
+
 
 });

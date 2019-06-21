@@ -11,6 +11,8 @@ $tooltip-bg: #002663;
 $tooltip-info-bg:rgba(255, 255, 255, 0.7);
 $section-header:rgba(252,186,25, 0.5);
 $err-color: #d8292f;
+$inflow_color:#65a89d;
+$outflow_color: #a96a46;
 
 
 //Bootstrap sass files
@@ -326,7 +328,7 @@ body {
 
 
 /*********sections********/
-  #overview::before, #inter-map::before, #graph::before, #facts::before {
+  #overview::before, #flow_map::before, #graph::before, #facts::before {
     content:"";
     display:block;
     height:100px; /* fixed header height*/
@@ -531,7 +533,7 @@ body {
   }
 
   // interactive map 
-  #inter-map {
+  #flow_map {
     margin-bottom: 5rem;
    
     #mapContainer {
@@ -554,40 +556,121 @@ body {
       }
     }
 
-    #distDropdown.active{
-        .list{
-          max-height: 240px;
+    #control {
+
+      #distDropdown.active{
+          .list{
+            max-height: 240px;
+          }
+      }
+
+      #flow_switch {
+        display: flex;
+        align-items: center;
+        margin: 1rem 0;
+        h6{
+          color:$btn-color;
+          font-weight: bold;
         }
-    }
+        #flat_switch {
+          display:block;
+          opacity:0;
+        }
+        label {
+          width: 60px;
+          height: 30px;
+          cursor: pointer;
+          display: inline-block;
+          position: relative;
+          border-radius: 30px;
+          border: 2px solid rgb(189, 189, 189);
+          transition: ease 0.5s;
+          transition: backgorund-color 0.5s;
+        }
 
-    .flowBtn {
-      margin-top: .5rem;
-      margin-right: .5rem;
-      padding: 0.25rem 0.5rem;
-      width: 5rem;
-      border: 2px solid $btn-color;
-      border-radius: 50px;
-      background: none;
-      color: $btn-color;
-      font-weight: medium;
-      cursor: pointer;
-    }
+        label:after {
+          left: 0;
+          width: 20px;
+          height: 20px;
+          margin: 3px;
+          content: '';
+          position: absolute;
+          background: rgb(189, 189, 189);
+          border-radius: 10px;
+        }
+        input:checked + label {
+          background: none;
+          border: 2px solid $btn-color;
+          box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05);
+        }
+        input:checked + label:after {
+          background: $btn-color;
+          left: auto;
+          right: 0;
+        }
+      }
 
-    .flowBtn:hover{
-      color: #fff;
-      background: $btn-color;
-      transition: .3s ease;
-    }
+      .flowBtn {
+        margin-right: 0.5rem;
+        padding: 0.25rem 0.5rem;
+        width: 5rem;
+        border: 2px solid $btn-color;
+        border-radius: 50px;
+        background: none;
+        color: $btn-color;
+        font-weight: medium;
+        cursor: pointer;
+      }
 
-    .selected {
-      color: #fff;
-      background: $btn-color;
-      box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05);
-    }
+      .flowBtn:hover{
+        color: #fff;
+        background: $btn-color;
+        transition: .3s ease;
+      }
 
-    /* #maincontainer {
-            display:flex;
-        } */
+      #flow_legend {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .dot {
+          height: 1.5em;
+          width: 1.5em;
+          border-radius: 50%;
+          opacity: 0.5;
+          display: inline-block;
+          text-align: center;
+          vertical-align: middle;
+          line-height: 1.5em;
+          color:white;
+      }
+        .outflow_color {
+          background-color: $outflow_color;
+        }
+        .inflow_color {
+          background-color: $inflow_color;
+        }
+        .dot_md{
+          height: 2.5em;
+          width: 2.5em;
+          line-height: 2.5em;
+        }
+        .dot_lg{
+          height: 3.5em;
+          width: 3.5em;
+          line-height: 3.5em;
+        }
+      }
+      #flow_text {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .selected {
+        color: #fff;
+        background: $btn-color;
+        box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05);
+      }
+  }
 
     .leaflet-pane{
       z-index: 0;

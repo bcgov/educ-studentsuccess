@@ -7230,7 +7230,7 @@ html {
       color: #002663; }
       html body .radio:hover .checkmark {
         border: 3px solid #002663; }
-    html body #overview::before, html body #inter-map::before, html body #graph::before, html body #facts::before {
+    html body #overview::before, html body #flow_map::before, html body #graph::before, html body #facts::before {
       content: "";
       display: block;
       height: 100px;
@@ -7364,27 +7364,60 @@ html {
       font-weight: 600; }
     html body #aniContainer .caption {
       fill: #494949; }
-    html body #inter-map {
-      margin-bottom: 5rem;
-      /* #maincontainer {
-            display:flex;
-        } */ }
-      html body #inter-map #mapContainer {
+    html body #flow_map {
+      margin-bottom: 5rem; }
+      html body #flow_map #mapContainer {
         position: relative; }
-      html body #inter-map #interactiveMap {
+      html body #flow_map #interactiveMap {
         max-width: 100%;
         height: 500px;
         z-index: 1;
         position: relative; }
-        html body #inter-map #interactiveMap svg {
+        html body #flow_map #interactiveMap svg {
           position: relative; }
-          html body #inter-map #interactiveMap svg .goingline {
+          html body #flow_map #interactiveMap svg .goingline {
             pointer-events: auto; }
-      html body #inter-map #distDropdown.active .list {
+      html body #flow_map #control #distDropdown.active .list {
         max-height: 240px; }
-      html body #inter-map .flowBtn {
-        margin-top: .5rem;
-        margin-right: .5rem;
+      html body #flow_map #control #flow_switch {
+        display: flex;
+        align-items: center;
+        margin: 1rem 0; }
+        html body #flow_map #control #flow_switch h6 {
+          color: #38598a;
+          font-weight: bold; }
+        html body #flow_map #control #flow_switch #flat_switch {
+          display: block;
+          opacity: 0; }
+        html body #flow_map #control #flow_switch label {
+          width: 60px;
+          height: 30px;
+          cursor: pointer;
+          display: inline-block;
+          position: relative;
+          border-radius: 30px;
+          border: 2px solid #bdbdbd;
+          transition: ease 0.5s;
+          transition: backgorund-color 0.5s; }
+        html body #flow_map #control #flow_switch label:after {
+          left: 0;
+          width: 20px;
+          height: 20px;
+          margin: 3px;
+          content: '';
+          position: absolute;
+          background: #bdbdbd;
+          border-radius: 10px; }
+        html body #flow_map #control #flow_switch input:checked + label {
+          background: none;
+          border: 2px solid #38598a;
+          box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
+        html body #flow_map #control #flow_switch input:checked + label:after {
+          background: #38598a;
+          left: auto;
+          right: 0; }
+      html body #flow_map #control .flowBtn {
+        margin-right: 0.5rem;
         padding: 0.25rem 0.5rem;
         width: 5rem;
         border: 2px solid #38598a;
@@ -7393,21 +7426,50 @@ html {
         color: #38598a;
         font-weight: medium;
         cursor: pointer; }
-      html body #inter-map .flowBtn:hover {
+      html body #flow_map #control .flowBtn:hover {
         color: #fff;
         background: #38598a;
         transition: .3s ease; }
-      html body #inter-map .selected {
+      html body #flow_map #control #flow_legend {
+        display: flex;
+        align-items: center;
+        justify-content: space-between; }
+        html body #flow_map #control #flow_legend .dot {
+          height: 1.5em;
+          width: 1.5em;
+          border-radius: 50%;
+          opacity: 0.5;
+          display: inline-block;
+          text-align: center;
+          vertical-align: middle;
+          line-height: 1.5em;
+          color: white; }
+        html body #flow_map #control #flow_legend .outflow_color {
+          background-color: #a96a46; }
+        html body #flow_map #control #flow_legend .inflow_color {
+          background-color: #65a89d; }
+        html body #flow_map #control #flow_legend .dot_md {
+          height: 2.5em;
+          width: 2.5em;
+          line-height: 2.5em; }
+        html body #flow_map #control #flow_legend .dot_lg {
+          height: 3.5em;
+          width: 3.5em;
+          line-height: 3.5em; }
+      html body #flow_map #control #flow_text {
+        display: flex;
+        justify-content: space-between; }
+      html body #flow_map #control .selected {
         color: #fff;
         background: #38598a;
         box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
-      html body #inter-map .leaflet-pane {
+      html body #flow_map .leaflet-pane {
         z-index: 0; }
-      html body #inter-map #tlTip {
+      html body #flow_map #tlTip {
         pointer-events: none;
         color: white;
         position: absolute; }
-      html body #inter-map #tipDiv {
+      html body #flow_map #tipDiv {
         font-size: 16px;
         border-radius: 3px;
         width: 180px;
@@ -7415,7 +7477,7 @@ html {
         background-repeat: no-repeat;
         text-align: left;
         line-height: 20px; }
-      html body #inter-map #tipLoc {
+      html body #flow_map #tipLoc {
         font-weight: normal;
         font-style: Italic;
         color: white;
@@ -7424,7 +7486,7 @@ html {
         background: #002663;
         font-size: 14px;
         border-radius: 3px 3px 0 0; }
-      html body #inter-map #tipInfo {
+      html body #flow_map #tipInfo {
         font-weight: normal;
         font-size: 12px;
         color: #494949;
@@ -7432,10 +7494,10 @@ html {
         padding: 5px 0px 5px 10px;
         background: rgba(255, 255, 255, 0.7);
         border-radius: 0 0 3px 3px; }
-      html body #inter-map #tlTip2 {
+      html body #flow_map #tlTip2 {
         pointer-events: none;
         color: white; }
-      html body #inter-map #tipDiv2 {
+      html body #flow_map #tipDiv2 {
         font-size: 16px;
         position: absolute;
         width: 250px;
@@ -7443,7 +7505,7 @@ html {
         background-repeat: no-repeat;
         text-align: left;
         line-height: 20px; }
-      html body #inter-map #tipLoc2 {
+      html body #flow_map #tipLoc2 {
         font-weight: normal;
         font-style: Italic;
         color: white;
@@ -7452,7 +7514,7 @@ html {
         background: #002663;
         font-size: 14px;
         border-radius: 3px 3px 0 0; }
-      html body #inter-map #tipInfo2 {
+      html body #flow_map #tipInfo2 {
         font-weight: normal;
         font-size: 10px;
         color: #494949;
@@ -7460,7 +7522,7 @@ html {
         padding: 5px 0px 5px 10px;
         background: rgba(255, 255, 255, 0.7);
         border-radius: 0 0 3px 3px; }
-      html body #inter-map .tipClear {
+      html body #flow_map .tipClear {
         clear: both; }
     html body #enrolment_model {
       margin-bottom: 5rem;
