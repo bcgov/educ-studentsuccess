@@ -221,7 +221,7 @@ d3.csv('../assets/raw_data/predictors.csv', function (error, data) {
             .attr("y", -6)
             .attr("dy", ".9em")
             .style("text-anchor", "end")
-            .text("Founded FTE in the year");
+            .text("Funded FTE in the year");
 
         //bar y axis
         line_chartGroup.append('g')

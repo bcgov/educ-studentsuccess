@@ -253,8 +253,8 @@ function transUpdate(year, type) {
             throw error;
         }
 
-        let yAxis_label = 'Founded FTE';
-        let xAxis_label = 'Founded FTE';
+        let yAxis_label = 'Funded FTE';
+        let xAxis_label = 'Funded FTE';
 
         let districtData = data.filter(function (d) { return +d.SCHOOL_YEAR == year });
 
@@ -364,7 +364,7 @@ function transUpdate(year, type) {
                 .attr('x', trans_width/2)
                 .attr("y", 12)
                 .style("text-anchor", "middle")
-                .text("Founded FTE");;
+                .text("Funded FTE");;
 
             //grid line
 
@@ -388,9 +388,19 @@ function transUpdate(year, type) {
     });
 }
 
+// populate dist dropdown
+for (let i = 0; i < sd_arr.length; i++) {
+    console.log()
+    let opt = sd_arr[i];
+    d3.select('#trans_dist_dropdown')
+        .append('option')
+        .text(opt)
+        //take the sd number (first 4 letters) as value
+        .attr('data-value', opt.substring(0, 4));
+};
+
 //dist dropdown multiselect
 $('#trans_dist_dropdown').on('click', function() {
-    $(this).toggleClass('active');
     selectpicker();
 });
 
