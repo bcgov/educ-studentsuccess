@@ -7268,12 +7268,12 @@ html {
       max-width: 400px;
       height: auto; }
     html body .controlSection {
-      margin-bottom: 2rem; }
+      margin-bottom: 1rem; }
     html body .dropDown {
       position: relative;
       background: white;
       width: 100%;
-      padding: 12px 15px;
+      padding: 6px 10px;
       border: 2px solid #38598a;
       box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
       border-radius: 0.5em;
@@ -7300,7 +7300,7 @@ html {
       html body .dropDown .list div {
         text-decoration: none;
         color: #494949;
-        padding: 12px 15px;
+        padding: 6px 10px;
         transition: 0.3s ease-out;
         border: none; }
       html body .dropDown .list div:hover {
@@ -7715,23 +7715,19 @@ html {
     html body #transition {
       padding-top: 5rem;
       margin-bottom: 5rem; }
-      html body #transition #trans_control {
+      html body #transition #trans_control #trans_slider {
+        fill: #494949;
+        font-size: 12px;
+        padding: 0; }
+      html body #transition #trans_control_2 {
         display: flex; }
-        html body #transition #trans_control h6 {
-          font-weight: bold;
-          margin: 0;
-          padding: 1em 0 0 1em; }
-        html body #transition #trans_control #trans_slider {
-          fill: #494949;
-          font-size: 12px;
-          padding: 0; }
-      html body #transition #trans_radio {
-        display: flex;
-        justify-content: space-around; }
       html body #transition #graph_container {
-        margin-top: 6rem;
+        margin-top: 4rem;
         display: flex;
         flex-wrap: wrap; }
+        html body #transition #graph_container .trans_title {
+          color: #1D438C;
+          margin-bottom: 2rem; }
         html body #transition #graph_container #trans_rate {
           max-width: 200px;
           background: url(../assets/img/trans_icon.png);

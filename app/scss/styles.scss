@@ -384,14 +384,14 @@ body {
 
   // Shared 
   .controlSection {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
 
   .dropDown {
     position: relative;
     background: white;
     width: 100%;
-    padding: 12px 15px;
+    padding: 6px 10px;
     border: 2px solid $btn-color;
     box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
     border-radius: 0.5em;
@@ -422,7 +422,7 @@ body {
     .list div {
       text-decoration: none;
       color: $font-color;
-      padding: 12px 15px;
+      padding: 6px 10px;
       transition: 0.3s ease-out;
       border: none;
     }
@@ -1068,12 +1068,6 @@ body {
   margin-bottom: 5rem;
 
   #trans_control{
-    display: flex;
-    h6{
-      font-weight: bold;
-      margin: 0;
-      padding: 1em 0 0 1em;
-    }
 
   #trans_slider {
     fill: $font-color;
@@ -1081,16 +1075,20 @@ body {
     padding: 0;
     }
   }
-  
-  #trans_radio {
+
+  #trans_control_2{
     display: flex;
-    justify-content: space-around;
   }
   
   #graph_container {
-    margin-top: 6rem;
+    margin-top: 4rem;
     display: flex;
     flex-wrap: wrap;
+    
+    .trans_title{
+      color: #1D438C;
+      margin-bottom: 2rem;
+    }
     #trans_rate{
       max-width: 200px;
       background: url(../assets/img/trans_icon.png);

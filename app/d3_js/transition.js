@@ -24,7 +24,8 @@ let trans_yAxis = d3.axisLeft()
 let trans_xAxis = d3.axisBottom()
     .scale(trans_xScale)
     .tickSize(-trans_height)
-    .tickPadding(20);
+    .tickPadding(20)
+    .ticks(5);
 
 //canvas
 let trans_svg = d3.select('#transition_container').append('svg')
@@ -222,10 +223,10 @@ function graphUpdate(year) {
         });
 
         d3.select('#pub_to_ind').text(yrData.map(function (d) {
-            return d.RATE_PtoI + '%';
+            return  Math.round(Math.abs(d.LEAVE_PUBLIC)) + '  ('+ d.RATE_PtoI +'%)';
         }));
         d3.select('#ind_to_pub').text(yrData.map(function (d) {
-            return d.RATE_ItoP + '%';
+            return Math.round(d.ENTER_PUBLIC) +'  ('+ d.RATE_ItoP +'%)';
         }));
 
     });
@@ -281,9 +282,9 @@ function transUpdate(year, type) {
         console.log(districtData_top5);
 
         //set scale domain
-        trans_xScale.domain(d3.extent(districtData_top5, function (d) {
+        trans_xScale.domain([0, d3.max(districtData_top5, function (d) {
             return d.LAST_YEAR_ENROLMENT;
-        }))
+        })])
         .nice();
 
         trans_yScale.domain(d3.extent(districtData_top5, function (d) {
@@ -387,15 +388,26 @@ function transUpdate(year, type) {
     });
 }
 
-//radio selection
-$("#trans_radio input[type='radio']").change(function () {
-    let radioValue = $("input[name='trans-type']:checked").val();
-    $("input[name='trans-type']:checked").parent().css('color', '#002663');
-    trans_type = radioValue;
-    if (radioValue) {
+//dist dropdown multiselect
+$('#trans_dist_dropdown').on('click', function() {
+    $(this).toggleClass('active');
+    selectpicker();
+});
+
+//type dropdown
+$('#trans_type_dropdown').on('click', function (e) {
+    $(this).toggleClass('active');
+    d3.selectAll('#trans_type_dropdown .list div')
+            .on('click', function () {
+    let typeValue = d3.select(this).attr('data-value');
+    console.log(typeValue);
+    $('#trans_type_dropdown span').text($(this).text());
+    trans_type = typeValue;
+    if (typeValue) {
         transClear();
-        transUpdate(2013, radioValue);
+        transUpdate(2013, typeValue);
     }
+  });
 });
 
 function showTranstt(sd, yr, num, type, xpos, ypos) {
