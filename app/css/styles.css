@@ -7230,6 +7230,10 @@ html {
       color: #002663; }
       html body .radio:hover .checkmark {
         border: 3px solid #002663; }
+    html body .axis_label {
+      font-size: 1rem;
+      fill: #494949;
+      opacity: 0.5; }
     html body #overview::before, html body #flow_map::before, html body #graph::before, html body #facts::before {
       content: "";
       display: block;
@@ -7747,17 +7751,18 @@ html {
             font-weight: bold; }
       html body #transition #transition_container .trans_bar {
         fill: #002663;
+        opacity: 0.5;
         cursor: pointer; }
       html body #transition #transition_container .label {
         text-anchor: middle;
         fill: white; }
       html body #transition #transition_container .yAxis, html body #transition #transition_container .xAxis {
-        stroke-width: 0;
         color: #494949; }
         html body #transition #transition_container .yAxis .domain, html body #transition #transition_container .xAxis .domain {
           display: none; }
-      html body #transition #transition_container .xAxis {
-        font-weight: bold; }
+      html body #transition #transition_container .tick line {
+        stroke: #ccc;
+        stroke-opacity: 0.5; }
       html body #transition #transition_container #trans_tt .trans_link {
         margin: 0.5em; }
         html body #transition #transition_container #trans_tt .trans_link .ssLink {

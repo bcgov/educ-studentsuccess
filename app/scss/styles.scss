@@ -325,6 +325,12 @@ body {
   }
 }
 
+.axis_label {
+  font-size: 1rem;
+  fill: $font-color;
+  opacity: 0.5;
+}
+
 
 
 /*********sections********/
@@ -1110,6 +1116,7 @@ body {
   #transition_container {
     .trans_bar {
       fill: $tooltip-bg;
+      opacity: 0.5;
       cursor: pointer;
     }
 
@@ -1122,13 +1129,13 @@ body {
       .domain {
         display: none;
       }
-      stroke-width: 0;
       color:$font-color;
     }
 
-    .xAxis {
-      font-weight: bold;
-    }
+    .tick line{
+      stroke: #ccc;
+      stroke-opacity: 0.5;
+      }
 
     #trans_tt{
       .trans_link{

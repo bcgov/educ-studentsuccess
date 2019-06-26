@@ -10,18 +10,21 @@ let trans_margin = {
 let trans_height = 400 - trans_margin.top - trans_margin.bottom;
 let trans_width = 600 - trans_margin.left - trans_margin.right;
 
-let trans_yScale = d3.scaleLinear()
-    .range([trans_height, 0]);
+let trans_xScale = d3.scaleLinear()
+    .range([0, trans_width]);
 
-let trans_xScale = d3.scaleBand()
-    .range([0, trans_width])
-    .padding(0.4);
+let trans_yScale = d3.scaleLinear()
+    .range([trans_height,0]);
 
 let trans_yAxis = d3.axisLeft()
-    .scale(trans_yScale);
+    .scale(trans_yScale)
+    .tickSize(-trans_width)
+    .tickPadding(20);
 
 let trans_xAxis = d3.axisBottom()
-    .scale(trans_xScale);
+    .scale(trans_xScale)
+    .tickSize(-trans_height)
+    .tickPadding(20);
 
 //canvas
 let trans_svg = d3.select('#transition_container').append('svg')
@@ -77,7 +80,8 @@ function transition_slider() {
     let tslider_xScale = d3.scaleLinear()
         .domain(tslider_years)
         .range([0, tslider_targetValue])
-        .clamp(true);
+        .clamp(true)
+        .nice();
 
     //create track
     tsliderGroup.append("line")
@@ -156,8 +160,6 @@ function transition_slider() {
 
     //flag for checking update() year input
     let tslider_yrCheck = 0;
-
-    let trans_type = 'ENTER_PUBLIC';
 
     function tslider_inputYear(val) {
         // console.log(val);
@@ -245,9 +247,13 @@ function transClear() {
 function transUpdate(year, type) {
 
     d3.csv('../assets/raw_data/transition_district.csv', function (error, data) {
+        
         if (error) {
             throw error;
         }
+
+        let yAxis_label = 'Founded FTE';
+        let xAxis_label = 'Founded FTE';
 
         let districtData = data.filter(function (d) { return +d.SCHOOL_YEAR == year });
 
@@ -256,6 +262,7 @@ function transUpdate(year, type) {
             d.ENTER_PUBLIC = +d.ENTER_PUBLIC;
             d.LEAVE_PUBLIC = +d.LEAVE_PUBLIC;
             d.NET_INDEPENDENT = +d.NET_INDEPENDENT;
+            d.LAST_YEAR_ENROLMENT = +d.LAST_YEAR_ENROLMENT;
         });
 
         //sort array of object based on # of enter, leave, and net
@@ -270,29 +277,30 @@ function transUpdate(year, type) {
 
         //top 5 district
         let districtData_top5 = districtData.slice(0, 5);
+        // districtData_top5.reverse();
+        console.log(districtData_top5);
 
         //set scale domain
-        trans_xScale.domain(districtData_top5.map(function (d) {
-            return d.DISTRICT;
-        }));
+        trans_xScale.domain(d3.extent(districtData_top5, function (d) {
+            return d.LAST_YEAR_ENROLMENT;
+        }))
+        .nice();
 
-        trans_yScale.domain([Math.min(0, d3.min(districtData_top5, function (d) {
-            return d[type];
-        })),
-        Math.max(0, d3.max(districtData_top5, function (d) {
-            return d[type];
-        }))]);
+        trans_yScale.domain(d3.extent(districtData_top5, function (d) {
+            return Math.abs(d[type]);
+        }))
+        .nice();
 
         //add ditrict name to ticks using sd_arr[] from predictors section
-        trans_xAxis.tickFormat(function (d) {
-            for (let sd of sd_arr) {
-                if (d == sd.substring(2, 4))
-                    return sd.substring(5, sd.lengt);
-            }
-        })
-
+        // trans_yAxis.tickFormat(function (d) {
+        //     for (let sd of sd_arr) {
+        //         if (d == sd.substring(2, 4))
+        //             return sd.substring(5, sd.length);
+        //     }
+        // })
+      
         //draw 
-        if ($('#transition_container .yAxis').length) {
+        if ($('#transition_container .xAxis').length) {
 
             //set transition
             let tran = d3.transition()
@@ -302,24 +310,8 @@ function transUpdate(year, type) {
             trans_chartGroup.selectAll('.trans_bar')
                 .data(districtData_top5)
                 .transition(tran)
-                .attr('y', function (d) { return trans_yScale(Math.max(0, d[type])); })
-                .attr('height', function (d) { return Math.abs(trans_yScale(d[type]) - trans_yScale(0)); });
-
-            //labels
-            trans_chartGroup.selectAll(".label")
-                .data(districtData_top5)
-                .transition(tran)
-                .attr("y", function (d) {
-                    if (d[type] > 0) { return trans_yScale(Math.max(0, d[type])); } else {
-                        return trans_yScale(d[type]);
-                    }
-                })
-                .attr("dy", function (d) {
-                    if (d[type] > 0) { return '1em' } else {
-                        return '-.75em';
-                    }
-                })
-                .text(function (d) { return Math.round(d[type]); });
+                .attr('cy', function (d) { return trans_yScale(Math.abs(d[type])); })
+                .attr('cx', function (d) { return trans_xScale(d.LAST_YEAR_ENROLMENT); });
 
 
             d3.select("#transition_container .yAxis")
@@ -330,61 +322,25 @@ function transUpdate(year, type) {
                 .transition(tran)
                 .call(trans_xAxis);
 
-            //grid line
-            d3.selectAll("g.yAxis g.tick")
-                .append("line")
-                .attr("class", "gridline")
-                .attr("x1", 0)
-                .attr("y1", 0)
-                .attr("x2", trans_width)
-                .attr("y2", 0);
-
-            d3.selectAll("g.xAxis g.tick")
-                .append("line")
-                .attr("class", "gridline")
-                .attr("x1", 0)
-                .attr("y1", trans_height)
-                .attr("x2", 0)
-                .attr("y2", 0);
-
         } else {
 
             //draw trans_bars
             trans_chartGroup.selectAll('.trans_bar')
                 .data(districtData_top5)
-                .enter().append('rect')
+                .enter().append('circle')
                 .attr('class', 'trans_bar')
-                .attr('x', function (d) { return trans_xScale(d.DISTRICT); })
-                .attr('y', function (d) { return trans_yScale(Math.max(0, d[type])); })
-                .attr('width', trans_xScale.bandwidth())
-                .attr('height', function (d) { return Math.abs(trans_yScale(d[type]) - trans_yScale(0)); })
+                .attr('cx', function (d) { return trans_xScale(d.LAST_YEAR_ENROLMENT); })
+                .attr('cy', function (d) { return trans_yScale(Math.abs(d[type])); })
+                .attr('r', 10)
                 .on('click', function (d) {
                     let xpos = d3.mouse(this)[0];
                     let ypos = d3.mouse(this)[1];
 
                     d3.selectAll('.trans_bar').style('fill', '#002663');
                     d3.select(this).style('fill', '#FCBA19')
-                    showTranstt(d.DISTRICT, year, d[type], type, xpos, ypos);
+                    console.log(type, trans_type);
+                    showTranstt(d.DISTRICT, year, Math.abs(d[trans_type]), trans_type, xpos, ypos);
                 });
-
-            //labels
-            trans_chartGroup.selectAll(".text")
-                .data(districtData_top5)
-                .enter()
-                .append("text")
-                .attr("class", "label")
-                .attr("x", (function (d) { return trans_xScale(d.DISTRICT) + trans_xScale.bandwidth() / 2; }))
-                .attr("y", function (d) {
-                    if (d[type] > 0) { return trans_yScale(Math.max(0, d[type])); } else {
-                        return trans_yScale(d[type]);
-                    }
-                })
-                .attr("dy", function (d) {
-                    if (d[type] > 0) { return '1em' } else {
-                        return '-1em';
-                    }
-                })
-                .text(function (d) { return Math.round(d[type]); });
 
             //axes
             trans_chartGroup.append('g')
@@ -392,33 +348,32 @@ function transUpdate(year, type) {
                 .call(trans_yAxis)
                 .append("text")
                 .attr("transform", "rotate(-90)")
-                .attr('fill', '#4c4c4c')
-                .attr("y", 6)
-                .attr("dy", ".8em")
-                .style("text-anchor", "end")
-                .text("FTE");
+                .attr('class', 'axis_label')
+                .attr('x', -trans_height/2)
+                .attr("y", 0)
+                .attr('text-anchor', 'middle')
+                .text(yAxis_label);;
 
             trans_chartGroup.append('g')
                 .attr('class', 'xAxis')
                 .attr('transform', 'translate(0,' + trans_height + ')')
-                .call(trans_xAxis);
+                .call(trans_xAxis)
+                .append("text")
+                .attr('class', 'axis_label')
+                .attr('x', trans_width/2)
+                .attr("y", 12)
+                .style("text-anchor", "middle")
+                .text("Founded FTE");;
 
             //grid line
-            d3.selectAll("g.yAxis g.tick")
-                .append("line")
-                .attr("class", "gridline")
-                .attr("x1", 0)
-                .attr("y1", 0)
-                .attr("x2", trans_width)
-                .attr("y2", 0);
 
-            d3.selectAll("g.xAxis g.tick")
-                .append("line")
-                .attr("class", "gridline")
-                .attr("x1", 0)
-                .attr("y1", -trans_height)
-                .attr("x2", 0)
-                .attr("y2", 0);
+            // d3.selectAll("#transition_container g.tick")
+            //     .append("line")
+            //     .attr("class", "gridline")
+            //     .attr("x1", 0)
+            //     .attr("y1", 0)
+            //     .attr("x2", trans_width)
+            //     .attr("y2", 0);
 
         }
 
@@ -446,22 +401,26 @@ $("#trans_radio input[type='radio']").change(function () {
 function showTranstt(sd, yr, num, type, xpos, ypos) {
 
     if (xpos < 40) {
-        xpos = 40
+        xpos = 40;
     };
 
     if (ypos < 40) {
-        ypos = 40
+        ypos = 40;
+    };
+
+    if (ypos > 200) {
+        ypos = 80;
     };
 
     d3.select('#trans_tt')
-        .style("top", ypos + "px")
-        .style("left", xpos + 30 + "px")
+        .style("top", ypos+ trans_margin.top+"px")
+        .style("left", xpos+ trans_margin.left+"px")
         .style('display', null)
         .html(function () {
             let content = "<div class='tipHeader'><b>District " + sd + "</b></div>";
             if (type == 'ENTER_PUBLIC') {
                 content += "<div class='tipInfo'>" + parseInt(num) + " students entered from independent schools in " + yr + ".</div>"
-            } else if (type == 'Leave_PUBLIC') {
+            } else if (type == 'LEAVE_PUBLIC') {
                 content += "<div class='tipInfo'>" + parseInt(num) + " students left for independent schools in " + yr + ".</div>"
             } else {
                 content += "<div class='tipInfo'>" + parseInt(num) + " students (Net inflow) entered from independent schools in " + yr + ".</div>"

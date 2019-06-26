@@ -304,23 +304,6 @@ d3.csv('../assets/raw_data/demographics.csv', function (error, data) {
                 .transition(tran)
                 .call(demo_xAxis);
 
-            //grid line
-            d3.selectAll("g.yAxis g.tick")
-                .append("line")
-                .attr("class", "gridline")
-                .attr("x1", 0)
-                .attr("y1", 0)
-                .attr("x2", demo_width)
-                .attr("y2", 0);
-
-            d3.selectAll("g.xAxis g.tick")
-                .append("line")
-                .attr("class", "gridline")
-                .attr("x1", 0)
-                .attr("y1", -demo_height)
-                .attr("x2", 0)
-                .attr("y2", 0);
-
         } else {
 
             //axes
@@ -348,15 +331,6 @@ d3.csv('../assets/raw_data/demographics.csv', function (error, data) {
                 .attr("y1", 0)
                 .attr("x2", demo_width)
                 .attr("y2", 0);
-
-            d3.selectAll("g.xAxis g.tick")
-                .append("line")
-                .attr("class", "gridline")
-                .attr("x1", 0)
-                .attr("y1", -demo_height)
-                .attr("x2", 0)
-                .attr("y2", 0);
-
         }
     }
 

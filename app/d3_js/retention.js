@@ -339,23 +339,6 @@ d3.csv('../assets/raw_data/retention_provincial.csv', function (error, data) {
                     .transition(tran)
                     .call(retention_xAxis);
 
-                //grid line
-                d3.selectAll('g.yAxis_dist g.tick')
-                    .append('line')
-                    .attr('class', 'gridline')
-                    .attr('x1', 0)
-                    .attr('y1', 0)
-                    .attr('x2', retention_width)
-                    .attr('y2', 0);
-
-                d3.selectAll('g.xAxis_dist g.tick')
-                    .append('line')
-                    .attr('class', 'gridline')
-                    .attr('x1', 0)
-                    .attr('y1', -retention_height)
-                    .attr('x2', 0)
-                    .attr('y2', 0);
-
             } else {
 
                 //axes
@@ -387,21 +370,13 @@ d3.csv('../assets/raw_data/retention_provincial.csv', function (error, data) {
                     .attr('transform', 'translate(0,' + retention_height + ')')
                     .call(retention_xAxis);
 
-                //grid line
+                //grid line, horizontal
                 d3.selectAll('g.yAxis_dist g.tick')
                     .append('line')
                     .attr('class', 'gridline')
                     .attr('x1', 0)
                     .attr('y1', 0)
                     .attr('x2', retention_width)
-                    .attr('y2', 0);
-
-                d3.selectAll('g.xAxis_dist g.tick')
-                    .append('line')
-                    .attr('class', 'gridline')
-                    .attr('x1', 0)
-                    .attr('y1', -retention_height)
-                    .attr('x2', 0)
                     .attr('y2', 0);
 
             }
