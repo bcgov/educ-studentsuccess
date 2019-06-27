@@ -1078,6 +1078,11 @@ body {
 
   #trans_control_2{
     display: flex;
+    #trans_dist_dropdown {
+      .list {
+        max-height: 220px;
+      }
+    }
   }
   
   #graph_container {
@@ -1112,7 +1117,7 @@ body {
   }
 
   #transition_container {
-    .trans_bar {
+    .trans_circ {
       fill: $tooltip-bg;
       opacity: 0.5;
       cursor: pointer;

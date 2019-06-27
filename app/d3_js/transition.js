@@ -14,7 +14,7 @@ let trans_xScale = d3.scaleLinear()
     .range([0, trans_width]);
 
 let trans_yScale = d3.scaleLinear()
-    .range([trans_height,0]);
+    .range([trans_height, 0]);
 
 let trans_yAxis = d3.axisLeft()
     .scale(trans_yScale)
@@ -50,7 +50,13 @@ let trans_tooltip = d3.select("#transition_container")
 let tslider_width = $('#trans_slider').width();
 transition_slider();
 
-$(window).resize(function() {
+let trans_type = 'ENTER_PUBLIC';
+let trans_dist = 'TOP5';
+let trans_year = 2013;
+graphUpdate(trans_year);
+transUpdate(trans_year, trans_dist, trans_type);
+
+$(window).resize(function () {
     d3.select('#trans_slider svg').remove();
     tslider_width = $('#trans_slider').width();
     transition_slider();
@@ -156,6 +162,8 @@ function transition_slider() {
         // console.log('dragged');
         currentValue = d3.event.x;
         d3.select(this).classed('active', false);
+        trans_tooltip.style("display", "none")
+        d3.selectAll('.trans_circ').style('fill', '#002663');
         tslider_inputYear(currentValue);
     }
 
@@ -199,15 +207,14 @@ function transition_slider() {
         //verify that a method was called with certain year input, call update() with unique each year value once
         if (tslider_yrCheck != xVal) {
             graphUpdate(xVal);
-            transUpdate(xVal, trans_type);
+            transUpdate(xVal, trans_dist, trans_type);
             tslider_yrCheck = xVal;
+            trans_year = xVal;
+            console.log(trans_year, trans_dist, trans_type);
         }
     }
 }
 
-let trans_type = 'ENTER_PUBLIC';
-graphUpdate(2013);
-transUpdate(2013, trans_type);
 
 function graphUpdate(year) {
 
@@ -223,19 +230,20 @@ function graphUpdate(year) {
         });
 
         d3.select('#pub_to_ind').text(yrData.map(function (d) {
-            return  Math.round(Math.abs(d.LEAVE_PUBLIC)) + '  ('+ d.RATE_PtoI +'%)';
+            return Math.round(Math.abs(d.LEAVE_PUBLIC)) + '  (' + d.RATE_PtoI + '%)';
         }));
         d3.select('#ind_to_pub').text(yrData.map(function (d) {
-            return Math.round(d.ENTER_PUBLIC) +'  ('+ d.RATE_ItoP +'%)';
+            return Math.round(d.ENTER_PUBLIC) + '  (' + d.RATE_ItoP + '%)';
         }));
 
     });
 }
 
 function transClear() {
-    //clear existing trans_bars
-    let existingBar = trans_chartGroup.selectAll(".trans_bar");
-    existingBar.transition()
+    //clear existing trans_circs
+    let existingCirc = trans_chartGroup.selectAll(".trans_circ");
+
+    existingCirc.transition()
         .duration(500)
         .remove();
 
@@ -245,10 +253,10 @@ function transClear() {
         .remove();
 }
 
-function transUpdate(year, type) {
+function transUpdate(year, dist, type) {
 
     d3.csv('../assets/raw_data/transition_district.csv', function (error, data) {
-        
+
         if (error) {
             throw error;
         }
@@ -256,63 +264,108 @@ function transUpdate(year, type) {
         let yAxis_label = 'Funded FTE';
         let xAxis_label = 'Funded FTE';
 
-        let districtData = data.filter(function (d) { return +d.SCHOOL_YEAR == year });
+        let distData = data.filter(function (d) { return +d.SCHOOL_YEAR == year });
 
         //format data
-        districtData.forEach(function (d) {
+        distData.forEach(function (d) {
             d.ENTER_PUBLIC = +d.ENTER_PUBLIC;
             d.LEAVE_PUBLIC = +d.LEAVE_PUBLIC;
             d.NET_INDEPENDENT = +d.NET_INDEPENDENT;
             d.LAST_YEAR_ENROLMENT = +d.LAST_YEAR_ENROLMENT;
         });
 
-        //sort array of object based on # of enter, leave, and net
-        districtData.sort(function (a, b) {
-            //# of leave is negative, reverse sort
-            if (type == 'LEAVE_PUBLIC') {
-                return a[type] - b[type];
-            } else {
-                return b[type] - a[type];
-            }
-        });
+        let districtData;
 
-        //top 5 district
-        let districtData_top5 = districtData.slice(0, 5);
-        // districtData_top5.reverse();
-        console.log(districtData_top5);
+        if (dist == 'TOP5') {
+            //sort array of object based on # of enter, leave, and net
+            distData.sort(function (a, b) {
+                //# of leave is negative, reverse sort
+                if (type == 'LEAVE_PUBLIC') {
+                    return a[type] - b[type];
+                } else {
+                    return b[type] - a[type];
+                }
+            });
+            //top 5 district
+            districtData = distData.slice(0, 5);
+            //set scale domain
+            trans_xScale.domain([0, d3.max(districtData, function (d) {
+                return d.LAST_YEAR_ENROLMENT;
+            })])
+                .nice();
 
-        //set scale domain
-        trans_xScale.domain([0, d3.max(districtData_top5, function (d) {
-            return d.LAST_YEAR_ENROLMENT;
-        })])
-        .nice();
+            trans_yScale.domain(d3.extent(districtData, function (d) {
+                return Math.abs(d[type]);
+            }))
+                .nice();
+        } else if (dist == '99') {
+            districtData = distData;
+            //set scale domain
+            trans_xScale.domain([0, d3.max(districtData, function (d) {
+                return d.LAST_YEAR_ENROLMENT;
+            })])
+                .nice();
 
-        trans_yScale.domain(d3.extent(districtData_top5, function (d) {
-            return Math.abs(d[type]);
-        }))
-        .nice();
+            trans_yScale.domain(d3.extent(districtData, function (d) {
+                return Math.abs(d[type]);
+            }))
+                .nice();
+        } else {
+            districtData = distData.filter(function (d) { return +d.DISTRICT == dist });
+            //set scale domain
+            trans_xScale.domain([0, d3.max(distData, function (d) {
+                return d.LAST_YEAR_ENROLMENT;
+            })])
+                .nice();
 
-        //add ditrict name to ticks using sd_arr[] from predictors section
-        // trans_yAxis.tickFormat(function (d) {
-        //     for (let sd of sd_arr) {
-        //         if (d == sd.substring(2, 4))
-        //             return sd.substring(5, sd.length);
-        //     }
-        // })
-      
-        //draw 
+            trans_yScale.domain(d3.extent(distData, function (d) {
+                return Math.abs(d[type]);
+            }))
+                .nice();
+        }
+
+        //check existing circles, the length of existing (based on previous type selection)
+        //will be used to compare with incoming districtData.length.
+        let existingCircles = d3.selectAll('.trans_circ');
+
         if ($('#transition_container .xAxis').length) {
 
             //set transition
             let tran = d3.transition()
                 .duration(1500);
 
-            //draw trans_bars
-            trans_chartGroup.selectAll('.trans_bar')
-                .data(districtData_top5)
-                .transition(tran)
-                .attr('cy', function (d) { return trans_yScale(Math.abs(d[type])); })
-                .attr('cx', function (d) { return trans_xScale(d.LAST_YEAR_ENROLMENT); });
+            console.log(dist);
+            console.log(distData);
+            console.log(districtData);
+            console.log(existingCircles.nodes().length);
+
+            // if the length matches, update cx, cy coordinates only,no need to rebind nodes
+            if (districtData.length == existingCircles.nodes().length) {
+                trans_chartGroup.selectAll('.trans_circ')
+                    .data(districtData)
+                    .transition(tran)
+                    .attr('cx', function (d) { return trans_xScale(d.LAST_YEAR_ENROLMENT); })
+                    .attr('cy', function (d) { return trans_yScale(Math.abs(d[type])); })
+            } else {
+                trans_chartGroup.selectAll('.trans_circ')
+                    .exit()
+                    .remove()
+                    .data(districtData)
+                    .enter().append('circle')
+                    .attr('class', 'trans_circ')
+                    .attr('cx', function (d) { return trans_xScale(d.LAST_YEAR_ENROLMENT); })
+                    .attr('cy', function (d) { return trans_yScale(Math.abs(d[type])); })
+                    .attr('r', 10)
+                    .on('click', function (d) {
+                        let xpos = d3.mouse(this)[0];
+                        let ypos = d3.mouse(this)[1];
+
+                        d3.selectAll('.trans_circ').style('fill', '#002663');
+                        d3.select(this).style('fill', '#FCBA19')
+                        console.log(type, trans_type);
+                        showTranstt(d.DISTRICT, trans_year, Math.abs(d[trans_type]), trans_type, xpos, ypos);
+                    });
+            }
 
 
             d3.select("#transition_container .yAxis")
@@ -322,14 +375,18 @@ function transUpdate(year, type) {
             d3.select("#transition_container .xAxis")
                 .transition(tran)
                 .call(trans_xAxis);
+        }
+        else if (!($('#transition_container .xAxis').length)) {
 
-        } else {
 
-            //draw trans_bars
-            trans_chartGroup.selectAll('.trans_bar')
-                .data(districtData_top5)
+            console.log(districtData);
+            console.log(existingCircles.nodes());
+
+            //draw trans_circs
+            trans_chartGroup.selectAll('.trans_circ')
+                .data(districtData)
                 .enter().append('circle')
-                .attr('class', 'trans_bar')
+                .attr('class', 'trans_circ')
                 .attr('cx', function (d) { return trans_xScale(d.LAST_YEAR_ENROLMENT); })
                 .attr('cy', function (d) { return trans_yScale(Math.abs(d[type])); })
                 .attr('r', 10)
@@ -337,10 +394,10 @@ function transUpdate(year, type) {
                     let xpos = d3.mouse(this)[0];
                     let ypos = d3.mouse(this)[1];
 
-                    d3.selectAll('.trans_bar').style('fill', '#002663');
+                    d3.selectAll('.trans_circ').style('fill', '#002663');
                     d3.select(this).style('fill', '#FCBA19')
                     console.log(type, trans_type);
-                    showTranstt(d.DISTRICT, year, Math.abs(d[trans_type]), trans_type, xpos, ypos);
+                    showTranstt(d.DISTRICT, trans_year, Math.abs(d[trans_type]), trans_type, xpos, ypos);
                 });
 
             //axes
@@ -350,7 +407,7 @@ function transUpdate(year, type) {
                 .append("text")
                 .attr("transform", "rotate(-90)")
                 .attr('class', 'axis_label')
-                .attr('x', -trans_height/2)
+                .attr('x', -trans_height / 2)
                 .attr("y", 0)
                 .attr('text-anchor', 'middle')
                 .text(yAxis_label);;
@@ -361,63 +418,80 @@ function transUpdate(year, type) {
                 .call(trans_xAxis)
                 .append("text")
                 .attr('class', 'axis_label')
-                .attr('x', trans_width/2)
+                .attr('x', trans_width / 2)
                 .attr("y", 12)
                 .style("text-anchor", "middle")
-                .text("Funded FTE");;
-
-            //grid line
-
-            // d3.selectAll("#transition_container g.tick")
-            //     .append("line")
-            //     .attr("class", "gridline")
-            //     .attr("x1", 0)
-            //     .attr("y1", 0)
-            //     .attr("x2", trans_width)
-            //     .attr("y2", 0);
-
+                .text(xAxis_label);;
         }
 
         //click on anything else close tooltip
         document.addEventListener('click', function (e) {
-            if (e.target.closest('.trans_bar')) return;
+            if (e.target.closest('.trans_circ')) return;
             d3.select('#trans_tt').style('display', 'none');
-            d3.selectAll('.trans_bar').style('fill', '#002663');
+            d3.selectAll('.trans_circ').style('fill', '#002663');
         })
 
     });
 }
 
 // populate dist dropdown
+let trans_dd = d3.select('#trans_dist_dropdown .list');
+
+trans_dd
+    .append('div')
+    .text('Top 5 districts')
+    .attr('data-value', 'TOP5');
+
+trans_dd
+    .append('div')
+    .text('SD99-Province')
+    .attr('data-value', 'SD99');
+
+console.log(sd_arr);
+
 for (let i = 0; i < sd_arr.length; i++) {
-    console.log()
     let opt = sd_arr[i];
-    d3.select('#trans_dist_dropdown')
-        .append('option')
+
+    d3.select('#trans_dist_dropdown .list')
+        .append('div')
         .text(opt)
         //take the sd number (first 4 letters) as value
         .attr('data-value', opt.substring(0, 4));
 };
 
 //dist dropdown multiselect
-$('#trans_dist_dropdown').on('click', function() {
-    selectpicker();
+$('#trans_dist_dropdown').on('click', function () {
+    $(this).toggleClass('active');
+    d3.selectAll('#trans_dist_dropdown .list div')
+        .on('click', function () {
+            let dist = d3.select(this).attr('data-value');
+            if (dist != 'TOP5') {
+                dist = dist.substring(2, 4);
+            }
+            trans_dist = dist;
+            $('#trans_dist_dropdown span').text($(this).text());
+            if (dist) {
+                transClear();
+                transUpdate(trans_year, dist, trans_type);
+            }
+
+        });
 });
 
 //type dropdown
 $('#trans_type_dropdown').on('click', function (e) {
     $(this).toggleClass('active');
     d3.selectAll('#trans_type_dropdown .list div')
-            .on('click', function () {
-    let typeValue = d3.select(this).attr('data-value');
-    console.log(typeValue);
-    $('#trans_type_dropdown span').text($(this).text());
-    trans_type = typeValue;
-    if (typeValue) {
-        transClear();
-        transUpdate(2013, typeValue);
-    }
-  });
+        .on('click', function () {
+            let typeValue = d3.select(this).attr('data-value');
+            $('#trans_type_dropdown span').text($(this).text());
+            trans_type = typeValue;
+            if (typeValue) {
+                transClear();
+                transUpdate(trans_year, trans_dist, typeValue);
+            }
+            console.log(trans_year, trans_dist, trans_type);
+        });
 });
 
 function showTranstt(sd, yr, num, type, xpos, ypos) {
@@ -435,8 +509,8 @@ function showTranstt(sd, yr, num, type, xpos, ypos) {
     };
 
     d3.select('#trans_tt')
-        .style("top", ypos+ trans_margin.top+"px")
-        .style("left", xpos+ trans_margin.left+"px")
+        .style("top", ypos + trans_margin.top + "px")
+        .style("left", xpos + trans_margin.left + "px")
         .style('display', null)
         .html(function () {
             let content = "<div class='tipHeader'><b>District " + sd + "</b></div>";

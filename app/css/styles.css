@@ -7721,6 +7721,8 @@ html {
         padding: 0; }
       html body #transition #trans_control_2 {
         display: flex; }
+        html body #transition #trans_control_2 #trans_dist_dropdown .list {
+          max-height: 220px; }
       html body #transition #graph_container {
         margin-top: 4rem;
         display: flex;
@@ -7745,7 +7747,7 @@ html {
             bottom: 0;
             color: #D42D75;
             font-weight: bold; }
-      html body #transition #transition_container .trans_bar {
+      html body #transition #transition_container .trans_circ {
         fill: #002663;
         opacity: 0.5;
         cursor: pointer; }
