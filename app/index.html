@@ -60,14 +60,16 @@
   <div class="container" id='intro'>
     <!-- Jumbotron / hero section, a component -->
     <div class="row">
-      <div class="col-sm-12 col-md-4 intro">
+      <div class="col-sm-12 col-md-6 col-xl-5">
         <h2 class="intro_header mb-3">Enrolment Model</h2>
         <p>Student enrolment is influenced by four main drivers: demographics, migration, public-independent transition,
-          and
-          retention.</p>
-        <a class="btn ctaBtn btn-lg" href="#enrolment_model" role="button">Learn more</a>
+          and course load retention.</p>
+          <div class="cta_container mt-5">
+        <a class="btn ctaBtn btn-lg mr-3" href="#enrolment_model" >EXPLORE</a>
+        <a class="btn ctaGhost btn-lg" href="#booklet">STATIC REPORT</a>
       </div>
-      <div class="col-sm-12 col-md-8 pt-5">
+      </div>
+      <div class="col-sm-12 col-md-6 col-xl-6">
         <img src="/assets/img/infographic.png" class="img-fluid" alt="overview img">
       </div>
     </div>
@@ -75,7 +77,7 @@
 
   <div class="container" id="enrolment_model">
     <div class="row">
-      <div class="col-8 mx-auto">
+      <div class="col-md-10 mx-auto mb-3">
         <h2 class="section_header text-center mb-3"><span>Key Predictors and Impact</span></h2>
         <p>The Ministry of Education District Enrolment Forecast Model (DEFM) has been developed based on
           the Cohort Survival Method approach. The DEFM is based on four enrolment drivers: migration, demographics,
@@ -114,7 +116,7 @@
 
   <div class="container" id="demographics">
     <div class="row">
-      <div class="col-8 mx-auto">
+      <div class="col-md-10 mx-auto mb-3">
         <h2 class="section_header text-center mb-3"><span>Demographics</span></h2>
         <p>The demographics driver provides an indication or whether more kindergarten students are entering schools
           relative to those leaving through graduation. If the net demographic value is positive, it is indicating that
@@ -169,14 +171,14 @@
 
         </div>
 
-        <div id="demo-legend"></div>
+        <div id="demo_legend"></div>
       </div>
     </div>
   </div>
 
   <div class="container" id='migration_overview'>
     <div class="row mb-5">
-      <div class="col-sm-12 col-md-4 intro">
+      <div class="col-sm-12 col-md-4 migration_left_text">
         <h2 class="section_header mb-3"><span>Student Migration</span></h2>
         <p>The migration driver provides a measure of how many students are entering or leaving a district. If net
           migration is positive then more people are entering the district than leaving it.</p>
@@ -187,7 +189,7 @@
         </p>
         <img class="img-fluid" src="/assets/img/migration_drc.png" alt="migration img">
       </div>
-      <div class="col-sm-12 col-md-8 pt-5">
+      <div class="col-sm-12 col-md-8">
         <div id="aniContainer">
           <div id="animationMap" class="mb-5"></div>
           <div id="ani_control" class="row">
@@ -244,16 +246,7 @@
               <label for="flat_switch"></label>
             </div>
             <div id="flow_legend">
-              <div class="dot outflow_color dot_lg">500</div>
-              <div class="dot outflow_color dot_md">150</div>
-              <div class="dot outflow_color">50</div>
-              <div class="dot inflow_color">50</div>
-              <div class="dot inflow_color dot_md">150</div>
-              <div class="dot inflow_color dot_lg">500</div>
-            </div>
-            <div id="flow_text">
-              <p>Outflow</p>
-              <p>Inflow</p>
+              <img class="img-fluid" src="/assets/img/flow_legend.png" alt="flow legend">
             </div>
           </div>
         </div>
@@ -264,7 +257,7 @@
 
   <div class="container" id="transition">
     <div class="row">
-      <div class="col-8 mx-auto">
+      <div class="col-md-10 mx-auto mb-3">
         <h2 class="section_header text-center mb-3"><span>Public and Independent Transition</span></h2>
         <p>The transition driver measures how many students move from independent schools to public schools as a net
           positive inflow, and independent to public schools as a negative outflow.</p>
@@ -326,7 +319,7 @@
 
   <div class="container" id="retention">
     <div class="row">
-      <div class="col-8 mx-auto">
+      <div class="col-md-10 mx-auto mb-3">
         <h2 class="section_header text-center mb-3"><span>Full-time to Part-time Retention</span></h2>
         <p>The retention driver provides an indication if students are moving from full-time to part-time status or
           vise-versa. If net retention is positive then students are increasing their course load on average. If net
@@ -357,11 +350,11 @@
 
   <div class="container" id="booklet">
     <div class="row">
-      <div class="col-8 mx-auto mb-5 text-center">
+      <div class="col-md-10 mx-auto mb-3 mb-5 text-center">
         <h2 class="section_header mb-4"><span>BC School Enrolment Booklet</span></h2>
         <p>For more data at the provincial and district levels. Please view the detailed 2019/2020 BC School Enrolment
           Booklet.</p>
-        <a class="btn ctaBtn btn-lg" href="#" role="button">Download</a>
+        <a class="btn ctaBtn btn-lg" href="#" role="button">DOWNLOAD</a>
       </div>
     </div>
   </div>

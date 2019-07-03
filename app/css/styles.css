@@ -7020,11 +7020,32 @@ a.text-dark:hover, a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6; } }
 
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 480px) {
+  h2 {
+    font-size: 6vw !important; }
+  .section_header ~ p {
+    font-size: 14px; } }
+
+/* Small Devices, Tablets */
+@media only screen and (max-width: 768px) {
+  #intro {
+    text-align: center; }
+    #intro .ctaBtn, #intro .ctaGhost {
+      font-size: 1rem; }
+    #intro .cta_container {
+      justify-content: center; }
+  .migration_left_text .section_header, .migration_left_text .section_header ~ p {
+    text-align: center !important; }
+  #flow_legend img {
+    max-width: 80%; } }
+
+/* Medium Devices, Desktops */
 html {
   scroll-behavior: smooth; }
   html body {
     background-color: #f7f7f9;
-    font-family: 'Lato', sans-serif;
+    font-family: Myraid-Pro, Calibri, Arial, sans-serif;
     color: #494949;
     background-image: url(../assets/img/bg-dcr.png), url(../assets/img/bg-dcr2.png), url(../assets/img/bg-dcr3.png);
     background-size: 34% auto, 28% auto, 24% auto;
@@ -7102,10 +7123,13 @@ html {
     html body .section_header {
       background-size: 100% 100%; }
       html body .section_header span {
-        background-image: linear-gradient(180deg, transparent 65%, rgba(252, 186, 25, 0.5) 0);
+        color: #002663;
+        background-image: linear-gradient(-180deg, transparent 65%, #2cc7c0, #59d99d 0);
         background-repeat: no-repeat;
         text-decoration: none;
         background-size: 100% 100%; }
+    html body .section_header ~ p {
+      text-align: center; }
     html body .ghostBtn {
       display: inline-block;
       padding: 0.5rem 1rem;
@@ -7133,18 +7157,23 @@ html {
       background: #00305d;
       transition: .3s ease; }
     html body .ctaBtn {
-      margin-top: 2rem;
-      max-width: 180px;
-      background: #FCBA19;
-      border-radius: 50px;
-      padding: .5rem 2rem;
+      background: linear-gradient(90deg, #2cc7c0, #59d99d);
       color: #f7f7f9;
-      box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
+      border-color: #4cc6aa;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
     html body .ctaBtn:hover {
       color: #f7f7f9;
-      box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
-      transform: translateY(-0.025em);
-      transition: .3s ease; }
+      background: linear-gradient(90deg, #25a8a2, #3ad28b);
+      transition: all .4s ease; }
+    html body .ctaGhost {
+      color: #4cc6aa;
+      border-color: #4cc6aa;
+      background: transparent;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
+    html body .ctaGhost:hover {
+      color: #f7f7f9;
+      background: linear-gradient(90deg, #25a8a2, #3ad28b);
+      border-color: #4cc6aa; }
     html body .track,
     html body .track-inset,
     html body .track-overlay {
@@ -7234,7 +7263,9 @@ html {
       font-size: 1rem;
       fill: #494949;
       opacity: 0.5; }
-    html body #overview::before, html body #flow_map::before, html body #graph::before, html body #facts::before {
+    html body #intro, html body #enrolment_model, html body #demographics, html body #migration_overview, html body #flow_map, html body #transition, html body #retention {
+      margin-bottom: 6vw; }
+    html body #enrolment_model::before, html body #demographics::before, html body #migration_overview::before, html body #transition::before, html body #retention::before {
       content: "";
       display: block;
       height: 100px;
@@ -7242,24 +7273,24 @@ html {
       margin-top: -100px;
       /* negative fixed header height */ }
     html body #intro {
-      margin-top: 5rem;
-      margin-bottom: 5rem; }
+      margin-top: 6vw; }
       html body #intro .intro_header {
-        color: #002663; }
-    html body #migration_overview {
-      padding-top: 5rem;
-      margin-bottom: 5rem; }
-      html body #migration_overview .intro {
-        padding-top: 2rem; }
-      html body #migration_overview #tipContainer {
-        position: absolute;
-        z-index: 10;
-        top: 2em;
-        border-radius: 5px;
-        width: 10em;
-        background: white;
-        opacity: 0.9;
-        pointer-events: none; }
+        color: #002663;
+        font-weight: bold; }
+      html body #intro .cta_container {
+        display: flex;
+        flex-wrap: wrap; }
+    html body #migration_overview .migration_left_text p {
+      text-align: left; }
+    html body #migration_overview #tipContainer {
+      position: absolute;
+      z-index: 10;
+      top: 2em;
+      border-radius: 5px;
+      width: 10em;
+      background: white;
+      opacity: 0.9;
+      pointer-events: none; }
     html body .dcr-wrapper {
       display: flex;
       justify-content: flex-end;
@@ -7347,6 +7378,7 @@ html {
       html body #aniContainer #ani_control #ani_year {
         font-weight: bold;
         font-size: 1.6rem;
+        color: #38598a;
         vertical-align: middle; }
       html body #aniContainer #ani_control #play-pause {
         width: 40px;
@@ -7368,173 +7400,171 @@ html {
       font-weight: 600; }
     html body #aniContainer .caption {
       fill: #494949; }
-    html body #flow_map {
-      margin-bottom: 5rem; }
-      html body #flow_map #mapContainer {
+    html body #flow_map h3 {
+      color: #002663; }
+    html body #flow_map #mapContainer {
+      position: relative; }
+    html body #flow_map #interactiveMap {
+      max-width: 100%;
+      height: 500px;
+      z-index: 1;
+      position: relative; }
+      html body #flow_map #interactiveMap svg {
         position: relative; }
-      html body #flow_map #interactiveMap {
-        max-width: 100%;
-        height: 500px;
-        z-index: 1;
-        position: relative; }
-        html body #flow_map #interactiveMap svg {
-          position: relative; }
-          html body #flow_map #interactiveMap svg .goingline {
-            pointer-events: auto; }
-      html body #flow_map #control #distDropdown.active .list {
-        max-height: 240px; }
-      html body #flow_map #control #flow_switch {
-        display: flex;
-        align-items: center;
-        margin: 1rem 0; }
-        html body #flow_map #control #flow_switch h6 {
-          color: #38598a;
-          font-weight: bold; }
-        html body #flow_map #control #flow_switch #flat_switch {
-          display: block;
-          opacity: 0; }
-        html body #flow_map #control #flow_switch label {
-          width: 60px;
-          height: 30px;
-          cursor: pointer;
-          display: inline-block;
-          position: relative;
-          border-radius: 30px;
-          border: 2px solid #bdbdbd;
-          transition: ease 0.5s;
-          transition: backgorund-color 0.5s; }
-        html body #flow_map #control #flow_switch label:after {
-          left: 0;
-          width: 20px;
-          height: 20px;
-          margin: 3px;
-          content: '';
-          position: absolute;
-          background: #bdbdbd;
-          border-radius: 10px; }
-        html body #flow_map #control #flow_switch input:checked + label {
-          background: none;
-          border: 2px solid #38598a;
-          box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
-        html body #flow_map #control #flow_switch input:checked + label:after {
-          background: #38598a;
-          left: auto;
-          right: 0; }
-      html body #flow_map #control .flowBtn {
-        margin-right: 0.5rem;
-        padding: 0.25rem 0.5rem;
-        width: 5rem;
-        border: 2px solid #38598a;
-        border-radius: 50px;
-        background: none;
+        html body #flow_map #interactiveMap svg .goingline {
+          pointer-events: auto; }
+    html body #flow_map #control #distDropdown.active .list {
+      max-height: 240px; }
+    html body #flow_map #control #flow_switch {
+      display: flex;
+      align-items: center;
+      margin: 1rem 0; }
+      html body #flow_map #control #flow_switch h6 {
         color: #38598a;
-        font-weight: medium;
-        cursor: pointer; }
-      html body #flow_map #control .flowBtn:hover {
-        color: #fff;
-        background: #38598a;
-        transition: .3s ease; }
-      html body #flow_map #control #flow_legend {
-        display: flex;
-        align-items: center;
-        justify-content: space-between; }
-        html body #flow_map #control #flow_legend .dot {
-          height: 1.5em;
-          width: 1.5em;
-          border-radius: 50%;
-          opacity: 0.5;
-          display: inline-block;
-          text-align: center;
-          vertical-align: middle;
-          line-height: 1.5em;
-          color: white; }
-        html body #flow_map #control #flow_legend .outflow_color {
-          background-color: #a96a46; }
-        html body #flow_map #control #flow_legend .inflow_color {
-          background-color: #65a89d; }
-        html body #flow_map #control #flow_legend .dot_md {
-          height: 2.5em;
-          width: 2.5em;
-          line-height: 2.5em; }
-        html body #flow_map #control #flow_legend .dot_lg {
-          height: 3.5em;
-          width: 3.5em;
-          line-height: 3.5em; }
-      html body #flow_map #control #flow_text {
-        display: flex;
-        justify-content: space-between; }
-        html body #flow_map #control #flow_text p:first-child {
-          color: #a96a46; }
-        html body #flow_map #control #flow_text p:last-child {
-          color: #65a89d; }
-      html body #flow_map #control .selected {
-        color: #fff;
-        background: #38598a;
-        box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
-      html body #flow_map .leaflet-pane {
-        z-index: 0; }
-      html body #flow_map #tlTip {
-        pointer-events: none;
-        color: white;
-        position: absolute; }
-      html body #flow_map #tipDiv {
-        font-size: 16px;
-        border-radius: 3px;
-        width: 180px;
-        z-index: 100;
-        background-repeat: no-repeat;
-        text-align: left;
-        line-height: 20px; }
-      html body #flow_map #tipLoc {
-        font-weight: normal;
-        font-style: Italic;
-        color: white;
-        margin: 0px;
-        padding: 10px 10px;
-        background: #002663;
-        font-size: 14px;
-        border-radius: 3px 3px 0 0; }
-      html body #flow_map #tipInfo {
-        font-weight: normal;
-        font-size: 12px;
-        color: #494949;
-        margin: 0px;
-        padding: 5px 0px 5px 10px;
-        background: rgba(255, 255, 255, 0.7);
-        border-radius: 0 0 3px 3px; }
-      html body #flow_map #tlTip2 {
-        pointer-events: none;
-        color: white; }
-      html body #flow_map #tipDiv2 {
-        font-size: 16px;
+        font-weight: bold; }
+      html body #flow_map #control #flow_switch #flat_switch {
+        display: block;
+        opacity: 0; }
+      html body #flow_map #control #flow_switch label {
+        width: 60px;
+        height: 30px;
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        border-radius: 30px;
+        border: 2px solid #bdbdbd;
+        transition: ease 0.5s;
+        transition: backgorund-color 0.5s; }
+      html body #flow_map #control #flow_switch label:after {
+        left: 0;
+        width: 20px;
+        height: 20px;
+        margin: 3px;
+        content: '';
         position: absolute;
-        width: 250px;
-        z-index: 100;
-        background-repeat: no-repeat;
-        text-align: left;
-        line-height: 20px; }
-      html body #flow_map #tipLoc2 {
-        font-weight: normal;
-        font-style: Italic;
-        color: white;
-        margin: 0px;
-        padding: 10px 10px;
-        background: #002663;
-        font-size: 14px;
-        border-radius: 3px 3px 0 0; }
-      html body #flow_map #tipInfo2 {
-        font-weight: normal;
-        font-size: 10px;
-        color: #494949;
-        margin: 0px;
-        padding: 5px 0px 5px 10px;
-        background: rgba(255, 255, 255, 0.7);
-        border-radius: 0 0 3px 3px; }
-      html body #flow_map .tipClear {
-        clear: both; }
+        background: #bdbdbd;
+        border-radius: 10px; }
+      html body #flow_map #control #flow_switch input:checked + label {
+        background: none;
+        border: 2px solid #38598a;
+        box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
+      html body #flow_map #control #flow_switch input:checked + label:after {
+        background: #38598a;
+        left: auto;
+        right: 0; }
+    html body #flow_map #control .flowBtn {
+      margin-right: 0.5rem;
+      padding: 0.25rem 0.5rem;
+      width: 5rem;
+      border: 2px solid #38598a;
+      border-radius: 50px;
+      background: none;
+      color: #38598a;
+      font-weight: medium;
+      cursor: pointer; }
+    html body #flow_map #control .flowBtn:hover {
+      color: #fff;
+      background: #38598a;
+      transition: .3s ease; }
+    html body #flow_map #control #flow_legend {
+      display: flex;
+      align-items: center;
+      justify-content: space-between; }
+      html body #flow_map #control #flow_legend .dot {
+        height: 1.5em;
+        width: 1.5em;
+        border-radius: 50%;
+        opacity: 0.5;
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 1.5em;
+        color: white; }
+      html body #flow_map #control #flow_legend .outflow_color {
+        background-color: #a96a46; }
+      html body #flow_map #control #flow_legend .inflow_color {
+        background-color: #65a89d; }
+      html body #flow_map #control #flow_legend .dot_md {
+        height: 2.5em;
+        width: 2.5em;
+        line-height: 2.5em; }
+      html body #flow_map #control #flow_legend .dot_lg {
+        height: 3.5em;
+        width: 3.5em;
+        line-height: 3.5em; }
+    html body #flow_map #control #flow_text {
+      display: flex;
+      justify-content: space-between; }
+      html body #flow_map #control #flow_text p:first-child {
+        color: #a96a46; }
+      html body #flow_map #control #flow_text p:last-child {
+        color: #65a89d; }
+    html body #flow_map #control .selected {
+      color: #fff;
+      background: #38598a;
+      box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
+    html body #flow_map .leaflet-pane {
+      z-index: 0; }
+    html body #flow_map #tlTip {
+      pointer-events: none;
+      color: white;
+      position: absolute; }
+    html body #flow_map #tipDiv {
+      font-size: 16px;
+      border-radius: 3px;
+      width: 180px;
+      z-index: 100;
+      background-repeat: no-repeat;
+      text-align: left;
+      line-height: 20px; }
+    html body #flow_map #tipLoc {
+      font-weight: normal;
+      font-style: Italic;
+      color: white;
+      margin: 0px;
+      padding: 10px 10px;
+      background: #002663;
+      font-size: 14px;
+      border-radius: 3px 3px 0 0; }
+    html body #flow_map #tipInfo {
+      font-weight: normal;
+      font-size: 12px;
+      color: #494949;
+      margin: 0px;
+      padding: 5px 0px 5px 10px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 0 0 3px 3px; }
+    html body #flow_map #tlTip2 {
+      pointer-events: none;
+      color: white; }
+    html body #flow_map #tipDiv2 {
+      font-size: 16px;
+      position: absolute;
+      width: 250px;
+      z-index: 100;
+      background-repeat: no-repeat;
+      text-align: left;
+      line-height: 20px; }
+    html body #flow_map #tipLoc2 {
+      font-weight: normal;
+      font-style: Italic;
+      color: white;
+      margin: 0px;
+      padding: 10px 10px;
+      background: #002663;
+      font-size: 14px;
+      border-radius: 3px 3px 0 0; }
+    html body #flow_map #tipInfo2 {
+      font-weight: normal;
+      font-size: 10px;
+      color: #494949;
+      margin: 0px;
+      padding: 5px 0px 5px 10px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 0 0 3px 3px; }
+    html body #flow_map .tipClear {
+      clear: both; }
     html body #enrolment_model {
-      margin-bottom: 5rem;
-      padding-top: 5rem;
       /* slider ------------------------------ */ }
       html body #enrolment_model #model_distDropdown.active .list {
         max-height: 240px; }
@@ -7616,42 +7646,197 @@ html {
         cursor: pointer; }
       html body #enrolment_model .handle.active {
         fill: #002663; }
-    html body #demographics {
-      padding-top: 5rem; }
-      html body #demographics #demoContainer .demo_line {
-        stroke-linecap: round; }
-      html body #demographics #demoContainer .xAxis {
+    html body #demographics #demoContainer .demo_line {
+      stroke-linecap: round; }
+    html body #demographics #demoContainer .xAxis {
+      stroke-width: 0; }
+      html body #demographics #demoContainer .xAxis .domain {
+        display: none; }
+    html body #demographics #demoContainer .yAxis .domain {
+      display: none; }
+    html body #demographics #demoContainer .yAxis line {
+      display: none; }
+    html body #demographics #demoContainer .yAxis .gridline {
+      display: inline-block;
+      stroke: #ccc;
+      shape-rendering: crispEdges;
+      stroke-opacity: .5; }
+    html body #demographics #demoContainer .demo_overlay {
+      fill: none;
+      pointer-events: all;
+      cursor: pointer; }
+    html body #demographics #demoContainer .demott_line {
+      stroke: #002663;
+      stroke-dasharray: 2,5;
+      stroke-width: 2;
+      opacity: 0.5; }
+    html body #demographics #demoContainer .demott_rect {
+      position: absolute;
+      z-index: 10;
+      top: 2em;
+      border-radius: 5px;
+      width: 8em;
+      background: white;
+      opacity: 0.9;
+      pointer-events: none; }
+      html body #demographics #demoContainer .demott_rect .tipHeader {
+        color: white;
+        padding: 5px;
+        background: #002663;
+        font-weight: bold;
+        font-style: italic;
+        font-size: 12px;
+        border-radius: 5px 5px 0 0; }
+      html body #demographics #demoContainer .demott_rect .tipInfo {
+        margin-left: 5px;
+        color: #002663;
+        font-size: 10px; }
+        html body #demographics #demoContainer .demott_rect .tipInfo .tipNum {
+          color: #494949; }
+    html body #demographics #demographics-control #demo-radio {
+      display: flex;
+      flex-direction: column; }
+    html body #demographics #demographics-control .modal-body {
+      display: grid;
+      grid-template-columns: repeat(4, 1.2fr);
+      grid-gap: 10px;
+      font-size: 12px; }
+      html body #demographics #demographics-control .modal-body .checkbox span {
+        vertical-align: middle;
+        margin-left: 0.3em;
+        cursor: pointer; }
+      html body #demographics #demographics-control .modal-body .checkbox .demo_checkbox {
+        -webkit-appearance: none;
+        border: 2px solid #ccc;
+        padding: 6px;
+        border-radius: 3px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+        display: inline-block;
+        position: relative;
+        vertical-align: middle;
+        cursor: pointer; }
+      html body #demographics #demographics-control .modal-body .checkbox .demo_checkbox:hover, html body #demographics #demographics-control .modal-body .checkbox .demo_checkbox:checked {
+        border: 2px solid #002663; }
+      html body #demographics #demographics-control .modal-body .checkbox .demo_checkbox:checked ~ * {
+        color: #002663; }
+      html body #demographics #demographics-control .modal-body .checkbox .demo_checkbox:checked:after {
+        content: '';
+        position: absolute;
+        left: 4px;
+        top: 1px;
+        width: 5px;
+        height: 10px;
+        border: solid #002663;
+        border-radius: 5px;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg); }
+    html body #demographics #demographics-control #demoModal_msg {
+      margin-left: 1rem;
+      align-self: center; }
+    html body #demographics #demographics-control #demo_deselect {
+      margin-right: auto;
+      font-weight: bold;
+      color: #5091CD;
+      cursor: pointer; }
+    html body #transition #trans_control #trans_slider {
+      fill: #494949;
+      font-size: 12px;
+      padding: 0; }
+    html body #transition #trans_control_2 {
+      display: flex; }
+      html body #transition #trans_control_2 #trans_dist_dropdown .list {
+        max-height: 220px; }
+    html body #transition #graph_container {
+      margin-top: 4rem;
+      display: flex;
+      flex-wrap: wrap; }
+      html body #transition #graph_container .trans_title {
+        color: #1D438C;
+        margin-bottom: 2rem; }
+      html body #transition #graph_container #trans_rate {
+        max-width: 200px;
+        background: url(../assets/img/trans_icon.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        position: relative; }
+        html body #transition #graph_container #trans_rate #pub_to_ind {
+          color: #4EBDEB;
+          font-weight: bold; }
+        html body #transition #graph_container #trans_rate #ind_to_pub {
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          color: #D42D75;
+          font-weight: bold; }
+    html body #transition #transition_container .trans_circ {
+      fill: #002663;
+      opacity: 0.5;
+      cursor: pointer; }
+    html body #transition #transition_container .label {
+      text-anchor: middle;
+      fill: white; }
+    html body #transition #transition_container .yAxis, html body #transition #transition_container .xAxis {
+      color: #494949; }
+      html body #transition #transition_container .yAxis .domain, html body #transition #transition_container .xAxis .domain {
+        display: none; }
+    html body #transition #transition_container .tick line {
+      stroke: #ccc;
+      stroke-opacity: 0.5; }
+    html body #transition #transition_container #trans_tt .trans_link {
+      margin: 0.5em; }
+      html body #transition #transition_container #trans_tt .trans_link .ssLink {
+        font-size: 14px;
+        line-height: 0.1em; }
+    html body #retention #retention_control .controlSelection {
+      margin-bottom: 0; }
+    html body #retention #retention_control #retention_distDropdown.active .list {
+      max-height: 240px; }
+    html body #retention #retention_control .legendContainer {
+      max-height: 100px; }
+    html body #retention #retention_container {
+      position: relative; }
+      html body #retention #retention_container .prov_retention_line {
+        stroke-linecap: round;
+        stroke: #002663; }
+      html body #retention #retention_container .dist_retention_line {
+        stroke-linecap: round;
+        stroke: #FCBA19; }
+      html body #retention #retention_container .xAxis, html body #retention #retention_container .yAxis_prov {
         stroke-width: 0; }
-        html body #demographics #demoContainer .xAxis .domain {
+        html body #retention #retention_container .xAxis .domain, html body #retention #retention_container .yAxis_prov .domain {
           display: none; }
-      html body #demographics #demoContainer .yAxis .domain {
+      html body #retention #retention_container .yAxis_dist .domain {
         display: none; }
-      html body #demographics #demoContainer .yAxis line {
+      html body #retention #retention_container .yAxis_dist line {
         display: none; }
-      html body #demographics #demoContainer .yAxis .gridline {
+      html body #retention #retention_container .yAxis_dist .gridline {
         display: inline-block;
         stroke: #ccc;
         shape-rendering: crispEdges;
         stroke-opacity: .5; }
-      html body #demographics #demoContainer .demo_overlay {
+      html body #retention #retention_container .retention_overlay {
         fill: none;
         pointer-events: all;
         cursor: pointer; }
-      html body #demographics #demoContainer .demott_line {
+      html body #retention #retention_container .retentiontt_line {
         stroke: #002663;
         stroke-dasharray: 2,5;
         stroke-width: 2;
         opacity: 0.5; }
-      html body #demographics #demoContainer .demott_rect {
+      html body #retention #retention_container .retentiontt_rect {
         position: absolute;
         z-index: 10;
-        top: 2em;
+        top: 8em;
         border-radius: 5px;
         width: 8em;
         background: white;
         opacity: 0.9;
         pointer-events: none; }
-        html body #demographics #demoContainer .demott_rect .tipHeader {
+        html body #retention #retention_container .retentiontt_rect .tipHeader {
           color: white;
           padding: 5px;
           background: #002663;
@@ -7659,177 +7844,12 @@ html {
           font-style: italic;
           font-size: 12px;
           border-radius: 5px 5px 0 0; }
-        html body #demographics #demoContainer .demott_rect .tipInfo {
+        html body #retention #retention_container .retentiontt_rect .tipInfo {
           margin-left: 5px;
           color: #002663;
           font-size: 10px; }
-          html body #demographics #demoContainer .demott_rect .tipInfo .tipNum {
+          html body #retention #retention_container .retentiontt_rect .tipInfo .tipNum {
             color: #494949; }
-      html body #demographics #demographics-control #demo-radio {
-        display: flex;
-        flex-direction: column; }
-      html body #demographics #demographics-control .modal-body {
-        display: grid;
-        grid-template-columns: repeat(4, 1.2fr);
-        grid-gap: 10px;
-        font-size: 12px; }
-        html body #demographics #demographics-control .modal-body .checkbox span {
-          vertical-align: middle;
-          margin-left: 0.3em;
-          cursor: pointer; }
-        html body #demographics #demographics-control .modal-body .checkbox .demo_checkbox {
-          -webkit-appearance: none;
-          border: 2px solid #ccc;
-          padding: 6px;
-          border-radius: 3px;
-          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
-          display: inline-block;
-          position: relative;
-          vertical-align: middle;
-          cursor: pointer; }
-        html body #demographics #demographics-control .modal-body .checkbox .demo_checkbox:hover, html body #demographics #demographics-control .modal-body .checkbox .demo_checkbox:checked {
-          border: 2px solid #002663; }
-        html body #demographics #demographics-control .modal-body .checkbox .demo_checkbox:checked ~ * {
-          color: #002663; }
-        html body #demographics #demographics-control .modal-body .checkbox .demo_checkbox:checked:after {
-          content: '';
-          position: absolute;
-          left: 4px;
-          top: 1px;
-          width: 5px;
-          height: 10px;
-          border: solid #002663;
-          border-radius: 5px;
-          border-width: 0 3px 3px 0;
-          -webkit-transform: rotate(45deg);
-          -ms-transform: rotate(45deg);
-          transform: rotate(45deg); }
-      html body #demographics #demographics-control #demoModal_msg {
-        margin-left: 1rem;
-        align-self: center; }
-      html body #demographics #demographics-control #demo_deselect {
-        margin-right: auto;
-        font-weight: bold;
-        color: #5091CD;
-        cursor: pointer; }
-    html body #transition {
-      padding-top: 5rem;
-      margin-bottom: 5rem; }
-      html body #transition #trans_control #trans_slider {
-        fill: #494949;
-        font-size: 12px;
-        padding: 0; }
-      html body #transition #trans_control_2 {
-        display: flex; }
-        html body #transition #trans_control_2 #trans_dist_dropdown .list {
-          max-height: 220px; }
-      html body #transition #graph_container {
-        margin-top: 4rem;
-        display: flex;
-        flex-wrap: wrap; }
-        html body #transition #graph_container .trans_title {
-          color: #1D438C;
-          margin-bottom: 2rem; }
-        html body #transition #graph_container #trans_rate {
-          max-width: 200px;
-          background: url(../assets/img/trans_icon.png);
-          background-repeat: no-repeat;
-          background-position: center;
-          background-size: contain;
-          position: relative; }
-          html body #transition #graph_container #trans_rate #pub_to_ind {
-            color: #4EBDEB;
-            font-weight: bold; }
-          html body #transition #graph_container #trans_rate #ind_to_pub {
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            color: #D42D75;
-            font-weight: bold; }
-      html body #transition #transition_container .trans_circ {
-        fill: #002663;
-        opacity: 0.5;
-        cursor: pointer; }
-      html body #transition #transition_container .label {
-        text-anchor: middle;
-        fill: white; }
-      html body #transition #transition_container .yAxis, html body #transition #transition_container .xAxis {
-        color: #494949; }
-        html body #transition #transition_container .yAxis .domain, html body #transition #transition_container .xAxis .domain {
-          display: none; }
-      html body #transition #transition_container .tick line {
-        stroke: #ccc;
-        stroke-opacity: 0.5; }
-      html body #transition #transition_container #trans_tt .trans_link {
-        margin: 0.5em; }
-        html body #transition #transition_container #trans_tt .trans_link .ssLink {
-          font-size: 14px;
-          line-height: 0.1em; }
-    html body #retention {
-      padding-top: 5rem;
-      margin-bottom: 5rem; }
-      html body #retention #retention_control .controlSelection {
-        margin-bottom: 0; }
-      html body #retention #retention_control #retention_distDropdown.active .list {
-        max-height: 240px; }
-      html body #retention #retention_control .legendContainer {
-        max-height: 100px; }
-      html body #retention #retention_container {
-        position: relative; }
-        html body #retention #retention_container .prov_retention_line {
-          stroke-linecap: round;
-          stroke: #002663; }
-        html body #retention #retention_container .dist_retention_line {
-          stroke-linecap: round;
-          stroke: #FCBA19; }
-        html body #retention #retention_container .xAxis, html body #retention #retention_container .yAxis_prov {
-          stroke-width: 0; }
-          html body #retention #retention_container .xAxis .domain, html body #retention #retention_container .yAxis_prov .domain {
-            display: none; }
-        html body #retention #retention_container .yAxis_dist .domain {
-          display: none; }
-        html body #retention #retention_container .yAxis_dist line {
-          display: none; }
-        html body #retention #retention_container .yAxis_dist .gridline {
-          display: inline-block;
-          stroke: #ccc;
-          shape-rendering: crispEdges;
-          stroke-opacity: .5; }
-        html body #retention #retention_container .retention_overlay {
-          fill: none;
-          pointer-events: all;
-          cursor: pointer; }
-        html body #retention #retention_container .retentiontt_line {
-          stroke: #002663;
-          stroke-dasharray: 2,5;
-          stroke-width: 2;
-          opacity: 0.5; }
-        html body #retention #retention_container .retentiontt_rect {
-          position: absolute;
-          z-index: 10;
-          top: 8em;
-          border-radius: 5px;
-          width: 8em;
-          background: white;
-          opacity: 0.9;
-          pointer-events: none; }
-          html body #retention #retention_container .retentiontt_rect .tipHeader {
-            color: white;
-            padding: 5px;
-            background: #002663;
-            font-weight: bold;
-            font-style: italic;
-            font-size: 12px;
-            border-radius: 5px 5px 0 0; }
-          html body #retention #retention_container .retentiontt_rect .tipInfo {
-            margin-left: 5px;
-            color: #002663;
-            font-size: 10px; }
-            html body #retention #retention_container .retentiontt_rect .tipInfo .tipNum {
-              color: #494949; }
-    html body #booklet {
-      padding-top: 5rem; }
     html body .footer-img {
       display: block;
       width: calc(100%) !important;

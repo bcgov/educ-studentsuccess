@@ -35,9 +35,8 @@ let demo_chartGroup = demo_svg.append('g')
     .attr('class', 'chartGroup')
     .attr("transform", "translate(" + demo_margin.left + "," + demo_margin.top + ")");
 
-let legendContainer = d3.select('#demo-legend')
+let legendContainer = d3.select('#demo_legend')
     .append('svg')
-    .attr('height', '200')
     .append('g')
     .attr('class', 'legendContainer');
 
@@ -59,7 +58,7 @@ d3.csv('../assets/raw_data/demographics.csv', function (error, data) {
             .duration(500)
             .remove();
         //clear existing legends
-        let existingLegend = d3.selectAll("#demo-legend .legend");
+        let existingLegend = d3.selectAll("#demo_legend .legend");
 
         existingLegend.exit();
         existingLegend.transition()
@@ -184,7 +183,7 @@ d3.csv('../assets/raw_data/demographics.csv', function (error, data) {
             }
         }
 
-        
+
 
         // use for loop for positioning the legend
         for (let i = 0; i < selectedDistricts.length; i++) {
@@ -192,14 +191,14 @@ d3.csv('../assets/raw_data/demographics.csv', function (error, data) {
                 return d.DISTRICT == selectedDistricts[i].substring(2, 4)
             });
 
-             //set scale domain (combined districtData[])
-             demo_xScale.domain(districtData.map(function (d) {
+            //set scale domain (combined districtData[])
+            demo_xScale.domain(districtData.map(function (d) {
                 return d.SCHOOL_YEAR;
             }));
 
             if ((selectedDistricts[i] == 'SD99-Province')) {
                 let radioValue = $("input[name='demo-type']:checked").val();
-           
+
                 if (radioValue != 'NET') {
                     demo_yScale.domain([Math.min(35000, d3.min(districtData, function (d) {
                         return d[type];
@@ -208,7 +207,7 @@ d3.csv('../assets/raw_data/demographics.csv', function (error, data) {
                         return d[type];
                     }))
                     ]);
-                } else{
+                } else {
                     demo_yScale.domain([Math.min(0, d3.min(districtData, function (d) {
                         return d[type];
                     })),
@@ -219,14 +218,14 @@ d3.csv('../assets/raw_data/demographics.csv', function (error, data) {
                 }
             } else {
 
-            demo_yScale.domain([Math.min(0, d3.min(districtData, function (d) {
-                return d[type];
-            })),
-            Math.max(0, d3.max(districtData, function (d) {
-                return d[type];
-            }))
-            ]);
-        }
+                demo_yScale.domain([Math.min(0, d3.min(districtData, function (d) {
+                    return d[type];
+                })),
+                Math.max(0, d3.max(districtData, function (d) {
+                    return d[type];
+                }))
+                ]);
+            }
             //line generator 
             let demoLine = d3.line()
                 .x(function (d) {
