@@ -7129,7 +7129,7 @@ html {
         height: 2px;
         left: 50%;
         position: absolute;
-        background: #FCBA19;
+        background: linear-gradient(90deg, #2cc7c0, #59d99d);
         transition: width 0.3s ease 0s, left 0.3s ease 0s;
         width: 0; }
       html body .navbar .navbar-nav a:hover:after {

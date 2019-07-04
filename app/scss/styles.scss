@@ -190,12 +190,12 @@ body {
         height: 2px;
         left: 50%;
         position: absolute;
-        background: #FCBA19;
+        background: $cta-gradient;
         transition: width 0.3s ease 0s, left 0.3s ease 0s;
         width: 0;
       }
 
-      a:hover:after {
+      a:hover:after{
         width: 100%;
         left: 0;
       }
