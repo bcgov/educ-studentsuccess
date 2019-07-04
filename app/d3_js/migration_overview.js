@@ -112,10 +112,9 @@ let legend = function (g) {
     g.append("text")
         .attr("class", "caption")
         .attr("y", -6)
-        .attr("fill", "#000")
         .attr("text-anchor", "start")
         .attr("font-weight", "bold")
-        .text("Net Migration (FTE)");
+        .text("Net Change (Funded FTE)");
 
     let ticks = ["Inflow", "Outflow"];
 

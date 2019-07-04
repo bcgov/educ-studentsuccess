@@ -7052,10 +7052,12 @@ a.text-dark:hover, a.text-dark:focus {
   .migration_left_text .section_header, .migration_left_text .section_header ~ p {
     text-align: left; } }
 
-/* large Devices, Desktops */
-@media only screen and (min-width: 1440px) {
+/* extra large Devices, Desktops */
+@media only screen and (min-width: 1280px) {
   h2 {
     font-size: 2.8rem; }
+  h3 {
+    font-size: 2rem; }
   .ctaBtn, .ctaGhost {
     font-size: 1.2rem !important; }
   .section_header ~ p {
@@ -7118,8 +7120,7 @@ html {
       html body .navbar .open .bottom {
         transform: rotate(-45deg);
         top: 48%; }
-      html body .navbar .navbar-nav .nav-link,
-      html body .navbar .navbar-nav .nav-link:hover {
+      html body .navbar .navbar-nav .nav-link, html body .navbar .navbar-nav f .nav-link:hover {
         color: #5091CD; }
       html body .navbar .navbar-nav a:after {
         background: none repeat scroll 0 0 transparent;
@@ -7140,8 +7141,11 @@ html {
       html body .navbar .navbar-brand {
         color: #002663;
         font-size: 1rem; }
+    html body .driver_section {
+      margin-bottom: 4vw; }
     html body .section_header {
-      background-size: 100% 100%; }
+      background-size: 100% 100%;
+      margin-bottom: 3vw; }
       html body .section_header span {
         color: #002663;
         background-image: linear-gradient(-180deg, transparent 65%, #2cc7c0, #59d99d 0);
@@ -7282,11 +7286,11 @@ html {
       html body .radio:hover .checkmark {
         border: 3px solid #002663; }
     html body .axis_label {
-      font-size: 1rem;
+      font-size: 0.8rem;
       fill: #494949;
       opacity: 0.5; }
     html body #intro, html body #enrolment_model, html body #demographics, html body #migration_overview, html body #flow_map, html body #transition, html body #retention {
-      margin-bottom: 10vw; }
+      margin-bottom: 9vw; }
     html body #enrolment_model::before, html body #demographics::before, html body #migration_overview::before, html body #transition::before, html body #retention::before {
       content: "";
       display: block;
@@ -7302,6 +7306,18 @@ html {
       html body #intro .cta_container {
         display: flex;
         flex-wrap: wrap; }
+      html body #intro .gradient_para {
+        max-width: 450px;
+        padding: 4px 15px;
+        margin-top: 4vw;
+        display: block;
+        color: white;
+        font-weight: 500;
+        border-radius: 3px;
+        background: linear-gradient(315deg, #f7f7f9, #2cc7c0);
+        overflow: hidden; }
+        html body #intro .gradient_para i {
+          margin-right: 0.4rem; }
     html body #migration_overview #tipContainer {
       position: absolute;
       z-index: 10;
@@ -7799,10 +7815,8 @@ html {
     html body #transition #transition_container .label {
       text-anchor: middle;
       fill: white; }
-    html body #transition #transition_container .yAxis, html body #transition #transition_container .xAxis {
-      color: #494949; }
-      html body #transition #transition_container .yAxis .domain, html body #transition #transition_container .xAxis .domain {
-        display: none; }
+    html body #transition #transition_container .yAxis .domain, html body #transition #transition_container .xAxis .domain {
+      display: none; }
     html body #transition #transition_container .tick line {
       stroke: #ccc;
       stroke-opacity: 0.5; }
@@ -7811,8 +7825,6 @@ html {
       html body #transition #transition_container #trans_tt .trans_link .ssLink {
         font-size: 14px;
         line-height: 0.1em; }
-    html body #retention .row {
-      justify-content: space-between; }
     html body #retention #retention_control .controlSelection {
       margin-bottom: 0; }
     html body #retention #retention_control #retention_distDropdown.active .list {
@@ -7833,13 +7845,9 @@ html {
           display: none; }
       html body #retention #retention_container .yAxis_dist .domain {
         display: none; }
-      html body #retention #retention_container .yAxis_dist line {
-        display: none; }
-      html body #retention #retention_container .yAxis_dist .gridline {
-        display: inline-block;
+      html body #retention #retention_container .yAxis_dist .tick line {
         stroke: #ccc;
-        shape-rendering: crispEdges;
-        stroke-opacity: .5; }
+        stroke-opacity: 0.5; }
       html body #retention #retention_container .retention_overlay {
         fill: none;
         pointer-events: all;
@@ -7872,6 +7880,8 @@ html {
           font-size: 10px; }
           html body #retention #retention_container .retentiontt_rect .tipInfo .tipNum {
             color: #494949; }
+    html body #booklet .ctaBtn {
+      margin-top: 2.5vw; }
     html body .footer-img {
       display: block;
       width: calc(100%) !important;

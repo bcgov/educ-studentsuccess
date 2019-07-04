@@ -1,9 +1,9 @@
 //margin
 let retention_margin = {
     top: 10,
-    right: 50,
+    right: 65,
     bottom: 50,
-    left: 30
+    left: 60
 };
 
 //height and width
@@ -21,7 +21,9 @@ let retention_xAxis = d3.axisBottom()
 
 let retention_yAxis_dist = d3.axisLeft()
     .scale(retention_yScale_dist)
-    .tickSizeOuter(0);
+    .tickSizeOuter(0)
+    .tickSize(-trans_width+40)
+    .tickPadding(20);
 
 let retention_yAxis_prov = d3.axisRight()
     .scale(retention_yScale_prov)
@@ -60,7 +62,7 @@ let retention_chartGroup = retention_svg.append('g')
 
 let r_legendContainer = d3.select('#retention_control .row')
     .append('svg')
-    .attr('class', 'retention_legend col-4');
+    .attr('class', 'retention_legend col-5');
 
 //populate dropdown menu
 for (let i = 0; i < sd_arr.length; i++) {
@@ -120,6 +122,9 @@ d3.csv('../assets/raw_data/retention_provincial.csv', function (error, data) {
             if (error) {
                 throw error;
             }
+
+            let yAxis_dist_label = 'Change in Full Course Load - District';
+            let yAxis_prov_label = 'Change in Full Course Load - Province';
 
             let districtData = data.filter(function (d) {
                 return +d.DISTRICT == dist;
@@ -347,11 +352,11 @@ d3.csv('../assets/raw_data/retention_provincial.csv', function (error, data) {
                     .call(retention_yAxis_dist)
                     .append('text')
                     .attr('transform', 'rotate(-90)')
-                    .attr('fill', '#4c4c4c')
-                    .attr('y', 6)
-                    .attr('dy', '.8em')
-                    .style('text-anchor', 'end')
-                    .text('FTE - District');
+                    .attr('class', 'axis_label')
+                    .attr('x', -trans_height / 2)
+                    .attr("y", -45)
+                    .attr('text-anchor', 'middle')
+                    .text(yAxis_dist_label);
 
                 retention_chartGroup.append('g')
                     .attr('class', 'yAxis_prov')
@@ -359,25 +364,16 @@ d3.csv('../assets/raw_data/retention_provincial.csv', function (error, data) {
                     .call(retention_yAxis_prov)
                     .append('text')
                     .attr('transform', 'rotate(-90)')
-                    .attr('fill', '#4c4c4c')
-                    .attr('y', 6)
-                    .attr('dy', '-0.2em')
-                    .style('text-anchor', 'end')
-                    .text('FTE - Province');
+                    .attr('class', 'axis_label')
+                    .attr('x', -trans_height / 2)
+                    .attr("y", 60)
+                    .attr('text-anchor', 'middle')
+                    .text(yAxis_prov_label);
 
                 retention_chartGroup.append('g')
                     .attr('class', 'xAxis')
                     .attr('transform', 'translate(0,' + retention_height + ')')
                     .call(retention_xAxis);
-
-                //grid line, horizontal
-                d3.selectAll('g.yAxis_dist g.tick')
-                    .append('line')
-                    .attr('class', 'gridline')
-                    .attr('x1', 0)
-                    .attr('y1', 0)
-                    .attr('x2', retention_width)
-                    .attr('y2', 0);
 
             }
 

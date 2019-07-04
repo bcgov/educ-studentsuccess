@@ -1,9 +1,9 @@
 //trans_margin 
 let trans_margin = {
     top: 50,
-    right: 50,
+    right: 30,
     bottom: 50,
-    left: 50
+    left: 60
 };
 
 //height and width
@@ -261,8 +261,8 @@ function transUpdate(year, dist, type) {
             throw error;
         }
 
-        let yAxis_label = 'Funded FTE';
-        let xAxis_label = 'Funded FTE';
+        let yAxis_label = 'Transition in Funded FTE';
+        let xAxis_label = 'District Enrolment in Funded FTE';
 
         let distData = data.filter(function (d) { return +d.SCHOOL_YEAR == year });
 
@@ -334,10 +334,10 @@ function transUpdate(year, dist, type) {
             let tran = d3.transition()
                 .duration(1500);
 
-            console.log(dist);
-            console.log(distData);
-            console.log(districtData);
-            console.log(existingCircles.nodes().length);
+            // console.log(dist);
+            // console.log(distData);
+            // console.log(districtData);
+            // console.log(existingCircles.nodes().length);
 
             // if the length matches, update cx, cy coordinates only,no need to rebind nodes
             if (districtData.length == existingCircles.nodes().length) {
@@ -379,8 +379,8 @@ function transUpdate(year, dist, type) {
         else if (!($('#transition_container .xAxis').length)) {
 
 
-            console.log(districtData);
-            console.log(existingCircles.nodes());
+            // console.log(districtData);
+            // console.log(existingCircles.nodes());
 
             //draw trans_circs
             trans_chartGroup.selectAll('.trans_circ')
@@ -408,9 +408,9 @@ function transUpdate(year, dist, type) {
                 .attr("transform", "rotate(-90)")
                 .attr('class', 'axis_label')
                 .attr('x', -trans_height / 2)
-                .attr("y", 0)
+                .attr("y", -45)
                 .attr('text-anchor', 'middle')
-                .text(yAxis_label);;
+                .text(yAxis_label);
 
             trans_chartGroup.append('g')
                 .attr('class', 'xAxis')
@@ -419,7 +419,7 @@ function transUpdate(year, dist, type) {
                 .append("text")
                 .attr('class', 'axis_label')
                 .attr('x', trans_width / 2)
-                .attr("y", 12)
+                .attr("y", 50)
                 .style("text-anchor", "middle")
                 .text(xAxis_label);;
         }
