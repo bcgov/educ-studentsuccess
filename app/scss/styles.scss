@@ -22,42 +22,74 @@ $outflow_color: #a96a46;
 @import"node_modules/bootstrap/scss/bootstrap";
 
 /* Extra Small Devices, Phones */ 
-@media only screen and (max-width : 480px) {
+@media only screen and (min-width : 320px) {
   h2{
-    font-size: 6vw !important;
+    font-size: 6vw;
   }
   .section_header ~ p {
      font-size: 14px; 
   }
 }
-/* Small Devices, Tablets */
-@media only screen and (max-width : 768px) {
-    #intro{
+
+@media only screen and (min-width : 480px) {
+  h2{
+    font-size: 2rem;
+  }
+
+  #intro{
+    text-align: center;
+    .ctaBtn, .ctaGhost {
+      font-size: 1rem;
+    }
+    .cta_container{
+      justify-content: center;
+    }
+  }
+
+  .migration_left_text{
+    .section_header, .section_header ~ p {
       text-align: center;
-      .ctaBtn, .ctaGhost {
-        font-size: 1rem;
-      }
-      .cta_container{
-        justify-content: center;
-      }
     }
+  }
 
-    .migration_left_text{
-      .section_header, .section_header ~ p {
-        text-align: center !important;
-      }
+  #flow_legend{
+    img {
+      max-width: 80%;
     }
+  }
+}
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+  #intro{
+    text-align: left;
+    .ctaBtn, .ctaGhost {
+      font-size: 1rem;
+    }
+    .cta_container{
+      justify-content: flex-start;
+    }
+  }
 
-    #flow_legend{
-      img {
-        max-width: 80%;
-      }
+  .migration_left_text{
+    .section_header, .section_header ~ p {
+      text-align: left;
     }
+  }
 }
 
-/* Medium Devices, Desktops */
-@media only screen and (max-width : 992px) {
+/* large Devices, Desktops */
+@media only screen and (min-width : 1440px) {
+  h2{
+    font-size: 2.8rem;
+  }
 
+  .ctaBtn, .ctaGhost {
+    font-size: 1.2rem !important;
+  }
+
+  .section_header ~ p{
+    font-size: 1rem;
+  }
 }
 
 html {
@@ -68,10 +100,10 @@ body {
   font-family: Myraid-Pro, Calibri, Arial, sans-serif;
   color: $font-color;
 
-    background-image: url(../assets/img/bg-dcr.png), url(../assets/img/bg-dcr2.png), url(../assets/img/bg-dcr3.png);
-    background-size:34% auto, 28% auto, 24% auto;
+    background-image: url(../assets/img/bg_img1.svg), url(../assets/img/bg_img2.svg), url(../assets/img/bg_img4.svg);
+    background-size:8% auto, 14% auto, 10% auto;
     background-repeat: no-repeat, no-repeat, no-repeat;
-    background-position: left 8%, right 21%, left 91%;
+    background-position: 4vw 10%, 82vw 21% , 4vw 94%;
     background-attachment: scroll, scroll, scroll;
 
   div:focus, button:focus {outline:none;}
@@ -195,6 +227,10 @@ body {
 
   .section_header ~ p {
     text-align: center;
+  }
+
+  .isometric_img {
+    max-width: 100%;
   }
 
   .ghostBtn{
@@ -391,7 +427,7 @@ body {
 
 /*********sections********/
 #intro, #enrolment_model, #demographics, #migration_overview, #flow_map, #transition, #retention {
-  margin-bottom: 6vw;
+  margin-bottom: 10vw;
 }
 
   #enrolment_model::before, #demographics::before, #migration_overview::before, #transition::before,#retention::before {
@@ -417,12 +453,6 @@ body {
 
   #migration_overview {
   
-
-  .migration_left_text {
-    p{
-      text-align: left;
-    }
-  }
   #tipContainer{
     position: absolute;
     z-index:10;
@@ -1221,6 +1251,9 @@ body {
 
 //retention
 #retention {
+  .row{
+    justify-content: space-between;
+  }
 
 #retention_control{
   .controlSelection {
@@ -1231,8 +1264,9 @@ body {
       max-height: 240px;
     }
   }
-  .legendContainer {
-    max-height:100px;
+
+  .retention_legend{
+    max-height: 100px;
   }
 }
 #retention_container {
