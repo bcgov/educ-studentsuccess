@@ -110,6 +110,28 @@ body {
     background-position: 4vw 10%, 82vw 21% , 4vw 94%;
     background-attachment: scroll, scroll, scroll;
 
+  // *********studentsucess**********
+  #header{ 
+    background: #003366;
+    border-bottom: 2px solid #fcba19;
+    position: fixed;
+    height: 7rem;
+    width: 100%;
+    z-index: 2;
+    img{
+      max-width: 100%;
+      vertical-align: middle;
+    }
+
+    #language-switcher {
+      padding-top: 1rem;
+      margin-right: 0.5rem;
+      text-align: right;
+  }
+  }
+
+
+  
   div:focus, button:focus {outline:none;}
 
   a,
@@ -1043,7 +1065,7 @@ body {
   //demographics 
   #demographics{
 
-    #demoContainer{
+    #demo_container{
 
       .demo_line {
         stroke-linecap: round;
@@ -1055,22 +1077,16 @@ body {
         }
         stroke-width: 0;
     }
+
       .yAxis {
         .domain{
           display: none;
         }
-        line{
-          display:none;
-        }
-        .gridline{
-          display: inline-block;
+        .tick line{
           stroke: #ccc;
-          shape-rendering: crispEdges;
-          stroke-opacity: .5;
+          stroke-opacity: 0.5;
           }
       }
-
-
 
         .demo_overlay {
           fill: none;

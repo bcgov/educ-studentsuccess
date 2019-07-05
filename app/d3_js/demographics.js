@@ -1,9 +1,9 @@
 //margin
 let demo_margin = {
     top: 10,
-    right: 50,
+    right: 20,
     bottom: 50,
-    left: 50
+    left:80
 };
 //height and width
 let demo_height = 400 - demo_margin.top - demo_margin.bottom;
@@ -22,10 +22,12 @@ let demo_xAxis = d3.axisBottom()
 
 let demo_yAxis = d3.axisLeft()
     .scale(demo_yScale)
-    .tickSizeOuter(0);
+    .tickSizeOuter(0)
+    .tickSize(-demo_width)
+    .tickPadding(20);
 
 //canvas
-let demo_svg = d3.select('#demoContainer')
+let demo_svg = d3.select('#demo_container')
     .append('svg')
     .attr("preserveAspectRatio", "xMinYMin meet") // This forces uniform scaling for both the x and y, aligning the midpoint of the SVG object with the midpoint of the container element.
     .attr("viewBox", "0 0 600 400") //define the aspect ratio, the inner scaling of object lengths and coordinates
@@ -50,9 +52,11 @@ d3.csv('../assets/raw_data/demographics.csv', function (error, data) {
 
     let defaultType = 'NEW_KINDERGARTEN';
 
+    let yAxis_label = 'Number of Students';
+
     function demoClear() {
         //clear existing line
-        let existingPath = d3.selectAll("#demoContainer .demo_line");
+        let existingPath = d3.selectAll("#demo_container .demo_line");
         existingPath.exit();
         existingPath.transition()
             .duration(500)
@@ -107,7 +111,7 @@ d3.csv('../assets/raw_data/demographics.csv', function (error, data) {
             .attr("y2", demo_height);
 
         //tt info rect, since z-index doesnt work for svg elments, draw later
-        d3.select('#demoContainer').append('div')
+        d3.select('#demo_container').append('div')
             .attr('class', 'demott_rect')
             .style('display', 'none');
 
@@ -150,7 +154,7 @@ d3.csv('../assets/raw_data/demographics.csv', function (error, data) {
                     .style('display', null);
 
                 //difference btween contianer div and svg canvas
-                let oBox = document.getElementById('demoContainer').getBoundingClientRect();
+                let oBox = document.getElementById('demo_container').getBoundingClientRect();
                 let svgSacle = oBox.width / 600;
 
                 d3.select(".demott_rect")
@@ -289,17 +293,17 @@ d3.csv('../assets/raw_data/demographics.csv', function (error, data) {
         }
 
 
-        if ($('#demoContainer .yAxis').length) {
+        if ($('#demo_container .yAxis').length) {
 
             //set transition
             let tran = d3.transition()
                 .duration(1500);
 
-            d3.select("#demoContainer .yAxis")
+            d3.select("#demo_container .yAxis")
                 .transition(tran)
                 .call(demo_yAxis);
 
-            d3.select("#demoContainer .xAxis")
+            d3.select("#demo_container .xAxis")
                 .transition(tran)
                 .call(demo_xAxis);
 
@@ -311,11 +315,11 @@ d3.csv('../assets/raw_data/demographics.csv', function (error, data) {
                 .call(demo_yAxis)
                 .append("text")
                 .attr("transform", "rotate(-90)")
-                .attr('fill', '#4c4c4c')
-                .attr("y", 6)
-                .attr("dy", ".8em")
-                .style("text-anchor", "end")
-                .text("Headcount");
+                .attr('class', 'axis_label')
+                .attr('x', -demo_height / 2)
+                .attr("y", -60)
+                .attr('text-anchor', 'middle')
+                .text(yAxis_label);
 
             demo_chartGroup.append('g')
                 .attr('class', 'xAxis')
