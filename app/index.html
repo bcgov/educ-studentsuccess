@@ -69,7 +69,8 @@
           <a class="btn ctaBtn btn-lg mr-3" href="#enrolment_model">EXPLORE</a>
           <a class="btn ctaGhost btn-lg" href="#booklet">STATIC REPORT</a>
         </div>
-        <p class="gradient_para"><i class="far fa-chart-bar"></i></i><span>An interactive app exploring enrolment data</span></p>
+        <p class="gradient_para"><i class="far fa-chart-bar"></i></i><span>An interactive app exploring enrolment
+            data</span></p>
       </div>
       <div class="col-sm-12 col-md-7">
         <img src="/assets/img/hero_isometric.png" class="isometric_img" alt="hero img">
@@ -250,9 +251,7 @@
               <input type="checkbox" id="flat_switch" />
               <label for="flat_switch"></label>
             </div>
-            <div id="flow_legend">
               <img class="img-fluid" src="/assets/img/flow_legend.png" alt="flow legend">
-            </div>
           </div>
         </div>
       </div>
@@ -275,51 +274,54 @@
         </div>
 
         <div id="graph_container">
-          <div class="col-12 text-center trans_title">
-            <h5>Province Overview</h5>
-          </div>
-          <div class="col-4">
-            <img id="public_school_icon" class="img-fluid" src="/assets/img/public.png" alt="public school">
+            
+          <h5 class="col-12 text-center trans_title">Transition Overview</h5>
+          <div id="school_graph">
+          <div>
+            <img id="public_school_icon" class="img-fluid" src="/assets/img/public2.png" alt="public school">
             <h6 class="text-center">Public</h6>
           </div>
-          <div id="trans_rate" class="col-4">
-            <div id="pub_to_ind" class="text-center mt-2"></div>
-            <div id="ind_to_pub" class="text-center mb-2"></div>
+          <div id="trans_rate" class="col-3">
+            <div id="pub_to_ind" class="text-center"></div>
+            <div id="ind_to_pub" class="text-center"></div>
           </div>
-          <div class="col-4">
-            <img id="independent_school_icon" class="img-fluid" src="/assets/img/independent.png"
+          <div>
+            <img id="independent_school_icon" class="img-fluid" src="/assets/img/independent2.png"
               alt="independent school">
             <h6 class="text-center">Independent</h6>
           </div>
         </div>
-      </div>
 
-      <div class="col-sm-12 col-md-7">
-        <div id="trans_control_2">
-          <div class="col-7">
-            <h5>School District</h5>
-            <div id="trans_dist_dropdown" class="dropDown" tabindex="1">
-              <span>Top 5 districts</span>
-              <div class="list">
-              </div>
-            </div>
-          </div>
-          <div class="col-5">
-            <h5>Transition Type</h5>
-            <div id="trans_type_dropdown" class="dropDown" tabindex="1">
-              <span>Public entered</span>
-              <div class="list">
-                <div data-value="ENTER_PUBLIC">Public entered</div>
-                <div data-value="LEAVE_PUBLIC">Public left</div>
-                <div data-value="NET_INDEPENDENT">Net change</div>
-              </div>
+
+      </div>
+    </div>
+
+    <div class="col-sm-12 col-md-7">
+      <div id="trans_control_2">
+        <div class="col-7">
+          <h5>School District</h5>
+          <div id="trans_dist_dropdown" class="dropDown" tabindex="1">
+            <span>Top 5 districts</span>
+            <div class="list">
             </div>
           </div>
         </div>
-
-        <div id="transition_container"></div>
+        <div class="col-5">
+          <h5>Transition Type</h5>
+          <div id="trans_type_dropdown" class="dropDown" tabindex="1">
+            <span>Public entered</span>
+            <div class="list">
+              <div data-value="ENTER_PUBLIC">Public entered</div>
+              <div data-value="LEAVE_PUBLIC">Public left</div>
+              <div data-value="NET_INDEPENDENT">Net change</div>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <div id="transition_container"></div>
     </div>
+  </div>
   </div>
 
   <div class="container" id="retention">

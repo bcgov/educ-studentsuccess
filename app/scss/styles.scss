@@ -66,6 +66,10 @@ $btn_hover_shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0
     font-size: 2rem;
   }
 
+  h5{
+    font-size: 1.25rem;
+  }
+
   #flow_legend{
     img {
       max-width: 80%;
@@ -74,9 +78,6 @@ $btn_hover_shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0
 }
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px) {
-  h5{
-    font-size: 1.25rem;
-  }
 
   .section_header{
     margin-bottom: 3vw;
@@ -1250,37 +1251,48 @@ body {
   }
   
   #graph_container {
-    margin-top: 4rem;
-    display: flex;
-    flex-wrap: wrap;
+    margin-top: 4vw;
     
     .trans_title{
       color: #1D438C;
       margin-bottom: 2rem;
     }
-    #trans_rate{
-      max-width: 200px;
-      background: url(../assets/img/trans_icon.png);
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: contain;
-      position: relative;
-      #pub_to_ind{
-        color:#4EBDEB;
-        font-weight: bold;
+
+    #school_graph {
+      display: flex;
+
+      #trans_rate{
+        max-width: 200px;
+        background: url(../assets/img/trans_icon.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        position: relative;
       }
-       #ind_to_pub {
-        position: absolute;
-        left:0;
-        right:0;
-        bottom: 0;
-        color:#D42D75;
-        font-weight: bold;
+
+        #pub_to_ind{
+          position: absolute;
+          top: 2vw;
+          left: 0;
+          right: 0;
+          color:#4EBDEB;
+          font-weight: bold;
+        }
+        
+        #ind_to_pub {
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 2vw;
+          color:#D42D75;
+          font-weight: bold;
+        }
       }
     }
-  }
+  
 
   #transition_container {
+
     .trans_circ {
       fill: $tooltip-bg;
       opacity: 0.5;

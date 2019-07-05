@@ -7044,13 +7044,13 @@ a.text-dark:hover, a.text-dark:focus {
 @media only screen and (min-width: 480px) {
   h2 {
     font-size: 2rem; }
+  h5 {
+    font-size: 1.25rem; }
   #flow_legend img {
     max-width: 80%; } }
 
 /* Small Devices, Tablets */
 @media only screen and (min-width: 768px) {
-  h5 {
-    font-size: 1.25rem; }
   .section_header {
     margin-bottom: 3vw; }
   .driver_section {
@@ -7810,27 +7810,31 @@ html {
       html body #transition #trans_control_2 #trans_dist_dropdown .list {
         max-height: 220px; }
     html body #transition #graph_container {
-      margin-top: 4rem;
-      display: flex;
-      flex-wrap: wrap; }
+      margin-top: 4vw; }
       html body #transition #graph_container .trans_title {
         color: #1D438C;
         margin-bottom: 2rem; }
-      html body #transition #graph_container #trans_rate {
-        max-width: 200px;
-        background: url(../assets/img/trans_icon.png);
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: contain;
-        position: relative; }
-        html body #transition #graph_container #trans_rate #pub_to_ind {
+      html body #transition #graph_container #school_graph {
+        display: flex; }
+        html body #transition #graph_container #school_graph #trans_rate {
+          max-width: 200px;
+          background: url(../assets/img/trans_icon.png);
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: contain;
+          position: relative; }
+        html body #transition #graph_container #school_graph #pub_to_ind {
+          position: absolute;
+          top: 2vw;
+          left: 0;
+          right: 0;
           color: #4EBDEB;
           font-weight: bold; }
-        html body #transition #graph_container #trans_rate #ind_to_pub {
+        html body #transition #graph_container #school_graph #ind_to_pub {
           position: absolute;
           left: 0;
           right: 0;
-          bottom: 0;
+          bottom: 2vw;
           color: #D42D75;
           font-weight: bold; }
     html body #transition #transition_container .trans_circ {
