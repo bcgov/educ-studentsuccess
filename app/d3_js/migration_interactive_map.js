@@ -180,11 +180,9 @@ $(document).ready(function () {
         return d.total_move_in;
       });
 
-      /////////////////////////////////////
       let indomain = [moveout_min, moveout_max]; //domain of min-max 
       let outdomain = [movein_min, movein_max];
       let fillcolor = d3.scaleLinear().range(colors).domain(indomain);
-      ////////////////////////////////////
 
       d3.json("../assets/geo_json/sd_geo.json", function (error, json) {
         if (error) throw error;
@@ -698,8 +696,8 @@ $(document).ready(function () {
 
   //dropdown selection
   $('#yearDropdown').on('click', function (et) {
+    $('.dropDown').removeClass('active');
     $(this).toggleClass('active');
-    $('#distDropdown').removeClass('active');
     //swap database when select changes
     d3.selectAll('#yearDropdown .list div')
       .on('click', function () {
@@ -717,6 +715,7 @@ $(document).ready(function () {
 
   //dropdown select district
   $('#distDropdown').on('click', function (et) {
+    $('.dropDown').removeClass('active');
     $(this).toggleClass('active');
     $('#yearDropdown').removeClass('active');
 

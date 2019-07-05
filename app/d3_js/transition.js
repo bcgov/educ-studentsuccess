@@ -461,6 +461,7 @@ for (let i = 0; i < sd_arr.length; i++) {
 
 //dist dropdown multiselect
 $('#trans_dist_dropdown').on('click', function () {
+    $('.dropDown').removeClass('active');
     $(this).toggleClass('active');
     d3.selectAll('#trans_dist_dropdown .list div')
         .on('click', function () {
@@ -480,6 +481,7 @@ $('#trans_dist_dropdown').on('click', function () {
 
 //type dropdown
 $('#trans_type_dropdown').on('click', function (e) {
+    $('.dropDown').removeClass('active');
     $(this).toggleClass('active');
     d3.selectAll('#trans_type_dropdown .list div')
         .on('click', function () {

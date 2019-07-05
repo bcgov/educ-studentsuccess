@@ -1,9 +1,14 @@
-//line_margin 
-let line_margin = { top: 50, right: 50, bottom: 50, left: 50 };
+//model_margin 
+let model_margin = {
+    top: 50,
+    right: 70,
+    bottom: 50,
+    left: 60
+};
 
 //height and width
-let line_height = 400 - line_margin.top - line_margin.bottom;
-let line_width = 600 - line_margin.left - line_margin.right;
+let model_height = 400 - model_margin.top - model_margin.bottom;
+let model_width = 600 - model_margin.left - model_margin.right;
 
 let formatC = d3.format(",.0f");
 // let formatPercent = d3.format(".0%");
@@ -12,13 +17,13 @@ let formatC = d3.format(",.0f");
 let parseDate = d3.timeParse('%Y');
 
 //scales
-let line_xScale = d3.scalePoint().range([0, line_width]).padding(0.5);;
+let model_xScale = d3.scalePoint().range([0, model_width]).padding(0.5);;
 
 
 //x1, usedto create the group (grouped bars) elements
 // 0.1 is the padding added to offset the band from the edge of the interval
 let bar_xScale1 = d3.scaleBand()
-    .rangeRound([0, line_width])
+    .rangeRound([0, model_width])
     .padding(.2)
     .paddingInner(.2);
 
@@ -27,11 +32,11 @@ let bar_xScale1 = d3.scaleBand()
 let bar_xScale2 = d3.scaleBand()
     .padding(0.1);
 
-let line_yScale = d3.scaleLinear()
-    .range([line_height, 0]);
+let model_yScale = d3.scaleLinear()
+    .range([model_height, 0]);
 
 let bar_yScale = d3.scaleLinear()
-    .range([line_height, 0]);
+    .range([model_height, 0]);
 
 //color scale
 let color_scale = d3.scaleOrdinal()
@@ -40,8 +45,8 @@ let color_scale = d3.scaleOrdinal()
 let bar_xAxis = d3.axisBottom()
     .scale(bar_xScale1);
 
-let line_yAxis = d3.axisRight()
-    .scale(line_yScale);
+let model_yAxis = d3.axisRight()
+    .scale(model_yScale);
 
 let bar_yAxis = d3.axisLeft()
     .scale(bar_yScale);
@@ -50,10 +55,10 @@ let bar_yAxis = d3.axisLeft()
 //lines
 let growthLine = d3.line()
     .x(function (d) {
-        return line_xScale(d.SCHOOL_YEAR);
+        return model_xScale(d.SCHOOL_YEAR);
     })
     .y(function (d) {
-        return line_yScale(d.LAST_YEAR_ENROLMENT);
+        return model_yScale(d.LAST_YEAR_ENROLMENT);
     }); //smooth the line
 
 
@@ -74,14 +79,14 @@ let yr1 = 2013;
 let yr2 = 2016;
 
 //canvas
-let line_svg = d3.select('#lineContainer').append('svg')
+let model_svg = d3.select('#lineContainer').append('svg')
     .attr("preserveAspectRatio", "xMinYMin meet")  // This forces uniform scaling for both the x and y, aligning the midpoint of the SVG object with the midpoint of the container element.
     .attr("viewBox", "0 0 600 400") //defines the aspect ratio, the inner scaling of object lengths and coordinates
     .attr('class', 'svg-content');
 
-let line_chartGroup = line_svg.append('g')
+let model_chartGroup = model_svg.append('g')
     .attr('class', 'chartGroup')
-    .attr('transform', 'translate(' + line_margin.left + ',' + line_margin.top + ')');
+    .attr('transform', 'translate(' + model_margin.left + ',' + model_margin.top + ')');
 
 
 //initialize html tooltip
@@ -94,6 +99,9 @@ d3.csv('../assets/raw_data/predictors.csv', function (error, data) {
     if (error) {
         throw error;
     }
+
+    let yAxis_driver_label = 'Driver Impact';
+    let yAxis_total_label = 'Total Enrolment in Funded FTE';
 
     //get the array of keys (drivers)
     let driverNames = d3.keys(data[0]).filter(function (key) {
@@ -147,25 +155,25 @@ d3.csv('../assets/raw_data/predictors.csv', function (error, data) {
     }
 
     function modelClear() {
-        line_chartGroup.selectAll('.year').remove().transition()
+        model_chartGroup.selectAll('.year').remove().transition()
             .duration(500);
 
-        line_chartGroup.selectAll('.xAxis').remove().transition()
+        model_chartGroup.selectAll('.xAxis').remove().transition()
             .duration(500);
 
-        line_chartGroup.selectAll('.yAxis').remove().transition()
+        model_chartGroup.selectAll('.yAxis').remove().transition()
             .duration(500);
 
-        line_chartGroup.selectAll('.yAxis2').remove().transition()
+        model_chartGroup.selectAll('.yAxis2').remove().transition()
             .duration(500);
 
-        line_chartGroup.selectAll('.dot').remove().transition()
+        model_chartGroup.selectAll('.dot').remove().transition()
             .duration(500);
 
-        line_chartGroup.selectAll('.line').remove().transition()
+        model_chartGroup.selectAll('.line').remove().transition()
             .duration(500);
 
-        line_chartGroup.select('#zero-line').remove().transition()
+        model_chartGroup.select('#zero-line').remove().transition()
             .duration(500);
     }
 
@@ -192,11 +200,11 @@ d3.csv('../assets/raw_data/predictors.csv', function (error, data) {
         });
 
         //set aixs
-        line_xScale.domain(districtData.map(function (d) { return d.SCHOOL_YEAR; }));
+        model_xScale.domain(districtData.map(function (d) { return d.SCHOOL_YEAR; }));
         bar_xScale1.domain(districtData.map(function (d) { return d.SCHOOL_YEAR; }));
         // set x2 axis within the bar group
         bar_xScale2.domain(driverNames).rangeRound([0, bar_xScale1.bandwidth()]);
-        line_yScale.domain([0, d3.max(districtData, function (d) { return d.LAST_YEAR_ENROLMENT; })]);
+        model_yScale.domain([0, d3.max(districtData, function (d) { return d.LAST_YEAR_ENROLMENT; })]);
 
         // get min and max from multi columns (drivers)
         //first find out lowest/highest population amount throught the years then finds out largest number of drivers of that year
@@ -211,33 +219,33 @@ d3.csv('../assets/raw_data/predictors.csv', function (error, data) {
         })]);
 
         //line y axis
-        line_chartGroup.append('g')
+        model_chartGroup.append('g')
             .attr('class', 'yAxis')
-            .attr('transform', "translate( " + line_width + ", 0 )")
-            .call(line_yAxis)
+            .attr('transform', "translate( " + model_width + ", 0 )")
+            .call(model_yAxis)
             .append("text")
             .attr("transform", "rotate(-90)")
-            .attr('fill', '#4c4c4c')
-            .attr("y", -6)
-            .attr("dy", ".9em")
-            .style("text-anchor", "end")
-            .text("Funded FTE in the year");
+            .attr('class', 'axis_label')
+            .attr('x', -model_height / 2)
+            .attr("y", 65)
+            .attr('text-anchor', 'middle')
+            .text(yAxis_total_label);
 
         //bar y axis
-        line_chartGroup.append('g')
+        model_chartGroup.append('g')
             .attr('class', 'yAxis2')
             .call(bar_yAxis)
             .append("text")
             .attr("transform", "rotate(-90)")
-            .attr('fill', '#4c4c4c')
-            .attr("y", 6)
-            .attr("dy", ".1em")
-            .style("text-anchor", "end")
-            .text("Driver Impact");
+            .attr('class', 'axis_label')
+            .attr('x', -model_height / 2)
+            .attr("y", -45)
+            .attr('text-anchor', 'middle')
+            .text(yAxis_driver_label);
 
         //bar x axis
-        line_chartGroup.append('g')
-            .attr('transform', 'translate(0,' + line_height + ')')
+        model_chartGroup.append('g')
+            .attr('transform', 'translate(0,' + model_height + ')')
             .attr('class', 'xAxis')
             .call(bar_xAxis);
 
@@ -245,24 +253,24 @@ d3.csv('../assets/raw_data/predictors.csv', function (error, data) {
 
         let zero = [
             { 'x': 0, 'y': 0 },
-            { 'x': line_width, 'y': 0 }
+            { 'x': model_width, 'y': 0 }
         ];
 
         var xScale = d3.scaleLinear()
-            .domain([0, line_width]) // input
-            .range([0, line_width]);
+            .domain([0, model_width]) // input
+            .range([0, model_width]);
 
         let zero_line = d3.line()
             .x(function (d) { return xScale(d['x']); })
             .y(function (d) { return bar_yScale(d['y']); });
 
-        line_chartGroup.append('path')
+        model_chartGroup.append('path')
             .datum(zero)
             .attr('id', 'zero-line')
             .attr('d', zero_line);
 
         //year group
-        let yrGroup = line_chartGroup.selectAll('.year')
+        let yrGroup = model_chartGroup.selectAll('.year')
             .data(districtData)
             .enter()
             .append('g')
@@ -285,34 +293,34 @@ d3.csv('../assets/raw_data/predictors.csv', function (error, data) {
             .style('fill', function (d) { return color_scale(d.name); });
 
         //bar labels
-        // let labels = line_chartGroup.selectAll(".label")
+        // let labels = model_chartGroup.selectAll(".label")
         //     .data(districtData)
         //     .enter()
         //     .append("text")
         //     .attr("class", "label")
         //     .attr("x", (function (d) { return bar_xScale(d.Year) + bar_xScale.bandwidth() / 2; }))
-        //     .attr("y", function (d) { return line_height - bar_yScale(d.NetMigration) + 1; })
+        //     .attr("y", function (d) { return model_height - bar_yScale(d.NetMigration) + 1; })
         //     .attr("dy", ".75em")
         //     .text(function (d) { return d.NetMigration; });
 
         //draw line graph
-        let linegraph = line_chartGroup.append('path')
+        let linegraph = model_chartGroup.append('path')
             .datum(districtData)
             .attr('class', 'line')
             .attr('d', growthLine);
 
 
-        let dots = line_chartGroup.selectAll(".dot")
+        let dots = model_chartGroup.selectAll(".dot")
             .data(districtData)
             .enter().append("circle") // Uses the enter().append() method
             .attr("class", "dot") // Assign a class for styling
-            .attr("cx", function (d) { return line_xScale(d.SCHOOL_YEAR); })
-            .attr("cy", function (d) { return line_yScale(d.LAST_YEAR_ENROLMENT) })
+            .attr("cx", function (d) { return model_xScale(d.SCHOOL_YEAR); })
+            .attr("cy", function (d) { return model_yScale(d.LAST_YEAR_ENROLMENT) })
             .attr("r", 5)
             .on("mouseenter", function (d) {
                 //toolOver is the event handler
                 console.log(d);
-                return line_toolOver(d, this);
+                return model_toolOver(d, this);
             })
             .on("mousemove", function (d) {
                 //gets mouse coordinates on screen
@@ -323,18 +331,18 @@ d3.csv('../assets/raw_data/predictors.csv', function (error, data) {
                 let mx = (event.pageX - offset.left);
                 let my = (event.pageY - offset.top);
 
-                return line_toolMove(mx, my, d);
+                return model_toolMove(mx, my, d);
             })
             .on("mouseleave", function (d) {
-                return line_toolOut(d, this);
+                return model_toolOut(d, this);
             });
 
         //dropdown select district
         //removes event handlers from selected elements as updateGraph
         $('#model_distDropdown').unbind().on('click', function (et) {
             console.log('clicked');
+            $('.dropDown').removeClass('active');
             $(this).toggleClass('active');
-            // $('#yearDropdown').removeClass('active');
 
             //or add on click when appending the divs
             d3.selectAll('#model_distDropdown .list div')
@@ -381,11 +389,11 @@ d3.csv('../assets/raw_data/predictors.csv', function (error, data) {
                         d3.select('a.reportBtn').attr('href', 'https://www2.gov.bc.ca/gov/content/education-training/k-12/administration/program-management/reporting-on-k-12/district-reports/' + sdLink);
                     }
                     //set aixs
-                    line_xScale.domain(districtData.map(function (d) { return d.SCHOOL_YEAR; }));
+                    model_xScale.domain(districtData.map(function (d) { return d.SCHOOL_YEAR; }));
                     bar_xScale1.domain(districtData.map(function (d) { return d.SCHOOL_YEAR; }));
                     // set x2 axis within the bar group
                     bar_xScale2.domain(driverNames).rangeRound([0, bar_xScale1.bandwidth()]);
-                    line_yScale.domain([0, d3.max(districtData, function (d) { return d.LAST_YEAR_ENROLMENT; })]);
+                    model_yScale.domain([0, d3.max(districtData, function (d) { return d.LAST_YEAR_ENROLMENT; })]);
 
                     // get min and max from multi columns (drivers)
                     //first find out lowest/highest population amount throught the years then finds out largest number of drivers of that year
@@ -416,8 +424,8 @@ d3.csv('../assets/raw_data/predictors.csv', function (error, data) {
                     dots.data(districtData)
                         .transition()
                         .duration(1500)
-                        .attr("cx", function (d) { return line_xScale(d.SCHOOL_YEAR); })
-                        .attr("cy", function (d) { return line_yScale(d.LAST_YEAR_ENROLMENT) });
+                        .attr("cx", function (d) { return model_xScale(d.SCHOOL_YEAR); })
+                        .attr("cy", function (d) { return model_yScale(d.LAST_YEAR_ENROLMENT) });
 
                     zero_line.y(function (d) { return bar_yScale(d['y']); });
                     d3.select('#zero-line')
@@ -425,12 +433,12 @@ d3.csv('../assets/raw_data/predictors.csv', function (error, data) {
                         .duration(1600)
                         .attr('d', zero_line);
 
-                    line_chartGroup.select('.yAxis')
+                    model_chartGroup.select('.yAxis')
                         .transition()
                         .duration(1600)
-                        .call(line_yAxis);
+                        .call(model_yAxis);
 
-                    line_chartGroup.select('.yAxis2')
+                    model_chartGroup.select('.yAxis2')
                         .transition()
                         .duration(1600)
                         .call(bar_yAxis);
@@ -449,13 +457,13 @@ d3.csv('../assets/raw_data/predictors.csv', function (error, data) {
             .style("opacity", "0");
 
         legend.append("rect")
-            .attr("x", line_width - 300)
+            .attr("x", model_width - 300)
             .attr("width", 18)
             .attr("height", 18)
             .style("fill", function (d) { return color_scale(d); });
 
         legend.append("text")
-            .attr("x", line_width - 280)
+            .attr("x", model_width - 280)
             .attr("y", 9)
             .attr("dy", ".3em")
             .style("text-anchor", "start")
@@ -576,7 +584,7 @@ d3.csv('../assets/raw_data/predictors.csv', function (error, data) {
 
 
 
-function line_toolOver(v, thepath) {
+function model_toolOver(v, thepath) {
     d3.select(thepath)
         //in v4+ use the "long forms"
         .attr("style", "fill:#FCBA19")
@@ -584,7 +592,7 @@ function line_toolOver(v, thepath) {
     return tooltip_line.style('display', null);
 };
 
-function line_toolOut(m, thepath) {
+function model_toolOut(m, thepath) {
     d3.select(thepath)
         .attr("style", "fill:#002663")
         .attr("cursor", "pointer");
@@ -592,7 +600,7 @@ function line_toolOut(m, thepath) {
 }
 
 
-function line_toolMove(mx, my, data) {
+function model_toolMove(mx, my, data) {
     //create the tooltip, style it and inject info
 
     return tooltip_line.style("top", my + "px")
@@ -601,5 +609,5 @@ function line_toolMove(mx, my, data) {
             let content = "<div class='tipHeader'><b>Year: </b>" + data.SCHOOL_YEAR + "</div>";
             content += "<div class='tipInfo'>Total Enrolment: <span class='tipNum'>" + Math.round(data.LAST_YEAR_ENROLMENT).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span></div>"
             return content;
-        }); 
+        });
 }

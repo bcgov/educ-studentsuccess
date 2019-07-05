@@ -7174,7 +7174,7 @@ html {
       display: inline-block;
       padding: 0.5rem 1rem;
       border: 2px solid #38598a;
-      border-radius: 50px;
+      border-radius: 0.3rem;
       background: #fff;
       color: #38598a;
       cursor: pointer; }
@@ -7349,7 +7349,9 @@ html {
       max-width: 400px;
       height: auto; }
     html body .controlSection {
-      margin-bottom: 1rem; }
+      margin-bottom: 1.5rem; }
+      html body .controlSection h5 {
+        font-weight: bold; }
     html body .dropDown {
       position: relative;
       background: white;
@@ -7357,7 +7359,7 @@ html {
       padding: 6px 10px;
       border: 2px solid #38598a;
       box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
-      border-radius: 0.5em;
+      border-radius: 0.3rem;
       cursor: pointer;
       transition: all 0.3s ease-out;
       /* Hover state */

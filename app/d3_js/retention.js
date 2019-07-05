@@ -387,8 +387,8 @@ d3.csv('../assets/raw_data/retention_provincial.csv', function (error, data) {
 
     //dropdown select district
     //removes event handlers from selected elements as updateGraph
-    $('#retention_distDropdown').unbind().on('click', function (et) {
-        console.log('clicked');
+    $('#retention_distDropdown').unbind().on('click', function () {
+        $('.dropDown').removeClass('active');
         $(this).toggleClass('active');
 
         //or add on click when appending the divs

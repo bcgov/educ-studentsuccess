@@ -267,7 +267,7 @@ body {
     display: inline-block;
     padding: 0.5rem 1rem;
     border: 2px solid $btn-color;
-    border-radius: 50px;
+    border-radius: 0.3rem;
     background: #fff;
     color: $btn-color;
     cursor: pointer;
@@ -524,7 +524,10 @@ body {
 
   // Shared 
   .controlSection {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    h5{
+      font-weight: bold;
+    }
   }
 
   .dropDown {
@@ -534,7 +537,7 @@ body {
     padding: 6px 10px;
     border: 2px solid $btn-color;
     box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
-    border-radius: 0.5em;
+    border-radius: 0.3rem;
     cursor: pointer;
     transition: all 0.3s ease-out;
     
