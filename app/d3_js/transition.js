@@ -357,13 +357,17 @@ function transUpdate(year, dist, type) {
                     .attr('cy', function (d) { return trans_yScale(Math.abs(d[type])); })
                     .attr('r', 10)
                     .on('click', function (d) {
-                        let xpos = d3.mouse(this)[0];
-                        let ypos = d3.mouse(this)[1];
+                        //gets mouse coordinates on screen
+                        let offsetTarget = $(this).parent().parent().parent().parent();
+                        console.log(offsetTarget);
+                        let offset = offsetTarget.offset();
+                        let mx = (event.pageX - offset.left);
+                        let my = (event.pageY - offset.top);
 
                         d3.selectAll('.trans_circ').style('fill', '#002663');
                         d3.select(this).style('fill', '#FCBA19')
-                        console.log(type, trans_type);
-                        showTranstt(d.DISTRICT, trans_year, Math.abs(d[trans_type]), trans_type, xpos, ypos);
+                        // console.log(type, trans_type);
+                        showTranstt(d.DISTRICT, trans_year, Math.abs(d[trans_type]), trans_type, mx, my);
                     });
             }
 
@@ -378,10 +382,6 @@ function transUpdate(year, dist, type) {
         }
         else if (!($('#transition_container .xAxis').length)) {
 
-
-            // console.log(districtData);
-            // console.log(existingCircles.nodes());
-
             //draw trans_circs
             trans_chartGroup.selectAll('.trans_circ')
                 .data(districtData)
@@ -391,13 +391,18 @@ function transUpdate(year, dist, type) {
                 .attr('cy', function (d) { return trans_yScale(Math.abs(d[type])); })
                 .attr('r', 10)
                 .on('click', function (d) {
-                    let xpos = d3.mouse(this)[0];
-                    let ypos = d3.mouse(this)[1];
+                    //gets mouse coordinates on screen
+                    let offsetTarget = $(this).parent().parent().parent().parent();
+                    console.log(offsetTarget);
+                    let offset = offsetTarget.offset();
+                    let mx = (event.pageX - offset.left);
+                    let my = (event.pageY - offset.top);
+                    console.log(mx, my);
 
                     d3.selectAll('.trans_circ').style('fill', '#002663');
                     d3.select(this).style('fill', '#FCBA19')
-                    console.log(type, trans_type);
-                    showTranstt(d.DISTRICT, trans_year, Math.abs(d[trans_type]), trans_type, xpos, ypos);
+                    // console.log(type, trans_type);
+                    showTranstt(d.DISTRICT, trans_year, Math.abs(d[trans_type]), trans_type, mx, my);
                 });
 
             //axes
@@ -496,26 +501,36 @@ $('#trans_type_dropdown').on('click', function (e) {
         });
 });
 
-function showTranstt(sd, yr, num, type, xpos, ypos) {
+function showTranstt(sd, yr, num, type, mx, my) {
 
-    if (xpos < 40) {
-        xpos = 40;
+    if (mx < 120) {
+        mx = 120;
+    } else if (mx > 500) {
+        mx = 500;
     };
 
-    if (ypos < 40) {
-        ypos = 40;
+    if (my < 40) {
+        my = 40;
     };
 
-    if (ypos > 200) {
-        ypos = 80;
+    if (my > 220) {
+        my = 220;
+    };
+
+    //check if sd_arr string coontains sd district number 
+    let dist;
+    for (let d of sd_arr) {
+        if (d.includes(sd.toString())) {
+            dist = d;
+        }
     };
 
     d3.select('#trans_tt')
-        .style("top", ypos + trans_margin.top + "px")
-        .style("left", xpos + trans_margin.left + "px")
+        .style("top", my + "px")
+        .style("left", mx + "px")
         .style('display', null)
         .html(function () {
-            let content = "<div class='tipHeader'><b>District " + sd + "</b></div>";
+            let content = "<div class='tipHeader'><b>" + dist + "</b></div>";
             if (type == 'ENTER_PUBLIC') {
                 content += "<div class='tipInfo'>" + parseInt(num) + " students entered from independent schools in " + yr + ".</div>"
             } else if (type == 'LEAVE_PUBLIC') {

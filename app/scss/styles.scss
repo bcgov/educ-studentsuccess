@@ -16,6 +16,7 @@ $section-header:rgba(252,186,25, 0.5);
 $err-color: #d8292f;
 $inflow_color:#65a89d;
 $outflow_color: #a96a46;
+$btn_hover_shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
 
 
 //Bootstrap sass files
@@ -275,16 +276,17 @@ body {
 
   .ghostBtn:hover{
       color: #fff;
-      background: $btn-color;
-      box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
+      border: 2px solid #00305d;
+      background: #00305d;
+      box-shadow: $btn_hover_shadow;
       // transform: translateY(-0.025em);
-      transition: .3s ease;
+      transition: 0.3s ease;
   }
 
   .flatBtn{
     display: inline-block;
     padding: 0.5rem 1rem;
-    border-radius: 50px;
+    border-radius: 0.3rem;
     border: 2px solid $btn-color;
     color: #fff;
     background: $btn-color;
@@ -295,6 +297,7 @@ body {
       color: #fff;
       border: 2px solid #00305d;
       background: #00305d;
+      box-shadow: $btn_hover_shadow;
       transition: .3s ease;
   }
 
@@ -308,6 +311,7 @@ body {
   .ctaBtn:hover {
     color: $body-bg;
     background: $cta-gradient-hover;
+    box-shadow: $btn_hover_shadow;
     transition: all .4s ease;
   }
 
@@ -321,6 +325,7 @@ body {
   .ctaGhost:hover{
     color: $body-bg;
     background: $cta-gradient-hover;
+    box-shadow: $btn_hover_shadow;
     border-color: $cta-ghost; 
   }
 

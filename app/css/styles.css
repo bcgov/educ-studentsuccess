@@ -7180,13 +7180,14 @@ html {
       cursor: pointer; }
     html body .ghostBtn:hover {
       color: #fff;
-      background: #38598a;
+      border: 2px solid #00305d;
+      background: #00305d;
       box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
-      transition: .3s ease; }
+      transition: 0.3s ease; }
     html body .flatBtn {
       display: inline-block;
       padding: 0.5rem 1rem;
-      border-radius: 50px;
+      border-radius: 0.3rem;
       border: 2px solid #38598a;
       color: #fff;
       background: #38598a;
@@ -7195,6 +7196,7 @@ html {
       color: #fff;
       border: 2px solid #00305d;
       background: #00305d;
+      box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
       transition: .3s ease; }
     html body .ctaBtn {
       background: linear-gradient(90deg, #2cc7c0, #59d99d);
@@ -7204,6 +7206,7 @@ html {
     html body .ctaBtn:hover {
       color: #f7f7f9;
       background: linear-gradient(90deg, #25a8a2, #3ad28b);
+      box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
       transition: all .4s ease; }
     html body .ctaGhost {
       color: #4cc6aa;
@@ -7213,6 +7216,7 @@ html {
     html body .ctaGhost:hover {
       color: #f7f7f9;
       background: linear-gradient(90deg, #25a8a2, #3ad28b);
+      box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
       border-color: #4cc6aa; }
     html body .track,
     html body .track-inset,
