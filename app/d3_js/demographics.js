@@ -180,9 +180,9 @@ d3.csv('../assets/raw_data/demographics.csv', function (error, data) {
 
 
                 if (currentPos == 2018) {
-                    d3.select(".demott_rect").style('left', (demo_xScale(currentPos) * svgSacle - 60) + 'px');
+                    d3.select(".demott_rect").style('left', (demo_xScale(currentPos) * svgSacle - 40 * svgSacle) + 'px');
                 } else {
-                    d3.select(".demott_rect").style('left', (demo_xScale(currentPos) * svgSacle + 85) + 'px');;
+                    d3.select(".demott_rect").style('left', (demo_xScale(currentPos) * svgSacle + 100 * svgSacle) + 'px');;
                 }
             }
         }

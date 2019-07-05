@@ -236,9 +236,9 @@ d3.csv('../assets/raw_data/retention_provincial.csv', function (error, data) {
 
 
                     if (currentPos == 2018) {
-                        d3.select(".retentiontt_rect").style('left', (retention_xScale(currentPos) * svgSacle - 100) + 'px');
+                        d3.select(".retentiontt_rect").style('left', (retention_xScale(currentPos) * svgSacle - 60 * svgSacle) + 'px');
                     } else {
-                        d3.select(".retentiontt_rect").style('left', (retention_xScale(currentPos) * svgSacle + 50) + 'px');;
+                        d3.select(".retentiontt_rect").style('left', (retention_xScale(currentPos) * svgSacle + 70 * svgSacle) + 'px');;
                     }
                 }
             }

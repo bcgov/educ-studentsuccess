@@ -27,14 +27,21 @@ $btn_hover_shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0
   h2{
     font-size: 6vw;
   }
+
+  h5{
+    font-size: 4vw;
+  }
+
+  .section_header{
+    margin-bottom: 5vw;
+  }
+
+  .driver_section{
+    margin-bottom: 7vw;
+  }
+
   .section_header ~ p {
      font-size: 14px; 
-  }
-}
-
-@media only screen and (min-width : 480px) {
-  h2{
-    font-size: 2rem;
   }
 
   #intro{
@@ -52,6 +59,12 @@ $btn_hover_shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0
       text-align: center;
     }
   }
+}
+
+@media only screen and (min-width : 480px) {
+  h2{
+    font-size: 2rem;
+  }
 
   #flow_legend{
     img {
@@ -61,6 +74,18 @@ $btn_hover_shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0
 }
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px) {
+  h5{
+    font-size: 1.25rem;
+  }
+
+  .section_header{
+    margin-bottom: 3vw;
+  }
+
+  .driver_section{
+    margin-bottom: 4vw;
+  }
+
   #intro{
     text-align: left;
     .ctaBtn, .ctaGhost {
@@ -240,13 +265,9 @@ body {
   }
 
   /**********shared********/
-  .driver_section {
-    margin-bottom: 4vw;
-  }
-
   .section_header{
     background-size:100% 100%;
-    margin-bottom: 3vw;
+  
     span{
     color: $home-color;
     background-image: linear-gradient(-180deg,transparent 65%, #2cc7c0,#59d99d 0);

@@ -7024,12 +7024,14 @@ a.text-dark:hover, a.text-dark:focus {
 @media only screen and (min-width: 320px) {
   h2 {
     font-size: 6vw; }
+  h5 {
+    font-size: 4vw; }
+  .section_header {
+    margin-bottom: 5vw; }
+  .driver_section {
+    margin-bottom: 7vw; }
   .section_header ~ p {
-    font-size: 14px; } }
-
-@media only screen and (min-width: 480px) {
-  h2 {
-    font-size: 2rem; }
+    font-size: 14px; }
   #intro {
     text-align: center; }
     #intro .ctaBtn, #intro .ctaGhost {
@@ -7037,12 +7039,22 @@ a.text-dark:hover, a.text-dark:focus {
     #intro .cta_container {
       justify-content: center; }
   .migration_left_text .section_header, .migration_left_text .section_header ~ p {
-    text-align: center; }
+    text-align: center; } }
+
+@media only screen and (min-width: 480px) {
+  h2 {
+    font-size: 2rem; }
   #flow_legend img {
     max-width: 80%; } }
 
 /* Small Devices, Tablets */
 @media only screen and (min-width: 768px) {
+  h5 {
+    font-size: 1.25rem; }
+  .section_header {
+    margin-bottom: 3vw; }
+  .driver_section {
+    margin-bottom: 4vw; }
   #intro {
     text-align: left; }
     #intro .ctaBtn, #intro .ctaGhost {
@@ -7155,11 +7167,8 @@ html {
       html body .navbar .navbar-brand {
         color: #002663;
         font-size: 1rem; }
-    html body .driver_section {
-      margin-bottom: 4vw; }
     html body .section_header {
-      background-size: 100% 100%;
-      margin-bottom: 3vw; }
+      background-size: 100% 100%; }
       html body .section_header span {
         color: #002663;
         background-image: linear-gradient(-180deg, transparent 65%, #2cc7c0, #59d99d 0);
