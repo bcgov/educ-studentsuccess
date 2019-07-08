@@ -2,7 +2,7 @@
 $home-color: #002663;
 $nav-color: #5091CD;
 $footer-color:#1D438C;
-$nav-bg: #fff;
+$nav-bg: rgba(255, 255, 255, 0.9);
 $body-bg: #f7f7f9;
 $font-color: #494949;
 $cta-gradient: linear-gradient(90deg,#2cc7c0,#59d99d);
@@ -22,8 +22,75 @@ $btn_hover_shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0
 //Bootstrap sass files
 @import"node_modules/bootstrap/scss/bootstrap";
 
+/* student success */
+@media only screen and (min-width: 320px){
+.restrain {
+    max-width: 320px;
+  }
+  #secondary-nav {
+    top: 70px;
+  }
+
+  .secondary-nav-container>li:first-of-type {
+    margin-top: 10px;
+}
+
+  .secondary-nav-container>li {
+    margin-bottom: 10px;
+    display: block;
+}
+}
+
+@media only screen and (min-width: 605px){
+  .restrain {
+      max-width: 600px;
+  }
+      #logo {
+        padding-left: 0;
+      }
+      #language-switcher {
+        float: right;
+      }
+
+      #secondary-nav {
+        top: 70px;
+        height: initial;
+
+        .secondary-nav-container>li:first-of-type {
+          margin-left: 0;
+          padding-left: 0;
+        }
+      }
+    
+  }
+
+@media only screen and (min-width: 1030px){
+    .restrain {
+        max-width: 1030px;
+      }
+
+    #secondary-nav{
+      height: 38px !important;
+     .sub-menu-trigger {
+        display: none;
+    }
+      .secondary-nav-container>li {
+        display: inline-block;
+        margin: 10px 5px;
+        padding-left: 5px;
+        padding-right: 10px;
+        border-right: 1px solid rgba(255,255,255,0.5);
+    }
+  }
+  }
+
 /* Extra Small Devices, Phones */ 
 @media only screen and (min-width : 320px) {
+
+  body{
+  background-image: none;
+  }
+
   h2{
     font-size: 6vw;
   }
@@ -59,9 +126,26 @@ $btn_hover_shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0
       text-align: center;
     }
   }
+
+  #flow_map{
+    img{
+      max-width: 60%;
+    }
+  }
+
+
 }
 
 @media only screen and (min-width : 480px) {
+
+  body{
+    background-image: url(../assets/img/bg_img1.svg), url(../assets/img/bg_img2.svg), url(../assets/img/bg_img4.svg);
+    background-size:8% auto, 14% auto, 10% auto;
+    background-repeat: no-repeat, no-repeat, no-repeat;
+    background-position: 4vw 12%, 82vw 24% , 4vw 92%;
+    background-attachment: scroll, scroll, scroll;
+  }
+
   h2{
     font-size: 2rem;
   }
@@ -102,10 +186,21 @@ $btn_hover_shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0
       text-align: left;
     }
   }
+
+  #flow_map{
+    img{
+      max-width: 100%;
+    }
+  }
 }
 
 /* extra large Devices, Desktops */
 @media only screen and (min-width : 1280px) {
+  
+  body{
+    background-position: 4vw 10%, 82vw 22% , 4vw 93%;
+  }
+  
   h2{
     font-size: 2.8rem;
   }
@@ -131,31 +226,100 @@ body {
   font-family: Myraid-Pro, Calibri, Arial, sans-serif;
   color: $font-color;
 
-    background-image: url(../assets/img/bg_img1.svg), url(../assets/img/bg_img2.svg), url(../assets/img/bg_img4.svg);
-    background-size:8% auto, 14% auto, 10% auto;
-    background-repeat: no-repeat, no-repeat, no-repeat;
-    background-position: 4vw 10%, 82vw 21% , 4vw 94%;
-    background-attachment: scroll, scroll, scroll;
-
-  // *********studentsucess**********
+  /*********student success**********/
   #header{ 
     background: #003366;
     border-bottom: 2px solid #fcba19;
     position: fixed;
-    height: 7rem;
+    height: 70px;
     width: 100%;
     z-index: 2;
-    img{
-      max-width: 100%;
-      vertical-align: middle;
+    top: 0;
+
+      #logo{
+        float: left;
+        padding-left: 5px;
+        img{
+          max-width: 100%;
+          vertical-align: middle;
+        }
     }
 
     #language-switcher {
       padding-top: 1rem;
-      margin-right: 0.5rem;
+      margin-right: 5px;
       text-align: right;
+
+      a{
+        color: white;
+      }
+
+      a.active{
+        font-weight:bold;
+      }
+    }
   }
+
+  .restrain{
+    margin: auto;
+    display: block;
+    clear: both;
+    padding-left: 5px;
+    padding-right: 5px;
   }
+
+  .contracted {
+    height: 35px !important;
+  }
+  
+  .expand {
+      margin-top: 10px;
+  }
+
+
+#secondary-nav {
+  position: fixed;
+  top: 70px;
+  display: block;
+  background-color: #38598a;
+  width: 100%;
+  box-shadow: 0px 3px 3px 1px rgba(51,51,51,0.5);
+  z-index: 99;
+  overflow: hidden;
+  height: 270px;
+  -webkit-transition: all 0.125s linear;
+  -moz-transition: all 0.125s linear;
+  -ms-transition: all 0.125s linear;
+  -o-transition: all 0.125s linear;
+  transition: all 0.125s linear;
+
+    .sub-menu-trigger {
+      color: white;
+      padding-left: 5px;
+      cursor: pointer;
+
+      .fa {
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+      }
+   }
+
+   .secondary-nav-container{
+     font-size: 13px;
+     .secondary-nav-link:hover {
+      text-decoration: underline;
+  }
+     a{
+    color: white !important;
+     }
+   }
+      
+}
+
+
+
 
 
   
@@ -172,7 +336,8 @@ body {
 
   .navbar {
     box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.1);
-
+    top: 105px;
+    padding: 0;
     a {
       display: inline-block;
       position: relative;
@@ -194,7 +359,7 @@ body {
         transform: transition(-15px);
         height: 2px;
         width: 100%;
-        background: #ccc;
+        background: $home-color;
         border-radius: 2px;
         transition: all cubic-bezier(0.26, 0.1, 0.27, 1.55) 0.35s;
       }
@@ -205,6 +370,7 @@ body {
 
       .middle {
         top: 48%;
+        left:25%;
         width: 50%;
       }
 
@@ -230,7 +396,7 @@ body {
 
     .navbar-nav {
 
-      .nav-link,f
+      .nav-link,
       .nav-link:hover {
         color: $nav-color;
       }
@@ -490,13 +656,13 @@ body {
   #enrolment_model::before, #demographics::before, #migration_overview::before, #transition::before,#retention::before {
     content:"";
     display:block;
-    height:100px; /* fixed header height*/
-    margin-top:-100px; /* negative fixed header height */
+    height:140px; /* fixed header height*/
+    margin-top:-140px; /* negative fixed header height */
   }
 
 
   #intro {
-    margin-top: 6vw;
+    margin-top: 9rem;
 
     .intro_header{
       color:$home-color;

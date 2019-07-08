@@ -20,23 +20,50 @@
 </head>
 
 <body>
+
+    <div id="header">
+        <div class="restrain">
+          <div id="logo">
+            <a href="http://www2.gov.bc.ca/"><img src="/assets/img/gov3_bc_logo.png" alt="Government of B.C." title="Government of B.C."></a>
+          </div>
+              
+          <div id="language-switcher">
+            <a class="en language-switcher active" href="https://studentsuccess.gov.bc.ca/lang/en">English</a> 
+      
+                          <a onclick="javascript: alert('Ce site sera disponible en français prochainement.');" class="en language-switcher" href="#">Français</a>
+            
+          </div>
+        </div>
+      </div><!-- /#header -->
+      
+      <nav id="secondary-nav" class="contracted">
+        <div class="expand sub-menu-trigger restrain">Open <i class="fa fa-caret-down" aria-hidden="true"></i></div>
+        <ul class="secondary-nav-container restrain white">
+          <li><a class="secondary-nav-link" href="/">Home</a></li>
+          <li><a class="secondary-nav-link" href="#about-this-website">About this Website</a></li>
+          <li><a class="secondary-nav-link" href="/all/school-districts">School Districts</a></li>
+          <li><a class="secondary-nav-link" href="/all/cities">Cities</a></li>
+          <li><a class="secondary-nav-link" href="/all/cities">Interactive Dashboard</a></li>
+          <li><a class="secondary-nav-link" href="/glossary">Glossary</a></li>
+          <li><a class="secondary-nav-link" href="#search">Search</a></li>
+          <!--<li><a id="main-download-report-link" target="_blank" class="secondary-nav-link" href="#">Download <span class="download-report-sd"></span> Report (PDF)</a></li>-->
+        </ul>
+      </nav>
   <!-- always evolved from a grid container (fixed width:960px), 
     container class allows to center content. container-fluid: completely fluid-->
 
-  <nav class="navbar navbar-expand-lg navbar-light sticky-top nav-bg">
-    <div class="container">
-      <a class="navbar-brand" href="#">Enrolment Booklet</a>
+    <div class="navbar navbar-expand-lg sticky-top nav-bg">
 
       <!-- hamburger menu -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+      <button class="navbar-toggler mx-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
         <div class="icon">
           <span class="line top"></span>
           <span class="line middle"></span>
           <span class="line bottom"></span>
         </div>
       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
+      <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto">
           <li class="nav-item">
             <a class="nav-link" href="#enrolment_model">The Model</a>
           </li>
@@ -55,7 +82,6 @@
         </ul>
       </div>
     </div>
-  </nav>
 
   <div class="container" id='intro'>
     <!-- Jumbotron / hero section, a component -->
