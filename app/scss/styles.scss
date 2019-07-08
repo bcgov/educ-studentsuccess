@@ -318,9 +318,48 @@ body {
       
 }
 
+#footer-bar-thing {
+  background: #4b91cd;
+  height: 70px;
+
+    .some-links {
+      position: relative;
+      font-size: 250%;
+      .some-link {
+        padding-right: 10px;
+        color: #036;
+        text-decoration: none;
+    }
+  }
+}
+
+#footer {
+  background: #003366;
+  border-top: 2px solid #fcba19;
+  min-height: 179px;
+    nav ul {
+      color: #fff;
+      padding: 0;
+      padding-top: 20px;
+    
+      li:last-of-type {
+        border-right: 0;
+    }
+    
+    li {
+        list-style: none;
+        padding: 1px 5px;
+        display: inline-block;
+        border-right: 1px solid rgba(255,255,255,0.3);
+    }
+  }
+
+}
 
 
 
+
+/********student success*********/
 
   
   div:focus, button:focus {outline:none;}
@@ -500,7 +539,7 @@ body {
     color: $body-bg;
     background: $cta-gradient-hover;
     box-shadow: $btn_hover_shadow;
-    transition: all .4s ease;
+    transition: all .3s ease;
   }
 
   .ctaGhost {
@@ -515,6 +554,7 @@ body {
     background: $cta-gradient-hover;
     box-shadow: $btn_hover_shadow;
     border-color: $cta-ghost; 
+    transition: all .3s ease;
   }
 
   .track,
@@ -1584,6 +1624,8 @@ body {
 }
   //booklet
   #booklet{
+    margin-bottom: 5rem;
+
     .ctaBtn{
       margin-top: 2.5vw;
     }

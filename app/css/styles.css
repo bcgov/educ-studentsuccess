@@ -7136,6 +7136,7 @@ html {
     font-family: Myraid-Pro, Calibri, Arial, sans-serif;
     color: #494949;
     /*********student success**********/
+    /********student success*********/
     /**********shared********/
     /*********sections********/ }
     html body #header {
@@ -7200,6 +7201,31 @@ html {
           text-decoration: underline; }
         html body #secondary-nav .secondary-nav-container a {
           color: white !important; }
+    html body #footer-bar-thing {
+      background: #4b91cd;
+      height: 70px; }
+      html body #footer-bar-thing .some-links {
+        position: relative;
+        font-size: 250%; }
+        html body #footer-bar-thing .some-links .some-link {
+          padding-right: 10px;
+          color: #036;
+          text-decoration: none; }
+    html body #footer {
+      background: #003366;
+      border-top: 2px solid #fcba19;
+      min-height: 179px; }
+      html body #footer nav ul {
+        color: #fff;
+        padding: 0;
+        padding-top: 20px; }
+        html body #footer nav ul li:last-of-type {
+          border-right: 0; }
+        html body #footer nav ul li {
+          list-style: none;
+          padding: 1px 5px;
+          display: inline-block;
+          border-right: 1px solid rgba(255, 255, 255, 0.3); }
     html body div:focus, html body button:focus {
       outline: none; }
     html body a,
@@ -7318,7 +7344,7 @@ html {
       color: #f7f7f9;
       background: linear-gradient(90deg, #25a8a2, #3ad28b);
       box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
-      transition: all .4s ease; }
+      transition: all .3s ease; }
     html body .ctaGhost {
       color: #4cc6aa;
       border-color: #4cc6aa;
@@ -7328,7 +7354,8 @@ html {
       color: #f7f7f9;
       background: linear-gradient(90deg, #25a8a2, #3ad28b);
       box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
-      border-color: #4cc6aa; }
+      border-color: #4cc6aa;
+      transition: all .3s ease; }
     html body .track,
     html body .track-inset,
     html body .track-overlay {
@@ -8011,8 +8038,10 @@ html {
           font-size: 10px; }
           html body #retention #retention_container .retentiontt_rect .tipInfo .tipNum {
             color: #494949; }
-    html body #booklet .ctaBtn {
-      margin-top: 2.5vw; }
+    html body #booklet {
+      margin-bottom: 5rem; }
+      html body #booklet .ctaBtn {
+        margin-top: 2.5vw; }
     html body .footer-img {
       display: block;
       width: calc(100%) !important;
