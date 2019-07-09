@@ -7083,7 +7083,11 @@ a.text-dark:hover, a.text-dark:focus {
   .migration_left_text .section_header, .migration_left_text .section_header ~ p {
     text-align: center; }
   #flow_map img {
-    max-width: 60%; } }
+    max-width: 60%; }
+  #transition #pub_to_ind {
+    top: 3rem !important; }
+  #transition #ind_to_pub {
+    bottom: 3rem !important; } }
 
 @media only screen and (min-width: 480px) {
   body {
@@ -7114,7 +7118,13 @@ a.text-dark:hover, a.text-dark:focus {
   .migration_left_text .section_header, .migration_left_text .section_header ~ p {
     text-align: left; }
   #flow_map img {
-    max-width: 100%; } }
+    max-width: 100%; }
+  #flow_map #flow_type {
+    display: block; }
+  #transition #pub_to_ind {
+    top: 3vw !important; }
+  #transition #ind_to_pub {
+    bottom: 3vw !important; } }
 
 /* extra large Devices, Desktops */
 @media only screen and (min-width: 1280px) {
@@ -7127,7 +7137,10 @@ a.text-dark:hover, a.text-dark:focus {
   .ctaBtn, .ctaGhost {
     font-size: 1.2rem !important; }
   .section_header ~ p {
-    font-size: 1rem; } }
+    font-size: 1rem; }
+  #flow_map #flow_type {
+    display: flex;
+    align-items: center; } }
 
 html {
   scroll-behavior: smooth; }
@@ -7145,7 +7158,7 @@ html {
       position: fixed;
       height: 70px;
       width: 100%;
-      z-index: 2;
+      z-index: 99;
       top: 0; }
       html body #header #logo {
         float: left;
@@ -7609,13 +7622,13 @@ html {
           pointer-events: auto; }
     html body #flow_map #control #distDropdown.active .list {
       max-height: 240px; }
+    html body #flow_map #control h6 {
+      color: #38598a;
+      font-weight: bold; }
     html body #flow_map #control #flow_switch {
       display: flex;
       align-items: center;
       margin: 1rem 0; }
-      html body #flow_map #control #flow_switch h6 {
-        color: #38598a;
-        font-weight: bold; }
       html body #flow_map #control #flow_switch #flat_switch {
         display: block;
         opacity: 0; }
@@ -7646,20 +7659,27 @@ html {
         background: #38598a;
         left: auto;
         right: 0; }
-    html body #flow_map #control .flowBtn {
-      margin-right: 0.5rem;
-      padding: 0.25rem 0.5rem;
-      width: 5rem;
-      border: 2px solid #38598a;
-      border-radius: 50px;
-      background: none;
-      color: #38598a;
-      font-weight: medium;
-      cursor: pointer; }
-    html body #flow_map #control .flowBtn:hover {
-      color: #fff;
-      background: #38598a;
-      transition: .3s ease; }
+    html body #flow_map #control #flow_type {
+      margin: 1rem 0; }
+      html body #flow_map #control #flow_type .flowBtn {
+        font-size: 14px;
+        margin-right: 0.5rem;
+        padding: 0.25rem 0.5rem;
+        width: 5rem;
+        border: 2px solid #38598a;
+        border-radius: 50px;
+        background: none;
+        color: #38598a;
+        font-weight: medium;
+        cursor: pointer; }
+      html body #flow_map #control #flow_type .flowBtn:hover {
+        color: #fff;
+        background: #38598a;
+        transition: .3s ease; }
+      html body #flow_map #control #flow_type .selected {
+        color: #fff;
+        background: #38598a;
+        box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
     html body #flow_map #control #flow_legend {
       display: flex;
       align-items: center;
@@ -7693,10 +7713,6 @@ html {
         color: #a96a46; }
       html body #flow_map #control #flow_text p:last-child {
         color: #65a89d; }
-    html body #flow_map #control .selected {
-      color: #fff;
-      background: #38598a;
-      box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
     html body #flow_map .leaflet-pane {
       z-index: 0; }
     html body #flow_map #tlTip {
@@ -7954,7 +7970,7 @@ html {
           position: relative; }
         html body #transition #graph_container #school_graph #pub_to_ind {
           position: absolute;
-          top: 2vw;
+          top: 3vw;
           left: 0;
           right: 0;
           color: #4EBDEB;
@@ -7963,7 +7979,7 @@ html {
           position: absolute;
           left: 0;
           right: 0;
-          bottom: 2vw;
+          bottom: 3vw;
           color: #D42D75;
           font-weight: bold; }
     html body #transition #transition_container .trans_circ {
