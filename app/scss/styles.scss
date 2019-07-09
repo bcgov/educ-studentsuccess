@@ -861,6 +861,7 @@ body {
     border-radius: 0.5em 0.5em  0 0;
     box-shadow: none;
     background:white;
+    border-bottom: transparent;
 
     .list{
       display:block;
@@ -876,10 +877,10 @@ body {
 
   } 
 
-  .dropDown:hover{
-    border: 2px solid $home-color;
-    box-shadow: 0 2px 0 2px rgba(0,0,0,.04); 
-  }
+  // .dropDown:hover{
+  //   border: 2px solid $home-color;
+  //   box-shadow: 0 2px 0 2px rgba(0,0,0,.04); 
+  // }
 
 
   .dropDown:after { /* Little arrow */
@@ -1035,7 +1036,7 @@ body {
         font-size: 14px;
         margin-right: 0.5rem;
         padding: 0.25rem 0.5rem;
-        width: 5rem;
+        width: 4.5rem;
         border: 2px solid $btn-color;
         border-radius: 50px;
         background: none;

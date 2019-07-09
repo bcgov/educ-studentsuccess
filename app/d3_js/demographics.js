@@ -14,7 +14,8 @@ let demo_xScale = d3.scalePoint().range([0, demo_width]).padding(0.5);
 let demo_yScale = d3.scaleLinear().range([demo_height, 0]);
 
 //create color scale
-let demo_color = d3.scaleOrdinal(d3.schemeCategory20);
+let color_arr = ['#6699CC', '#99C794', '#5FB3B3', '#EC5F67', '#F99157', '#FAC863', '#C594C5', '#AB7967'];
+let demo_color = d3.scaleOrdinal(color_arr);
 
 //axes
 let demo_xAxis = d3.axisBottom()
@@ -39,6 +40,7 @@ let demo_chartGroup = demo_svg.append('g')
 
 let legendContainer = d3.select('#demo_legend')
     .append('svg')
+    .attr('height','160px')
     .append('g')
     .attr('class', 'legendContainer');
 
@@ -91,7 +93,7 @@ d3.csv('../assets/raw_data/demographics.csv', function (error, data) {
             district.forEach(function (d) {
                 d.SCHOOL_YEAR = (parseDate(d.SCHOOL_YEAR)).getFullYear();
                 d.NEW_KINDERGARTEN = +d.NEW_KINDERGARTEN;
-                d.GRADUATES = +d.GRADUATES;
+                d.GRADUATES = Math.abs(+d.GRADUATES);
                 d.NET = +d.NET;
             });
             // concat method doesn't change the original array, need to reassign it.

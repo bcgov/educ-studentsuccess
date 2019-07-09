@@ -7555,7 +7555,8 @@ html {
     html body .dropDown.active {
       border-radius: 0.5em 0.5em  0 0;
       box-shadow: none;
-      background: white; }
+      background: white;
+      border-bottom: transparent; }
       html body .dropDown.active .list {
         display: block;
         border: 2px solid #38598a;
@@ -7564,9 +7565,6 @@ html {
         margin: 0 -2px; }
       html body .dropDown.active .list div {
         border-top: 1px solid rgba(0, 0, 0, 0.05); }
-    html body .dropDown:hover {
-      border: 2px solid #002663;
-      box-shadow: 0 2px 0 2px rgba(0, 0, 0, 0.04); }
     html body .dropDown:after {
       /* Little arrow */
       content: "";
@@ -7665,7 +7663,7 @@ html {
         font-size: 14px;
         margin-right: 0.5rem;
         padding: 0.25rem 0.5rem;
-        width: 5rem;
+        width: 4.5rem;
         border: 2px solid #38598a;
         border-radius: 50px;
         background: none;

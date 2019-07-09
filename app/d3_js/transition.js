@@ -452,8 +452,6 @@ trans_dd
     .text('SD99-Province')
     .attr('data-value', 'SD99');
 
-console.log(sd_arr);
-
 for (let i = 0; i < sd_arr.length; i++) {
     let opt = sd_arr[i];
 
@@ -480,7 +478,6 @@ $('#trans_dist_dropdown').on('click', function () {
                 transClear();
                 transUpdate(trans_year, dist, trans_type);
             }
-
         });
 });
 
