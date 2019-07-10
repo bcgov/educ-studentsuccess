@@ -7080,7 +7080,11 @@ a.text-dark:hover, a.text-dark:focus {
       font-size: 1rem; }
     #intro .cta_container {
       justify-content: center; }
-  .migration_left_text .section_header, .migration_left_text .section_header ~ p {
+  #model_control, #demo_control, #flow_control {
+    text-align: center; }
+  #migration_overview .section_header, #migration_overview .section_header ~ p {
+    text-align: center; }
+  #flow_map .section_header {
     text-align: center; }
   #flow_map img {
     max-width: 60%; }
@@ -7115,12 +7119,17 @@ a.text-dark:hover, a.text-dark:focus {
       font-size: 1rem; }
     #intro .cta_container {
       justify-content: flex-start; }
-  .migration_left_text .section_header, .migration_left_text .section_header ~ p {
+  #model_control, #demo_control, #flow_control {
+    text-align: left; }
+  #migration_overview .section_header, #migration_overview .section_header ~ p {
     text-align: left; }
   #flow_map img {
     max-width: 100%; }
-  #flow_map #flow_type {
-    display: block; }
+  #flow_map .section_header {
+    text-align: left; }
+  #flow_map #flow_type, #flow_map #flow_switch {
+    display: flex;
+    align-items: center; }
   #transition #pub_to_ind {
     top: 3vw !important; }
   #transition #ind_to_pub {
@@ -7137,10 +7146,7 @@ a.text-dark:hover, a.text-dark:focus {
   .ctaBtn, .ctaGhost {
     font-size: 1.2rem !important; }
   .section_header ~ p {
-    font-size: 1rem; }
-  #flow_map #flow_type {
-    display: flex;
-    align-items: center; } }
+    font-size: 1rem; } }
 
 html {
   scroll-behavior: smooth; }
@@ -7555,8 +7561,7 @@ html {
     html body .dropDown.active {
       border-radius: 0.5em 0.5em  0 0;
       box-shadow: none;
-      background: white;
-      border-bottom: transparent; }
+      background: white; }
       html body .dropDown.active .list {
         display: block;
         border: 2px solid #38598a;
@@ -7618,19 +7623,17 @@ html {
         position: relative; }
         html body #flow_map #interactiveMap svg .goingline {
           pointer-events: auto; }
-    html body #flow_map #control #distDropdown.active .list {
+    html body #flow_map #flow_control #distDropdown.active .list {
       max-height: 240px; }
-    html body #flow_map #control h6 {
+    html body #flow_map #flow_control h6 {
       color: #38598a;
       font-weight: bold; }
-    html body #flow_map #control #flow_switch {
-      display: flex;
-      align-items: center;
+    html body #flow_map #flow_control #flow_switch {
       margin: 1rem 0; }
-      html body #flow_map #control #flow_switch #flat_switch {
+      html body #flow_map #flow_control #flow_switch #flat_switch {
         display: block;
         opacity: 0; }
-      html body #flow_map #control #flow_switch label {
+      html body #flow_map #flow_control #flow_switch label {
         width: 60px;
         height: 30px;
         cursor: pointer;
@@ -7640,7 +7643,7 @@ html {
         border: 2px solid #bdbdbd;
         transition: ease 0.5s;
         transition: backgorund-color 0.5s; }
-      html body #flow_map #control #flow_switch label:after {
+      html body #flow_map #flow_control #flow_switch label:after {
         left: 0;
         width: 20px;
         height: 20px;
@@ -7649,17 +7652,17 @@ html {
         position: absolute;
         background: #bdbdbd;
         border-radius: 10px; }
-      html body #flow_map #control #flow_switch input:checked + label {
+      html body #flow_map #flow_control #flow_switch input:checked + label {
         background: none;
         border: 2px solid #38598a;
         box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
-      html body #flow_map #control #flow_switch input:checked + label:after {
+      html body #flow_map #flow_control #flow_switch input:checked + label:after {
         background: #38598a;
         left: auto;
         right: 0; }
-    html body #flow_map #control #flow_type {
+    html body #flow_map #flow_control #flow_type {
       margin: 1rem 0; }
-      html body #flow_map #control #flow_type .flowBtn {
+      html body #flow_map #flow_control #flow_type .flowBtn {
         font-size: 14px;
         margin-right: 0.5rem;
         padding: 0.25rem 0.5rem;
@@ -7670,19 +7673,19 @@ html {
         color: #38598a;
         font-weight: medium;
         cursor: pointer; }
-      html body #flow_map #control #flow_type .flowBtn:hover {
+      html body #flow_map #flow_control #flow_type .flowBtn:hover {
         color: #fff;
         background: #38598a;
         transition: .3s ease; }
-      html body #flow_map #control #flow_type .selected {
+      html body #flow_map #flow_control #flow_type .selected {
         color: #fff;
         background: #38598a;
         box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
-    html body #flow_map #control #flow_legend {
+    html body #flow_map #flow_control #flow_legend {
       display: flex;
       align-items: center;
       justify-content: space-between; }
-      html body #flow_map #control #flow_legend .dot {
+      html body #flow_map #flow_control #flow_legend .dot {
         height: 1.5em;
         width: 1.5em;
         border-radius: 50%;
@@ -7692,24 +7695,24 @@ html {
         vertical-align: middle;
         line-height: 1.5em;
         color: white; }
-      html body #flow_map #control #flow_legend .outflow_color {
+      html body #flow_map #flow_control #flow_legend .outflow_color {
         background-color: #a96a46; }
-      html body #flow_map #control #flow_legend .inflow_color {
+      html body #flow_map #flow_control #flow_legend .inflow_color {
         background-color: #65a89d; }
-      html body #flow_map #control #flow_legend .dot_md {
+      html body #flow_map #flow_control #flow_legend .dot_md {
         height: 2.5em;
         width: 2.5em;
         line-height: 2.5em; }
-      html body #flow_map #control #flow_legend .dot_lg {
+      html body #flow_map #flow_control #flow_legend .dot_lg {
         height: 3.5em;
         width: 3.5em;
         line-height: 3.5em; }
-    html body #flow_map #control #flow_text {
+    html body #flow_map #flow_control #flow_text {
       display: flex;
       justify-content: space-between; }
-      html body #flow_map #control #flow_text p:first-child {
+      html body #flow_map #flow_control #flow_text p:first-child {
         color: #a96a46; }
-      html body #flow_map #control #flow_text p:last-child {
+      html body #flow_map #flow_control #flow_text p:last-child {
         color: #65a89d; }
     html body #flow_map .leaflet-pane {
       z-index: 0; }
@@ -7773,41 +7776,41 @@ html {
     html body #flow_map .tipClear {
       clear: both; }
     html body #enrolment_model {
-      /* slider ------------------------------ */ }
+      /* control panel, slider */ }
       html body #enrolment_model #model_distDropdown.active .list {
         max-height: 240px; }
-      html body #enrolment_model #lineContainer {
+      html body #enrolment_model #modelContainer {
         display: inline-block;
         position: relative;
         width: 100%;
         vertical-align: top;
         overflow: hidden; }
-        html body #enrolment_model #lineContainer .svg-content .legend {
+        html body #enrolment_model #modelContainer .svg-content .legend {
           font-size: 9px; }
-        html body #enrolment_model #lineContainer .svg-content .bar {
+        html body #enrolment_model #modelContainer .svg-content .bar {
           stroke: none; }
-        html body #enrolment_model #lineContainer .svg-content .bar:hover {
+        html body #enrolment_model #modelContainer .svg-content .bar:hover {
           fill: rgba(0, 38, 99, 0.7) !important; }
-        html body #enrolment_model #lineContainer .svg-content .label {
+        html body #enrolment_model #modelContainer .svg-content .label {
           fill: white;
           font-weight: 400;
           text-anchor: middle; }
-        html body #enrolment_model #lineContainer .svg-content .line {
+        html body #enrolment_model #modelContainer .svg-content .line {
           fill: none;
           stroke: #002663;
           stroke-width: 3; }
-        html body #enrolment_model #lineContainer .svg-content .dot {
+        html body #enrolment_model #modelContainer .svg-content .dot {
           fill: #002663;
           stroke: #fff; }
-        html body #enrolment_model #lineContainer .yAxis, html body #enrolment_model #lineContainer .yAxis2, html body #enrolment_model #lineContainer .xAxis {
+        html body #enrolment_model #modelContainer .yAxis, html body #enrolment_model #modelContainer .yAxis2, html body #enrolment_model #modelContainer .xAxis {
           stroke-width: 0; }
-          html body #enrolment_model #lineContainer .yAxis .domain, html body #enrolment_model #lineContainer .yAxis2 .domain, html body #enrolment_model #lineContainer .xAxis .domain {
+          html body #enrolment_model #modelContainer .yAxis .domain, html body #enrolment_model #modelContainer .yAxis2 .domain, html body #enrolment_model #modelContainer .xAxis .domain {
             display: none; }
-        html body #enrolment_model #lineContainer #zero-line {
+        html body #enrolment_model #modelContainer #zero-line {
           fill: none;
           stroke: #ccc;
           stroke-width: 1; }
-        html body #enrolment_model #lineContainer .modeltt_rect {
+        html body #enrolment_model #modelContainer .modeltt_rect {
           position: absolute;
           z-index: 10;
           top: 2em;
@@ -7816,7 +7819,7 @@ html {
           background: white;
           opacity: 0.9;
           pointer-events: none; }
-          html body #enrolment_model #lineContainer .modeltt_rect .tipHeader {
+          html body #enrolment_model #modelContainer .modeltt_rect .tipHeader {
             color: white;
             padding: 5px;
             background: #002663;
@@ -7824,11 +7827,11 @@ html {
             font-style: italic;
             font-size: 12px;
             border-radius: 5px 5px 0 0; }
-          html body #enrolment_model #lineContainer .modeltt_rect .tipInfo {
+          html body #enrolment_model #modelContainer .modeltt_rect .tipInfo {
             margin-left: 5px;
             color: #002663;
             font-size: 12px; }
-            html body #enrolment_model #lineContainer .modeltt_rect .tipInfo .tipNum {
+            html body #enrolment_model #modelContainer .modeltt_rect .tipInfo .tipNum {
               color: #494949; }
       html body #enrolment_model .ticks {
         font-size: 12px; }
@@ -7854,6 +7857,9 @@ html {
         cursor: pointer; }
       html body #enrolment_model .handle.active {
         fill: #002663; }
+      html body #enrolment_model #distName {
+        color: #002663;
+        font-weight: bold; }
     html body #demographics #demo_container .demo_line {
       stroke-linecap: round; }
     html body #demographics #demo_container .xAxis {
@@ -7897,19 +7903,19 @@ html {
         font-size: 10px; }
         html body #demographics #demo_container .demott_rect .tipInfo .tipNum {
           color: #494949; }
-    html body #demographics #demographics-control #demo-radio {
+    html body #demographics #demo_control #demo-radio {
       display: flex;
       flex-direction: column; }
-    html body #demographics #demographics-control .modal-body {
+    html body #demographics #demo_control .modal-body {
       display: grid;
       grid-template-columns: repeat(4, 1.2fr);
       grid-gap: 10px;
       font-size: 12px; }
-      html body #demographics #demographics-control .modal-body .checkbox span {
+      html body #demographics #demo_control .modal-body .checkbox span {
         vertical-align: middle;
         margin-left: 0.3em;
         cursor: pointer; }
-      html body #demographics #demographics-control .modal-body .checkbox .demo_checkbox {
+      html body #demographics #demo_control .modal-body .checkbox .demo_checkbox {
         -webkit-appearance: none;
         border: 2px solid #ccc;
         padding: 6px;
@@ -7919,11 +7925,11 @@ html {
         position: relative;
         vertical-align: middle;
         cursor: pointer; }
-      html body #demographics #demographics-control .modal-body .checkbox .demo_checkbox:hover, html body #demographics #demographics-control .modal-body .checkbox .demo_checkbox:checked {
+      html body #demographics #demo_control .modal-body .checkbox .demo_checkbox:hover, html body #demographics #demo_control .modal-body .checkbox .demo_checkbox:checked {
         border: 2px solid #002663; }
-      html body #demographics #demographics-control .modal-body .checkbox .demo_checkbox:checked ~ * {
+      html body #demographics #demo_control .modal-body .checkbox .demo_checkbox:checked ~ * {
         color: #002663; }
-      html body #demographics #demographics-control .modal-body .checkbox .demo_checkbox:checked:after {
+      html body #demographics #demo_control .modal-body .checkbox .demo_checkbox:checked:after {
         content: '';
         position: absolute;
         left: 4px;
@@ -7936,10 +7942,10 @@ html {
         -webkit-transform: rotate(45deg);
         -ms-transform: rotate(45deg);
         transform: rotate(45deg); }
-    html body #demographics #demographics-control #demoModal_msg {
+    html body #demographics #demo_control #demoModal_msg {
       margin-left: 1rem;
       align-self: center; }
-    html body #demographics #demographics-control #demo_deselect {
+    html body #demographics #demo_control #demo_deselect {
       margin-right: auto;
       font-weight: bold;
       color: #5091CD;

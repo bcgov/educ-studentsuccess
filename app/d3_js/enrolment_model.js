@@ -62,7 +62,7 @@ let growthLine = d3.line()
     }); //smooth the line
 
 
-//distirct controls
+//tirct controls
 let targetDistrict = 'SD99';
 let defaultPageLoad = true;
 
@@ -79,7 +79,7 @@ let yr1 = 2013;
 let yr2 = 2016;
 
 //canvas
-let model_svg = d3.select('#lineContainer').append('svg')
+let model_svg = d3.select('#modelContainer').append('svg')
     .attr("preserveAspectRatio", "xMinYMin meet")  // This forces uniform scaling for both the x and y, aligning the midpoint of the SVG object with the midpoint of the container element.
     .attr("viewBox", "0 0 600 400") //defines the aspect ratio, the inner scaling of object lengths and coordinates
     .attr('class', 'svg-content');
@@ -90,7 +90,7 @@ let model_chartGroup = model_svg.append('g')
 
 
 //initialize html tooltip
-let tooltip_line = d3.select("#lineContainer")
+let tooltip_line = d3.select("#modelContainer")
     .append("div")
     .attr("class", "modeltt_rect")
     .style('display', 'none');
@@ -447,7 +447,7 @@ d3.csv('../assets/raw_data/predictors.csv', function (error, data) {
 
         //legends
         let legends = ['Demographics', 'Migration', 'Retention', 'Independent']
-        let svgContainer = d3.select('#lineContainer .svg-content');
+        let svgContainer = d3.select('#modelContainer .svg-content');
         let legend = svgContainer.selectAll(".legend")
             .data(legends)
             .enter().append("svg")
