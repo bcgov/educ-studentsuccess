@@ -159,19 +159,19 @@
         <div id="demo_control">
           <div class="controlSection">
             <h5>Demographic Type</h5>
-            <form id="demo-radio">
-              <label class="radio">
-                <input type="radio" name="demo-type" value="NEW_KINDERGARTEN" checked><span>New to kindergarten</span>
-                <span class="checkmark"></span>
-              </label>
-              <label class="radio">
-                <input type="radio" name="demo-type" value="GRADUATES"><span>Graduates</span>
-                <span class="checkmark"></span>
-              </label>
-              <label class="radio">
-                <input type="radio" name="demo-type" value="NET"><span>Net change</span>
-                <span class="checkmark"></span>
-              </label>
+            <form id="demo_radio">         
+              <p>
+                  <input type="radio" id="ntk" name="demo-type" value="NEW_KINDERGARTEN" checked>
+                  <label for="ntk">New to kindergarten</label>
+              </p>
+                <p>
+                  <input type="radio" id="grad" name="demo-type" value="GRADUATES">
+                  <label for="grad">Graduates</label>
+                </p>
+                <p>
+                  <input type="radio" id="net" name="demo-type" value="NET">
+                  <label for="net">Net change</label>
+                </p>
             </form>
           </div>
           <div class="controlSection">
@@ -308,7 +308,7 @@
           <div id="school_graph">
           <div>
             <img id="public_school_icon" class="img-fluid" src="/assets/img/public2.png" alt="public school">
-            <h6 class="text-center">Public</h6>
+            <h6 class="text-center font-weight-bold">Public</h6>
           </div>
           <div id="trans_rate" class="col-3">
             <div id="pub_to_ind" class="text-center"></div>
@@ -317,7 +317,7 @@
           <div>
             <img id="independent_school_icon" class="img-fluid" src="/assets/img/independent2.png"
               alt="independent school">
-            <h6 class="text-center">Independent</h6>
+            <h6 class="text-center font-weight-bold">Independent</h6>
           </div>
         </div>
 

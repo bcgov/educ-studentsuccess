@@ -294,10 +294,17 @@ function transUpdate(year, dist, type) {
             })])
                 .nice();
 
-            trans_yScale.domain(d3.extent(districtData, function (d) {
-                return Math.abs(d[type]);
-            }))
-                .nice();
+            if (trans_type == 'NET_INDEPENDENT') {
+                trans_yScale.domain(d3.extent(districtData, function (d) {
+                    return d[type];
+                }))
+                    .nice();
+            } else {
+                trans_yScale.domain(d3.extent(districtData, function (d) {
+                    return Math.abs(d[type]);
+                }))
+                    .nice();
+            }
         } else if (dist == '99') {
             districtData = distData;
             //set scale domain
@@ -306,10 +313,17 @@ function transUpdate(year, dist, type) {
             })])
                 .nice();
 
-            trans_yScale.domain(d3.extent(districtData, function (d) {
-                return Math.abs(d[type]);
-            }))
-                .nice();
+            if (trans_type == 'NET_INDEPENDENT') {
+                trans_yScale.domain(d3.extent(districtData, function (d) {
+                    return d[type];
+                }))
+                    .nice();
+            } else {
+                trans_yScale.domain(d3.extent(districtData, function (d) {
+                    return Math.abs(d[type]);
+                }))
+                    .nice();
+            }
         } else {
             districtData = distData.filter(function (d) { return +d.DISTRICT == dist });
             //set scale domain
@@ -318,10 +332,17 @@ function transUpdate(year, dist, type) {
             })])
                 .nice();
 
-            trans_yScale.domain(d3.extent(distData, function (d) {
-                return Math.abs(d[type]);
-            }))
-                .nice();
+            if (trans_type == 'NET_INDEPENDENT') {
+                trans_yScale.domain(d3.extent(distData, function (d) {
+                    return d[type];
+                }))
+                    .nice();
+            } else {
+                trans_yScale.domain(d3.extent(distData, function (d) {
+                    return Math.abs(d[type]);
+                }))
+                    .nice();
+            }
         }
 
         //check existing circles, the length of existing (based on previous type selection)
@@ -345,7 +366,10 @@ function transUpdate(year, dist, type) {
                     .data(districtData)
                     .transition(tran)
                     .attr('cx', function (d) { return trans_xScale(d.LAST_YEAR_ENROLMENT); })
-                    .attr('cy', function (d) { return trans_yScale(Math.abs(d[type])); })
+                    .attr('cy', function (d) { if (trans_type == 'NET_INDEPENDENT') { return trans_yScale(d[type]); }
+                    else {
+                        return trans_yScale(Math.abs(d[type]));
+                    }})
             } else {
                 trans_chartGroup.selectAll('.trans_circ')
                     .exit()
@@ -354,7 +378,10 @@ function transUpdate(year, dist, type) {
                     .enter().append('circle')
                     .attr('class', 'trans_circ')
                     .attr('cx', function (d) { return trans_xScale(d.LAST_YEAR_ENROLMENT); })
-                    .attr('cy', function (d) { return trans_yScale(Math.abs(d[type])); })
+                    .attr('cy', function (d) { if (trans_type == 'NET_INDEPENDENT') { return trans_yScale(d[type]); }
+                    else {
+                        return trans_yScale(Math.abs(d[type]));
+                    }})
                     .attr('r', 10)
                     .on('click', function (d) {
                         //gets mouse coordinates on screen
@@ -367,7 +394,11 @@ function transUpdate(year, dist, type) {
                         d3.selectAll('.trans_circ').style('fill', '#002663');
                         d3.select(this).style('fill', '#FCBA19')
                         // console.log(type, trans_type);
-                        showTranstt(d.DISTRICT, trans_year, Math.abs(d[trans_type]), trans_type, mx, my);
+                        if (trans_type == 'NET_INDEPENDENT') {
+                            showTranstt(d.DISTRICT, trans_year, d[trans_type], trans_type, mx, my);
+                        } else {
+                            showTranstt(d.DISTRICT, trans_year, Math.abs(d[trans_type]), trans_type, mx, my);
+                        }
                     });
             }
 
@@ -388,7 +419,12 @@ function transUpdate(year, dist, type) {
                 .enter().append('circle')
                 .attr('class', 'trans_circ')
                 .attr('cx', function (d) { return trans_xScale(d.LAST_YEAR_ENROLMENT); })
-                .attr('cy', function (d) { return trans_yScale(Math.abs(d[type])); })
+                .attr('cy', function (d) {
+                    if (trans_type == 'NET_INDEPENDENT') { return trans_yScale(d[type]); }
+                    else {
+                        return trans_yScale(Math.abs(d[type]));
+                    }
+                })
                 .attr('r', 10)
                 .on('click', function (d) {
                     //gets mouse coordinates on screen
@@ -401,8 +437,11 @@ function transUpdate(year, dist, type) {
 
                     d3.selectAll('.trans_circ').style('fill', '#002663');
                     d3.select(this).style('fill', '#FCBA19')
-                    // console.log(type, trans_type);
-                    showTranstt(d.DISTRICT, trans_year, Math.abs(d[trans_type]), trans_type, mx, my);
+                    if (trans_type == 'NET_INDEPENDENT') {
+                        showTranstt(d.DISTRICT, trans_year, d[trans_type], trans_type, mx, my);
+                    } else {
+                        showTranstt(d.DISTRICT, trans_year, Math.abs(d[trans_type]), trans_type, mx, my);
+                    }
                 });
 
             //axes
@@ -533,7 +572,11 @@ function showTranstt(sd, yr, num, type, mx, my) {
             } else if (type == 'LEAVE_PUBLIC') {
                 content += "<div class='tipInfo'>" + parseInt(num) + " students left for independent schools in " + yr + ".</div>"
             } else {
-                content += "<div class='tipInfo'>" + parseInt(num) + " students (Net inflow) entered from independent schools in " + yr + ".</div>"
+                if (parseInt(num) >= 0) {
+                    content += "<div class='tipInfo'>" + parseInt(num) + " students (Net inflow) entered from independent schools in " + yr + ".</div>"
+                } else {
+                    content += "<div class='tipInfo'>" + parseInt(num) + " students (Net outflow) left for independent schools in " + yr + ".</div>"
+                }
             }
             content += "<div class='trans_link'><a class='ssLink' href='https://studentsuccess.gov.bc.ca/school-district/0" + sd + "/report/fsa' target='_blank'>Foundation Skills Assessment<i class='fas fa-angle-right ml-1'></i></a></div>";
             content += "<div class='trans_link'><a class='ssLink' href='https://studentsuccess.gov.bc.ca/school-district/0" + sd + "/report/student-satisfaction' target='_blank'>Student Satisfaction<i class='fas fa-angle-right ml-1'></i></a></div>";

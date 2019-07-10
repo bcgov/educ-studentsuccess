@@ -7357,7 +7357,7 @@ html {
     html body .ctaBtn {
       background: linear-gradient(90deg, #2cc7c0, #59d99d);
       color: #f7f7f9;
-      border-color: #4cc6aa;
+      border: none;
       box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
     html body .ctaBtn:hover {
       color: #f7f7f9;
@@ -7365,16 +7365,16 @@ html {
       box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
       transition: all .3s ease; }
     html body .ctaGhost {
-      color: #4cc6aa;
-      border-color: #4cc6aa;
+      color: #59d99d;
+      border: 1px solid #59d99d;
       background: transparent;
       box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
     html body .ctaGhost:hover {
       color: #f7f7f9;
-      background: linear-gradient(90deg, #25a8a2, #3ad28b);
+      background: linear-gradient(90deg, #2cc7c0, #59d99d);
       box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
-      border-color: #4cc6aa;
-      transition: all .3s ease; }
+      border-color: #59d99d;
+      transition: all .5s ease; }
     html body .track,
     html body .track-inset,
     html body .track-overlay {
@@ -7422,44 +7422,56 @@ html {
       margin: 0.5em;
       color: #002663;
       font-size: 14px; }
-    html body .radio {
+    html body #demo_control [type="radio"]:checked,
+    html body #demo_control [type="radio"]:not(:checked) {
+      position: absolute;
+      opacity: 0; }
+    html body #demo_control [type="radio"]:checked + label,
+    html body #demo_control [type="radio"]:not(:checked) + label {
       position: relative;
-      padding-left: 1.5em;
-      color: #38598a;
-      cursor: pointer; }
-      html body .radio input {
-        position: absolute;
-        opacity: 0; }
-      html body .radio .checkmark {
-        position: absolute;
-        top: 0.1em;
-        left: 0;
-        height: 20px;
-        width: 20px;
-        border: 3px solid #38598a;
-        border-radius: 50%; }
-      html body .radio .checkmark:after {
-        content: "";
-        position: absolute;
-        display: none; }
-      html body .radio input:checked ~ * {
-        color: #002663;
-        font-weight: bold; }
-      html body .radio input:checked ~ .checkmark {
-        border: 3px solid #002663; }
-      html body .radio input:checked ~ .checkmark:after {
-        display: block; }
-      html body .radio .checkmark:after {
-        top: 3px;
-        left: 3px;
-        width: .5em;
-        height: .5em;
-        border-radius: 50%;
-        background: #002663; }
-    html body .radio:hover {
+      padding-left: 24px;
+      cursor: pointer;
+      line-height: 20px;
+      display: inline-block;
+      color: #38598a; }
+    html body #demo_control [type="radio"]:checked + label:before,
+    html body #demo_control [type="radio"]:not(:checked) + label:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #38598a;
+      border-radius: 100%;
+      background: white; }
+    html body #demo_control [type="radio"]:checked + label:after,
+    html body #demo_control [type="radio"]:not(:checked) + label:after {
+      content: '';
+      width: 10px;
+      height: 10px;
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      border-radius: 100%;
+      -webkit-transition: all 0.2s ease;
+      transition: all 0.2s ease; }
+    html body #demo_control [type="radio"]:not(:checked) + label:after {
+      opacity: 0;
+      -webkit-transform: scale(0);
+      transform: scale(0); }
+    html body #demo_control [type="radio"]:checked + label {
+      color: #002663;
+      font-weight: bold; }
+    html body #demo_control [type="radio"]:checked + label:before {
+      border: 3px solid #002663; }
+    html body #demo_control [type="radio"]:checked + label:after {
+      opacity: 1;
+      background: #002663;
+      -webkit-transform: scale(1);
+      transform: scale(1); }
+    html body #demo_control [type="radio"]:not(:checked) + label:hover {
       color: #002663; }
-      html body .radio:hover .checkmark {
-        border: 3px solid #002663; }
     html body .axis_label {
       font-size: 0.8rem;
       fill: #494949;
@@ -7642,7 +7654,7 @@ html {
         border-radius: 30px;
         border: 2px solid #bdbdbd;
         transition: ease 0.5s;
-        transition: backgorund-color 0.5s; }
+        transition: #38598a 0.5s; }
       html body #flow_map #flow_control #flow_switch label:after {
         left: 0;
         width: 20px;
@@ -7659,7 +7671,9 @@ html {
       html body #flow_map #flow_control #flow_switch input:checked + label:after {
         background: #38598a;
         left: auto;
-        right: 0; }
+        right: 0;
+        transition: ease 0.5s;
+        transition: #38598a 0.5s; }
     html body #flow_map #flow_control #flow_type {
       margin: 1rem 0; }
       html body #flow_map #flow_control #flow_type .flowBtn {
@@ -7903,9 +7917,6 @@ html {
         font-size: 10px; }
         html body #demographics #demo_container .demott_rect .tipInfo .tipNum {
           color: #494949; }
-    html body #demographics #demo_control #demo-radio {
-      display: flex;
-      flex-direction: column; }
     html body #demographics #demo_control .modal-body {
       display: grid;
       grid-template-columns: repeat(4, 1.2fr);
