@@ -239,7 +239,8 @@ d3.csv('../assets/raw_data/demographics.csv', function (error, data) {
                 })
                 .y(function (d) {
                     return demo_yScale(d[type]);
-                });
+                })
+                .curve(d3.curveCardinal.tension(0.85)); //smooth the line, round corner;
 
 
             //draw line

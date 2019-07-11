@@ -37,7 +37,8 @@ let prov_line = d3.line()
     .y(function (d) {
         return retention_yScale_prov(d.PROV_NET_RETENTION);
     })
-    .curve(d3.curveMonotoneX); //smooth the line
+    .curve(d3.curveCardinal.tension(0.5)); //smooth the line, round corner
+    // .interpolate("monotone");
 
 //lines
 let dist_line = d3.line()
@@ -47,7 +48,7 @@ let dist_line = d3.line()
     .y(function (d) {
         return retention_yScale_dist(d.DIST_NET_RETENTION);
     })
-    .curve(d3.curveMonotoneX); //smooth the line
+    .curve(d3.curveCardinal.tension(0.5)); //smooth the line
 
 //canvas
 let retention_svg = d3.select('#retention_container')
