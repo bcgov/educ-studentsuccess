@@ -1,6 +1,6 @@
 //margin
 let retention_margin = {
-    top: 10,
+    top: 20,
     right: 65,
     bottom: 50,
     left: 60
@@ -384,12 +384,12 @@ d3.csv('../assets/raw_data/retention_province.csv', function (error, data) {
 
     }
 
+    //default district
     retentionUpdate('05');
 
     //dropdown select district
     //removes event handlers from selected elements as updateGraph
     $('#retention_distDropdown').unbind().on('click', function () {
-        $('.dropDown').removeClass('active');
         $(this).toggleClass('active');
 
         //or add on click when appending the divs

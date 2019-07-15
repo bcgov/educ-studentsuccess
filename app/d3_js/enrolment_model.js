@@ -342,7 +342,6 @@ d3.csv('../assets/raw_data/key_drivers.csv', function (error, data) {
         //removes event handlers from selected elements as updateGraph
         $('#model_distDropdown').unbind().on('click', function (et) {
             console.log('clicked');
-            $('.dropDown').removeClass('active');
             $(this).toggleClass('active');
 
             //or add on click when appending the divs
@@ -356,6 +355,9 @@ d3.csv('../assets/raw_data/key_drivers.csv', function (error, data) {
 
                     let districtData = data.filter(function (d) { return d.ABBREV == targetDistrict && (+d.SCHOOL_YEAR >= yr1 && +d.SCHOOL_YEAR <= yr2) });
                     let distName = $(this).text();
+
+                    //no need because event bubbling
+                    //$(this).parent().toggleClass('active');
 
                     let driverNames = d3.keys(data[0]).filter(function (key) {
                         if (key !== 'ABBREV' && key !== 'DISTRICT' && key !== 'SCHOOL_YEAR' && key !== 'LAST_YEAR_ENROLMENT' && key !== 'drivers') {

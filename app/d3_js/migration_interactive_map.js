@@ -685,14 +685,11 @@ $(document).ready(function () {
     defBtn.classed('selected', true);;
     currentFlowType='all';
   }
-  //  d3.select(self.frameElement).style("height", "700px");
-
 
   /*control panel*/
 
   //dropdown selection
-  $('#yearDropdown').on('click', function (et) {
-    $('.dropDown').removeClass('active');
+  $('#yearDropdown').on('click', function() {
     $(this).toggleClass('active');
     //swap database when select changes
     d3.selectAll('#yearDropdown .list div')
@@ -710,8 +707,7 @@ $(document).ready(function () {
 
 
   //dropdown select district
-  $('#distDropdown').on('click', function (et) {
-    $('.dropDown').removeClass('active');
+  $('#distDropdown').on('click', function() {
     $(this).toggleClass('active');
     $('#yearDropdown').removeClass('active');
 
