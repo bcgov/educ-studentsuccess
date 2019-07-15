@@ -103,7 +103,7 @@ function retentionClear() {
         .remove();
 }
 
-d3.csv('../assets/raw_data/retention_provincial.csv', function (error, data) {
+d3.csv('../assets/raw_data/retention_province.csv', function (error, data) {
     if (error) {
         throw error;
     }

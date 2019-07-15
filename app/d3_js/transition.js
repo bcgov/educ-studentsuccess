@@ -218,7 +218,7 @@ function transition_slider() {
 
 function graphUpdate(year) {
 
-    d3.csv('../assets/raw_data/transition_provincial.csv', function (error, data) {
+    d3.csv('../assets/raw_data/transition_province.csv', function (error, data) {
         if (error) {
             throw error;
         }

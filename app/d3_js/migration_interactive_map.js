@@ -187,7 +187,16 @@ $(document).ready(function () {
       d3.json("../assets/geo_json/sd_geo.json", function (error, json) {
         if (error) throw error;
 
-        //convert json to svg
+        /* 
+        A custom geometric transformation for Leaflet map
+        Converts an input geometry (such as polygons in spherical geographic coordinates) 
+        to a different output geometry (such as polygons in projected screen coordinates). 
+        */
+       function projectPoint(x, y) {
+        let point = map.latLngToLayerPoint(new L.LatLng(y, x));
+        this.stream.point(point.x, point.y);
+      }
+
         let transform = d3.geoTransform({
           point: projectPoint
         });
@@ -362,24 +371,11 @@ $(document).ready(function () {
             .transition()
             .duration(1500);
         }
-
-        /* 
-        adapt Leaflet’s API to fit D3 by implementing a custom geometric transformation. 
-        A transform converts an input geometry (such as polygons in spherical geographic coordinates) 
-        to a different output geometry (such as polygons in projected screen coordinates). 
-        */
-        function projectPoint(x, y) {
-          let point = map.latLngToLayerPoint(new L.LatLng(y, x));
-          this.stream.point(point.x, point.y);
-        }
-
-
       });
     });
   }
 
-  //initial/default map
-
+  //default map
   updateMap("../assets/raw_data/sd_coming_2018.csv", "../assets/raw_data/sd_going_2018.csv");
 
   function toolOver(v, thepath) {

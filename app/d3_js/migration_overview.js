@@ -159,7 +159,7 @@ function update(year) {
         loadJson(csv_data, json, mapGroup, ani_path, 'dist-main');
     });
 
-    d3.json("../assets/geo_json/lower_mainland_chilliwack.json", function (json) {
+    d3.json("../assets/geo_json/lower_mainland_sub.json", function (json) {
         loadJson(csv_data, json, mapGroup_lm, ani_path_lm, 'dist-lm');
     });
 

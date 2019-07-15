@@ -138,8 +138,10 @@ d3.csv('../assets/raw_data/demographics.csv', function (error, data) {
             .on("mousemove", showDemott);
 
         let currentPos;
-        // custom invert function for point scale + tooltips
+        
         function showDemott() {
+            
+            // custom invert function for point scale + tooltips
             let xPos = d3.mouse(this)[0];
             let domain = demo_xScale.domain();
             let range = demo_xScale.range();

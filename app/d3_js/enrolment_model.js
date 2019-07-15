@@ -20,14 +20,14 @@ let parseDate = d3.timeParse('%Y');
 let model_xScale = d3.scalePoint().range([0, model_width]).padding(0.5);;
 
 
-//x1, usedto create the group (grouped bars) elements
+//x1, used to create the group (grouped bars) elements
 // 0.1 is the padding added to offset the band from the edge of the interval
 let bar_xScale1 = d3.scaleBand()
     .rangeRound([0, model_width])
     .padding(.2)
     .paddingInner(.2);
 
-//x2, create the smaller elements inside the group
+//x2, create the bar elements inside the group
 // domain and range will be set later
 let bar_xScale2 = d3.scaleBand()
     .padding(0.1);
@@ -95,7 +95,7 @@ let tooltip_line = d3.select("#modelContainer")
     .attr("class", "modeltt_rect")
     .style('display', 'none');
 
-d3.csv('../assets/raw_data/predictors.csv', function (error, data) {
+d3.csv('../assets/raw_data/key_drivers.csv', function (error, data) {
     if (error) {
         throw error;
     }
@@ -181,7 +181,8 @@ d3.csv('../assets/raw_data/predictors.csv', function (error, data) {
 
         modelClear();
 
-        let districtData = data.filter(function (d) { return (d.ABBREV == targetDistrict) && (+d.SCHOOL_YEAR >= yr1 && +d.SCHOOL_YEAR <= yr2) });
+        let districtData = data.filter(function (d) { 
+            return (d.ABBREV == targetDistrict) && (+d.SCHOOL_YEAR >= yr1 && +d.SCHOOL_YEAR <= yr2) });
 
         //for each js object, generate a new key called drivers
         // value is an array of js objects each has driver name and value
@@ -199,10 +200,10 @@ d3.csv('../assets/raw_data/predictors.csv', function (error, data) {
             });
         });
 
-        //set aixs
+        //set scale
         model_xScale.domain(districtData.map(function (d) { return d.SCHOOL_YEAR; }));
         bar_xScale1.domain(districtData.map(function (d) { return d.SCHOOL_YEAR; }));
-        // set x2 axis within the bar group
+        // set x2 sclae within the bar group
         bar_xScale2.domain(driverNames).rangeRound([0, bar_xScale1.bandwidth()]);
         model_yScale.domain([0, d3.max(districtData, function (d) { return d.LAST_YEAR_ENROLMENT; })]);
 
