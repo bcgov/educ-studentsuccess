@@ -1246,6 +1246,7 @@ body {
 
         .bar:hover {
             fill: rgba(0, 38, 99, 0.7) !important;
+            cursor: pointer;
         }
 
         .label {
@@ -1414,14 +1415,14 @@ body {
             background: $tooltip-bg;
             font-weight: bold;
             font-style: italic;
-            font-size: 12px;
+            font-size: 14px;
             border-radius: 5px 5px 0 0;
           }
 
           .tipInfo {
             margin-left: 5px;
             color:$tooltip-bg;
-            font-size:10px;
+            font-size:12px;
             .tipNum{
               color:$font-color;
             }
@@ -1581,10 +1582,10 @@ body {
 
     #trans_tt{
       .trans_link{
-        margin:0.5em;
+        margin: 0.5rem;
+        line-height: 1rem;
         .ssLink{
         font-size: 14px;
-        line-height: 0.1em;
       }
     }
     }

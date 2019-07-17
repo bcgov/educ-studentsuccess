@@ -449,8 +449,8 @@ $(document).ready(function () {
     return tooltip2.style("top", my + "px")
       .style("left", mx + "px")
       .html("<div id='tipDiv2'><div id='tipLoc2'><b>" + home +
-        "/" + end + "</b></div><div id='tipInfo2'>Migration, " + home +
-        " to " + end + ": <b>" + formatC(v2) + "</b><br>Migration, " + end +
+        "/" + end + "</b></div><div id='tipInfo2'>" + home +
+        " to " + end + ": <b>" + formatC(v2) + "</b><br>" + end +
         " to " + home + ": <b>" + formatC(v1) + "</b><br>Net change, " + home +
         ": <b>" + formatD(v1 - v2) + "</b></div><div class='tipClear'></div> </div>");
   };
