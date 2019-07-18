@@ -690,6 +690,7 @@ $(document).ready(function () {
 
   //dropdown selection
   $('#yearDropdown').on('click', function() {
+    $('.dropDown').not(this).removeClass('active');
     $(this).toggleClass('active');
     //swap database when select changes
     d3.selectAll('#yearDropdown .list div')
@@ -708,6 +709,7 @@ $(document).ready(function () {
 
   //dropdown select district
   $('#distDropdown').on('click', function() {
+    $('.dropDown').not(this).removeClass('active');
     $(this).toggleClass('active');
     $('#yearDropdown').removeClass('active');
 

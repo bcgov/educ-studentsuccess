@@ -1594,6 +1594,12 @@ body {
       cursor: pointer;
     }
 
+    .trans_top5_label{
+      font-size: 10px;
+      fill: $font-color;
+      pointer-events: none;
+    }
+
     .label{
       text-anchor: middle;
       fill: white;

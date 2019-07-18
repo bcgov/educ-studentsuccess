@@ -8012,6 +8012,10 @@ html {
       fill: #003663;
       opacity: 0.5;
       cursor: pointer; }
+    html body #transition #transition_container .trans_top5_label {
+      font-size: 10px;
+      fill: #494949;
+      pointer-events: none; }
     html body #transition #transition_container .label {
       text-anchor: middle;
       fill: white; }
