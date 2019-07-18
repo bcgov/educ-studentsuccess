@@ -56,7 +56,7 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #f7f7f9; }
+  background-color: #F2F2F2; }
 
 [tabindex="-1"]:focus {
   outline: 0 !important; }
@@ -394,7 +394,7 @@ mark,
 
 .img-thumbnail {
   padding: 0.25rem;
-  background-color: #f7f7f9;
+  background-color: #F2F2F2;
   border: 1px solid #dee2e6;
   border-radius: 0.25rem;
   max-width: 100%;
@@ -2757,11 +2757,11 @@ input[type="button"].btn-block {
   .custom-range:focus {
     outline: none; }
     .custom-range:focus::-webkit-slider-thumb {
-      box-shadow: 0 0 0 1px #f7f7f9, 0 0 0 0.2rem rgba(0, 123, 255, 0.25); }
+      box-shadow: 0 0 0 1px #F2F2F2, 0 0 0 0.2rem rgba(0, 123, 255, 0.25); }
     .custom-range:focus::-moz-range-thumb {
-      box-shadow: 0 0 0 1px #f7f7f9, 0 0 0 0.2rem rgba(0, 123, 255, 0.25); }
+      box-shadow: 0 0 0 1px #F2F2F2, 0 0 0 0.2rem rgba(0, 123, 255, 0.25); }
     .custom-range:focus::-ms-thumb {
-      box-shadow: 0 0 0 1px #f7f7f9, 0 0 0 0.2rem rgba(0, 123, 255, 0.25); }
+      box-shadow: 0 0 0 1px #F2F2F2, 0 0 0 0.2rem rgba(0, 123, 255, 0.25); }
   .custom-range::-moz-focus-outer {
     border: 0; }
   .custom-range::-webkit-slider-thumb {
@@ -2893,8 +2893,8 @@ input[type="button"].btn-block {
   .nav-tabs .nav-link.active,
   .nav-tabs .nav-item.show .nav-link {
     color: #495057;
-    background-color: #f7f7f9;
-    border-color: #dee2e6 #dee2e6 #f7f7f9; }
+    background-color: #F2F2F2;
+    border-color: #dee2e6 #dee2e6 #F2F2F2; }
   .nav-tabs .dropdown-menu {
     margin-top: -1px;
     border-top-left-radius: 0;
@@ -4183,7 +4183,7 @@ a.close.disabled {
     .bs-tooltip-top .arrow::before, .bs-tooltip-auto[x-placement^="top"] .arrow::before {
       top: 0;
       border-width: 0.4rem 0.4rem 0;
-      border-top-color: #002663; }
+      border-top-color: #003663; }
 
 .bs-tooltip-right, .bs-tooltip-auto[x-placement^="right"] {
   padding: 0 0.4rem; }
@@ -4194,7 +4194,7 @@ a.close.disabled {
     .bs-tooltip-right .arrow::before, .bs-tooltip-auto[x-placement^="right"] .arrow::before {
       right: 0;
       border-width: 0.4rem 0.4rem 0.4rem 0;
-      border-right-color: #002663; }
+      border-right-color: #003663; }
 
 .bs-tooltip-bottom, .bs-tooltip-auto[x-placement^="bottom"] {
   padding: 0.4rem 0; }
@@ -4203,7 +4203,7 @@ a.close.disabled {
     .bs-tooltip-bottom .arrow::before, .bs-tooltip-auto[x-placement^="bottom"] .arrow::before {
       bottom: 0;
       border-width: 0 0.4rem 0.4rem;
-      border-bottom-color: #002663; }
+      border-bottom-color: #003663; }
 
 .bs-tooltip-left, .bs-tooltip-auto[x-placement^="left"] {
   padding: 0 0.4rem; }
@@ -4214,14 +4214,14 @@ a.close.disabled {
     .bs-tooltip-left .arrow::before, .bs-tooltip-auto[x-placement^="left"] .arrow::before {
       left: 0;
       border-width: 0.4rem 0 0.4rem 0.4rem;
-      border-left-color: #002663; }
+      border-left-color: #003663; }
 
 .tooltip-inner {
   max-width: 200px;
   padding: 0.25rem 0.5rem;
   color: #fff;
   text-align: center;
-  background-color: #002663;
+  background-color: #003663;
   border-radius: 0.25rem; }
 
 .popover {
@@ -7065,7 +7065,7 @@ a.text-dark:hover, a.text-dark:focus {
   body {
     background-image: none; }
   h2 {
-    font-size: 6vw; }
+    font-size: 1.75rem; }
   h5 {
     font-size: 4vw; }
   .section_header {
@@ -7076,10 +7076,12 @@ a.text-dark:hover, a.text-dark:focus {
     font-size: 14px; }
   #intro {
     text-align: center; }
-    #intro .ctaBtn, #intro .ctaGhost {
+    #intro p, #intro .ctaBtn, #intro .ctaGhost {
       font-size: 1rem; }
     #intro .cta_container {
       justify-content: center; }
+    #intro .gradient_para {
+      font-size: 14px; }
   #model_control, #demo_control, #flow_control {
     text-align: center; }
   #migration_overview .section_header, #migration_overview .section_header ~ p {
@@ -7115,10 +7117,12 @@ a.text-dark:hover, a.text-dark:focus {
     margin-bottom: 4vw; }
   #intro {
     text-align: left; }
-    #intro .ctaBtn, #intro .ctaGhost {
+    #intro p, #intro .ctaBtn, #intro .ctaGhost {
       font-size: 1rem; }
     #intro .cta_container {
       justify-content: flex-start; }
+    #intro .gradient_para {
+      font-size: 1rem; }
   #model_control, #demo_control, #flow_control {
     text-align: left; }
   #migration_overview .section_header, #migration_overview .section_header ~ p {
@@ -7143,21 +7147,25 @@ a.text-dark:hover, a.text-dark:focus {
     font-size: 2.8rem; }
   h3 {
     font-size: 2rem; }
-  .ctaBtn, .ctaGhost {
-    font-size: 1.2rem !important; }
+  #intro p, #intro .ctaBtn, #intro .ctaGhost {
+    font-size: 18px; }
   .section_header ~ p {
-    font-size: 1rem; } }
+    font-size: 18px; } }
 
+/* Webfont: BCSans-Bold */
 html {
   scroll-behavior: smooth; }
   html body {
-    background-color: #f7f7f9;
-    font-family: Myraid-Pro, Calibri, Arial, sans-serif;
+    background-color: #F2F2F2;
+    font-family: Myriad-Pro, Calibri, Arial, 'sans serif';
     color: #494949;
     /*********student success**********/
     /********student success*********/
     /**********shared********/
     /*********sections********/ }
+    html body p {
+      font-size: 18px;
+      line-height: 1.6; }
     html body #header {
       background: #003366;
       border-bottom: 2px solid #fcba19;
@@ -7253,9 +7261,10 @@ html {
     html body .nav-bg {
       background: rgba(255, 255, 255, 0.9); }
     html body .navbar {
+      font-size: 14px;
+      padding: 0;
       box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.1);
-      top: 105px;
-      padding: 0; }
+      top: 105px; }
       html body .navbar a {
         display: inline-block;
         position: relative; }
@@ -7272,7 +7281,7 @@ html {
           transform: transition(-15px);
           height: 2px;
           width: 100%;
-          background: #002663;
+          background: #003663;
           border-radius: 2px;
           transition: all cubic-bezier(0.26, 0.1, 0.27, 1.55) 0.35s; }
         html body .navbar .icon .top {
@@ -7312,12 +7321,12 @@ html {
       html body .navbar button {
         border: none; }
       html body .navbar .navbar-brand {
-        color: #002663;
+        color: #003663;
         font-size: 1rem; }
     html body .section_header {
       background-size: 100% 100%; }
       html body .section_header span {
-        color: #002663;
+        color: #003663;
         background-image: linear-gradient(-180deg, transparent 65%, #2cc7c0, #59d99d 0);
         background-repeat: no-repeat;
         text-decoration: none;
@@ -7356,11 +7365,11 @@ html {
       transition: .3s ease; }
     html body .ctaBtn {
       background: linear-gradient(90deg, #2cc7c0, #59d99d);
-      color: #f7f7f9;
+      color: #F2F2F2;
       border: none;
       box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
     html body .ctaBtn:hover {
-      color: #f7f7f9;
+      color: #F2F2F2;
       background: linear-gradient(90deg, #25a8a2, #3ad28b);
       box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
       transition: all .3s ease; }
@@ -7370,7 +7379,7 @@ html {
       background: transparent;
       box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
     html body .ctaGhost:hover {
-      color: #f7f7f9;
+      color: #F2F2F2;
       background: linear-gradient(90deg, #2cc7c0, #59d99d);
       box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
       border-color: #59d99d;
@@ -7398,7 +7407,7 @@ html {
       stroke-width: 1.25px;
       cursor: pointer; }
     html body .handle.active {
-      fill: #002663; }
+      fill: #003663; }
     html body .ticks {
       fill: #494949;
       font-size: 12px; }
@@ -7414,13 +7423,13 @@ html {
     html body .tipHeader {
       color: white;
       padding: 5px;
-      background: #002663;
+      background: #003663;
       font-style: italic;
       font-size: 16px;
       border-radius: 5px 5px 0 0; }
     html body .tipInfo {
       margin: 0.5em;
-      color: #002663;
+      color: #003663;
       font-size: 14px; }
     html body #demo_control [type="radio"]:checked,
     html body #demo_control [type="radio"]:not(:checked) {
@@ -7461,24 +7470,24 @@ html {
       -webkit-transform: scale(0);
       transform: scale(0); }
     html body #demo_control [type="radio"]:checked + label {
-      color: #002663;
+      color: #003663;
       font-weight: bold; }
     html body #demo_control [type="radio"]:checked + label:before {
-      border: 3px solid #002663; }
+      border: 3px solid #003663; }
     html body #demo_control [type="radio"]:checked + label:after {
       opacity: 1;
-      background: #002663;
+      background: #003663;
       -webkit-transform: scale(1);
       transform: scale(1); }
     html body #demo_control [type="radio"]:not(:checked) + label:hover {
-      color: #002663; }
+      color: #003663; }
     html body .axis_label {
       font-size: 0.8rem;
       fill: #494949;
       opacity: 0.5; }
     html body #intro, html body #enrolment_model, html body #demographics, html body #migration_overview, html body #flow_map, html body #transition, html body #retention {
       margin-bottom: 9vw; }
-    html body #enrolment_model::before, html body #demographics::before, html body #migration_overview::before, html body #transition::before, html body #retention::before {
+    html body #enrolment_model::before, html body #demographics::before, html body #migration_overview::before, html body #transition::before, html body #retention::before, html body #booklet::before {
       content: "";
       display: block;
       height: 140px;
@@ -7488,8 +7497,9 @@ html {
     html body #intro {
       margin-top: 9rem; }
       html body #intro .intro_header {
-        color: #002663;
-        font-weight: bold; }
+        color: #003663;
+        font-weight: bold;
+        margin-bottom: 1rem; }
       html body #intro .cta_container {
         display: flex;
         flex-wrap: wrap; }
@@ -7501,7 +7511,7 @@ html {
         color: white;
         font-weight: 500;
         border-radius: 3px;
-        background: linear-gradient(315deg, #f7f7f9, #2cc7c0);
+        background: linear-gradient(315deg, #38598a, #2cc7c0);
         overflow: hidden; }
         html body #intro .gradient_para i {
           margin-right: 0.4rem; }
@@ -7561,7 +7571,7 @@ html {
         border: none; }
       html body .dropDown .list div:hover {
         color: #5091CD;
-        background: #f7f7f9; }
+        background: #F2F2F2; }
       html body .dropDown .list::-webkit-scrollbar {
         width: .4rem; }
       html body .dropDown .list::-webkit-scrollbar-track {
@@ -7623,7 +7633,7 @@ html {
     html body #aniContainer .caption {
       fill: #494949; }
     html body #flow_map h3 {
-      color: #002663; }
+      color: #003663; }
     html body #flow_map #mapContainer {
       position: relative; }
     html body #flow_map #interactiveMap {
@@ -7748,7 +7758,7 @@ html {
       color: white;
       margin: 0px;
       padding: 10px 10px;
-      background: #002663;
+      background: #003663;
       font-size: 14px;
       border-radius: 3px 3px 0 0; }
     html body #flow_map #tipInfo {
@@ -7776,7 +7786,7 @@ html {
       color: white;
       margin: 0px;
       padding: 10px 10px;
-      background: #002663;
+      background: #003663;
       font-size: 14px;
       border-radius: 3px 3px 0 0; }
     html body #flow_map #tipInfo2 {
@@ -7812,10 +7822,10 @@ html {
           text-anchor: middle; }
         html body #enrolment_model #modelContainer .svg-content .line {
           fill: none;
-          stroke: #002663;
+          stroke: #003663;
           stroke-width: 3; }
         html body #enrolment_model #modelContainer .svg-content .dot {
-          fill: #002663;
+          fill: #003663;
           stroke: #fff; }
         html body #enrolment_model #modelContainer .yAxis, html body #enrolment_model #modelContainer .yAxis2, html body #enrolment_model #modelContainer .xAxis {
           stroke-width: 0; }
@@ -7837,14 +7847,14 @@ html {
           html body #enrolment_model #modelContainer .modeltt_rect .tipHeader {
             color: white;
             padding: 5px;
-            background: #002663;
+            background: #003663;
             font-weight: bold;
             font-style: italic;
             font-size: 12px;
             border-radius: 5px 5px 0 0; }
           html body #enrolment_model #modelContainer .modeltt_rect .tipInfo {
             margin-left: 5px;
-            color: #002663;
+            color: #003663;
             font-size: 12px; }
             html body #enrolment_model #modelContainer .modeltt_rect .tipInfo .tipNum {
               color: #494949; }
@@ -7871,9 +7881,9 @@ html {
         stroke-width: 1.25px;
         cursor: pointer; }
       html body #enrolment_model .handle.active {
-        fill: #002663; }
+        fill: #003663; }
       html body #enrolment_model #distName {
-        color: #002663;
+        color: #003663;
         font-weight: bold; }
     html body #demographics #demo_container .demo_line {
       stroke-linecap: round; }
@@ -7891,7 +7901,7 @@ html {
       pointer-events: all;
       cursor: pointer; }
     html body #demographics #demo_container .demott_line {
-      stroke: #002663;
+      stroke: #003663;
       stroke-dasharray: 2,5;
       stroke-width: 2;
       opacity: 0.5; }
@@ -7907,14 +7917,14 @@ html {
       html body #demographics #demo_container .demott_rect .tipHeader {
         color: white;
         padding: 5px;
-        background: #002663;
+        background: #003663;
         font-weight: bold;
         font-style: italic;
         font-size: 14px;
         border-radius: 5px 5px 0 0; }
       html body #demographics #demo_container .demott_rect .tipInfo {
         margin-left: 5px;
-        color: #002663;
+        color: #003663;
         font-size: 12px; }
         html body #demographics #demo_container .demott_rect .tipInfo .tipNum {
           color: #494949; }
@@ -7938,9 +7948,9 @@ html {
         vertical-align: middle;
         cursor: pointer; }
       html body #demographics #demo_control .modal-body .checkbox .demo_checkbox:hover, html body #demographics #demo_control .modal-body .checkbox .demo_checkbox:checked {
-        border: 2px solid #002663; }
+        border: 2px solid #003663; }
       html body #demographics #demo_control .modal-body .checkbox .demo_checkbox:checked ~ * {
-        color: #002663; }
+        color: #003663; }
       html body #demographics #demo_control .modal-body .checkbox .demo_checkbox:checked:after {
         content: '';
         position: absolute;
@@ -7948,7 +7958,7 @@ html {
         top: 1px;
         width: 5px;
         height: 10px;
-        border: solid #002663;
+        border: solid #003663;
         border-radius: 5px;
         border-width: 0 3px 3px 0;
         -webkit-transform: rotate(45deg);
@@ -7999,7 +8009,7 @@ html {
           color: #D42D75;
           font-weight: bold; }
     html body #transition #transition_container .trans_circ {
-      fill: #002663;
+      fill: #003663;
       opacity: 0.5;
       cursor: pointer; }
     html body #transition #transition_container .label {
@@ -8025,7 +8035,7 @@ html {
       position: relative; }
       html body #retention #retention_container .prov_retention_line {
         stroke-linecap: round;
-        stroke: #002663; }
+        stroke: #003663; }
       html body #retention #retention_container .dist_retention_line {
         stroke-linecap: round;
         stroke: #FCBA19; }
@@ -8043,7 +8053,7 @@ html {
         pointer-events: all;
         cursor: pointer; }
       html body #retention #retention_container .retentiontt_line {
-        stroke: #002663;
+        stroke: #003663;
         stroke-dasharray: 2,5;
         stroke-width: 2;
         opacity: 0.5; }
@@ -8059,14 +8069,14 @@ html {
         html body #retention #retention_container .retentiontt_rect .tipHeader {
           color: white;
           padding: 5px;
-          background: #002663;
+          background: #003663;
           font-weight: bold;
           font-style: italic;
           font-size: 12px;
           border-radius: 5px 5px 0 0; }
         html body #retention #retention_container .retentiontt_rect .tipInfo {
           margin-left: 5px;
-          color: #002663;
+          color: #003663;
           font-size: 10px; }
           html body #retention #retention_container .retentiontt_rect .tipInfo .tipNum {
             color: #494949; }

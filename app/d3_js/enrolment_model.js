@@ -89,8 +89,13 @@ let model_chartGroup = model_svg.append('g')
     .attr('transform', 'translate(' + model_margin.left + ',' + model_margin.top + ')');
 
 
-//initialize html tooltip
+//tooltips
 let tooltip_line = d3.select("#modelContainer")
+    .append("div")
+    .attr("class", "modeltt_rect")
+    .style('display', 'none');
+
+let tooltip_bar = d3.select("#modelContainer")
     .append("div")
     .attr("class", "modeltt_rect")
     .style('display', 'none');
@@ -181,8 +186,9 @@ d3.csv('../assets/raw_data/key_drivers.csv', function (error, data) {
 
         modelClear();
 
-        let districtData = data.filter(function (d) { 
-            return (d.ABBREV == targetDistrict) && (+d.SCHOOL_YEAR >= yr1 && +d.SCHOOL_YEAR <= yr2) });
+        let districtData = data.filter(function (d) {
+            return (d.ABBREV == targetDistrict) && (+d.SCHOOL_YEAR >= yr1 && +d.SCHOOL_YEAR <= yr2)
+        });
 
         //for each js object, generate a new key called drivers
         // value is an array of js objects each has driver name and value
@@ -291,7 +297,26 @@ d3.csv('../assets/raw_data/key_drivers.csv', function (error, data) {
             .attr('width', function (d) { return bar_xScale2.bandwidth(); })
             .attr('y', function (d) { return bar_yScale(Math.max(0, d.value)); })
             .attr('height', function (d) { return Math.abs(bar_yScale(d.value) - bar_yScale(0)); })
-            .style('fill', function (d) { return color_scale(d.name); });
+            .style('fill', function (d) { return color_scale(d.name); })
+            .on("mouseenter", function (d) {
+                //toolOver is the event handler
+                console.log(d);
+                return model_toolOver(d, this);
+            })
+            .on("mousemove", function (d) {
+                //gets mouse coordinates on screen
+                let offsetTarget = $(this).parent().parent().parent().parent();
+
+                let offset = offsetTarget.offset();
+
+                let mx = (event.pageX - offset.left);
+                let my = (event.pageY - offset.top);
+
+                return model_toolMove(mx, my, d);
+            })
+            .on("mouseleave", function (d) {
+                return model_toolOut(d, this);
+            });
 
         //bar labels
         // let labels = model_chartGroup.selectAll(".label")
@@ -320,7 +345,7 @@ d3.csv('../assets/raw_data/key_drivers.csv', function (error, data) {
             .attr("r", 5)
             .on("mouseenter", function (d) {
                 //toolOver is the event handler
-                console.log(d);
+                console.log(d.ABBREV);
                 return model_toolOver(d, this);
             })
             .on("mousemove", function (d) {
@@ -449,7 +474,7 @@ d3.csv('../assets/raw_data/key_drivers.csv', function (error, data) {
         });
 
         //legends
-        let legends = ['Demographics', 'Migration', 'Retention', 'Independent']
+        let legends = ['Demographics', 'Migration', 'Retention', 'Transition']
         let svgContainer = d3.select('#modelContainer .svg-content');
         let legend = svgContainer.selectAll(".legend")
             .data(legends)
@@ -587,30 +612,47 @@ d3.csv('../assets/raw_data/key_drivers.csv', function (error, data) {
 
 
 
-function model_toolOver(v, thepath) {
-    d3.select(thepath)
-        //in v4+ use the "long forms"
-        .attr("style", "fill:#FCBA19")
-        .attr("cursor", "pointer");
-    return tooltip_line.style('display', null);
-};
+function model_toolOver(d, target) {
+    if (d.ABBREV) {
+        d3.select(target)
+            //in v4+ use the "long forms"
+            .attr("style", "fill:#FCBA19")
+            .attr("cursor", "pointer");
+        return tooltip_line.style('display', null);
+    } else {
+        return tooltip_bar.style('display', null);
+    }
+}
 
-function model_toolOut(m, thepath) {
-    d3.select(thepath)
-        .attr("style", "fill:#002663")
-        .attr("cursor", "pointer");
-    return tooltip_line.style('display', 'none');
+function model_toolOut(d, target) {
+    if (d.ABBREV) {
+        d3.select(target)
+            .attr("style", "fill:#002663")
+            .attr("cursor", "pointer");
+        return tooltip_line.style('display', 'none');
+    } else {
+        return tooltip_bar.style('display', 'none');
+    }
 }
 
 
 function model_toolMove(mx, my, data) {
-    //create the tooltip, style it and inject info
-
-    return tooltip_line.style("top", my + "px")
-        .style("left", mx - 10 + "px")
-        .html(function () {
-            let content = "<div class='tipHeader'><b>Year: </b>" + data.SCHOOL_YEAR + "</div>";
-            content += "<div class='tipInfo'>Total Enrolment: <span class='tipNum'>" + Math.round(data.LAST_YEAR_ENROLMENT).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span></div>"
-            return content;
-        });
+    //inject info
+    if (data.ABBREV) {
+        return tooltip_line.style("top", my + "px")
+            .style("left", mx - 10 + "px")
+            .html(function () {
+                let content = "<div class='tipHeader'><b>Year: </b>" + data.SCHOOL_YEAR + "</div>";
+                content += "<div class='tipInfo'>Total Enrolment: <span class='tipNum'>" + Math.round(data.LAST_YEAR_ENROLMENT).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span></div>"
+                return content;
+            });
+    } else {
+        return tooltip_bar.style("top", my + "px")
+            .style("left", mx + 10 + "px")
+            .html(function () {
+                let content = "<div class='tipHeader'>" + data.name + "</div>";
+                content += "<div class='tipInfo'>Impact: <span class='tipNum'>" + Math.round(data.value).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span></div>"
+                return content;
+            });
+    }
 }

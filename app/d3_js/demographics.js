@@ -347,7 +347,7 @@ d3.csv('../assets/raw_data/demographics.csv', function (error, data) {
     /******control******/
 
     //radio selection
-    $("#demo_radio input[type='radio']").change(function () {
+    $("input[type='radio']").change(function () {
         let radioValue = $("input[name='demo-type']:checked").val();
         if (radioValue) {
             demoClear();

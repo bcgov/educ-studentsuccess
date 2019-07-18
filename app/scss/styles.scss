@@ -1,22 +1,22 @@
 //varible overrides
-$home-color: #002663;
+$home-color: #003663;
 $nav-color: #5091CD;
 $footer-color:#1D438C;
 $nav-bg: rgba(255, 255, 255, 0.9);
-$body-bg: #f7f7f9;
+$body-bg: #F2F2F2;
 $font-color: #494949;
 $cta-gradient: linear-gradient(90deg,#2cc7c0,#59d99d);
 $cta-gradient-hover: linear-gradient(90deg,#25a8a2,#3ad28b);
 $cta-ghost: #59d99d;
 $cta-yellow: #FCBA19;
 $btn-color: #38598a;
-$tooltip-bg: #002663;
+$tooltip-bg: #003663;
 $tooltip-info-bg:rgba(255, 255, 255, 0.7);
 $section-header:rgba(252,186,25, 0.5);
 $err-color: #d8292f;
-$inflow_color:#65a89d;
-$outflow_color: #a96a46;
-$btn_hover_shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
+$inflow-color:#65a89d;
+$outflow-color: #a96a46;
+$btn-hover-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
 
 
 //Bootstrap sass files
@@ -93,7 +93,7 @@ $btn_hover_shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0
   }
 
   h2{
-    font-size: 6vw;
+    font-size: 1.75rem;
   }
 
   h5{
@@ -114,11 +114,14 @@ $btn_hover_shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0
 
   #intro{
     text-align: center;
-    .ctaBtn, .ctaGhost {
+    p, .ctaBtn, .ctaGhost {
       font-size: 1rem;
     }
     .cta_container{
       justify-content: center;
+    }
+    .gradient_para {
+      font-size: 14px;
     }
   } 
 
@@ -189,11 +192,17 @@ $btn_hover_shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0
 
   #intro{
     text-align: left;
-    .ctaBtn, .ctaGhost {
+
+    p, .ctaBtn, .ctaGhost {
       font-size: 1rem;
     }
+
     .cta_container{
       justify-content: flex-start;
+    }
+
+    .gradient_para {
+      font-size: 1rem;
     }
   }
 
@@ -250,23 +259,42 @@ $btn_hover_shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0
     font-size: 2rem;
   }
 
-  .ctaBtn, .ctaGhost {
-    font-size: 1.2rem !important;
-  }
+  #intro{
+    p, .ctaBtn, .ctaGhost {
+      font-size: 18px;
+    }
+ }
 
-  .section_header ~ p{
-    font-size: 1rem;
-  }
+  .section_header ~ p {
+    font-size: 18px; 
+ }
 
 }
+
+/* Webfont: BCSans-Bold */
+// @font-face {
+//   font-family: 'BCSans';
+//   src: url('../assets/fonts/BCSans-Regular.eot'); /* IE9 Compat Modes */
+//   src: url('../assets/fonts/BCSans-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+//        url('../assets/fonts/BCSans-Regular.woff') format('woff'), /* Modern Browsers */
+//        url('../assets/fonts/BCSans-Regular.ttf') format('truetype'); /* Safari, Android, iOS */
+//            font-style: normal;
+//   font-weight: normal;
+//   text-rendering: optimizeLegibility;
+// }
 
 html {
     scroll-behavior: smooth;
 
 body {
   background-color: $body-bg;
-  font-family: Myraid-Pro, Calibri, Arial, sans-serif;
+  font-family:  Myriad-Pro, Calibri, Arial, 'sans serif';
   color: $font-color;
+
+  p {
+    font-size: 18px;
+    line-height: 1.6;
+  }
 
   /*********student success**********/
   #header{ 
@@ -416,9 +444,10 @@ body {
   }
 
   .navbar {
+    font-size: 14px;
+    padding: 0;
     box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.1);
     top: 105px;
-    padding: 0;
     a {
       display: inline-block;
       position: relative;
@@ -547,7 +576,7 @@ body {
       color: #fff;
       border: 2px solid #00305d;
       background: #00305d;
-      box-shadow: $btn_hover_shadow;
+      box-shadow: $btn-hover-shadow;
       // transform: translateY(-0.025em);
       transition: 0.3s ease;
   }
@@ -566,7 +595,7 @@ body {
       color: #fff;
       border: 2px solid #00305d;
       background: #00305d;
-      box-shadow: $btn_hover_shadow;
+      box-shadow: $btn-hover-shadow;
       transition: .3s ease;
   }
 
@@ -580,7 +609,7 @@ body {
   .ctaBtn:hover {
     color: $body-bg;
     background: $cta-gradient-hover;
-    box-shadow: $btn_hover_shadow;
+    box-shadow: $btn-hover-shadow;
     transition: all .3s ease;
   }
 
@@ -594,7 +623,7 @@ body {
   .ctaGhost:hover{
     color: $body-bg;
     background: $cta-gradient;
-    box-shadow: $btn_hover_shadow;
+    box-shadow: $btn-hover-shadow;
     border-color: $cta-ghost; 
     transition: all .5s ease;
   }
@@ -743,7 +772,7 @@ body {
   margin-bottom: 9vw;
 }
 
-  #enrolment_model::before, #demographics::before, #migration_overview::before, #transition::before,#retention::before {
+  #enrolment_model::before, #demographics::before, #migration_overview::before, #transition::before, #retention::before, #booklet::before {
     content:"";
     display:block;
     height:140px; /* fixed header height*/
@@ -757,6 +786,7 @@ body {
     .intro_header{
       color:$home-color;
       font-weight: bold;
+      margin-bottom: 1rem;
     }
     .cta_container{
       display: flex;
@@ -770,7 +800,7 @@ body {
       color: white;
       font-weight: 500;
       border-radius: 3px;
-      background: linear-gradient(315deg,$body-bg,#2cc7c0);
+      background: linear-gradient(315deg,$btn-color,#2cc7c0);
       overflow: hidden;
       i{
         margin-right: 0.4rem;
@@ -1094,10 +1124,10 @@ body {
           color:white;
       }
         .outflow_color {
-          background-color: $outflow_color;
+          background-color: $outflow-color;
         }
         .inflow_color {
-          background-color: $inflow_color;
+          background-color: $inflow-color;
         }
         .dot_md{
           height: 2.5em;
@@ -1114,10 +1144,10 @@ body {
         display: flex;
         justify-content: space-between;
         p:first-child {
-          color: $outflow_color;
+          color: $outflow-color;
         }
         p:last-child {
-          color: $inflow_color;
+          color: $inflow-color;
         }
       }
   }
