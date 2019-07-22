@@ -7158,14 +7158,12 @@ html {
   html body {
     background-color: #F2F2F2;
     font-family: Myriad-Pro, Calibri, Arial, 'sans serif';
+    line-height: 1.6;
     color: #494949;
     /*********student success**********/
     /********student success*********/
     /**********shared********/
     /*********sections********/ }
-    html body p {
-      font-size: 18px;
-      line-height: 1.6; }
     html body #header {
       background: #003366;
       border-bottom: 2px solid #fcba19;
@@ -7388,6 +7386,7 @@ html {
     html body .track-inset,
     html body .track-overlay {
       stroke-opacity: 0.3;
+      stroke-linejoin: round;
       stroke-linecap: round; }
     html body .track {
       stroke-opacity: 0.3;
@@ -7408,6 +7407,9 @@ html {
       cursor: pointer; }
     html body .handle.active {
       fill: #003663; }
+    html body path {
+      stroke-linejoin: round;
+      stroke-linecap: round; }
     html body .ticks {
       fill: #494949;
       font-size: 12px; }
@@ -7886,6 +7888,7 @@ html {
         color: #003663;
         font-weight: bold; }
     html body #demographics #demo_container .demo_line {
+      stroke-linejoin: round;
       stroke-linecap: round; }
     html body #demographics #demo_container .xAxis {
       stroke-width: 0; }
@@ -8038,9 +8041,11 @@ html {
     html body #retention #retention_container {
       position: relative; }
       html body #retention #retention_container .prov_retention_line {
+        stroke-linejoin: round;
         stroke-linecap: round;
         stroke: #003663; }
       html body #retention #retention_container .dist_retention_line {
+        stroke-linejoin: round;
         stroke-linecap: round;
         stroke: #FCBA19; }
       html body #retention #retention_container .xAxis, html body #retention #retention_container .yAxis_prov {

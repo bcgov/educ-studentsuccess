@@ -288,13 +288,11 @@ html {
 
 body {
   background-color: $body-bg;
-  font-family:  Myriad-Pro, Calibri, Arial, 'sans serif';
+  font-family: Myriad-Pro, Calibri, Arial, 'sans serif';
+  line-height: 1.6;
   color: $font-color;
 
-  p {
-    font-size: 18px;
-    line-height: 1.6;
-  }
+ 
 
   /*********student success**********/
   #header{ 
@@ -632,6 +630,7 @@ body {
   .track-inset,
   .track-overlay {
     stroke-opacity: 0.3;
+    stroke-linejoin: round;
     stroke-linecap: round;
   }
 
@@ -663,11 +662,16 @@ body {
   .handle.active {
     fill: $home-color;
   }
+
+  path{
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
   
   .ticks {
     fill: $font-color;
     font-size: 12px;
-}
+  }
 
  .tt_container{
   position: absolute;
@@ -1396,6 +1400,7 @@ body {
     #demo_container{
 
       .demo_line {
+        stroke-linejoin: round;
         stroke-linecap: round;
       }
      
@@ -1649,10 +1654,12 @@ body {
    position: relative;
 
   .prov_retention_line{
+    stroke-linejoin: round;
     stroke-linecap: round;
     stroke:$tooltip-bg;
   }
   .dist_retention_line{
+    stroke-linejoin: round;
     stroke-linecap: round;
     stroke:$cta-yellow;
   }
