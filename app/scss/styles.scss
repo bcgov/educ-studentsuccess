@@ -1536,45 +1536,5 @@ body {
       margin-top: 2.5vw;
     }
   }
-
-  .footer-img{
-    display: block;
-    width: calc(100%) !important;
-    height:auto;
-  }
-
-  footer {
-    background-color: $footer-color;
-    color: white;
-
-    a,
-    a:hover {
-      text-decoration: none;
-      color: white;
-    }
-
-    .container{
-      display: flex;
-
-    #footer-logo {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-
-      
-    .bc_logo {
-      max-width: 120px;
-      height: auto;
-    }
-
-      p.copyright {
-        display: inline-block;
-        font-size: 10px;
-      }
-    }
-
-  }
-
-  }
-}
+ }
 }
