@@ -20,8 +20,8 @@ laravel.log
 sftp-config.json
 
 # Compiled CSS
-style.css
-style.css.map
+#style.css
+#style.css.map
 /.sass-cache
 
 # Compiled JS
