@@ -1,0 +1,40 @@
+/* Headings */
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
+  margin: 0.5rem 0;
+}
+
+.slide-title {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.slide-sub-heading {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 2rem 0;
+}
+
+.sub-sub-heading {
+  font-size: 3rem;
+}
+
+.slide-content .independent_school_flag {
+  font-size: 2rem;
+  margin: 0;
+}
+
+/* "Slide" (aka <main>) Content */
+
+.slide-content p,
+.slide-content ul,
+.slide-content ol {
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
+
+/* Type Helper Classes */
+
+.center {
+  text-align: center;
+}

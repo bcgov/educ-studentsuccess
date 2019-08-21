@@ -1,0 +1,41 @@
+/**
+ * @file
+ * Resets some of the CSS that BCPS wants us to use but doesn't work well with
+ * our layout.
+ */
+
+/* Apply a natural box layout model to all elements. */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  margin: 0;
+  background-color: #FFFFFF;
+}
+
+a {
+  color: $ministry_blue;
+  text-decoration: none;
+} 
+
+audio, video, img, iframe { 
+  max-width: 100%; 
+}
+
+// Resets some values set in BCGOV CSS. 
+.row.arrow-row {
+  background: #ffffff;
+}
+
+ul, li, ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}

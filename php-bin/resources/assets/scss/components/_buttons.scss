@@ -1,0 +1,82 @@
+// Button styles.
+.button {
+  padding: 1rem 2rem;
+  background: $ministry_blue;
+  border: 0;
+  color: white;
+  font-size: 2rem;
+  border-radius: 3rem;
+  text-align: center;
+  display: inline-block;
+  margin: 0.5rem auto;
+  vertical-align: middle; 
+  min-width: 100px;
+
+  &:hover, &:focus, &:active {
+    text-decoration: none;
+  }
+
+  // Button style modifiers.
+  &.big {
+    min-width: 100%;
+    display: inline-block;
+    border-radius: 1rem;
+    font-weight: normal;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+
+    @media only screen and (min-width: $tablet) {
+      max-width: 33.33%;
+      min-width: 290px;
+      min-height: 5.5rem;
+    }
+
+    @media only screen and (min-width: $desktop) {
+      min-width: 300px;
+      padding: 2rem 4rem;
+      font-size: 2rem;
+      min-height: 1px;
+    }
+
+    // &:after {
+    //   content: '\00BB';
+    //   padding-left: 0.5rem;
+    // }
+
+    // &.previous:after {
+    //   content: '';
+    // }
+    // &.previous:before {
+    //   content: '\00AB';
+    //   padding-right: 0.5rem; 
+    // }
+
+    // &.information:before, &.information:after {
+    //   content: '';
+    // }
+    
+    &.previous i.fa {
+      float: left;
+    }
+    &.next i.fa {
+      float: right;
+    }
+    
+    i.fa {
+      font-size: 270%;
+      line-height: 0;
+      position: relative;
+      top: 0.75rem;
+    }
+
+    &.main-search {
+      min-height: 1px;
+    }
+  }
+
+  // Custom buttons
+  &.main-search {
+    margin-top: 0;
+  }
+}
+

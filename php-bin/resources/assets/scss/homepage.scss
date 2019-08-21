@@ -1,0 +1,132 @@
+#refresh-title{
+  background: url('../img/information-title.png') no-repeat center -150px $aqua;
+  background-size: auto 100%;
+}
+
+.down-arrow{
+  height: auto;
+  width: 24px;
+}
+.green-bar{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+#tagline {
+  color: #2d5f54;
+  text-align: center;
+  margin: 0;
+  padding: 1px;
+  line-height: 1.5;
+  margin-bottom: 6px;
+  padding: 0 0.5rem;
+  font-size: 2rem;
+  margin-top: 1rem;
+}
+
+#report-title {
+  font-size: 3rem;
+  //color: $ministry_blue;
+  padding-top: 75px !important;
+   /*background: url('../img/happy_small_people.png') center 11px no-repeat transparent;*/
+  background-size: contain; 
+}
+
+// Note: individual search element(s) styled in scss/components/_search-inputs.scss
+#main-search-wrapper {
+  width: 100%;
+  margin: auto;
+  margin-bottom: 2rem;  
+  line-height: normal;
+
+  .main-search.button {
+
+    &:first-of-type {
+      margin-right: 0.25rem;
+    }
+    &:last-of-type {
+      margin-left: 0.25rem;
+    }
+  }
+}
+
+#search {
+  color: $ministry-blue;
+  padding-top: 2rem;
+  font-size: 30px;
+  margin-top: 2rem;
+
+  @media (max-width: $tablet) {
+    font-size: 4rem; 
+  }
+}
+
+#main-search-button-wrapper {
+  margin-top: 2rem;
+}
+
+// Resets with media queries.
+#main-search-wrapper,
+#main-search-button-wrapper {
+  padding-left: 8px;
+  padding-right: 16px; 
+}
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.green-bg {
+  background-color: #4cc6aa;
+  padding: 40px;
+  margin: 2px 0px 0px 1px;
+}
+
+.search-right{
+  margin-top: 8px;
+  background-color: white; 
+  border-radius: 1em;
+}
+.bgw{
+  background-color: white;
+  padding: 0px;
+  border-radius: 1rem;
+}
+.view-all{
+  color:#036;
+  padding: 1rem 2rem;
+  font-size: 2rem;
+}
+.white-text {
+  color: white;
+}
+.title-font{
+  font-size: 45px;
+}
+.title2-font{
+  font-size: 30px;
+}
+
+.stat-icons {
+	height: auto;
+	width: 95px;
+}
+
+.educated-citizen{
+  margin: auto;
+  display: block;
+  clear: both;
+  padding: 40px 0px 0px 0px;
+  width: 1020px;
+  height:auto;
+}

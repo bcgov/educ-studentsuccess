@@ -1,0 +1,3 @@
+# Force PDFs to download
+# https://css-tricks.com/snippets/htaccess/force-files-to-download-not-open-in-browser/
+AddType application/octet-stream .pdf

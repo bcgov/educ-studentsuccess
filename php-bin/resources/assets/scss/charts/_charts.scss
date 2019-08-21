@@ -1,0 +1,210 @@
+.tableau-embed {
+  border: 0;
+  margin-bottom: 1rem;
+  min-height: 150px; // Basic minimun height for all Tableau iframes.
+  width: 100%;
+}
+
+// INDIVIDUAL CHART STYLINGS ///////////////////////////////////////////////////
+
+#frameId-5 {
+  height: $phone;
+}
+
+#frameId-6 {
+  height: 300px;
+}
+@media only screen and (min-width: $phone) {
+  #frameId-6 {
+    height: 300px;
+  }
+}
+@media only screen and (min-width: $tablet) {
+  #frameId-6 {
+    height: 300px;
+  }
+}
+@media only screen and (min-width: $desktop) {
+  #frameId-6 {
+    height: 500px;
+  }
+}
+
+#frameId-7 {
+  height: 200px;
+}
+@media only screen and (min-width: $phone) {
+  #frameId-7 {
+    height: 200px;
+  }
+}
+@media only screen and (min-width: $tablet) {
+  #frameId-7 {
+    height: 250px;
+  }
+}
+@media only screen and (min-width: $desktop) {
+  #frameId-7 {
+    height: 250px;
+  }
+}
+
+#frameId-8 {
+  height: 450px;
+}
+@media only screen and (min-width: $phone) {
+  #frameId-8 {
+    height: 450px;
+  }
+}
+@media only screen and (min-width: $tablet) {
+  #frameId-8 {
+    height: 350px;
+  }
+}
+@media only screen and (min-width: $desktop) {
+  #frameId-8 {
+    height: 450px;
+  }
+}
+
+#frameId-91 {
+  height: 200px;
+}
+
+#frameId-92,
+#frameId-93 {
+  height: 200px;
+}
+@media only screen and (min-width: $phone) {
+  #frameId-92,
+  #frameId-93 {
+    height: 200px;
+  }
+}
+@media only screen and (min-width: $tablet) {
+  #frameId-92,
+  #frameId-93 {
+    height: 300px;
+  }
+}
+@media only screen and (min-width: $desktop) {
+  #frameId-92,
+  #frameId-93 {
+    height: 400px;
+  }
+}
+
+#frameId-101,
+#frameId-101b {
+  height: 700px;
+}
+
+#frameId-101-school,
+#frameId-101b-school {
+  height: 350px;
+}
+
+#frameId-102,
+#frameId-103,
+#frameId-104 {
+  height: 400px;
+}
+@media only screen and (min-width: $phone) {
+  #frameId-102,
+  #frameId-103,
+  #frameId-104 {
+    height: 400px;
+  }
+}
+@media only screen and (min-width: $tablet) {
+  #frameId-101,
+  #frameId-101b {
+    height: 800px;
+  }
+  #frameId-101-school,
+  #frameId-101b-school {
+    height: 400px;
+  }
+  #frameId-102,
+  #frameId-103,
+  #frameId-104 {
+    height: 300px;
+  }
+}
+@media only screen and (min-width: $desktop) {
+  #frameId-101,
+  #frameId-101b {
+    height: 800px;
+  }
+  #frameId-102,
+  #frameId-103,
+  #frameId-104 {
+    height: 400px;
+  }
+}
+
+#frameId-11 {
+  height: 500px;
+}
+
+#frameId-12 {
+  height: 500px;
+}
+@media only screen and (min-width: $phone) {
+  #frameId-12 {
+    height: 500px;
+  }
+}
+@media only screen and (min-width: $tablet) {
+  #frameId-12 {
+    height: 500px;
+  }
+}
+@media only screen and (min-width: $desktop) {
+  #frameId-12 {
+    height: 400px;
+  }
+}
+
+#frameId-13 {
+  height: 800px;
+}
+@media only screen and (min-width: $phone) {
+  #frameId-13 {
+    height: 800px;
+  }
+}
+@media only screen and (min-width: $tablet) {
+  #frameId-13 {
+    height: 800px;
+  }
+}
+@media only screen and (min-width: $desktop) {
+  #frameId-13 {
+    height: 700px;
+  }
+}
+
+#frameId-14 {
+  height: 400px;
+}
+
+#frameId-15 {
+  height: 600px;
+}
+@media only screen and (min-width: $phone) {
+  #frameId-15 {
+    height: 600px;
+  }
+}
+@media only screen and (min-width: $tablet) {
+  #frameId-15 {
+    height: 600px;
+  }
+}
+@media only screen and (min-width: $desktop) {
+  #frameId-15 {
+    height: 980px;
+  }
+}

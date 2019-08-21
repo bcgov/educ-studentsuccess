@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\php-bin",
+    "\\php-bin\\app",
+    "\\php-bin\\app\\Http",
+    "\\php-bin\\app\\Http\\Controllers"
+  ],
+  "SelectedNode": "\\php-bin\\app\\Http\\Controllers\\GlossaryController.php",
+  "PreviewInSolutionExplorer": false
+}

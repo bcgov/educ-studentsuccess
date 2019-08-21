@@ -1,0 +1,53 @@
+#how-to-read {
+  padding-top: 2rem;
+}
+
+.arrow-above{
+  margin-top:20px;
+  text-align:center;
+  padding-top: 25px;
+  background: url("../img/icon-arrow-up.png") no-repeat center top;  
+  
+}
+.legend-greyblock{
+  background-color: #D5D5D5;
+  min-height: 25px !important;  
+  min-width: 50px;
+}
+
+.legend{
+  display:none;
+}
+.legend-orange-dot{
+  height:15px;
+  width:15px;
+  margin-left:15px; 
+}
+.legend-orange-line{
+  height:10px;
+  width:50px; 
+}
+.chart-content{
+  padding:20px;
+  font-size: 1.5rem;  
+}
+
+// Leave this media query here. It's special.
+@media only screen and (max-width: 604px) {
+  .legend-orange-dot {
+    margin-left: -35px;
+  }
+  .legend{
+    float:left;
+    padding-right:20px;
+    min-width:50px;
+    min-height: 100px;    
+    display:block;
+    margin-top:25px;
+  }
+  .arrow-above{
+    background:none !important;
+    margin-top: 0px !important;
+    padding-top: 0px !important;
+  }
+} /* END max-width: 605px */

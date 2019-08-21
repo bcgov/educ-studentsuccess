@@ -1,0 +1,148 @@
+@media only screen and (min-width: $desktop) {
+
+  // HEADER
+  #secondary-nav .sub-menu-trigger {
+    display: none;
+  }
+  .secondary-nav-container > li {
+    display: inline-block;
+    margin: 1rem 0.5rem;
+    padding-right: 1rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.5);
+
+    &:first-of-type {
+      margin-left: 0;
+      padding-left: 0;
+    }
+  }
+  #main-dropdown-wrapper {
+    margin-top: 1.25rem;
+  }
+  #header #logo img {
+    padding-left: 0rem;
+  }
+  #header #language-switcher {
+    margin-right: 0;
+  }
+
+  // HOMEPAGE
+  #report-title {
+    /*background: url('../img/happy_people.png') center center no-repeat transparent;*/
+    background-size: 100%;
+  }
+  #hero {
+    background: url(../img/header_image.png) no-repeat center -1px $aqua;
+  }
+
+  #refresh-title{
+    background: url('../img/information-title.png') no-repeat center -150px $aqua;
+    background-size: auto 100%;
+  }
+  .top-stripe{
+    margin: -40px -571px;
+    padding-bottom: 48px;
+  }
+  
+  .bottom-stripe{
+    margin: 0px -571px;
+    padding-top: 1px;
+    padding-bottom: 75px;
+  }
+  
+  #tagline {
+    padding: 3rem 15rem 1rem;
+  }
+  #header #logo img {
+    max-width: 99999999px; // reset
+  }
+  #report-title {
+    padding-top: 39rem;
+  }
+  #main-search-wrapper {
+    width: 80%;
+    margin-bottom: 5rem;
+  }
+  #main-search-button-wrapper {
+
+    .main-search.button {
+
+      &:first-of-type {
+        margin-right: 0.25rem;
+      }
+      &:last-of-type {
+        margin-left: 0.25rem;
+      }
+    }
+  }
+  #clear-search {
+    //MT
+    //bottom: -51px;
+    bottom:-8px;
+    right: 17px;
+  }
+
+  // CHARTS
+  .toc-chart {
+    min-height: 200px;
+  }
+
+  // IMAGES
+  .key-image {
+    margin-left: 1rem;
+  }
+
+  // SD SUB NAV
+  .sd-sub-nav {
+
+    .button {
+      font-size: 1.5rem; 
+      padding: 2rem;
+      margin: 2rem 1rem 0 1rem;
+    }
+  }
+
+  // DIRECTORY SUB MENU/HEADING
+  .directory-masthead {
+    padding-top: 4rem;
+  }
+  #directory-sort-wrapper {
+    //display: inline-block;
+    float: right;
+    margin-top: calc(3rem - 0.5rem); // 0.5rem is the margin-top of the buttons inside this wrapper.
+  }
+  .halfs.search-right.all-districts {
+    margin-top: 8px;
+    border-radius: 1em;
+    width: 49%;
+  }
+  #main-search {
+    display: block;
+    margin: auto;
+    width: 100%;
+  }
+  .main-title {
+    height: auto;
+    width: 55%;
+    padding-top: 64px;
+  }
+  .button-contact {
+    padding: 0px 1rem 8px 1em;
+    background: #036;
+    border: 0;
+    color: white;
+    font-size: 1rem;
+    border-radius: 1rem;
+    text-align: center;
+    display: block;
+    margin: 2.5rem auto 7em auto;
+    vertical-align: middle;
+    min-width: 143px;
+    width: 458px;
+  }
+  #eac-container-main-search {
+    left: -8px;
+    margin-top: 40px;
+    width: 100%;
+}
+
+} // END MEDIA QUERY

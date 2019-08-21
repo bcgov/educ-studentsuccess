@@ -1,0 +1,23 @@
+{
+  "private": true,
+  "name": "esdr2",
+  "version": "2.0.0",
+  "description": "Second version of ARU Enhanced District and School Reporting Site",
+  "dependencies": {
+    "node-artisan": "0.0.1",
+    "node-sass": "^4.10.0",
+    "package.json": "^2.0.1"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.3",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-watch": "^1.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "grunt sass:build"
+  },
+  "author": "EDUC Web Team",
+  "license": "MIT"
+}

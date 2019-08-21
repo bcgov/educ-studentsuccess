@@ -1,0 +1,33 @@
+#table-of-contents {
+  margin-top: 1rem;
+}
+
+.toc-sub-section {
+  display: block;
+}
+
+.toc-chart {
+  padding-bottom: 1rem;
+  display: block;
+
+  a {
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.toc.slide-sub-heading {
+  color: $ministry_blue;
+  margin: 4rem 0 1rem 0;
+}
+
+.toc-chart-thumbnail {
+  width: 100%;
+  height: auto;
+
+  @media screen and (max-width: $tablet) {
+    border-radius: 1rem;
+  }
+}

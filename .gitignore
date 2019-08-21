@@ -1,36 +1,37 @@
-# Packages #
-############
-*.7z
-*.dmg
-*.gz
-*.iso
-*.jar
-*.rar
-*.tar
-*.zip
+# Laravel stuff
+Homestead.yaml
+Homestead.json
+laravel.log
 
-# Logs and databases #
-######################
-*.log
-*.sql
-*.sqlite
+# Cache
+/www/storage
+# Cache files and log files are also stored in /data/* Those directories there have thier own .gitignore files.
 
-# OS generated files #
-######################
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
+# Composer
+/php-bin/vendor
 
-# Build Systems #
-######################
-node_modules/
-bower_components/
-.sass-cache
-*.css.map
-build/
-dist/
-maps/
+# Node for front-end tooling
+/node_modules
+
+# DB credentials and other important things we don't want in source control.
+.env.*
+!.env.example
+.env
+sftp-config.json
+
+# Compiled CSS
+style.css
+style.css.map
+/.sass-cache
+
+# Compiled JS
+bundle.js
+
+# All PDFs
+*.pdf
+
+# Backups
+*.bak
+
+# MS Office tmp files
+workfiles/~*

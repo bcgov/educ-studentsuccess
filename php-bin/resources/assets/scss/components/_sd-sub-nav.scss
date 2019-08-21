@@ -1,0 +1,26 @@
+#report-subtitle {
+  margin-bottom: 1rem; 
+  font-size: 2.75rem;
+
+  @media screen and (min-width: $tablet) {
+    margin-top: -4rem;
+  }
+}
+
+.report-meta {
+  font-size: 1.5rem;
+  padding: 1rem 0;
+}
+
+.sd-sub-nav {
+  padding-top: 1.5rem;
+
+  .button {
+    display: inline-block;
+    min-width: 100%;
+    font-size: 1rem;
+    padding: 1rem;
+    margin: 1rem 0 0.5rem 0;
+    font-size: 1.5rem;
+  }
+}

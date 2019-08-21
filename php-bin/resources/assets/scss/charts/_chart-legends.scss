@@ -1,0 +1,126 @@
+/* CHART LEGEND ***************************************************************/
+
+.chart-legend {
+  margin-top: 1rem !important;
+  margin-bottom: -3px !important;
+}
+
+.typical-range, .selected-districts, .range-of-districts { 
+  display: flex; 
+  margin-bottom: 5px;
+
+  @media screen and (min-width: $desktop) {
+    margin-bottom: 2px;
+  } 
+} 
+
+.typical-range-graphic, .selected-districts-graphic, .range-of-districts-graphic { 
+  flex: 1; 
+}
+
+.legend-desc {
+  flex: 6;
+  min-height: 33px;
+  padding-left: 9px;
+  font-size: 1.5rem;
+  color: #666;
+
+  @media screen and (min-width: $tablet) {
+    min-height: 29px;
+    font-size: 2rem;
+  }
+
+  @media screen and (min-width: $desktop) {
+    min-height: 27px;
+    flex: 14;
+    font-size: 133%;
+  }
+}
+
+.typical-range .legend-desc {
+  top: -2px;
+  position: relative;
+}
+
+.typical-range-graphic {
+  background-color: #d7d7d7;
+}
+
+.selected-districts-graphic {
+  background: url(/img/chart-legend-orange-dot.png) center center no-repeat;
+  background-size: 63%;
+
+  @media screen and (min-width: $tablet) {
+    background-size: 35%;
+  }
+}
+
+.range-of-districts-graphic {
+  border-top: 8px solid #f18c29;
+  margin-top: 5px;
+
+  @media screen and (min-width: $tablet) {
+    margin-top: 7px;
+  }
+}
+
+/* FSA CHART LEGEND ***********************************************************/
+
+.fsa_chart_legend {
+  font-size: 1.25rem;
+  display: flex;
+  margin-bottom: 3rem;
+}
+
+.fsa_chart_item {
+  flex: 1;
+  padding: 0.5rem;
+
+  &:first-of-type {
+    padding-left: 0;
+  }
+
+  &:last-of-type {
+    padding-right: 0;
+  }
+}
+
+.fsa_chart_color {
+  height: 50px;
+
+  &.first {
+    background-color: #D9D9D9;
+  }
+  &.second {
+    background-color: #B9CAFF;
+  }
+  &.third {
+    background-color: #EAC84B;
+  }
+
+  @media only screen and (min-width: $tablet) {
+    max-width: 100px;
+  }
+
+  @media only screen and (min-width: $desktop) {
+    display: inline-block;
+    width: 33%;
+    max-width: 999999px;
+  }
+}
+
+.fsa_chart_copy {
+  vertical-align: top;
+  padding-top: 0.5rem;
+
+  @media only screen and (min-width: $tablet) {
+    padding-top: 1rem;  
+  }
+
+  @media only screen and (min-width: $desktop) {
+    display: inline-block;
+    width: 66%;
+    padding-left: 7px;
+    padding-top: 0;
+  }
+}
