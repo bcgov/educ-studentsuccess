@@ -167,7 +167,7 @@ $btn-hover-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0
 @media only screen and (min-width : 768px) {
 
   body{
-    background-position: 4vw 550px, 82vw 1250px , bottom 260px left 4vw;
+    background-position: 4vw 600px, 82vw 1300px , bottom 240px left 4vw;
   }
 
   .section_header ~ p {
@@ -291,9 +291,29 @@ body {
       padding: 0;
       box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.1);
       top: 105px;
+      z-index: 2;
+
       a {
         display: inline-block;
         position: relative;
+      }
+
+      a:after {
+        background: none repeat scroll 0 0 transparent;
+        bottom: 0;
+        content: "";
+        display: block;
+        height: 2px;
+        left: 50%;
+        position: absolute;
+        background: $cta-gradient;
+        transition: width 0.3s ease 0s, left 0.3s ease 0s;
+        width: 0;
+      }
+
+      a:hover::after, a.active::after{
+        width: 100%;
+        left: 0;
       }
 
       .navbar-toggler {
@@ -349,27 +369,12 @@ body {
 
       .navbar-nav {
 
+        margin: 0 auto;
+       text-align: center;
+
         .nav-link,
         .nav-link:hover {
           color: $nav-color;
-        }
-
-        a:after {
-          background: none repeat scroll 0 0 transparent;
-          bottom: 0;
-          content: "";
-          display: block;
-          height: 2px;
-          left: 50%;
-          position: absolute;
-          background: $cta-gradient;
-          transition: width 0.3s ease 0s, left 0.3s ease 0s;
-          width: 0;
-        }
-
-        a:hover:after, a.active:after{
-          width: 100%;
-          left: 0;
         }
       }
 

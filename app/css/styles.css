@@ -7103,7 +7103,7 @@ a.text-dark:hover, a.text-dark:focus {
 /* Small Devices, Tablets */
 @media only screen and (min-width: 768px) {
   body {
-    background-position: 4vw 550px, 82vw 1250px , bottom 260px left 4vw; }
+    background-position: 4vw 600px, 82vw 1300px , bottom 240px left 4vw; }
   .section_header ~ p {
     font-size: 1.6rem; }
   #intro {
@@ -7169,10 +7169,25 @@ html {
       font-size: 14px;
       padding: 0;
       box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.1);
-      top: 105px; }
+      top: 105px;
+      z-index: 2; }
       html body #enrolment_subnav .navbar a {
         display: inline-block;
         position: relative; }
+      html body #enrolment_subnav .navbar a:after {
+        background: none repeat scroll 0 0 transparent;
+        bottom: 0;
+        content: "";
+        display: block;
+        height: 2px;
+        left: 50%;
+        position: absolute;
+        background: linear-gradient(90deg, #2cc7c0, #59d99d);
+        transition: width 0.3s ease 0s, left 0.3s ease 0s;
+        width: 0; }
+      html body #enrolment_subnav .navbar a:hover::after, html body #enrolment_subnav .navbar a.active::after {
+        width: 100%;
+        left: 0; }
       html body #enrolment_subnav .navbar .navbar-toggler {
         padding: 0; }
       html body #enrolment_subnav .navbar .icon {
@@ -7206,23 +7221,12 @@ html {
       html body #enrolment_subnav .navbar .open .bottom {
         transform: rotate(-45deg);
         top: 48%; }
-      html body #enrolment_subnav .navbar .navbar-nav .nav-link,
-      html body #enrolment_subnav .navbar .navbar-nav .nav-link:hover {
-        color: #5091CD; }
-      html body #enrolment_subnav .navbar .navbar-nav a:after {
-        background: none repeat scroll 0 0 transparent;
-        bottom: 0;
-        content: "";
-        display: block;
-        height: 2px;
-        left: 50%;
-        position: absolute;
-        background: linear-gradient(90deg, #2cc7c0, #59d99d);
-        transition: width 0.3s ease 0s, left 0.3s ease 0s;
-        width: 0; }
-      html body #enrolment_subnav .navbar .navbar-nav a:hover:after, html body #enrolment_subnav .navbar .navbar-nav a.active:after {
-        width: 100%;
-        left: 0; }
+      html body #enrolment_subnav .navbar .navbar-nav {
+        margin: 0 auto;
+        text-align: center; }
+        html body #enrolment_subnav .navbar .navbar-nav .nav-link,
+        html body #enrolment_subnav .navbar .navbar-nav .nav-link:hover {
+          color: #5091CD; }
       html body #enrolment_subnav .navbar button {
         border: none; }
       html body #enrolment_subnav .navbar .navbar-brand {
