@@ -7019,40 +7019,30 @@ a.text-dark:hover, a.text-dark:focus {
   .table .thead-dark th {
     color: inherit;
     border-color: #dee2e6; } }
-  
-    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-      /* IE10+ CSS styles go here */
-      html body #aniContainer #animationMap .svg-content {
-        width: 600px;
-        height: 400px; }
 
-      html body #enrolment_model #modelContainer .svg-content {
-        width: 600px;
-        height: 400px; }
-
-      html body #demographics #demo_container .svg-content {
-        width: 600px;
-        height: 400px; }
-        
-      html body #transition #transition_container .svg-content {
-        width: 600px;
-        height: 400px; }
-
-      html body #retention #retention_container .svg-content {
-        width: 600px;
-        height: 400px; }
-
-      html body #school_graph #independent_school_icon{
-        width: 80%;
-      }
-    
-      html body #school_graph #public_school_icon{
-        width: 80%;
-      }
-      
-      html body #retention .isometric_img{
-        width: 100%;
-      }}
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  /* IE10+ CSS styles go here */
+  html body #aniContainer #animationMap .svg-content {
+    width: 600px;
+    height: 400px; }
+  html body #enrolment_model #modelContainer .svg-content {
+    width: 600px;
+    height: 400px; }
+  html body #demographics #demo_container .svg-content {
+    width: 600px;
+    height: 400px; }
+  html body #transition #transition_container .svg-content {
+    width: 600px;
+    height: 400px; }
+  html body #retention #retention_container .svg-content {
+    width: 600px;
+    height: 400px; }
+  html body #school_graph #independent_school_icon {
+    width: 80%; }
+  html body #school_graph #public_school_icon {
+    width: 80%; }
+  html body #retention .isometric_img {
+    width: 100%; } }
 
 /* Extra Small Devices, Phones */
 @media only screen and (min-width: 320px) {
@@ -7862,6 +7852,8 @@ html {
           color: #494949; }
     html body #demographics #demo_control #demo_radio div {
       margin: 1rem 0; }
+    html body #demographics #demo_control .modal-header button span {
+      font-size: 3rem; }
     html body #demographics #demo_control .modal-body {
       display: grid;
       grid-template-columns: repeat(4, 1.2fr);
@@ -7870,6 +7862,7 @@ html {
       html body #demographics #demo_control .modal-body .checkbox span {
         vertical-align: middle;
         margin-left: 0.3em;
+        font-size: 1.2rem;
         cursor: pointer; }
       html body #demographics #demo_control .modal-body .checkbox .demo_checkbox {
         -webkit-appearance: none;
@@ -7905,6 +7898,7 @@ html {
       margin-right: auto;
       font-weight: bold;
       color: #5091CD;
+      font-size: 1.6rem;
       cursor: pointer; }
     html body #transition #trans_control #trans_slider {
       fill: #494949;

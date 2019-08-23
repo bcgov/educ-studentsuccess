@@ -1331,6 +1331,14 @@ body {
           margin: 1rem 0;
         }
     }
+
+    .modal-header{
+      button{
+        span{
+          font-size: 3rem;
+        }
+      }
+    }
     
     .modal-body{
       display: grid;
@@ -1342,6 +1350,7 @@ body {
       span{
         vertical-align: middle;
         margin-left: 0.3em;
+        font-size: 1.2rem;
         cursor: pointer;
       }
       .demo_checkbox{
@@ -1388,6 +1397,7 @@ body {
         margin-right: auto;
         font-weight: bold;
         color: $nav-color;
+        font-size: 1.6rem;
         cursor: pointer;
       }
   }
