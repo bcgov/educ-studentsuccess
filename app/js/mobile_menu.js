@@ -1,23 +1,13 @@
 $(document).ready(function() {
-  let jsTranslations = {};
-  jsTranslations.open_trigger = 'Open';
-  jsTranslations.close_trigger = 'Close';
-
-
-  // Secondary nav on small screens
-  $('.sub-menu-trigger').click(function(){
-    if ($('#secondary-nav').hasClass('contracted')) {
-      $('#secondary-nav').removeClass('contracted').addClass('expanded');
-      $(this).html(jsTranslations.close_trigger + ' <i class="fas fa-caret-up" aria-hidden="true"></i>');
-    } else if ($('#secondary-nav').hasClass('expanded')) {
-      $('#secondary-nav').removeClass('expanded').addClass('contracted');
-      $(this).html(jsTranslations.open_trigger + ' <i class="fas fa-caret-down" aria-hidden="true"></i>');
-    }
-  });
 
 $('.icon').on('click', function() {
   $(this).toggleClass('open');
 });
+
+$('#enrolment_subnav .nav-link').on('click', function() {
+  $('#enrolment_subnav .nav-link').attr('class','nav-link');
+  this.classList.add('active');
+})
 
 $(document).on('click', function(et) {
   //if you click on anything except the dropdown itself, close the dropdown

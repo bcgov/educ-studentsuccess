@@ -87,7 +87,7 @@ $(document).ready(function () {
   .attr("viewBox", "0 0 600 400") //define the aspect ratio, the inner scaling of object lengths and coordinates
   .attr('class', 'svg-content');
   var demo_chartGroup = demo_svg.append('g').attr('class', 'chartGroup').attr("transform", "translate(" + demo_margin.left + "," + demo_margin.top + ")");
-  var legendContainer = d3.select('#demo_legend').append('svg').attr('height', '160px').append('g').attr('class', 'legendContainer');
+  var legendContainer = d3.select('#demo_legend').append('svg').attr('width', 'auto').attr('height', '160px').append('g').attr('class', 'legendContainer');
   d3.csv('./assets/raw_data/demographics.csv', function (error, data) {
     if (error) {
       throw error;
