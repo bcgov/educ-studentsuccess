@@ -7019,6 +7019,40 @@ a.text-dark:hover, a.text-dark:focus {
   .table .thead-dark th {
     color: inherit;
     border-color: #dee2e6; } }
+  
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      /* IE10+ CSS styles go here */
+      html body #aniContainer #animationMap .svg-content {
+        width: 600px;
+        height: 400px; }
+
+      html body #enrolment_model #modelContainer .svg-content {
+        width: 600px;
+        height: 400px; }
+
+      html body #demographics #demo_container .svg-content {
+        width: 600px;
+        height: 400px; }
+        
+      html body #transition #transition_container .svg-content {
+        width: 600px;
+        height: 400px; }
+
+      html body #retention #retention_container .svg-content {
+        width: 600px;
+        height: 400px; }
+
+      html body #school_graph #independent_school_icon{
+        width: 80%;
+      }
+    
+      html body #school_graph #public_school_icon{
+        width: 80%;
+      }
+      
+      html body #retention .isometric_img{
+        width: 100%;
+      }}
 
 /* Extra Small Devices, Phones */
 @media only screen and (min-width: 320px) {
@@ -7063,7 +7097,7 @@ a.text-dark:hover, a.text-dark:focus {
     background-image: url(../assets/img/bg_img1.svg), url(../assets/img/bg_img2.svg), url(../assets/img/bg_img4.svg);
     background-size: 8% auto, 14% auto, 10% auto;
     background-repeat: no-repeat, no-repeat, no-repeat;
-    background-position: 4vw 12%, 82vw 25% , 4vw 94%;
+    background-position: 4vw 750px, 82vw 1650px, 4vw 6750px;
     background-attachment: scroll, scroll, scroll; }
   h2 {
     font-size: 3.2rem; }
@@ -7078,6 +7112,8 @@ a.text-dark:hover, a.text-dark:focus {
 
 /* Small Devices, Tablets */
 @media only screen and (min-width: 768px) {
+  body {
+    background-position: 4vw 550px, 82vw 1250px , bottom 260px left 4vw; }
   .section_header ~ p {
     font-size: 1.6rem; }
   #intro {
@@ -7113,7 +7149,7 @@ a.text-dark:hover, a.text-dark:focus {
 /* extra large Devices, Desktops */
 @media only screen and (min-width: 1280px) {
   body {
-    background-position: 4vw 10%, 82vw 23% , 4vw 96%; }
+    background-position: 4vw 550px, 82vw 1350px , 4vw 5850px; }
   h2 {
     font-size: 3.8rem; }
   h3 {
@@ -7139,22 +7175,22 @@ html {
       text-decoration: none; }
     html body .nav-bg {
       background: rgba(255, 255, 255, 0.9); }
-    html body .navbar {
+    html body #enrolment_subnav .navbar {
       font-size: 14px;
       padding: 0;
       box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.1);
       top: 105px; }
-      html body .navbar a {
+      html body #enrolment_subnav .navbar a {
         display: inline-block;
         position: relative; }
-      html body .navbar .navbar-toggler {
+      html body #enrolment_subnav .navbar .navbar-toggler {
         padding: 0; }
-      html body .navbar .icon {
+      html body #enrolment_subnav .navbar .icon {
         width: 24px;
         height: 24px;
         position: relative;
         cursor: pointer; }
-        html body .navbar .icon .line {
+        html body #enrolment_subnav .navbar .icon .line {
           position: absolute;
           left: 0;
           transform: transition(-15px);
@@ -7163,27 +7199,27 @@ html {
           background: #003663;
           border-radius: 2px;
           transition: all cubic-bezier(0.26, 0.1, 0.27, 1.55) 0.35s; }
-        html body .navbar .icon .top {
+        html body #enrolment_subnav .navbar .icon .top {
           top: 18%; }
-        html body .navbar .icon .middle {
+        html body #enrolment_subnav .navbar .icon .middle {
           top: 48%;
           left: 25%;
           width: 50%; }
-        html body .navbar .icon .bottom {
+        html body #enrolment_subnav .navbar .icon .bottom {
           top: 78%; }
-      html body .navbar .open .top {
+      html body #enrolment_subnav .navbar .open .top {
         transform: rotate(45deg);
         top: 48%; }
-      html body .navbar .open .middle {
+      html body #enrolment_subnav .navbar .open .middle {
         display: none; }
-      html body .navbar .open .middle,
-      html body .navbar .open .bottom {
+      html body #enrolment_subnav .navbar .open .middle,
+      html body #enrolment_subnav .navbar .open .bottom {
         transform: rotate(-45deg);
         top: 48%; }
-      html body .navbar .navbar-nav .nav-link,
-      html body .navbar .navbar-nav .nav-link:hover {
+      html body #enrolment_subnav .navbar .navbar-nav .nav-link,
+      html body #enrolment_subnav .navbar .navbar-nav .nav-link:hover {
         color: #5091CD; }
-      html body .navbar .navbar-nav a:after {
+      html body #enrolment_subnav .navbar .navbar-nav a:after {
         background: none repeat scroll 0 0 transparent;
         bottom: 0;
         content: "";
@@ -7194,12 +7230,12 @@ html {
         background: linear-gradient(90deg, #2cc7c0, #59d99d);
         transition: width 0.3s ease 0s, left 0.3s ease 0s;
         width: 0; }
-      html body .navbar .navbar-nav a:hover:after, html body .navbar .navbar-nav a.active:after {
+      html body #enrolment_subnav .navbar .navbar-nav a:hover:after, html body #enrolment_subnav .navbar .navbar-nav a.active:after {
         width: 100%;
         left: 0; }
-      html body .navbar button {
+      html body #enrolment_subnav .navbar button {
         border: none; }
-      html body .navbar .navbar-brand {
+      html body #enrolment_subnav .navbar .navbar-brand {
         color: #003663;
         font-size: 1rem; }
     html body .section_header {
