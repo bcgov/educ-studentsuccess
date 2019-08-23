@@ -22,69 +22,6 @@ $btn-hover-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0
 //Bootstrap sass files
 @import"node_modules/bootstrap/scss/bootstrap";
 
-/* student success */
-@media only screen and (min-width: 320px){
-.restrain {
-    max-width: 320px;
-  }
-  #secondary-nav {
-    top: 70px;
-  }
-
-  .secondary-nav-container>li:first-of-type {
-    margin-top: 10px;
-}
-
-  .secondary-nav-container>li {
-    margin-bottom: 10px;
-    display: block;
-  }
-
-}
-
-@media only screen and (min-width: 605px){
-  .restrain {
-      max-width: 600px;
-  }
-      #logo {
-        padding-left: 0;
-      }
-      #language-switcher {
-        float: right;
-      }
-
-      #secondary-nav {
-        top: 70px;
-        height: initial;
-
-        .secondary-nav-container>li:first-of-type {
-          margin-left: 0;
-          padding-left: 0;
-        }
-      }
-    
-  }
-
-@media only screen and (min-width: 1030px){
-    .restrain {
-        max-width: 1030px;
-      }
-
-    #secondary-nav{
-      height: 38px !important;
-     .sub-menu-trigger {
-        display: none;
-    }
-      .secondary-nav-container>li {
-        display: inline-block;
-        margin: 10px 5px;
-        padding-left: 5px;
-        padding-right: 10px;
-        border-right: 1px solid rgba(255,255,255,0.5);
-    }
-  }
-  }
-
 /* Extra Small Devices, Phones */ 
 @media only screen and (min-width : 320px) {
 
@@ -93,7 +30,11 @@ $btn-hover-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0
   }
 
   h2{
-    font-size: 1.75rem;
+    font-size: 2.8rem;
+  }
+
+  h3{
+    font-size: 2.2rem;
   }
 
   h5{
@@ -115,14 +56,16 @@ $btn-hover-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0
   #intro{
     text-align: center;
     p, .ctaBtn, .ctaGhost {
-      font-size: 1rem;
+      font-size: 1.6rem;
     }
     .cta_container{
       justify-content: center;
     }
     .gradient_para {
-      font-size: 14px;
+      margin: 4vw auto 0 auto;
+      font-size: 1.4rem;
     }
+
   } 
 
     #model_control, #demo_control, #flow_control{
@@ -152,7 +95,6 @@ $btn-hover-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0
       bottom: 3rem !important;
     }
   }
-
 }
 
 @media only screen and (min-width : 480px) {
@@ -161,17 +103,25 @@ $btn-hover-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0
     background-image: url(../assets/img/bg_img1.svg), url(../assets/img/bg_img2.svg), url(../assets/img/bg_img4.svg);
     background-size:8% auto, 14% auto, 10% auto;
     background-repeat: no-repeat, no-repeat, no-repeat;
-    background-position: 4vw 12%, 82vw 24% , 4vw 92%;
+    background-position: 4vw 12%, 82vw 25% , 4vw 94%;
     background-attachment: scroll, scroll, scroll;
   }
 
   h2{
-    font-size: 2rem;
+    font-size: 3.2rem;
+  }
+
+  h3{
+    font-size: 2.8rem;
   }
 
   h5{
-    font-size: 1.25rem;
+    font-size: 2rem;
   }
+
+  .section_header ~ p {
+    font-size: 1.4rem; 
+ }
 
   #flow_legend{
     img {
@@ -182,6 +132,30 @@ $btn-hover-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px) {
 
+  .section_header ~ p {
+    font-size: 1.6rem; 
+ }
+
+ #intro{
+  text-align: left;
+
+    p{
+      font-size: 1.6rem;
+    } 
+    
+    .ctaBtn, .ctaGhost {
+      font-size: 1.5rem;
+    }
+
+  .cta_container{
+    justify-content: flex-start;
+  }
+
+  .gradient_para {
+    font-size: 1.6rem;
+  }
+}
+
   .section_header{
     margin-bottom: 3vw;
   }
@@ -190,24 +164,7 @@ $btn-hover-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0
     margin-bottom: 4vw;
   }
 
-  #intro{
-    text-align: left;
-
-    p, .ctaBtn, .ctaGhost {
-      font-size: 1rem;
-    }
-
-    .cta_container{
-      justify-content: flex-start;
-    }
-
-    .gradient_para {
-      font-size: 1rem;
-    }
-  }
-
-  
-    #model_control, #demo_control, #flow_control{
+   #model_control, #demo_control, #flow_control{
       text-align: left;
     }
   
@@ -248,188 +205,37 @@ $btn-hover-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0
 @media only screen and (min-width : 1280px) {
   
   body{
-    background-position: 4vw 10%, 82vw 22% , 4vw 93%;
+    background-position: 4vw 10%, 82vw 23% , 4vw 96%;
   }
   
   h2{
-    font-size: 2.8rem;
+    font-size: 3.8rem;
   }
 
   h3{
-    font-size: 2rem;
+    font-size: 3.2rem;
   }
 
   #intro{
     p, .ctaBtn, .ctaGhost {
-      font-size: 18px;
+      font-size: 1.8rem;
     }
  }
 
   .section_header ~ p {
-    font-size: 18px; 
+    font-size: 1.8rem; 
  }
 
 }
 
-/* Webfont: BCSans-Bold */
-// @font-face {
-//   font-family: 'BCSans';
-//   src: url('../assets/fonts/BCSans-Regular.eot'); /* IE9 Compat Modes */
-//   src: url('../assets/fonts/BCSans-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-//        url('../assets/fonts/BCSans-Regular.woff') format('woff'), /* Modern Browsers */
-//        url('../assets/fonts/BCSans-Regular.ttf') format('truetype'); /* Safari, Android, iOS */
-//            font-style: normal;
-//   font-weight: normal;
-//   text-rendering: optimizeLegibility;
-// }
-
 html {
     scroll-behavior: smooth;
+    font-size: 10px;
 
 body {
   background-color: $body-bg;
-  font-family: Myriad-Pro, Calibri, Arial, 'sans serif';
-  line-height: 1.6;
+  font-family: Calibri, Arial, 'sans serif';
   color: $font-color;
-
- 
-
-  /*********student success**********/
-  #header{ 
-    background: #003366;
-    border-bottom: 2px solid #fcba19;
-    position: fixed;
-    height: 70px;
-    width: 100%;
-    z-index: 99;
-    top: 0;
-
-      #logo{
-        float: left;
-        padding-left: 5px;
-        img{
-          max-width: 100%;
-          vertical-align: middle;
-        }
-    }
-
-    #language-switcher {
-      padding-top: 1rem;
-      margin-right: 5px;
-      text-align: right;
-
-      a{
-        color: white;
-      }
-
-      a.active{
-        font-weight:bold;
-      }
-    }
-  }
-
-  .restrain{
-    margin: auto;
-    display: block;
-    clear: both;
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-
-  .contracted {
-    height: 35px !important;
-  }
-  
-  .expand {
-      margin-top: 10px;
-  }
-
-
-#secondary-nav {
-  position: fixed;
-  top: 70px;
-  display: block;
-  background-color: #38598a;
-  width: 100%;
-  box-shadow: 0px 3px 3px 1px rgba(51,51,51,0.5);
-  z-index: 99;
-  overflow: hidden;
-  height: 270px;
-  -webkit-transition: all 0.125s linear;
-  -moz-transition: all 0.125s linear;
-  -ms-transition: all 0.125s linear;
-  -o-transition: all 0.125s linear;
-  transition: all 0.125s linear;
-
-    .sub-menu-trigger {
-      color: white;
-      padding-left: 5px;
-      cursor: pointer;
-
-      .fa {
-        display: inline-block;
-        font: normal normal normal 14px/1 FontAwesome;
-        font-size: inherit;
-        text-rendering: auto;
-      }
-   }
-
-   .secondary-nav-container{
-     font-size: 13px;
-     .secondary-nav-link:hover {
-      text-decoration: underline;
-  }
-     a{
-    color: white !important;
-     }
-   }
-      
-}
-
-#footer-bar-thing {
-  background: #4b91cd;
-  height: 70px;
-
-    .some-links {
-      position: relative;
-      font-size: 250%;
-      .some-link {
-        padding-right: 10px;
-        color: #036;
-        text-decoration: none;
-    }
-  }
-}
-
-#footer {
-  background: #003366;
-  border-top: 2px solid #fcba19;
-  min-height: 179px;
-    nav ul {
-      color: #fff;
-      padding: 0;
-      padding-top: 20px;
-    
-      li:last-of-type {
-        border-right: 0;
-    }
-    
-    li {
-        list-style: none;
-        padding: 1px 5px;
-        display: inline-block;
-        border-right: 1px solid rgba(255,255,255,0.3);
-    }
-  }
-
-}
-
-
-
-
-/********student success*********/
-
-  
   div:focus, button:focus {outline:none;}
 
   a,
@@ -522,7 +328,7 @@ body {
         width: 0;
       }
 
-      a:hover:after{
+      a:hover:after, a.active:after{
         width: 100%;
         left: 0;
       }
@@ -562,9 +368,10 @@ body {
 
   .ghostBtn{
     display: inline-block;
-    padding: 0.5rem 1rem;
+    font-size: 1.8rem;
+    padding: 1rem 1.6rem !important;
     border: 2px solid $btn-color;
-    border-radius: 0.3rem;
+    border-radius: 0.4rem !important;
     background: #fff;
     color: $btn-color;
     cursor: pointer;
@@ -581,8 +388,9 @@ body {
 
   .flatBtn{
     display: inline-block;
-    padding: 0.5rem 1rem;
-    border-radius: 0.3rem;
+    font-size: 1.8rem;
+    padding: 1rem 1.6rem !important;
+    border-radius: 0.4rem !important;
     border: 2px solid $btn-color;
     color: #fff;
     background: $btn-color;
@@ -602,6 +410,7 @@ body {
     color: $body-bg; 
     border: none;  
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05);
+    padding: 0.8rem 1.6rem;
   }
 
   .ctaBtn:hover {
@@ -616,6 +425,7 @@ body {
     border: 1px solid $cta-ghost;
     background: transparent; 
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05);
+    padding: 0.8rem 1.6rem;
   }
 
   .ctaGhost:hover{
@@ -678,7 +488,7 @@ body {
   z-index:10;
   top:2em;
   border-radius: 5px;
-  width:10em;
+  width:16rem;
   background: white;
   opacity: 0.9;
   pointer-events: inherit;
@@ -764,7 +574,7 @@ body {
 }
 
 .axis_label {
-  font-size: 0.8rem;
+  font-size: 1.4rem;
   fill: $font-color;
   opacity: 0.5;
 }
@@ -774,6 +584,12 @@ body {
 /*********sections********/
 #intro, #enrolment_model, #demographics, #migration_overview, #flow_map, #transition, #retention {
   margin-bottom: 9vw;
+    div[class^='col'] {
+      padding: 0 15px;
+  }
+  div.dropDown>span, label, #demoModal_msg, .chart_legend, .list {
+    font-size: 1.6rem;
+  }
 }
 
   #enrolment_model::before, #demographics::before, #migration_overview::before, #transition::before, #retention::before, #booklet::before {
@@ -785,7 +601,11 @@ body {
 
 
   #intro {
-    margin-top: 9rem;
+    margin-top: 15rem;
+
+  a.fte_defin {
+    color: $nav-color;
+  }
 
     .intro_header{
       color:$home-color;
@@ -799,7 +619,6 @@ body {
     .gradient_para{
       max-width: 450px;
       padding: 4px 15px;
-      margin-top: 4vw;
       display: block;
       color: white;
       font-weight: 500;
@@ -844,6 +663,7 @@ body {
     margin-bottom: 1.5rem;
     h5{
       font-weight: bold;
+      font-size: 2rem;
     }
   }
 
@@ -958,7 +778,7 @@ body {
   
        #ani_year {
          font-weight: bold;
-         font-size: 1.6rem;
+         font-size: 2.6rem;
          color: $btn-color;
          vertical-align: middle;
        }
@@ -1038,6 +858,7 @@ body {
       h6{
         color:$btn-color;
         font-weight: bold;
+        font-size: 1.6rem;
       }
 
       #flow_switch {
@@ -1088,9 +909,9 @@ body {
 
       .flowBtn {
         font-size: 14px;
-        margin-right: 0.5rem;
-        padding: 0.25rem 0.5rem;
-        width: 4.5rem;
+        margin-right: 0.8rem;
+        padding: 0.4rem 0.8rem;
+        width: 8rem;
         border: 2px solid $btn-color;
         border-radius: 50px;
         background: none;
@@ -1252,14 +1073,11 @@ body {
   // interactive bar+line graph
   #enrolment_model {
     
-
       #model_distDropdown.active{
         .list{
           max-height: 240px;
         }
     }
-
-    
 
     #modelContainer {
       display: inline-block;
@@ -1270,7 +1088,7 @@ body {
 
       .svg-content {
 
-        .legend {
+        .chart_legend {
           font-size: 9px;
       }
 
@@ -1319,9 +1137,9 @@ body {
     .modeltt_rect {
       position: absolute;
       z-index:10;
-      top:2em;
+      top:2rem;
       border-radius: 5px;
-      width:8em;
+      width:12rem;
       background: white;
       opacity: 0.9;
       pointer-events: none;
@@ -1332,14 +1150,14 @@ body {
         background: $tooltip-bg;
         font-weight: bold;
         font-style: italic;
-        font-size: 12px;
+        font-size: 14px;
         border-radius: 5px 5px 0 0;
       }
 
       .tipInfo {
         margin-left: 5px;
         color:$tooltip-bg;
-        font-size:12px;
+        font-size:14px;
         .tipNum{
           color:$font-color;
         }
@@ -1390,6 +1208,7 @@ body {
     #distName{
       color: $home-color;
       font-weight: bold;
+      font-size: 2.4rem;
     }
 
 }
@@ -1437,9 +1256,9 @@ body {
         .demott_rect {
           position: absolute;
           z-index:10;
-          top:2em;
+          top:2rem;
           border-radius: 5px;
-          width:8em;
+          width:12rem;
           background: white;
           opacity: 0.9;
           pointer-events: none;
@@ -1450,14 +1269,14 @@ body {
             background: $tooltip-bg;
             font-weight: bold;
             font-style: italic;
-            font-size: 14px;
+            font-size: 16px;
             border-radius: 5px 5px 0 0;
           }
 
           .tipInfo {
             margin-left: 5px;
             color:$tooltip-bg;
-            font-size:12px;
+            font-size:14px;
             .tipNum{
               color:$font-color;
             }
@@ -1467,6 +1286,12 @@ body {
   }
 
   #demo_control{
+
+    #demo_radio {
+        div {
+          margin: 1rem 0;
+        }
+    }
     
     .modal-body{
       display: grid;
@@ -1560,6 +1385,9 @@ body {
 
     #school_graph {
       display: flex;
+      h6 {
+        font-size: 1.6rem;
+      }
 
       #trans_rate{
         max-width: 200px;
@@ -1577,6 +1405,7 @@ body {
           right: 0;
           color:#4EBDEB;
           font-weight: bold;
+          font-size: 1.6rem;
         }
         
         #ind_to_pub {
@@ -1586,6 +1415,7 @@ body {
           bottom: 3vw;
           color:#D42D75;
           font-weight: bold;
+          font-size: 1.6rem;
         }
       }
     }
@@ -1600,7 +1430,7 @@ body {
     }
 
     .trans_top5_label{
-      font-size: 10px;
+      font-size: 12px;
       fill: $font-color;
       pointer-events: none;
     }
@@ -1623,10 +1453,11 @@ body {
 
     #trans_tt{
       .trans_link{
-        margin: 0.5rem;
-        line-height: 1rem;
+        margin: 0.8rem;
+        line-height: 1.6rem;
         .ssLink{
         font-size: 14px;
+        color: $nav-color;
       }
     }
     }
@@ -1640,6 +1471,7 @@ body {
   .controlSelection {
     margin-bottom: 0;
   }
+
   #retention_distDropdown.active{
     .list{
       max-height: 240px;
@@ -1696,9 +1528,9 @@ body {
     .retentiontt_rect {
       position: absolute;
       z-index:10;
-      top:8em;
+      top:8rem;
       border-radius: 5px;
-      width:8em;
+      width:12rem;
       background: white;
       opacity: 0.9;
       pointer-events: none;
@@ -1709,14 +1541,14 @@ body {
         background: $tooltip-bg;
         font-weight: bold;
         font-style: italic;
-        font-size: 12px;
+        font-size: 16px;
         border-radius: 5px 5px 0 0;
       }
 
       .tipInfo {
         margin-left: 5px;
         color:$tooltip-bg;
-        font-size:10px;
+        font-size:14px;
         .tipNum{
           color:$font-color;
         }
@@ -1730,47 +1562,8 @@ body {
 
     .ctaBtn{
       margin-top: 2.5vw;
+      font-size: 2rem;
     }
   }
-
-  .footer-img{
-    display: block;
-    width: calc(100%) !important;
-    height:auto;
-  }
-
-  footer {
-    background-color: $footer-color;
-    color: white;
-
-    a,
-    a:hover {
-      text-decoration: none;
-      color: white;
-    }
-
-    .container{
-      display: flex;
-
-    #footer-logo {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-
-      
-    .bc_logo {
-      max-width: 120px;
-      height: auto;
-    }
-
-      p.copyright {
-        display: inline-block;
-        font-size: 10px;
-      }
-    }
-
-  }
-
-  }
-}
+ }
 }
