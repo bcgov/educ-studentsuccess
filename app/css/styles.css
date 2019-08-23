@@ -7103,7 +7103,7 @@ a.text-dark:hover, a.text-dark:focus {
 /* Small Devices, Tablets */
 @media only screen and (min-width: 768px) {
   body {
-    background-position: 4vw 600px, 82vw 1300px , bottom 240px left 4vw; }
+    background-position: 4vw 600px, 82vw 1300px , 4vw 4850px; }
   .section_header ~ p {
     font-size: 1.6rem; }
   #intro {
@@ -7137,9 +7137,9 @@ a.text-dark:hover, a.text-dark:focus {
     bottom: 3vw !important; } }
 
 /* extra large Devices, Desktops */
-@media only screen and (min-width: 1280px) {
+@media only screen and (min-width: 1200px) {
   body {
-    background-position: 4vw 550px, 82vw 1350px , 4vw 5850px; }
+    background-position: 4vw 550px, 82vw 1350px , 4vw 5650px; }
   h2 {
     font-size: 3.8rem; }
   h3 {
