@@ -15,13 +15,13 @@ laravel.log
 
 # DB credentials and other important things we don't want in source control.
 .env.*
-!.env.example
+.env.example
 .env
 sftp-config.json
 
 # Compiled CSS
-#style.css
-#style.css.map
+style.css
+style.css.map
 /.sass-cache
 
 # Compiled JS

@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="description" content="{{ trans('esdr2.meta_desc') }}">
   <meta name="keywords" content="bc, education, performance, schools, british columbia">
-
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>{{ trans('esdr2.site_title') }} - @yield('subtitle')</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">

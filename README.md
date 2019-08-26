@@ -37,18 +37,6 @@ cd ..
 grunt
 ```
 
-### Database Credentials, Enviroment Variables and the `.env` File
-
-Copy and rename the `php-bin/.env.example` file to `php-bin/.env`. Open `.env` and adjust any values that need to be set for your local enviroment.
-
-The database connection information can probably stay the same as the front-end only reads (doesn't write) from a single database.
-
-The `.env` is a special file with passwords and credentials. **Do not commit it to source control.**
-
-The `.env` file needs to be changed to suit each enviroment/server that the app sits on. Do not overwrite this file with your local copy when saving/uploading files to the server. Make sure to set the `APP_ENV` variable for each enviroment.
-
-`php-bin/config/oracle.php` also contains database connection information, but NOT the password.
-
 ### OCI Installation (aka Oracle Hell)
 
 I would have rather eaten 10 spiders in my sleep than figure out the installation of the PHP Oracle drivers for this project.

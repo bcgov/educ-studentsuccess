@@ -1,62 +1,64 @@
 $(document).ready(function () {
-
-    /*** chart ***/
     //margin
-    const margin = {
+    let margin = {
         top: 50,
         bottom: 50,
         left: 100,
         right: 100
     }
 
-    const ani_width = 600 - margin.left - margin.right;
-    const ani_height = 400 - margin.top - margin.bottom;
+    let ani_width = 600 - margin.left - margin.right;
+    let ani_height = 400 - margin.top - margin.bottom;
 
+    //format int val
     let format = d3.format(",.0f");
+
     //the data object here is used to load different year's data
     let data = {};
 
     //define the projection expressions
-    const projection_BC = d3.geoAlbers()
+    let projection1 = d3.geoAlbers()
         .rotate([122, 0, 0])
         .scale(1800)
         .translate([ani_width * 0.97, ani_height * 2.28]);
 
-    const projection_LM = d3.geoAlbers()
+    let projection_LM = d3.geoAlbers()
         .rotate([122, 0, 0])
         .scale(6500)
         .translate([ani_width * 0.2, ani_height * 5.12]);
 
-    const projection_SVI = d3.geoAlbers()
+    let projection_SVI = d3.geoAlbers()
         .rotate([122, 0, 0])
         .scale(6000)
         .translate([ani_width * 0.5, ani_height * 4.08]);
 
-    //Define path generators
-    const ani_path = d3.geoPath()
-        .projection(projection_BC);
 
-    const ani_path_lm = d3.geoPath()
+    //Define path generators
+    let ani_path = d3.geoPath()
+        .projection(projection1);
+
+    let ani_path_lm = d3.geoPath()
         .projection(projection_LM);
 
-    const ani_path_svi = d3.geoPath()
+    let ani_path_svi = d3.geoPath()
         .projection(projection_SVI);
 
     //Create SVG element for map
-    const svg_map = d3.select("#animationMap")
+    let svg_map = d3.select("#animationMap")
         .append("svg")
         .attr("preserveAspectRatio", "xMinYMin meet")  // This forces uniform scaling for both the x and y, aligning the midpoint of the SVG object with the midpoint of the container element.
         .attr("viewBox", "0 0 600 400") //defines the aspect ratio, the inner scaling of object lengths and coordinates
         .attr('class', 'svg-content');
 
+
     //chart groups
-    const mapGroup = svg_map.append('g')
+    let mapGroup = svg_map.append('g')
         .attr('class', 'mainMap');
 
-    const mapGroup_lm = svg_map.append('g')
+    let mapGroup_lm = svg_map.append('g')
         .attr('class', 'lmMap');
 
-    const mapGroup_svi = svg_map.append('g')
+    let mapGroup_svi = svg_map.append('g')
         .attr('class', 'sviMap');
 
     mapGroup.append('text')
@@ -84,14 +86,15 @@ $(document).ready(function () {
         .attr("text-anchor", "middle")
         .text('Lower Mainland');
 
-    //tooltip
+    //initialize html animation_tooltip
     let animation_tooltip = d3.select("#aniContainer")
         .append("div")
         .attr("id", "ani_tt")
         .style("position", "absolute")
         .style("visibility", "hidden");
 
-    //color scales
+
+    //Continuouscolor scale
     let colorIn = d3.scaleLinear().range(["#b2ebf2", "#67a9cf"]);
     let colorOut = d3.scaleLinear().range(["#ff8f00", "#ffecb3"]);
 
@@ -105,7 +108,7 @@ $(document).ready(function () {
             .attr("height", h)
             .attr("preserveAspectRatio", "none")
             //image link
-            .attr("xlink:href", "../assets/img/choropleth_legend2.png");
+            .attr("xlink:href", "./assets/img/choropleth_legend2.png");
 
         g.append("text")
             .attr("class", "caption")
@@ -132,17 +135,16 @@ $(document).ready(function () {
     }
 
     let legendGroup = svg_map.append('g')
-        .attr('class', 'legend')
+        .attr('class', 'chart_legend')
         .attr('transform', 'translate(460, 40)')
         .call(legend);
 
-    //transition
+    //transition animation 
     let trans = d3.transition()
         .duration(200);
 
-    /*** chart functions ***/
     //update migration map 
-    function updateMap(year) {
+    function update(year) {
         //d3.csv() in queue, here csv_data is same as the data in d3.csv(xxx,function (data) {})
         let csv_data = data[year];
 
@@ -154,20 +156,24 @@ $(document).ready(function () {
         colorOut.domain([minMove, 0]);
 
 
-        d3.json("../assets/geo_json/sd_geo_grouped.json", function (json) {
+        d3.json("./assets/geo_json/sd_geo_grouped.json", function (json) {
             loadJson(csv_data, json, mapGroup, ani_path, 'dist-main');
         });
 
-        d3.json("../assets/geo_json/lower_mainland_sub.json", function (json) {
+        d3.json("./assets/geo_json/lower_mainland_sub.json", function (json) {
             loadJson(csv_data, json, mapGroup_lm, ani_path_lm, 'dist-lm');
         });
 
-        d3.json("../assets/geo_json/southern_vancouver_island.json", function (json) {
+        d3.json("./assets/geo_json/southern_vancouver_island.json", function (json) {
             loadJson(csv_data, json, mapGroup_svi, ani_path_svi, 'dist-svi');
         });
     }
 
-    //load json and render map
+
+
+
+
+    //load json and draw map
     function loadJson(csv_data, json, map, path, pathClass) {
         console.log('json updated');
         for (var i = 0; i < csv_data.length; i++) {
@@ -259,12 +265,12 @@ $(document).ready(function () {
 
     // queue to load the multiple datasets
     d3.queue()
-        .defer(d3.csv, '../assets/raw_data/sd_going_2018.csv')
-        .defer(d3.csv, '../assets/raw_data/sd_going_2017.csv')
-        .defer(d3.csv, '../assets/raw_data/sd_going_2016.csv')
-        .defer(d3.csv, '../assets/raw_data/sd_going_2015.csv')
-        .defer(d3.csv, '../assets/raw_data/sd_going_2014.csv')
-        .defer(d3.csv, '../assets/raw_data/sd_going_2013.csv')
+        .defer(d3.csv, './assets/raw_data/sd_going_2018.csv')
+        .defer(d3.csv, './assets/raw_data/sd_going_2017.csv')
+        .defer(d3.csv, './assets/raw_data/sd_going_2016.csv')
+        .defer(d3.csv, './assets/raw_data/sd_going_2015.csv')
+        .defer(d3.csv, './assets/raw_data/sd_going_2014.csv')
+        .defer(d3.csv, './assets/raw_data/sd_going_2013.csv')
         .await(function (error, d2018, d2017, d2016, d2015, d2014, d2013) {
             data['2013'] = d2013;
             data['2014'] = d2014;
@@ -272,7 +278,7 @@ $(document).ready(function () {
             data['2016'] = d2016;
             data['2017'] = d2017;
             data['2018'] = d2018;
-            updateMap(2013);
+            update(2013);
         });
 
 
@@ -290,6 +296,7 @@ $(document).ready(function () {
             .attr("cursor", "pointer");
         return animation_tooltip.style("visibility", "hidden");
     };
+
 
     function ani_toolMove(mx, my, data) {
 
@@ -315,8 +322,10 @@ $(document).ready(function () {
         }
     };
 
-    /*** control functions ***/
+
     //slider
+
+    //Create SVG element for slider
     let mgslider_width = $('#ani-slider').width();
     migration_overview_slider();
 
@@ -464,7 +473,7 @@ $(document).ready(function () {
 
             //verify that a method was called with certain year input, call update() with unique each year value once
             if (yrCheck != xVal) {
-                updateMap(xVal);
+                update(xVal);
                 yrCheck = xVal;
             }
         }

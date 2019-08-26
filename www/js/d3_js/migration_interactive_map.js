@@ -1,19 +1,25 @@
 $(document).ready(function () {
+  //Width and height
+  let width = 760;
+  let height = 600;
+  let centered;
 
-  /*** chart ***/
-  //format number to int, .1f -> 1 decimal place after decimal
   let formatC = d3.format(",.0f");
   let formatD = d3.format("+,.0f");
 
-  //min & max number of students move in and out 
+  //let of min & max number of students move in and out 
   let movein_min, movein_max, moveout_min, moveout_max;
+
   let colors = ["#65a89d", "#a96a46"]; //color range based on the number of people
+
+  //array used to populate dropdown menu
+  let sd_list_arr = [];
 
   let map = new L.Map("interactiveMap", {
     center: [54, -124],
     zoom: 5
   })
-    .addLayer(new L.TileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"));
+    .addLayer(new L.TileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"));
 
   //create the projection expression
   // let projection = d3.geoAlbers()
@@ -22,17 +28,33 @@ $(document).ready(function () {
   //   .translate([width * .57, height * 1.4]);
   // .fitSize([width, height], json);
 
+  //Define path generator
+  // let path = d3.geoPath()
+  //   .projection(projection);
+
   let path;
 
-  //scales
+  //create scales
   let circleSize = d3.scaleLinear().domain([0, 300]).range([0, 700]);
   let lineSize = d3.scaleLinear().domain([0, 100]).range([2, 25]);
 
-  //svg canvas
+  // let fillcolor = d3.scaleLinear().range(colors).domain(immdomain);
+
+
+  //Create SVG element
+  // let svg = d3.select("#interactiveMap")
+  //   .append("svg")
+  //   .attr("width", width)
+  //   .attr("height", height);
+
   let svg = d3.select(map.getPanes().overlayPane).append("svg");
+
   let chartGroup = svg.append("g").attr("class", "leaflet-zoom-hide");
 
-  //tooltips
+
+  let fp = d3.format(".1f"); // format number, 1 place after decimal
+
+  //initialize html tooltip
   let tooltip = d3.select("#interactiveMap")
     .append("div")
     .attr("id", "tlTip")
@@ -47,15 +69,12 @@ $(document).ready(function () {
     .style("position", "absolute")
     .style("visibility", "hidden");
 
-  /*** control ***/
-  //array used to populate dropdown menu
-  let sd_list_arr = [];
+  // let chartGroup = svg.append("g");
   let comingData, goingData;
   let currentDist;
-  let currentFlowType = 'all';
+  let currentFlowType='all';
 
-  /*** chart functions ***/
-  //the main function that wraps around the d3 pattern (bind, add, update, remove)
+  //the BIG function that wraps around the d3 pattern (bind, add, update, remove)
   function updateMap(coming, going) {
 
     chartGroup.selectAll('.circ').remove().transition()
@@ -82,16 +101,16 @@ $(document).ready(function () {
         }
       }
       /*
-        num__coming_arr is not a number, cannot pass into Math.max() directly
-        instead, pass an array of arguments:
-
-        how to get the min val and exclude 0:
-        num_coming_arr.filter creates a new array with all elements that pass the boolean test
-
-        for this instance, movein_min returns 0 because 0.xxxx might get rounded to 0
-
-        so, use Math.ceil()
-      */
+           num__coming_arr is not a number, cannot pass into Math.max() directly
+           instead, pass an array of arguments:
+   
+           how to get the min val and exclude 0:
+           num_coming_arr.filter creates a new array with all elements that pass the boolean test
+   
+           for this instance, movein_min returns 0 because 0.xxxx might get rounded to 0
+   
+           so, use Math.ceil()
+           */
       movein_min = Math.ceil(Math.min.apply(Math, num_coming_arr.filter(Boolean)));
       //movein_max will be the max # of total move in, from going csv
     });
@@ -99,6 +118,7 @@ $(document).ready(function () {
     d3.csv(going, function (data) {
       goingData = data;
 
+      console.log(goingData);
       //array contains all going numbers
       let num_going_arr = [];
 
@@ -136,23 +156,27 @@ $(document).ready(function () {
             .attr('data-value', opt.substring(0, 4));
         };
       }
+
+
       /* 
+      problem here:
       JavaScript engine called hoisting. The parser will read through the entire function before running it, 
       and any letiable declarations (i.e. using the let keyword) will be executed as if they were at the top of the containing scope.
    
-      so move... let is declared throughout the entire scope, 
+      so move.... let is declared throughout the entire scope, 
       but its value is undefined until the following statments run.
       CANNOT USE for the domain[] on top :(
+   
       */
       moveout_min = Math.ceil(Math.min.apply(Math, num_going_arr.filter(Boolean)));
       moveout_max = Math.round(Math.max.apply(Math, num_going_arr));
       //console.log(moveout_min, moveout_max);
 
       //this is for max in movingin column
-      data.forEach(d => {
+      data.forEach(function (d) {
         d.total_move_in = parseInt(d.total_move_in);
       });
-      movein_max = d3.max(data, d => {
+      movein_max = d3.max(data, function (d) {
         return d.total_move_in;
       });
 
@@ -160,17 +184,18 @@ $(document).ready(function () {
       let outdomain = [movein_min, movein_max];
       let fillcolor = d3.scaleLinear().range(colors).domain(indomain);
 
-      d3.json("../assets/geo_json/sd_geo.json", function (error, json) {
+      d3.json("./assets/geo_json/sd_geo.json", function (error, json) {
         if (error) throw error;
+
         /* 
         A custom geometric transformation for Leaflet map
         Converts an input geometry (such as polygons in spherical geographic coordinates) 
         to a different output geometry (such as polygons in projected screen coordinates). 
         */
-        function projectPoint(x, y) {
-          let point = map.latLngToLayerPoint(new L.LatLng(y, x));
-          this.stream.point(point.x, point.y);
-        }
+       function projectPoint(x, y) {
+        let point = map.latLngToLayerPoint(new L.LatLng(y, x));
+        this.stream.point(point.x, point.y);
+      }
 
         let transform = d3.geoTransform({
           point: projectPoint
@@ -222,7 +247,7 @@ $(document).ready(function () {
           .append("path")
           .attr("class", "district")
           //add id(district name) to each path (district shape on map)
-          .attr("id", d => {
+          .attr("id", function (d) {
             return d.properties.district;
           })
           .attr("d", path) //path here is the geo path generator
@@ -255,6 +280,8 @@ $(document).ready(function () {
           let zoomScale = (bottomRight[0] - topLeft[0]);
           console.log(zoomScale);
 
+
+
           svg.attr("width", 1.2 * (bottomRight[0] - topLeft[0]))
             .attr("height", 1.3 * (bottomRight[1] - topLeft[1]))
             .style("left", topLeft[0] + "px")
@@ -268,17 +295,17 @@ $(document).ready(function () {
           chartGroup.selectAll("circle")
             .data(json.features)
             .enter().append("circle")
-            .attr("cx", d => {
+            .attr("cx", function (d) {
               let ctroid;
               ctroid = path.centroid(d)[0]; // get the centroid x
               return ctroid;
             })
-            .attr("cy", d => {
+            .attr("cy", function (d) {
               let ctroid;
               ctroid = path.centroid(d)[1]; // get the centroid y
               return ctroid;
             })
-            .attr("r", d => {
+            .attr("r", function (d) {
               //radius of the circle is defined by the number of total net migration change
 
               /*total_move_in and totale_emm are columns from csv file
@@ -295,10 +322,10 @@ $(document).ready(function () {
             })
             .attr("class", "circ")
             //attach district name to each circle
-            .attr("id", d => {
+            .attr("id", function (d) {
               return d.abbrev;
             })
-            .attr("fill", d => {
+            .attr("fill", function (d) {
               /*fill the color based on -/+ net changes*/
               let diff = d.properties.total_move_in - d.properties.total_move_out;
               if (diff > 0) {
@@ -337,7 +364,7 @@ $(document).ready(function () {
             .on("click", function (d) {
 
               currentDist = d;
-              $('#distDropdown span').text($(this).attr('id') + '-' + d.id);
+              $('#distDropdown span').text($(this).attr('id')+'-'+d.id);
               clicked(d);
               resetBtn();
             })
@@ -347,8 +374,9 @@ $(document).ready(function () {
       });
     });
   }
-  //default render
-  updateMap("../assets/raw_data/sd_coming_2018.csv", "../assets/raw_data/sd_going_2018.csv");
+
+  //default map
+  updateMap("./assets/raw_data/sd_coming_2018.csv", "./assets/raw_data/sd_going_2018.csv");
 
   function toolOver(v, thepath) {
     d3.select(thepath)
@@ -364,6 +392,7 @@ $(document).ready(function () {
       .attr("cursor", "");
     return tooltip.style("visibility", "hidden");
   };
+
 
   function toolMove(mx, my, data) {
     if (mx < 40) {
@@ -386,7 +415,8 @@ $(document).ready(function () {
         "</b></div><div class='tipClear'></div> </div>");
   };
 
-  //tooltips for paths between districts
+
+  //toolOver2 and ...2 are event handlers for paths btw two districts
   function toolOver2(v, thepath) {
 
     d3.select(thepath)
@@ -425,12 +455,14 @@ $(document).ready(function () {
         ": <b>" + formatD(v1 - v2) + "</b></div><div class='tipClear'></div> </div>");
   };
 
-  //crates the paths (migration flows)
+  //function crates the path
   function clicked(selected, flowtype) {
-
+    console.log(selected);
     //let coming = selected.properties;
     let selDist, distName;
     let homex, homey;
+
+    // let selectedOpt = d3.select('#distDropdown').nodes()[0][0].label;
 
     /*
     if the selection is made by clicking we can access the following properties
@@ -457,6 +489,14 @@ $(document).ready(function () {
       homex = +(selected.getAttribute('cx'));
       homey = +(selected.getAttribute('cy'));
     }
+    console.log(selDist);
+
+    /*
+     d3.selectAll(".circ")
+     .attr("fill-opacity", "0.2");
+    */
+
+
 
     chartGroup.selectAll(".goingline")
       //dash css, 0 solid
@@ -516,7 +556,7 @@ $(document).ready(function () {
          In the normal version (https://d3js.org/d3.v4.js), the console.log return should be: 
          Selection {_groups: Array[1], _parents: Array[1]}
   
-         !!!!!use nodes(): to get the inner array(s)!
+         !!!!!use nodes(): to get the inner array(s)!!!!!
          */
 
         //coordinates of the path destination
@@ -580,6 +620,8 @@ $(document).ready(function () {
       .call(transition)
 
       //determine the stroke width based on net changes
+
+      //prob:stroke-width is fixed at 0.5?????
       .attr("stroke-width", function (d, i) {
 
         let finalval = comingData[i][selDist] - goingData[i][selDist];
@@ -627,27 +669,27 @@ $(document).ready(function () {
       .attrTween("stroke-dasharray", tweenDash);
   }
 
-  //flow animation
   function tweenDash() {
-    let ln = this.getTotalLength(),
-      i = d3.interpolateString("0," + ln, ln + "," + ln);
+    let l = this.getTotalLength(),
+      i = d3.interpolateString("0," + l, l + "," + l);
     return function (t) {
       return i(t);
     };
   }
 
-  /*control functions*/
   //clear flow selection
   function resetBtn() {
     let flowBtns = d3.selectAll('.flowBtn');
     flowBtns.attr('class', 'flowBtn');
     let defBtn = d3.select('#btn_all');
     defBtn.classed('selected', true);;
-    currentFlowType = 'all';
+    currentFlowType='all';
   }
 
+  /*control panel*/
+
   //dropdown selection
-  $('#yearDropdown').on('click', function () {
+  $('#yearDropdown').on('click', function() {
     $('.dropDown').not(this).removeClass('active');
     $(this).toggleClass('active');
     //swap database when select changes
@@ -659,13 +701,14 @@ $(document).ready(function () {
         let newData = d3.select(this).attr('data-value');
         //clear dropdown array
         // sd_list_arr=[];
-        updateMap("../assets/raw_data/sd_coming_" + newData + ".csv", "../assets/raw_data/sd_going_" + newData + ".csv");
+        updateMap("./assets/raw_data/sd_coming_" + newData + ".csv", "./assets/raw_data/sd_going_" + newData + ".csv");
         resetBtn();
       });
   });
 
+
   //dropdown select district
-  $('#distDropdown').on('click', function () {
+  $('#distDropdown').on('click', function() {
     $('.dropDown').not(this).removeClass('active');
     $(this).toggleClass('active');
     $('#yearDropdown').removeClass('active');
@@ -684,28 +727,42 @@ $(document).ready(function () {
       });
   });
 
-  //toggle between types
+  //toggle migration flow
+  let selectedFlow = 'all';
   let flowBtns = d3.selectAll('.flowBtn');
   flowBtns.on('click', function () {
+    console.log(currentDist);
     flowBtns.attr('class', 'flowBtn'); // this gets called everytime when a new click happens
     this.classList.add('selected'); //this can only apply vanllila js code
+
     currentFlowType = this.getAttribute('value');
+    // console.log(btnFlowType);
+
+    // let currentLines = chartGroup.selectAll('.goingline');
+    // console.log(currentLines);
+
+    // // currentLines.remove();
+
+    //let strokeColor = currentLines.nodes()[i].attributes.stroke.nodeValue;
     if (currentFlowType) {
       clicked(currentDist, currentFlowType);
     } else if (currentFlowType == 'all') {
       clicked(currentDist);
     }
+
   });
-  //.checked doesn't work on jquery object, use either way to 
-  // console.log(document.querySelector('#flat_switch').checked);
-  // console.log($('#flat_switch').is(':checked'));
+
   //top 5 swtich
+  //.checked doesn't work on jquery object, use either way to 
   $('#flat_switch').change(function () {
+    // console.log(document.querySelector('#flat_switch').checked);
+    // console.log($('#flat_switch').is(':checked'));
     if (currentFlowType) {
       clicked(currentDist, currentFlowType);
     } else if (currentFlowType == 'all') {
       clicked(currentDist);
     }
   });
+
 
 });

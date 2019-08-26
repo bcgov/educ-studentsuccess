@@ -1,0 +1,1038 @@
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  /* IE10+ CSS styles go here */
+  html body #aniContainer #animationMap .svg-content {
+    width: 600px;
+    height: 400px; }
+
+  html body #enrolment_model #modelContainer .svg-content {
+    width: 600px;
+    height: 400px; }
+
+  html body #demographics #demo_container .svg-content {
+    width: 600px;
+    height: 400px; }
+
+  html body #transition #transition_container .svg-content {
+    width: 600px;
+    height: 400px; }
+
+  html body #retention #retention_container .svg-content {
+    width: 600px;
+    height: 400px; }
+
+  html body #school_graph #independent_school_icon {
+    width: 80%; }
+
+  html body #school_graph #public_school_icon {
+    width: 80%; }
+
+  html body #retention .isometric_img {
+    width: 100%; } }
+/* Extra Small Devices, Phones */
+@media only screen and (min-width: 320px) {
+  body {
+    background-image: none; }
+
+  h2 {
+    font-size: 2.8rem; }
+
+  h3 {
+    font-size: 2.2rem; }
+
+  h5 {
+    font-size: 4vw; }
+
+  .section_header {
+    margin-bottom: 5vw; }
+
+  .driver_section {
+    margin-bottom: 7vw; }
+
+  .section_header ~ p {
+    font-size: 14px; }
+
+  #intro {
+    text-align: center; }
+    #intro p, #intro .ctaBtn, #intro .ctaGhost {
+      font-size: 1.6rem; }
+    #intro .cta_container {
+      justify-content: center; }
+    #intro .gradient_para {
+      margin: 4vw auto 0 auto;
+      font-size: 1.4rem; }
+
+  #model_control, #demo_control, #flow_control {
+    text-align: center; }
+
+  #migration_overview .section_header, #migration_overview .section_header ~ p {
+    text-align: center; }
+
+  #flow_map .section_header {
+    text-align: center; }
+  #flow_map img {
+    max-width: 60%; }
+
+  #transition #pub_to_ind {
+    top: 3rem !important; }
+  #transition #ind_to_pub {
+    bottom: 3rem !important; } }
+@media only screen and (min-width: 480px) {
+  #content_wrapper {
+    background-image: url(../assets/img/bg_img1.svg), url(../assets/img/bg_img2.svg), url(../assets/img/bg_img4.svg);
+    background-size: 8% auto, 14% auto, 10% auto;
+    background-repeat: no-repeat, no-repeat, no-repeat;
+    background-position: 4vw 750px, 82vw 1650px, 4vw 6650px;
+    background-attachment: scroll, scroll, scroll; }
+
+  h2 {
+    font-size: 3.2rem; }
+
+  h3 {
+    font-size: 2.8rem; }
+
+  h5 {
+    font-size: 2rem; }
+
+  .section_header ~ p {
+    font-size: 1.4rem; }
+
+  #flow_legend img {
+    max-width: 80%; } }
+/* Small Devices, Tablets */
+@media only screen and (min-width: 768px) {
+  #content_wrapper {
+    background-position: 4vw 600px, 82vw 1300px , 4vw 4650px; }
+
+  .section_header ~ p {
+    font-size: 1.6rem; }
+
+  #intro {
+    text-align: left; }
+    #intro p {
+      font-size: 1.6rem; }
+    #intro .ctaBtn, #intro .ctaGhost {
+      font-size: 1.5rem; }
+    #intro .cta_container {
+      justify-content: flex-start; }
+    #intro .gradient_para {
+      font-size: 1.6rem; }
+
+  .section_header {
+    margin-bottom: 3vw; }
+
+  .driver_section {
+    margin-bottom: 4vw; }
+
+  #model_control, #demo_control, #flow_control {
+    text-align: left; }
+
+  #migration_overview .section_header, #migration_overview .section_header ~ p {
+    text-align: left; }
+
+  #flow_map img {
+    max-width: 100%; }
+  #flow_map .section_header {
+    text-align: left; }
+  #flow_map #flow_type, #flow_map #flow_switch {
+    display: flex;
+    align-items: center; }
+
+  #transition #pub_to_ind {
+    top: 3vw !important; }
+  #transition #ind_to_pub {
+    bottom: 3vw !important; } }
+/* extra large Devices, Desktops */
+@media only screen and (min-width: 1200px) {
+  #content_wrapper {
+    background-position: 4vw 550px, 82vw 1350px , 4vw 5650px; }
+
+  h2 {
+    font-size: 3.8rem; }
+
+  h3 {
+    font-size: 3.2rem; }
+
+  #intro p, #intro .ctaBtn, #intro .ctaGhost {
+    font-size: 1.8rem; }
+
+  .section_header ~ p {
+    font-size: 1.8rem; } }
+html {
+  scroll-behavior: smooth;
+  font-size: 10px; }
+  html body {
+    background-color: #F2F2F2;
+    font-family: Calibri, Arial, 'sans serif';
+    color: #494949;
+    /**********shared********/
+    /*********sections********/ }
+    html body div:focus, html body button:focus {
+      outline: none; }
+    html body a,
+    html body a:hover {
+      text-decoration: none; }
+    html body .nav-bg {
+      background: rgba(255, 255, 255, 0.9); }
+    html body #enrolment_subnav .navbar {
+      font-size: 14px;
+      padding: 0;
+      box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.1);
+      top: 105px;
+      z-index: 2; }
+      html body #enrolment_subnav .navbar a {
+        display: inline-block;
+        position: relative; }
+      html body #enrolment_subnav .navbar a:after {
+        background: none repeat scroll 0 0 transparent;
+        bottom: 0;
+        content: "";
+        display: block;
+        height: 2px;
+        left: 50%;
+        position: absolute;
+        background: linear-gradient(90deg, #2cc7c0, #59d99d);
+        transition: width 0.3s ease 0s, left 0.3s ease 0s;
+        width: 0; }
+      html body #enrolment_subnav .navbar a:hover::after, html body #enrolment_subnav .navbar a.active::after {
+        width: 100%;
+        left: 0; }
+      html body #enrolment_subnav .navbar .navbar-toggler {
+        padding: 0; }
+      html body #enrolment_subnav .navbar .icon {
+        width: 24px;
+        height: 24px;
+        position: relative;
+        cursor: pointer; }
+        html body #enrolment_subnav .navbar .icon .line {
+          position: absolute;
+          left: 0;
+          transform: transition(-15px);
+          height: 2px;
+          width: 100%;
+          background: #003663;
+          border-radius: 2px;
+          transition: all cubic-bezier(0.26, 0.1, 0.27, 1.55) 0.35s; }
+        html body #enrolment_subnav .navbar .icon .top {
+          top: 18%; }
+        html body #enrolment_subnav .navbar .icon .middle {
+          top: 48%;
+          left: 25%;
+          width: 50%; }
+        html body #enrolment_subnav .navbar .icon .bottom {
+          top: 78%; }
+      html body #enrolment_subnav .navbar .open .top {
+        transform: rotate(45deg);
+        top: 48%; }
+      html body #enrolment_subnav .navbar .open .middle {
+        display: none; }
+      html body #enrolment_subnav .navbar .open .middle,
+      html body #enrolment_subnav .navbar .open .bottom {
+        transform: rotate(-45deg);
+        top: 48%; }
+      html body #enrolment_subnav .navbar .navbar-nav {
+        margin: 0 auto;
+        text-align: center; }
+        html body #enrolment_subnav .navbar .navbar-nav .nav-link,
+        html body #enrolment_subnav .navbar .navbar-nav .nav-link:hover {
+          color: #5091CD; }
+      html body #enrolment_subnav .navbar button {
+        border: none; }
+      html body #enrolment_subnav .navbar .navbar-brand {
+        color: #003663;
+        font-size: 1rem; }
+    html body .section_header {
+      background-size: 100% 100%; }
+      html body .section_header span {
+        color: #003663;
+        background-image: linear-gradient(-180deg, transparent 65%, #2cc7c0, #59d99d 0);
+        background-repeat: no-repeat;
+        text-decoration: none;
+        background-size: 100% 100%; }
+    html body .section_header ~ p {
+      text-align: center; }
+    html body .isometric_img {
+      max-width: 100%; }
+    html body .ghostBtn {
+      display: inline-block;
+      font-size: 1.8rem;
+      padding: 1rem 1.6rem !important;
+      border: 2px solid #38598a;
+      border-radius: 0.4rem !important;
+      background: #fff;
+      color: #38598a;
+      cursor: pointer; }
+    html body .ghostBtn:hover {
+      color: #fff;
+      border: 2px solid #00305d;
+      background: #00305d;
+      box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
+      transition: 0.3s ease; }
+    html body .flatBtn {
+      display: inline-block;
+      font-size: 1.8rem;
+      padding: 1rem 1.6rem !important;
+      border-radius: 0.4rem !important;
+      border: 2px solid #38598a;
+      color: #fff;
+      background: #38598a;
+      cursor: pointer; }
+    html body .flatBtn:hover {
+      color: #fff;
+      border: 2px solid #00305d;
+      background: #00305d;
+      box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
+      transition: .3s ease; }
+    html body .ctaBtn {
+      background: linear-gradient(90deg, #2cc7c0, #59d99d);
+      color: #F2F2F2;
+      border: none;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05);
+      padding: 0.8rem 1.6rem; }
+    html body .ctaBtn:hover {
+      color: #F2F2F2;
+      background: linear-gradient(90deg, #25a8a2, #3ad28b);
+      box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
+      transition: all .3s ease; }
+    html body .ctaGhost {
+      color: #59d99d;
+      border: 1px solid #59d99d;
+      background: transparent;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05);
+      padding: 0.8rem 1.6rem; }
+    html body .ctaGhost:hover {
+      color: #F2F2F2;
+      background: linear-gradient(90deg, #2cc7c0, #59d99d);
+      box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0.09);
+      border-color: #59d99d;
+      transition: all .5s ease; }
+    html body .track,
+    html body .track-inset,
+    html body .track-overlay {
+      stroke-opacity: 0.3;
+      stroke-linejoin: round;
+      stroke-linecap: round; }
+    html body .track {
+      stroke-opacity: 0.3;
+      stroke-width: 10px; }
+    html body .track-inset {
+      stroke: #bbb;
+      stroke-width: 8px; }
+    html body .track-overlay {
+      pointer-events: stroke;
+      stroke-width: 50px;
+      stroke: transparent;
+      cursor: pointer; }
+    html body .handle {
+      fill: #38598a;
+      stroke: #494949;
+      stroke-opacity: 0.5;
+      stroke-width: 1.25px;
+      cursor: pointer; }
+    html body .handle.active {
+      fill: #003663; }
+    html body path {
+      stroke-linejoin: round;
+      stroke-linecap: round; }
+    html body .ticks {
+      fill: #494949;
+      font-size: 12px; }
+    html body .tt_container {
+      position: absolute;
+      z-index: 10;
+      top: 2em;
+      border-radius: 5px;
+      width: 16rem;
+      background: white;
+      opacity: 0.9;
+      pointer-events: inherit; }
+    html body .tipHeader {
+      color: white;
+      padding: 5px;
+      background: #003663;
+      font-style: italic;
+      font-size: 16px;
+      border-radius: 5px 5px 0 0; }
+    html body .tipInfo {
+      margin: 0.5em;
+      color: #003663;
+      font-size: 14px; }
+    html body #demo_control [type="radio"]:checked,
+    html body #demo_control [type="radio"]:not(:checked) {
+      position: absolute;
+      opacity: 0; }
+    html body #demo_control [type="radio"]:checked + label,
+    html body #demo_control [type="radio"]:not(:checked) + label {
+      position: relative;
+      padding-left: 24px;
+      cursor: pointer;
+      line-height: 20px;
+      display: inline-block;
+      color: #38598a; }
+    html body #demo_control [type="radio"]:checked + label:before,
+    html body #demo_control [type="radio"]:not(:checked) + label:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #38598a;
+      border-radius: 100%;
+      background: white; }
+    html body #demo_control [type="radio"]:checked + label:after,
+    html body #demo_control [type="radio"]:not(:checked) + label:after {
+      content: '';
+      width: 10px;
+      height: 10px;
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      border-radius: 100%;
+      -webkit-transition: all 0.2s ease;
+      transition: all 0.2s ease; }
+    html body #demo_control [type="radio"]:not(:checked) + label:after {
+      opacity: 0;
+      -webkit-transform: scale(0);
+      transform: scale(0); }
+    html body #demo_control [type="radio"]:checked + label {
+      color: #003663;
+      font-weight: bold; }
+    html body #demo_control [type="radio"]:checked + label:before {
+      border: 3px solid #003663; }
+    html body #demo_control [type="radio"]:checked + label:after {
+      opacity: 1;
+      background: #003663;
+      -webkit-transform: scale(1);
+      transform: scale(1); }
+    html body #demo_control [type="radio"]:not(:checked) + label:hover {
+      color: #003663; }
+    html body .axis_label {
+      font-size: 1.4rem;
+      fill: #494949;
+      opacity: 0.5; }
+    html body #intro, html body #enrolment_model, html body #demographics, html body #migration_overview, html body #flow_map, html body #transition, html body #retention {
+      margin-bottom: 9vw; }
+      html body #intro div[class^='col'], html body #enrolment_model div[class^='col'], html body #demographics div[class^='col'], html body #migration_overview div[class^='col'], html body #flow_map div[class^='col'], html body #transition div[class^='col'], html body #retention div[class^='col'] {
+        padding: 0 15px; }
+      html body #intro div.dropDown > span, html body #intro label, html body #intro #demoModal_msg, html body #intro .chart_legend, html body #intro .list, html body #enrolment_model div.dropDown > span, html body #enrolment_model label, html body #enrolment_model #demoModal_msg, html body #enrolment_model .chart_legend, html body #enrolment_model .list, html body #demographics div.dropDown > span, html body #demographics label, html body #demographics #demoModal_msg, html body #demographics .chart_legend, html body #demographics .list, html body #migration_overview div.dropDown > span, html body #migration_overview label, html body #migration_overview #demoModal_msg, html body #migration_overview .chart_legend, html body #migration_overview .list, html body #flow_map div.dropDown > span, html body #flow_map label, html body #flow_map #demoModal_msg, html body #flow_map .chart_legend, html body #flow_map .list, html body #transition div.dropDown > span, html body #transition label, html body #transition #demoModal_msg, html body #transition .chart_legend, html body #transition .list, html body #retention div.dropDown > span, html body #retention label, html body #retention #demoModal_msg, html body #retention .chart_legend, html body #retention .list {
+        font-size: 1.6rem; }
+    html body #enrolment_model::before, html body #demographics::before, html body #migration_overview::before, html body #transition::before, html body #retention::before, html body #booklet::before {
+      content: "";
+      display: block;
+      height: 140px;
+      /* fixed header height*/
+      margin-top: -140px;
+      /* negative fixed header height */ }
+    html body #intro {
+      margin-top: 15rem; }
+      html body #intro a.fte_defin {
+        color: #5091CD; }
+      html body #intro .intro_header {
+        color: #003663;
+        font-weight: bold;
+        margin-bottom: 1rem; }
+      html body #intro .cta_container {
+        display: flex;
+        flex-wrap: wrap; }
+      html body #intro .gradient_para {
+        max-width: 450px;
+        padding: 4px 15px;
+        display: block;
+        color: white;
+        font-weight: 500;
+        border-radius: 3px;
+        background: linear-gradient(315deg, #38598a, #2cc7c0);
+        overflow: hidden; }
+        html body #intro .gradient_para i {
+          margin-right: 0.4rem; }
+    html body #migration_overview #tipContainer {
+      position: absolute;
+      z-index: 10;
+      top: 2em;
+      border-radius: 5px;
+      width: 10em;
+      background: white;
+      opacity: 0.9;
+      pointer-events: none; }
+    html body .dcr-wrapper {
+      display: flex;
+      justify-content: flex-end;
+      margin: 2rem 0; }
+    html body .bg-img {
+      max-width: 400px;
+      height: auto; }
+    html body .controlSection {
+      margin-bottom: 1.5rem; }
+      html body .controlSection h5 {
+        font-weight: bold;
+        font-size: 2rem; }
+    html body .dropDown {
+      position: relative;
+      background: white;
+      width: 100%;
+      padding: 6px 10px;
+      border: 2px solid #38598a;
+      box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+      border-radius: 0.3rem;
+      cursor: pointer;
+      transition: all 0.3s ease-out;
+      /* Hover state */
+      /* Track */
+      /* Handle */ }
+      html body .dropDown .list {
+        position: absolute;
+        z-index: 10;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        border-radius: 0 0 0.5em 0.5em;
+        border: none;
+        list-style: none;
+        transition: 0.3s ease-out;
+        /* Hiding */
+        display: none;
+        max-height: 0;
+        overflow: auto; }
+      html body .dropDown .list div {
+        text-decoration: none;
+        color: #494949;
+        padding: 6px 10px;
+        transition: 0.3s ease-out;
+        border: none; }
+      html body .dropDown .list div:hover {
+        color: #5091CD;
+        background: #F2F2F2; }
+      html body .dropDown .list::-webkit-scrollbar {
+        width: .4rem; }
+      html body .dropDown .list::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey;
+        border-radius: .1rem; }
+      html body .dropDown .list::-webkit-scrollbar-thumb {
+        background: #38598a;
+        border-radius: 10px; }
+    html body .dropDown.active {
+      border-radius: 0.5em 0.5em  0 0;
+      box-shadow: none;
+      background: white; }
+      html body .dropDown.active .list {
+        display: block;
+        border: 2px solid #38598a;
+        border-top: none;
+        max-height: 150px;
+        margin: 0 -2px; }
+      html body .dropDown.active .list div {
+        border-top: 1px solid rgba(0, 0, 0, 0.05); }
+    html body .dropDown:after {
+      /* Little arrow */
+      content: "";
+      width: 0;
+      height: 0;
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      margin-top: -3px;
+      border-width: 6px 6px 0 6px;
+      border-style: solid;
+      border-color: #38598a transparent; }
+    html body #aniContainer #ani_control {
+      align-items: center;
+      justify-content: center; }
+      html body #aniContainer #ani_control #ani_year {
+        font-weight: bold;
+        font-size: 2.6rem;
+        color: #38598a;
+        vertical-align: middle; }
+      html body #aniContainer #ani_control #play-pause {
+        width: 40px;
+        height: 40px; }
+      html body #aniContainer #ani_control .play {
+        background: url(../assets/img/play&pause.png) 0 0;
+        background-size: cover;
+        cursor: pointer; }
+      html body #aniContainer #ani_control .pause {
+        background: url(../assets/img/play&pause.png) 40px 0;
+        background-size: cover;
+        cursor: pointer; }
+    html body #aniContainer .dist-main,
+    html body #aniContainer .dist-lm,
+    html body #aniContainer .dist-svi {
+      stroke: #fff; }
+    html body #aniContainer .tick {
+      font-size: 10px;
+      font-weight: 600; }
+    html body #aniContainer .caption {
+      fill: #494949; }
+    html body #flow_map h3 {
+      color: #003663; }
+    html body #flow_map #mapContainer {
+      position: relative; }
+    html body #flow_map #interactiveMap {
+      max-width: 100%;
+      height: 500px;
+      z-index: 1;
+      position: relative; }
+      html body #flow_map #interactiveMap svg {
+        position: relative; }
+        html body #flow_map #interactiveMap svg .goingline {
+          pointer-events: auto; }
+    html body #flow_map #flow_control #distDropdown.active .list {
+      max-height: 240px; }
+    html body #flow_map #flow_control h6 {
+      color: #38598a;
+      font-weight: bold;
+      font-size: 1.6rem; }
+    html body #flow_map #flow_control #flow_switch {
+      margin: 1rem 0; }
+      html body #flow_map #flow_control #flow_switch #flat_switch {
+        display: block;
+        opacity: 0; }
+      html body #flow_map #flow_control #flow_switch label {
+        width: 60px;
+        height: 30px;
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        border-radius: 30px;
+        border: 2px solid #bdbdbd;
+        transition: ease 0.5s;
+        transition: #38598a 0.5s; }
+      html body #flow_map #flow_control #flow_switch label:after {
+        left: 0;
+        width: 20px;
+        height: 20px;
+        margin: 3px;
+        content: '';
+        position: absolute;
+        background: #bdbdbd;
+        border-radius: 10px; }
+      html body #flow_map #flow_control #flow_switch input:checked + label {
+        background: none;
+        border: 2px solid #38598a;
+        box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
+      html body #flow_map #flow_control #flow_switch input:checked + label:after {
+        background: #38598a;
+        left: auto;
+        right: 0;
+        transition: ease 0.5s;
+        transition: #38598a 0.5s; }
+    html body #flow_map #flow_control #flow_type {
+      margin: 1rem 0; }
+      html body #flow_map #flow_control #flow_type .flowBtn {
+        font-size: 14px;
+        margin-right: 0.8rem;
+        padding: 0.4rem 0.8rem;
+        width: 8rem;
+        border: 2px solid #38598a;
+        border-radius: 50px;
+        background: none;
+        color: #38598a;
+        font-weight: medium;
+        cursor: pointer; }
+      html body #flow_map #flow_control #flow_type .flowBtn:hover {
+        color: #fff;
+        background: #38598a;
+        transition: .3s ease; }
+      html body #flow_map #flow_control #flow_type .selected {
+        color: #fff;
+        background: #38598a;
+        box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.07), 0 4px 5px 0 rgba(0, 0, 0, 0.05); }
+    html body #flow_map #flow_control #flow_legend {
+      display: flex;
+      align-items: center;
+      justify-content: space-between; }
+      html body #flow_map #flow_control #flow_legend .dot {
+        height: 1.5em;
+        width: 1.5em;
+        border-radius: 50%;
+        opacity: 0.5;
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 1.5em;
+        color: white; }
+      html body #flow_map #flow_control #flow_legend .outflow_color {
+        background-color: #a96a46; }
+      html body #flow_map #flow_control #flow_legend .inflow_color {
+        background-color: #65a89d; }
+      html body #flow_map #flow_control #flow_legend .dot_md {
+        height: 2.5em;
+        width: 2.5em;
+        line-height: 2.5em; }
+      html body #flow_map #flow_control #flow_legend .dot_lg {
+        height: 3.5em;
+        width: 3.5em;
+        line-height: 3.5em; }
+    html body #flow_map #flow_control #flow_text {
+      display: flex;
+      justify-content: space-between; }
+      html body #flow_map #flow_control #flow_text p:first-child {
+        color: #a96a46; }
+      html body #flow_map #flow_control #flow_text p:last-child {
+        color: #65a89d; }
+    html body #flow_map .leaflet-pane {
+      z-index: 0; }
+    html body #flow_map #tlTip {
+      pointer-events: none;
+      color: white;
+      position: absolute; }
+    html body #flow_map #tipDiv {
+      font-size: 16px;
+      border-radius: 3px;
+      width: 180px;
+      z-index: 100;
+      background-repeat: no-repeat;
+      text-align: left;
+      line-height: 20px; }
+    html body #flow_map #tipLoc {
+      font-weight: normal;
+      font-style: Italic;
+      color: white;
+      margin: 0px;
+      padding: 10px 10px;
+      background: #003663;
+      font-size: 14px;
+      border-radius: 3px 3px 0 0; }
+    html body #flow_map #tipInfo {
+      font-weight: normal;
+      font-size: 12px;
+      color: #494949;
+      margin: 0px;
+      padding: 5px 0px 5px 10px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 0 0 3px 3px; }
+    html body #flow_map #tlTip2 {
+      pointer-events: none;
+      color: white; }
+    html body #flow_map #tipDiv2 {
+      font-size: 16px;
+      position: absolute;
+      width: 250px;
+      z-index: 100;
+      background-repeat: no-repeat;
+      text-align: left;
+      line-height: 20px; }
+    html body #flow_map #tipLoc2 {
+      font-weight: normal;
+      font-style: Italic;
+      color: white;
+      margin: 0px;
+      padding: 10px 10px;
+      background: #003663;
+      font-size: 14px;
+      border-radius: 3px 3px 0 0; }
+    html body #flow_map #tipInfo2 {
+      font-weight: normal;
+      font-size: 10px;
+      color: #494949;
+      margin: 0px;
+      padding: 5px 0px 5px 10px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 0 0 3px 3px; }
+    html body #flow_map .tipClear {
+      clear: both; }
+    html body #enrolment_model {
+      /* control panel, slider */ }
+      html body #enrolment_model #model_distDropdown.active .list {
+        max-height: 240px; }
+      html body #enrolment_model #modelContainer {
+        display: inline-block;
+        position: relative;
+        width: 100%;
+        vertical-align: top;
+        overflow: hidden; }
+        html body #enrolment_model #modelContainer .svg-content .chart_legend {
+          font-size: 9px; }
+        html body #enrolment_model #modelContainer .svg-content .bar {
+          stroke: none; }
+        html body #enrolment_model #modelContainer .svg-content .bar:hover {
+          fill: rgba(0, 38, 99, 0.7) !important;
+          cursor: pointer; }
+        html body #enrolment_model #modelContainer .svg-content .label {
+          fill: white;
+          font-weight: 400;
+          text-anchor: middle; }
+        html body #enrolment_model #modelContainer .svg-content .line {
+          fill: none;
+          stroke: #003663;
+          stroke-width: 3; }
+        html body #enrolment_model #modelContainer .svg-content .dot {
+          fill: #003663;
+          stroke: #fff; }
+        html body #enrolment_model #modelContainer .yAxis, html body #enrolment_model #modelContainer .yAxis2, html body #enrolment_model #modelContainer .xAxis {
+          stroke-width: 0; }
+          html body #enrolment_model #modelContainer .yAxis .domain, html body #enrolment_model #modelContainer .yAxis2 .domain, html body #enrolment_model #modelContainer .xAxis .domain {
+            display: none; }
+        html body #enrolment_model #modelContainer #zero-line {
+          fill: none;
+          stroke: #ccc;
+          stroke-width: 1; }
+        html body #enrolment_model #modelContainer .modeltt_rect {
+          position: absolute;
+          z-index: 10;
+          top: 2rem;
+          border-radius: 5px;
+          width: 12rem;
+          background: white;
+          opacity: 0.9;
+          pointer-events: none; }
+          html body #enrolment_model #modelContainer .modeltt_rect .tipHeader {
+            color: white;
+            padding: 5px;
+            background: #003663;
+            font-weight: bold;
+            font-style: italic;
+            font-size: 14px;
+            border-radius: 5px 5px 0 0; }
+          html body #enrolment_model #modelContainer .modeltt_rect .tipInfo {
+            margin-left: 5px;
+            color: #003663;
+            font-size: 14px; }
+            html body #enrolment_model #modelContainer .modeltt_rect .tipInfo .tipNum {
+              color: #494949; }
+      html body #enrolment_model .ticks {
+        font-size: 12px; }
+      html body #enrolment_model .track,
+      html body #enrolment_model .track-inset,
+      html body #enrolment_model .track-overlay {
+        stroke-linecap: round; }
+      html body #enrolment_model .track {
+        stroke: #bbb;
+        stroke-width: 10px; }
+      html body #enrolment_model .track-overlay {
+        pointer-events: stroke;
+        stroke-width: 50px;
+        cursor: crosshair; }
+      html body #enrolment_model .sel-range {
+        stroke: #5091CD;
+        stroke-width: 8px; }
+      html body #enrolment_model .handle {
+        fill: #38598a;
+        stroke: #494949;
+        stroke-opacity: 0.5;
+        stroke-width: 1.25px;
+        cursor: pointer; }
+      html body #enrolment_model .handle.active {
+        fill: #003663; }
+      html body #enrolment_model #distName {
+        color: #003663;
+        font-weight: bold;
+        font-size: 2.4rem; }
+    html body #demographics #demo_container .demo_line {
+      stroke-linejoin: round;
+      stroke-linecap: round; }
+    html body #demographics #demo_container .xAxis {
+      stroke-width: 0; }
+      html body #demographics #demo_container .xAxis .domain {
+        display: none; }
+    html body #demographics #demo_container .yAxis .domain {
+      display: none; }
+    html body #demographics #demo_container .yAxis .tick line {
+      stroke: #ccc;
+      stroke-opacity: 0.5; }
+    html body #demographics #demo_container .demo_overlay {
+      fill: none;
+      pointer-events: all;
+      cursor: pointer; }
+    html body #demographics #demo_container .demott_line {
+      stroke: #003663;
+      stroke-dasharray: 2,5;
+      stroke-width: 2;
+      opacity: 0.5; }
+    html body #demographics #demo_container .demott_rect {
+      position: absolute;
+      z-index: 10;
+      top: 2rem;
+      border-radius: 5px;
+      width: 12rem;
+      background: white;
+      opacity: 0.9;
+      pointer-events: none; }
+      html body #demographics #demo_container .demott_rect .tipHeader {
+        color: white;
+        padding: 5px;
+        background: #003663;
+        font-weight: bold;
+        font-style: italic;
+        font-size: 16px;
+        border-radius: 5px 5px 0 0; }
+      html body #demographics #demo_container .demott_rect .tipInfo {
+        margin-left: 5px;
+        color: #003663;
+        font-size: 14px; }
+        html body #demographics #demo_container .demott_rect .tipInfo .tipNum {
+          color: #494949; }
+    html body #demographics #demo_control #demo_radio div {
+      margin: 1rem 0; }
+    html body #demographics #demo_control .modal-header button span {
+      font-size: 3rem; }
+    html body #demographics #demo_control .modal-body {
+      display: grid;
+      grid-template-columns: repeat(4, 1.2fr);
+      grid-gap: 10px;
+      font-size: 12px; }
+      html body #demographics #demo_control .modal-body .checkbox span {
+        vertical-align: middle;
+        margin-left: 0.3em;
+        font-size: 1.2rem;
+        cursor: pointer; }
+      html body #demographics #demo_control .modal-body .checkbox .demo_checkbox {
+        -webkit-appearance: none;
+        border: 2px solid #ccc;
+        padding: 6px;
+        border-radius: 3px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+        display: inline-block;
+        position: relative;
+        vertical-align: middle;
+        cursor: pointer; }
+      html body #demographics #demo_control .modal-body .checkbox .demo_checkbox:hover, html body #demographics #demo_control .modal-body .checkbox .demo_checkbox:checked {
+        border: 2px solid #003663; }
+      html body #demographics #demo_control .modal-body .checkbox .demo_checkbox:checked ~ * {
+        color: #003663; }
+      html body #demographics #demo_control .modal-body .checkbox .demo_checkbox:checked:after {
+        content: '';
+        position: absolute;
+        left: 4px;
+        top: 1px;
+        width: 5px;
+        height: 10px;
+        border: solid #003663;
+        border-radius: 5px;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg); }
+    html body #demographics #demo_control #demoModal_msg {
+      margin-left: 1rem;
+      align-self: center; }
+    html body #demographics #demo_control #demo_deselect {
+      margin-right: auto;
+      font-weight: bold;
+      color: #5091CD;
+      font-size: 1.6rem;
+      cursor: pointer; }
+    html body #transition #trans_control #trans_slider {
+      fill: #494949;
+      font-size: 12px;
+      padding: 0; }
+    html body #transition #trans_control_2 {
+      display: flex; }
+      html body #transition #trans_control_2 #trans_dist_dropdown .list {
+        max-height: 220px; }
+    html body #transition #graph_container {
+      margin-top: 4vw; }
+      html body #transition #graph_container .trans_title {
+        color: #1D438C;
+        margin-bottom: 2rem; }
+      html body #transition #graph_container #school_graph {
+        display: flex; }
+        html body #transition #graph_container #school_graph h6 {
+          font-size: 1.6rem; }
+        html body #transition #graph_container #school_graph #trans_rate {
+          max-width: 200px;
+          background: url(../assets/img/trans_icon.png);
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: contain;
+          position: relative; }
+        html body #transition #graph_container #school_graph #pub_to_ind {
+          position: absolute;
+          top: 3vw;
+          left: 0;
+          right: 0;
+          color: #4EBDEB;
+          font-weight: bold;
+          font-size: 1.6rem; }
+        html body #transition #graph_container #school_graph #ind_to_pub {
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 3vw;
+          color: #D42D75;
+          font-weight: bold;
+          font-size: 1.6rem; }
+    html body #transition #transition_container .trans_circ {
+      fill: #003663;
+      opacity: 0.5;
+      cursor: pointer; }
+    html body #transition #transition_container .trans_top5_label {
+      font-size: 12px;
+      fill: #494949;
+      pointer-events: none; }
+    html body #transition #transition_container .label {
+      text-anchor: middle;
+      fill: white; }
+    html body #transition #transition_container .yAxis .domain, html body #transition #transition_container .xAxis .domain {
+      display: none; }
+    html body #transition #transition_container .tick line {
+      stroke: #ccc;
+      stroke-opacity: 0.5; }
+    html body #transition #transition_container #trans_tt .trans_link {
+      margin: 0.8rem;
+      line-height: 1.6rem; }
+      html body #transition #transition_container #trans_tt .trans_link .ssLink {
+        font-size: 14px;
+        color: #5091CD; }
+    html body #retention #retention_control .controlSelection {
+      margin-bottom: 0; }
+    html body #retention #retention_control #retention_distDropdown.active .list {
+      max-height: 240px; }
+    html body #retention #retention_control .retention_legend {
+      max-height: 100px; }
+    html body #retention #retention_container {
+      position: relative; }
+      html body #retention #retention_container .prov_retention_line {
+        stroke-linejoin: round;
+        stroke-linecap: round;
+        stroke: #003663; }
+      html body #retention #retention_container .dist_retention_line {
+        stroke-linejoin: round;
+        stroke-linecap: round;
+        stroke: #FCBA19; }
+      html body #retention #retention_container .xAxis, html body #retention #retention_container .yAxis_prov {
+        stroke-width: 0; }
+        html body #retention #retention_container .xAxis .domain, html body #retention #retention_container .yAxis_prov .domain {
+          display: none; }
+      html body #retention #retention_container .yAxis_dist .domain {
+        display: none; }
+      html body #retention #retention_container .yAxis_dist .tick line {
+        stroke: #ccc;
+        stroke-opacity: 0.5; }
+      html body #retention #retention_container .retention_overlay {
+        fill: none;
+        pointer-events: all;
+        cursor: pointer; }
+      html body #retention #retention_container .retentiontt_line {
+        stroke: #003663;
+        stroke-dasharray: 2,5;
+        stroke-width: 2;
+        opacity: 0.5; }
+      html body #retention #retention_container .retentiontt_rect {
+        position: absolute;
+        z-index: 10;
+        top: 8rem;
+        border-radius: 5px;
+        width: 12rem;
+        background: white;
+        opacity: 0.9;
+        pointer-events: none; }
+        html body #retention #retention_container .retentiontt_rect .tipHeader {
+          color: white;
+          padding: 5px;
+          background: #003663;
+          font-weight: bold;
+          font-style: italic;
+          font-size: 16px;
+          border-radius: 5px 5px 0 0; }
+        html body #retention #retention_container .retentiontt_rect .tipInfo {
+          margin-left: 5px;
+          color: #003663;
+          font-size: 14px; }
+          html body #retention #retention_container .retentiontt_rect .tipInfo .tipNum {
+            color: #494949; }
+    html body #booklet {
+      margin-bottom: 5rem; }
+      html body #booklet .ctaBtn {
+        margin-top: 2.5vw;
+        font-size: 2rem; }
