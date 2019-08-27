@@ -32,7 +32,7 @@ var bar_yAxis = d3.axisLeft().scale(bar_yScale); //lines
 var growthLine = d3.line().x(function (d) {
   return model_xScale(d.SCHOOL_YEAR);
 }).y(function (d) {
-  return model_yScale(d.LAST_YEAR_ENROLMENT);
+  return model_yScale(d.CURRENT_YEAR_ENROLMENT);
 }); //smooth the line
 //tirct controls
 
@@ -64,7 +64,7 @@ d3.csv('./assets/raw_data/key_drivers.csv', function (error, data) {
   var yAxis_total_label = 'Total Enrolment in Funded FTE'; //get the array of keys (drivers)
 
   var driverNames = d3.keys(data[0]).filter(function (key) {
-    if (key !== 'ABBREV' && key !== 'DISTRICT' && key !== 'SCHOOL_YEAR' && key !== 'LAST_YEAR_ENROLMENT') {
+    if (key !== 'ABBREV' && key !== 'DISTRICT' && key !== 'SCHOOL_YEAR' && key !== 'CURRENT_YEAR_ENROLMENT') {
       return key;
     }
   });
@@ -127,7 +127,7 @@ d3.csv('./assets/raw_data/key_drivers.csv', function (error, data) {
     //data must be grouped by year, inside data grouped by drivers 
 
     districtData.forEach(function (d) {
-      d.LAST_YEAR_ENROLMENT = parseInt(d.LAST_YEAR_ENROLMENT);
+      d.CURRENT_YEAR_ENROLMENT = parseInt(d.CURRENT_YEAR_ENROLMENT);
       d.drivers = driverNames.map(function (name) {
         return {
           name: name,
@@ -145,7 +145,7 @@ d3.csv('./assets/raw_data/key_drivers.csv', function (error, data) {
 
     bar_xScale2.domain(driverNames).rangeRound([0, bar_xScale1.bandwidth()]);
     model_yScale.domain([0, d3.max(districtData, function (d) {
-      return d.LAST_YEAR_ENROLMENT;
+      return d.CURRENT_YEAR_ENROLMENT;
     })]); // get min and max from multi columns (drivers)
     //first find out lowest/highest population amount throught the years then finds out largest number of drivers of that year
 
@@ -228,7 +228,7 @@ d3.csv('./assets/raw_data/key_drivers.csv', function (error, data) {
     .attr("cx", function (d) {
       return model_xScale(d.SCHOOL_YEAR);
     }).attr("cy", function (d) {
-      return model_yScale(d.LAST_YEAR_ENROLMENT);
+      return model_yScale(d.CURRENT_YEAR_ENROLMENT);
     }).attr("r", 5).on("mouseenter", function (d) {
       //toolOver is the event handler
       console.log(d.ABBREV);
@@ -261,7 +261,7 @@ d3.csv('./assets/raw_data/key_drivers.csv', function (error, data) {
         //$(this).parent().toggleClass('active');
 
         var driverNames = d3.keys(data[0]).filter(function (key) {
-          if (key !== 'ABBREV' && key !== 'DISTRICT' && key !== 'SCHOOL_YEAR' && key !== 'LAST_YEAR_ENROLMENT' && key !== 'drivers') {
+          if (key !== 'ABBREV' && key !== 'DISTRICT' && key !== 'SCHOOL_YEAR' && key !== 'CURRENT_YEAR_ENROLMENT' && key !== 'drivers') {
             return key;
           }
         }); //for each js object, generate a new key called drivers
@@ -270,7 +270,7 @@ d3.csv('./assets/raw_data/key_drivers.csv', function (error, data) {
         //data must be grouped by year, inside data grouped by drivers 
 
         districtData.forEach(function (d) {
-          d.LAST_YEAR_ENROLMENT = parseInt(d.LAST_YEAR_ENROLMENT);
+          d.CURRENT_YEAR_ENROLMENT = parseInt(d.CURRENT_YEAR_ENROLMENT);
           d.drivers = driverNames.map(function (name) {
             return {
               name: name,
@@ -300,7 +300,7 @@ d3.csv('./assets/raw_data/key_drivers.csv', function (error, data) {
 
         bar_xScale2.domain(driverNames).rangeRound([0, bar_xScale1.bandwidth()]);
         model_yScale.domain([0, d3.max(districtData, function (d) {
-          return d.LAST_YEAR_ENROLMENT;
+          return d.CURRENT_YEAR_ENROLMENT;
         })]); // get min and max from multi columns (drivers)
         //first find out lowest/highest population amount throught the years then finds out largest number of drivers of that year
 
@@ -325,7 +325,7 @@ d3.csv('./assets/raw_data/key_drivers.csv', function (error, data) {
         dots.data(districtData).transition().duration(1500).attr("cx", function (d) {
           return model_xScale(d.SCHOOL_YEAR);
         }).attr("cy", function (d) {
-          return model_yScale(d.LAST_YEAR_ENROLMENT);
+          return model_yScale(d.CURRENT_YEAR_ENROLMENT);
         });
         zero_line.y(function (d) {
           return bar_yScale(d['y']);
@@ -434,7 +434,7 @@ function model_toolMove(mx, my, data) {
   if (data.ABBREV) {
     return tooltip_line.style("top", my + "px").style("left", mx - 10 + "px").html(function () {
       var content = "<div class='tipHeader'><b>Year: </b>" + data.SCHOOL_YEAR + "</div>";
-      content += "<div class='tipInfo'>Total Enrolment: <span class='tipNum'>" + Math.round(data.LAST_YEAR_ENROLMENT).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span></div>";
+      content += "<div class='tipInfo'>Total Enrolment: <span class='tipNum'>" + Math.round(data.CURRENT_YEAR_ENROLMENT).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span></div>";
       return content;
     });
   } else {

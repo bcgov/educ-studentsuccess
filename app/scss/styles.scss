@@ -22,10 +22,6 @@ $btn-hover-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0
 //Bootstrap sass files
 @import"node_modules/bootstrap/scss/bootstrap";
 
-* {
-  border: 1px solid red;
-}
-
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
   /* IE10+ CSS styles go here */
   html body #aniContainer #animationMap .svg-content {
@@ -247,7 +243,7 @@ $btn-hover-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.14), 0 9px 10px 0 rgba(0, 0, 0, 0
 @media only screen and (min-width : 1200px) {
   
   #content_wrapper{
-    background-position: 4vw 550px, 82vw 1350px , 4vw 5650px;
+    background-position: 4vw 550px, 82vw 1450px , 4vw 5850px;
   }
   
   h2{
