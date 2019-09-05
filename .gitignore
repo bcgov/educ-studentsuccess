@@ -10,6 +10,7 @@ laravel.log
 # Composer
 /php-bin/vendor
 
+
 # Node for front-end tooling
 /node_modules
 
@@ -35,3 +36,59 @@ bundle.js
 
 # MS Office tmp files
 workfiles/~*
+
+# Dreamweaver notes
+/php-bin/_notes
+/php-bin/.settings/_notes
+php-bin/app/Console/Commands/_notes/dwsync.xml
+php-bin/bootstrap/_notes/dwsync.xml
+php-bin/app/Console/_notes/dwsync.xml
+php-bin/app/Events/_notes/dwsync.xml
+php-bin/app/Exceptions/_notes/dwsync.xml
+php-bin/app/Helpers/_notes/dwsync.xml
+php-bin/app/Http/Controllers/Auth/_notes/dwsync.xml
+php-bin/app/Http/Controllers/_notes/dwsync.xml
+php-bin/app/Http/Middleware/_notes/dwsync.xml
+php-bin/app/Http/Requests/_notes/dwsync.xml
+php-bin/app/Http/_notes/dwsync.xml
+php-bin/app/Jobs/_notes/dwsync.xml
+php-bin/app/Listeners/_notes/dwsync.xml
+php-bin/app/Policies/_notes/dwsync.xml
+php-bin/app/Presenters/_notes/dwsync.xml
+php-bin/app/Providers/_notes/dwsync.xml
+php-bin/app/_notes/dwsync.xml
+php-bin/config/_notes/dwsync.xml
+php-bin/database/_notes/dwsync.xml
+php-bin/database/factories/_notes/dwsync.xml
+php-bin/database/migrations/_notes/dwsync.xml
+php-bin/database/seeds/_notes/dwsync.xml
+php-bin/resources/assets/js/_notes/dwsync.xml
+php-bin/resources/assets/js/vendor/_notes/dwsync.xml
+php-bin/app/Http/_notes/dwsync.xml
+php-bin/app/Http/Controllers/_notes/dwsync.xml
+php-bin/resources/views/errors/_notes/dwsync.xml
+php-bin/resources/assets/scss/_notes/dwsync.xml
+php-bin/resources/assets/scss/bcgov/_notes/dwsync.xml
+php-bin/resources/assets/scss/breakpoints/_notes/dwsync.xml
+php-bin/resources/assets/scss/charts/_notes/dwsync.xml
+php-bin/resources/assets/scss/components/_notes/dwsync.xml
+php-bin/resources/assets/scss/vendor/_notes/dwsync.xml
+php-bin/resources/lang/en/_notes/dwsync.xml
+php-bin/resources/views/_notes/dwsync.xml
+php-bin/resources/views/components/_notes/dwsync.xml
+php-bin/resources/views/components/_notes/dwsync.xml
+php-bin/resources/assets/scss/_notes/dwsync.xml
+php-bin/resources/assets/scss/breakpoints/_notes/dwsync.xml
+php-bin/resources/assets/scss/components/_notes/dwsync.xml
+php-bin/resources/lang/en/_notes/dwsync.xml
+php-bin/resources/views/pages/_notes/dwsync.xml
+www/css/_notes/dwsync.xml
+
+php-bin/app/Http/Controllers/_notes/dwsync.xml
+www/js/d3_js/_notes/dwsync.xml
+www/css/enrolmentCSS/_notes/dwsync.xml
+php-bin/resources/views/components/_notes/dwsync.xml
+php-bin/resources/assets/scss/_notes/dwsync.xml
+php-bin/resources/assets/scss/breakpoints/_notes/dwsync.xml
+php-bin/resources/assets/scss/components/_notes/dwsync.xml
+php-bin/resources/lang/en/_notes/dwsync.xml

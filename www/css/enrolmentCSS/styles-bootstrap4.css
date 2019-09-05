@@ -7020,8 +7020,6 @@ a.text-dark:hover, a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6; } }
 
-
-
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
   /* IE10+ CSS styles go here */
   html body #aniContainer #animationMap .svg-content {
@@ -7141,7 +7139,7 @@ a.text-dark:hover, a.text-dark:focus {
 /* extra large Devices, Desktops */
 @media only screen and (min-width: 1200px) {
   #content_wrapper {
-    background-position: 4vw 550px, 82vw 1350px , 4vw 5650px; }
+    background-position: 4vw 550px, 82vw 1450px , 4vw 5750px; }
   h2 {
     font-size: 3.8rem; }
   h3 {
@@ -7418,7 +7416,7 @@ html {
       margin-top: -140px;
       /* negative fixed header height */ }
     html body #intro {
-      margin-top: 15rem; }
+      margin-top: 8rem; }
       html body #intro a.fte_defin {
         color: #5091CD; }
       html body #intro .intro_header {

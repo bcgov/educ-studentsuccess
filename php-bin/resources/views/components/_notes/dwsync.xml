@@ -4,4 +4,14 @@
 <file name="about-this-website.blade.php" server="morpheus.educ.gov.bc.ca//dsk01/app/webprd1/stsuccessprd1/" local="131935360545342491" remote="131941414300000000" Dst="1" />
 <file name="sd-charts-menu.blade.php" server="trinity.educ.gov.bc.ca//dsk01/app/webtst1/stsuccesstst1/" local="132077836671456142" remote="132077838770000000" Dst="2" />
 <file name="sd-charts-menu.blade.php" server="morpheus.educ.gov.bc.ca//dsk01/app/webprd1/stsuccessprd1/" local="132077836671456142" remote="132077840280000000" Dst="2" />
+<file name="chart-legend.blade.php" server="trinity.educ.gov.bc.ca//dsk01/app/webtst1/stsuccesstst1/" local="132025810271655863" remote="132114106350000000" Dst="2" />
+<file name="chart-legend_fsa.blade.php" server="trinity.educ.gov.bc.ca//dsk01/app/webtst1/stsuccesstst1/" local="131878238331388178" remote="132114106350000000" Dst="2" />
+<file name="footer.blade.php" server="trinity.educ.gov.bc.ca//dsk01/app/webtst1/stsuccesstst1/" local="132077867123017994" remote="132114106350000000" Dst="2" />
+<file name="header.blade.php" server="trinity.educ.gov.bc.ca//dsk01/app/webtst1/stsuccesstst1/" local="131878238331478422" remote="132114106350000000" Dst="2" />
+<file name="how-to-read-these-lollipop-charts.blade.php" server="trinity.educ.gov.bc.ca//dsk01/app/webtst1/stsuccesstst1/" local="131878238331518532" remote="132114106350000000" Dst="2" />
+<file name="report-meta-descriptions.blade.php" server="trinity.educ.gov.bc.ca//dsk01/app/webtst1/stsuccesstst1/" local="132025164873936541" remote="132114106350000000" Dst="2" />
+<file name="school-charts-menu.blade.php" server="trinity.educ.gov.bc.ca//dsk01/app/webtst1/stsuccesstst1/" local="131878238331678953" remote="132114106350000000" Dst="2" />
+<file name="school-directory-results-table.blade.php" server="trinity.educ.gov.bc.ca//dsk01/app/webtst1/stsuccesstst1/" local="131878238331749124" remote="132114106350000000" Dst="2" />
+<file name="school-meta.blade.php" server="trinity.educ.gov.bc.ca//dsk01/app/webtst1/stsuccesstst1/" local="131878238331799298" remote="132114106350000000" Dst="2" />
+<file name="sd-meta.blade.php" server="trinity.educ.gov.bc.ca//dsk01/app/webtst1/stsuccesstst1/" local="131878238331929605" remote="132114106350000000" Dst="2" />
 </dwsync>
