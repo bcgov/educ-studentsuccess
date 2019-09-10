@@ -179,6 +179,7 @@ return array (
   'particular_reports_heading1' => 'Reports for Particular Populations of Students',
   'abo_how_are_we_doing_heading' => 'Aboriginal Students: How Are We Doing?',
   'how_are_we_doing_report_heading' => 'Children and Youth in Care: How Are we Doing?',
+  'enrolment app heading' => 'Student Enrolment Report Application',
   'glossary_heading' => 'Glossary',
   'glossary_heading_long' => 'Reporting on K-12 Glossary of Terms',
   'glossary_inline' => 'glossary',

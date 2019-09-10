@@ -65,23 +65,22 @@
 		 
       {{-- This is an excetion for Mission School District. See also: SchoolDistrictsController@getSdReport and pages.sd-report --}}
       @if ($school_district->sd != '099')		  
-        <a id="ahawd-download-report-link" data-sd="{{ $school_district->sd }}" href="https://www2.gov.bc.ca/assets/gov/education/administration/kindergarten-to-grade-12/reports/ab-hawd/ab-hawd-school-district-{{ $school_district->sd }}.pdf" target="_blank"><img alt="Image of a chart depicting Aboriginal: How Are We Doing reports." class="toc-chart-thumbnail" src="/img/charts/ahawd.png" />
+        <a id="ahawd-download-report-link" data-sd="{{ $school_district->sd }}" href="https://www2.gov.bc.ca/assets/gov/education/administration/kindergarten-to-grade-12/reports/ab-hawd/ab-hawd-school-district-{{ $school_district->sd }}.pdf" target="_blank"><img alt="Image of a chart depicting Indigenous: How Are We Doing reports." class="toc-chart-thumbnail" src="/img/charts/ahawd.png" />
         {{ trans('esdr2.abo_how_are_we_doing_heading') }}</a> (PDF)
 	  @else  
-        <a id="ahawd-download-report-link" data-sd="{{ $school_district->sd }}" href="https://www2.gov.bc.ca/assets/gov/education/administration/kindergarten-to-grade-12/reports/ab-hawd/ab-hawd-school-district-public.pdf" target="_blank"><img alt="Image of a chart depicting Aboriginal: How Are We Doing reports." class="toc-chart-thumbnail" src="/img/charts/ahawd.png" />
-        {{ trans('esdr2.abo_how_are_we_doing_heading') }}</a> (PDF)
+        <a id="ahawd-download-report-link" data-sd="{{ $school_district->sd }}" href="https://www2.gov.bc.ca/assets/gov/education/administration/kindergarten-to-grade-12/reports/ab-hawd/ab-hawd-school-district-public.pdf" target="_blank"><img alt="Image of a chart depicting Indigenous: How Are We Doing reports." class="toc-chart-thumbnail" src="/img/charts/ahawd.png" />
+        {{ trans('esdr2.abo_how_are_we_doing_heading') }}</a>XXXXXXXXXS (PDF)
 	  @endif		  
       </li>
       <li class="toc-chart">
       @if ($school_district->sd == '099')	
-        <a id="hawd-download-report-link" href="https://www2.gov.bc.ca/assets/download/041C7A8EDD2A4CF880AAEAD05CC7A3E0"><img alt="Image of the cover for How are we doing report." class="toc-chart-thumbnail" src="/img/charts/CYICthumb.png" />
+        <a id="hawd-download-report-link" href="https://www2.gov.bc.ca/gov/content?id=448942935B6943DCAC404E5972226C81"><img alt="Image of the cover for How are we doing report." class="toc-chart-thumbnail" src="/img/charts/CYICthumb.png" />
           {{ trans('esdr2.how_are_we_doing_report_heading') }}</a> (PDF)
       @endif    
       </li>
       <li class="toc-chart">
       @if ($school_district->sd == '099')
         <a id="hawd-download-report-link" href="/enrolment-app"><img alt="Image of 2 students." class="toc-chart-thumbnail" src="/img/Icon_Student_Enrollment.png" />
-		  {{ trans('esdr2.enrolment_app_heading') }}
          </a>
       @endif  
       </li>
