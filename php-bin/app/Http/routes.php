@@ -71,8 +71,3 @@ Route::get('/enrolment-app', 'EnrolmentController@showEnrolment');
 
 // Returns all schools and school districts with mincode (or sd) and name via JSON
 Route::get('/api/v1/allSchoolsWithSchoolDistricts.json', 'SchoolsController@getAllSchoolsAndSchoolDistrictsJSON');
-
-Route::get('500', function()
-{
-    abort(500);
-});
