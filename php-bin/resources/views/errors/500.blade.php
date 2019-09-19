@@ -39,7 +39,7 @@
     <div class="aqua-bg fill-viewport error-page" id="hero">
       <div class="restrain">
 
-        <h2 id="report-title" class="center">503 Error</h2>
+        <h2 id="report-title" class="center">500 Error</h2>
         <p id="tagline">
           This website is currently offline. You can try refreshing the page.<br><br>
           If the problem persists feel free to <a href="mailto:EDUCWEBS@Victoria1.gov.bc.ca">contact us</a>.<br><br>
