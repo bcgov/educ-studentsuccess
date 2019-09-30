@@ -21,26 +21,23 @@
 
 </head>
 
-<body>
+<body style="background-color:#17d0bf">
 
   <div id="header">
-    <div class="restrain">
       <div id="logo">
         <a href="http://www2.gov.bc.ca/"><img src="/img/gov3_bc_logo.png" alt="Government of B.C." title="Government of B.C."></a>
       </div>
-      <h1 class="visuallyhidden">Enhanced District Reporting</h1>
-    </div>
   </div><!-- /#header -->
 
-  <div id="secondary-nav" class="contracted"></div>
+  <div id="secondary-nav" class="contracted restrain"></div>
 
   <main class="main-content">
     
     <div class="aqua-bg fill-viewport error-page" id="hero">
       <div class="restrain">
 
-        <h2 id="report-title" class="center">500 Error</h2>
-        <p id="tagline">
+        <h2 id="report-title" class="center" style="color:white">500 Error</h2>
+        <p id="tagline" style="color:white">
           This website is currently offline. You can try refreshing the page.<br><br>
           If the problem persists feel free to <a href="mailto:EDUCWEBS@Victoria1.gov.bc.ca">contact us</a>.<br><br>
         </p>

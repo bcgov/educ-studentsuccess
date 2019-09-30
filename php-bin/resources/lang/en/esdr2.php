@@ -27,7 +27,7 @@ return [
   'about_copy5' => 'See strategic planning info that schools & districts use',	
   'about_copy6' => 'We’re excited to share this information in a more meaningful way because it also plays an important part in driving continuous improvements under ',
   'about_copy7' => 'B.C.\'s Framework for Enhancing Student Learning',
-  'about_copy8' => 'To learn more about student learning in your area, please contact your',
+  'about_copy8' => 'To learn more about student learning in your area, please contact',
   'about_copy9' => 'your local school or district',
   'about_copy10' => 'For detailed descriptions of terms used on this site, please refer to our ',	
   'about_copy11' => 'glossary',		
