@@ -69,7 +69,7 @@
         {{ trans('esdr2.abo_how_are_we_doing_heading') }}</a> (PDF)
 	  @else  
         <a id="ahawd-download-report-link" data-sd="{{ $school_district->sd }}" href="https://www2.gov.bc.ca/assets/gov/education/administration/kindergarten-to-grade-12/reports/ab-hawd/ab-hawd-school-district-public.pdf" target="_blank"><img alt="Image of a chart depicting Indigenous: How Are We Doing reports." class="toc-chart-thumbnail" src="/img/charts/ahawd.png" />
-        {{ trans('esdr2.abo_how_are_we_doing_heading') }}</a>XXXXXXXXXS (PDF)
+        {{ trans('esdr2.abo_how_are_we_doing_heading') }}</a> (PDF)
 	  @endif		  
       </li>
       <li class="toc-chart">

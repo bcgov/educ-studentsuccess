@@ -18,4 +18,22 @@
 <file name="sd_going_2018.csv" server="trinity.educ.gov.bc.ca//dsk01/app/webtst1/stsuccesstst1/" local="132096686624026216" remote="132104497830000000" Dst="2" />
 <file name="transition_district.csv" server="trinity.educ.gov.bc.ca//dsk01/app/webtst1/stsuccesstst1/" local="132096686624265582" remote="132104497830000000" Dst="2" />
 <file name="transition_province.csv" server="trinity.educ.gov.bc.ca//dsk01/app/webtst1/stsuccesstst1/" local="132096686624515119" remote="132104497830000000" Dst="2" />
+<file name="demographics.csv" server="morpheus.educ.gov.bc.ca//dsk01/app/webprd1/stsuccessprd1/" local="132096686620107875" remote="132145240140000000" Dst="2" />
+<file name="grouped.csv" server="morpheus.educ.gov.bc.ca//dsk01/app/webprd1/stsuccessprd1/" local="132096686620452834" remote="132145240140000000" Dst="2" />
+<file name="key_drivers.csv" server="morpheus.educ.gov.bc.ca//dsk01/app/webprd1/stsuccessprd1/" local="132113953518411384" remote="132145240140000000" Dst="2" />
+<file name="retention_district.csv" server="morpheus.educ.gov.bc.ca//dsk01/app/webprd1/stsuccessprd1/" local="132096686620971449" remote="132145240150000000" Dst="2" />
+<file name="retention_province.csv" server="morpheus.educ.gov.bc.ca//dsk01/app/webprd1/stsuccessprd1/" local="132096686621350494" remote="132145240150000000" Dst="2" />
+<file name="sd_coming_2014.csv" server="morpheus.educ.gov.bc.ca//dsk01/app/webprd1/stsuccessprd1/" local="132096686621550264" remote="132145240150000000" Dst="2" />
+<file name="sd_coming_2015.csv" server="morpheus.educ.gov.bc.ca//dsk01/app/webprd1/stsuccessprd1/" local="132096686621819476" remote="132145240150000000" Dst="2" />
+<file name="sd_coming_2016.csv" server="morpheus.educ.gov.bc.ca//dsk01/app/webprd1/stsuccessprd1/" local="132096686622068507" remote="132145240150000000" Dst="2" />
+<file name="sd_coming_2017.csv" server="morpheus.educ.gov.bc.ca//dsk01/app/webprd1/stsuccessprd1/" local="132096686622307863" remote="132145240150000000" Dst="2" />
+<file name="sd_coming_2018.csv" server="morpheus.educ.gov.bc.ca//dsk01/app/webprd1/stsuccessprd1/" local="132096686622547990" remote="132145240150000000" Dst="2" />
+<file name="sd_going_2013.csv" server="morpheus.educ.gov.bc.ca//dsk01/app/webprd1/stsuccessprd1/" local="132096686622787339" remote="132145240150000000" Dst="2" />
+<file name="sd_going_2014.csv" server="morpheus.educ.gov.bc.ca//dsk01/app/webprd1/stsuccessprd1/" local="132096686623016726" remote="132145240150000000" Dst="2" />
+<file name="sd_going_2015.csv" server="morpheus.educ.gov.bc.ca//dsk01/app/webprd1/stsuccessprd1/" local="132096686623246090" remote="132145240150000000" Dst="2" />
+<file name="sd_going_2016.csv" server="morpheus.educ.gov.bc.ca//dsk01/app/webprd1/stsuccessprd1/" local="132096686623495640" remote="132145240150000000" Dst="2" />
+<file name="sd_going_2017.csv" server="morpheus.educ.gov.bc.ca//dsk01/app/webprd1/stsuccessprd1/" local="132096686623746969" remote="132145240150000000" Dst="2" />
+<file name="sd_going_2018.csv" server="morpheus.educ.gov.bc.ca//dsk01/app/webprd1/stsuccessprd1/" local="132096686624026216" remote="132145240150000000" Dst="2" />
+<file name="transition_district.csv" server="morpheus.educ.gov.bc.ca//dsk01/app/webprd1/stsuccessprd1/" local="132096686624265582" remote="132145240150000000" Dst="2" />
+<file name="transition_province.csv" server="morpheus.educ.gov.bc.ca//dsk01/app/webprd1/stsuccessprd1/" local="132096686624515119" remote="132145240150000000" Dst="2" />
 </dwsync>
