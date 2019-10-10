@@ -56,7 +56,7 @@
     <div class="slide-content restrain">
 
       @if ($report_slug == 'contextual-information')
-        
+       
         <h3 class="slide-title light-blue">{{ trans('esdr2.1_ComDemo') }}</h3>
         <iframe scrolling="no" id="frameId-5" class="tableau-embed" src="//public.tableau.com/views/ESDR1/1_ComDemo?:showVizHome=no&:display_share=no&:embed=true&:toolbar=no&:device=desktop&SD={{ $school_district->sd }},099"></iframe>
 

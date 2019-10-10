@@ -129,7 +129,7 @@ return [
   'my_ed_bc_copy1' => 'For information on student level reporting, please refer to MyEdBC.',
   'site_title' => 'B.C. Education System Performance',
   'district_office_label' => 'District Office',
-  'contextual_info_copy' => 'When reviewing this school system information, it is important to consider the factors that can influence student learning. Below are longitudinal and demographic student enrolment information that assists with planning and improvement efforts.',
+  'contextual_info_copy' => 'When reviewing this school system information, it is important to consider the factors that can influence student learning. Below are longitudinal and demographic student enrolment information that assists with planning and improvement efforts. All enrollment numbers are based on September 30th data collection.',
   'early_development_heading' => 'The Early Development Instrument',
   'early_development_copy' => 'The Early Development Instrument (EDI) is a questionnaire completed by kindergarten teachers from across British Columbia. The questionnaire measures five core areas of early child development. These areas are good predictions of adult health, education and social outcomes. Listed below are the percentages of students considered vulnerable in each of these core areas.',
   'learn_more_devel_link' => 'Learn more about the EDI',

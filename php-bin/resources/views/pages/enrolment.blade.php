@@ -12,7 +12,7 @@
         <span class="line bottom"></span>
       </div>
     </div>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent" style="display:flex!important">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" href="#enrolment_model">The Model</a>
