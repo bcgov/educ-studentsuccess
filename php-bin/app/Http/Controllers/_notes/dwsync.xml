@@ -7,4 +7,5 @@
 <file name="SchoolDistrictsController.php" server="trinity.educ.gov.bc.ca//dsk01/app/webtst1/stsuccesstst1/" local="131878238322645008" remote="132114106260000000" Dst="2" />
 <file name="SchoolsController.php" server="trinity.educ.gov.bc.ca//dsk01/app/webtst1/stsuccesstst1/" local="131878238322705167" remote="132114106260000000" Dst="2" />
 <file name="EnrolmentController.php" server="morpheus.educ.gov.bc.ca//dsk01/app/webprd1/stsuccessprd1/" local="132096704827929317" remote="132145237380000000" Dst="2" />
+<file name="DistrictTestController.php" server="trinity.educ.gov.bc.ca//dsk01/app/webtst1/stsuccesstst1/" local="132164269004214790" remote="132164276600000000" Dst="2" />
 </dwsync>

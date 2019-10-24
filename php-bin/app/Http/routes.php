@@ -63,8 +63,11 @@ Route::get('/school-district/{sdID}/report/{report_type}', 'SchoolDistrictsContr
 // Glossary /glossary
 Route::get('/glossary', 'GlossaryController@getAllTerms');
 
-// Glossary /glossary
+// Enrolment app 
 Route::get('/enrolment-app', 'EnrolmentController@showEnrolment');
+
+// Enrolment app 
+Route::get('/district-test', 'DistrictTestController@showDistrictTest');
 /**
  * API
  */
