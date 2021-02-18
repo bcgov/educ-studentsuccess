@@ -42,8 +42,6 @@ grunt
 
 ### OCI Installation (aka Oracle Hell)
 
-I would have rather eaten 10 spiders in my sleep than figure out the installation of the PHP Oracle drivers for this project.
-
 ESDR2 uses [the laravel-oci8 Oracle driver](https://github.com/yajra/laravel-oci8) for integration with [Eloquent](https://laravel.com/docs/5.2/eloquent)/Laravel.
 
 If you are using Windows for development and PHP version 5.6.x, then you will probably have to do [the following](https://stackoverflow.com/a/30782503/1171790):
@@ -59,7 +57,7 @@ More information around the driver install, can be found on [Oracel's website](h
 
 ### Folder Structure
 
-The site does not follow a classic Laravel folder structure because the people who administer the servers like to keep things the same as other PHP projects on the server, all the time.
+The site does not follow a classic Laravel folder structure.
 
 Normally, a Laravel application has a `public` sub-folder where one would point Apache's web root to. In our case, this is the `www` folder at the top level of the project. The `php-bin` folder (also at the top level of the project) holds all of the application code.
 
@@ -77,7 +75,7 @@ You can now upload a unique `.env` for the specific enviroment to `php-bin/.env`
 
 ## Theming and Front-end JavaScript
 
-This website tries to follow the BC Government's suggested look and feel. It also attempts to comply with GCPE's rules.
+This website follows the B.C. Government's design guidelines.
 
 Running `grunt watch` from the project root will watch JS and Sass files located in `php-bin/resources/assets` and automatically compile them to `style.css` and `bundle.js` located in the `www` folder.
 
