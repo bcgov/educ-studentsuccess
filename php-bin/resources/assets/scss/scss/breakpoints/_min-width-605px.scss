@@ -1,0 +1,168 @@
+@media only screen and (min-width: $tablet) {
+
+  // TYPOGRAPHY
+  .slide-title {
+    margin-bottom: 4rem;
+  }
+
+  // HEADER
+  #secondary-nav {
+    top: 7rem;
+    height: initial;
+  }
+  #main-dropdown-wrapper,
+  #logo {
+    padding-left: 0;
+  }
+  #language-switcher {
+    float: right;
+  }
+
+  // HOMEPAGE
+  #report-title {
+    font-size: 5rem;
+    padding-top: 40rem;
+    /*background: url('../img/happy_small_people.png') center 17px no-repeat transparent;*/
+    background-size: 100%; 
+    padding-bottom: 0;
+    min-height: initial;
+    margin-top: 0;
+  }
+  .top-stripe{
+    margin: -40px -90px;
+    padding-bottom: 48px;
+  }
+  
+  .bottom-stripe{
+    margin: 0px -90px;
+    padding-top: 1px;
+    padding-bottom: 75px;
+  }
+  #tagline {
+    font-size: 2.5rem;
+    line-height: 1.5;
+    padding: 3rem 0 1rem;
+  }
+  #hero {
+    padding-bottom: 6rem; 
+    background: url('../img/header_image.png') no-repeat center top -4px $aqua;
+  }
+  #main-search {
+    font-size: 2rem;
+    padding: 2rem;
+  }
+  #main-search-wrapper,
+  #main-search-button-wrapper {
+    padding: 0;
+  }
+  #clear-search {
+    bottom: -10px;
+    right: -138px;
+  }
+  .easy-autocomplete-container ul li,.easy-autocomplete-container ul .eac-category,
+  #clear-search,
+  #main-search {
+    font-size: 2rem;
+  }
+
+  // CHARTS MENU
+  .toc-chart {
+    width: 23%;
+    display: inline-block;
+    vertical-align: middle;
+    min-height: 160px;
+    margin-right: 1%;
+
+    .toc-chart-thumbnail {
+      border: 1px solid #ccc;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  // IMAGES
+  .key-image { 
+    margin: -3rem auto 1rem auto;
+    display: inline; // reset
+    float: right;
+  }
+
+  // SD SUB NAV
+  .sd-sub-nav {
+    display: flex;
+    align-items: center;
+    padding-top: 0;
+
+    .button {
+      min-width: 1px; // reset
+      flex: 1;
+      font-size: 1.25rem;
+      margin: 2rem 1rem 0 1rem;
+
+      &:first-of-type {
+        margin-left: 0;
+      }
+      &:last-of-type {
+        margin-right: 0;
+      }
+    }
+  }
+
+  // DIRECTORY SUB MENU/HEADING
+  .directory-masthead {
+    min-height: 19rem;
+    padding-top: 1rem;
+  }
+  #directory-main-heading {
+    margin-top: 3rem;
+  }
+  #directory-sort-wrapper {
+    //margin-top: calc(3rem - 0.5rem); // 0.5rem is the margin-top of the buttons inside this wrapper.
+  }
+  #directory-sort-wrapper {
+    display: block;
+    font-size: 3rem;
+
+    .button {
+      display: inline-block;
+    }
+  }
+
+  // MISC
+  .fill-viewport {
+    min-height: calc(100vh - 250px) !important; 
+  }
+  .halfs.search-right.all-districts {
+    margin-top: 8px;
+    border-radius: 1em;
+    width: 100%;
+  }
+  #main-search {
+    display: block;
+    margin: auto;
+    width: 100%;
+  }
+  .main-title {
+    height: auto;
+    width: 100%;
+    padding-top: 33px;
+  }
+  .button-contact {
+    padding: 0px 1rem 8px 1em;
+    background: #036;
+    border: 0;
+    color: white;
+    font-size: 1rem;
+    border-radius: 1rem;
+    text-align: center;
+    display: block;
+    margin: 2.5rem auto 7em auto;
+    vertical-align: middle;
+    min-width: 143px;
+    width: 458px;
+  }
+  #eac-container-main-search {
+    left: -8px;
+    margin-top: 40px;
+    width: 100%;
+}
+} // END MEDIA QUERY

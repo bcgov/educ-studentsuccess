@@ -1,0 +1,38 @@
+// was #74c3ae
+$aqua:  #19c9bc; // "Happy People" graphic background color.
+$green_accent: #23cb83;
+$ministry_blue: #003366;
+$ministry_blue_light: #4b91cd;
+$ministry_grey: #f1f0f0;
+$ministry_accent: rgb(62, 85, 139);
+$gov-gold: #fcba19;
+$white: #ffffff;
+$background_blue: #4791ce;
+
+.aqua-bg {
+  background-color: $aqua;
+}
+
+.blue-bg {
+  background-color: $background_blue;
+}
+
+.light-gray-bg {
+  background-color: $ministry_grey;
+}
+
+.darker-grey-bg {
+  background-color: darken($ministry_grey, 4%);
+}
+
+.ministry-blue {
+  color: $ministry_blue;
+}
+
+.light-blue {
+  color: $ministry_blue_light;
+}
+
+.white {
+  color: $white;
+}

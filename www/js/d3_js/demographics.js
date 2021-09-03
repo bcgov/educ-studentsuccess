@@ -123,7 +123,8 @@ $(document).ready(function () {
         var _loop2 = function _loop2() {
           var dist = _step.value;
           var district = data.filter(function (d) {
-            return d.DISTRICT == dist.substring(2, 4);
+            return d.DISTRICT == dist.substring(2, 4)
+            debugger;
           }); // format the data
 
           district.forEach(function (d) {

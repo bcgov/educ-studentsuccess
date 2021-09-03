@@ -1,0 +1,37 @@
+#about-this-website {
+  padding-top: 2rem;
+}
+
+#about-this-website h2 {
+  margin: 2rem 0;
+  padding-top:70px;
+}
+
+#about-this-website a {
+  font-weight: bold;
+  font-size: 18px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+#about-this-website .button-contact a {
+  font-weight: bold;
+  color: white;
+  font-size: 18px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+#about-this-website ul {
+  padding: initial;
+  margin: initial;
+  padding-left: 1.5rem;
+}
+
+#about-this-website li {
+  list-style: disc;
+  padding: initial;
+}

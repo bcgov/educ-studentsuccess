@@ -1,0 +1,91 @@
+// The main seach input
+#main-search {
+  display: block;
+  margin: auto;
+  width: 100%;
+}
+
+// Other (reusable) search inputs
+input.search {
+  font-size: 1.5rem;
+  color: darken($ministry-grey, 33%); 
+  //border: 1px solid rgb(204, 204, 204);
+  padding: 1rem 2rem;
+
+  // remove the addtional "x" in IE
+  &::-ms-clear {
+    display: none;
+  }
+}
+
+/**
+ * Search placeholder..
+ * Why so many declarations?? These have be declared IN A *SPECIAL* WAY:
+ * https://stackoverflow.com/a/2610741/1171790
+ */
+#main-search::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+  color: darken($ministry-grey, 33%); 
+}
+#main-search:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  color: darken($ministry-grey, 33%); 
+  opacity: 1;
+}
+#main-search::-moz-placeholder { /* Mozilla Firefox 19+ */
+  color: darken($ministry-grey, 33%); 
+  opacity: 1;
+}
+#main-search:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: darken($ministry-grey, 33%); 
+}
+#main-search::-ms-input-placeholder { /* Microsoft Edge */
+  color: darken($ministry-grey, 33%); 
+}
+
+// The little "x" that clears the main search
+#clear-search {
+  font-size: 1.5rem;
+  position: relative;
+  float: right;
+  bottom: -10px;
+  z-index: 1;
+  right: 10px;
+  cursor: pointer;
+  color: darken($ministry-grey, 33%);
+}
+
+// Overwrites AutoComplete.js out-of-the-box CSS
+.easy-autocomplete.eac-square input {
+  font-style: normal;
+}
+.easy-autocomplete-container ul {
+  border-top: 0;
+}
+.easy-autocomplete-container ul li,
+.easy-autocomplete-container ul .eac-category {
+  font-size: 1.5rem;
+  color: darken($ministry-grey, 33%);
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+.easy-autocomplete-container ul, 
+.easy-autocomplete-container ul li:last-child {
+  border-radius: 0 0 4rem 4rem;
+}
+.easy-autocomplete.eac-bootstrap input {
+  border-radius: 1rem; // Changes with JS.
+  //MT 2019-01-29
+  width: 485px;
+	height: 43px;
+
+  &:focus {
+    outline-width: 0; // Bad for accessibility. :\
+  }
+}
+//MT
+#main-search{
+  border-style: none;
+  box-shadow:none;
+  //MT 2019-01-29
+  height:42px;
+  position: absolute;
+}

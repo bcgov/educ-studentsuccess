@@ -259,7 +259,7 @@ $(document).ready(function () {
               return +b.getAttribute('data-num') - +a.getAttribute('data-num');
             }).appendTo(tipBox);
 
-            if (currentPos == 2018) {
+            if (currentPos == 2020) {
               d3.select(".retentiontt_rect").style('left', retention_xScale(currentPos) * svgSacle - 60 * svgSacle + 'px');
             } else {
               d3.select(".retentiontt_rect").style('left', retention_xScale(currentPos) * svgSacle + 70 * svgSacle + 'px');

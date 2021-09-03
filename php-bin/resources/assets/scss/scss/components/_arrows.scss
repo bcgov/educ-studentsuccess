@@ -1,0 +1,15 @@
+.arrow-down,
+.arrow-up {
+  width: 0; 
+  height: 0; 
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  position: relative;
+  left: 3.333rem;
+}
+.arrow-down {
+  border-top: 20px solid #4791CE;
+}
+.arrow-up {
+  border-bottom: 20px solid #4791CE;
+}

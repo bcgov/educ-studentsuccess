@@ -91,7 +91,7 @@ $(document).ready(function () {
   transition_slider();
   var trans_type = 'ENTER_PUBLIC';
   var trans_dist = 'TOP5';
-  var trans_year = 2013;
+  var trans_year = 2015;
   graphUpdate(trans_year);
   transUpdate(trans_year, trans_dist, trans_type);
   $(window).resize(function () {
@@ -107,7 +107,7 @@ $(document).ready(function () {
     var tslider_moving = false;
     var tslider_currentValue = 0;
     var tslider_targetValue = tslider_width - 50;
-    var tslider_years = [2013, 2018];
+    var tslider_years = [2015, 2020];
     var tslider_step = 1; // array useful for step sliders
 
     var tslider_yearValues = d3.range(tslider_years[0], tslider_years[1], tslider_step || 1).concat(tslider_years[1]); //scales

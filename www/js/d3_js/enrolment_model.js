@@ -45,8 +45,8 @@ var range_arr = []; //range slider domain
 
 var minYr, maxYr; //preset year range when start
 
-var yr1 = 2013;
-var yr2 = 2016; //canvas
+var yr1 = 2015;
+var yr2 = 2017; //canvas
 
 var model_svg = d3.select('#modelContainer').append('svg').attr("preserveAspectRatio", "xMinYMin meet") // This forces uniform scaling for both the x and y, aligning the midpoint of the SVG object with the midpoint of the container element.
 .attr("viewBox", "0 0 600 400") //defines the aspect ratio, the inner scaling of object lengths and coordinates

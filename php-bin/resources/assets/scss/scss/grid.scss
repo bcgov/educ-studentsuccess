@@ -1,0 +1,136 @@
+/* Grid and general layout styles. */
+
+/**
+ * Tableau iframe sizes are:
+ *  
+ * min-width : 320px 
+ * min-width : 600px
+ * min-width : 1000px
+ *
+ * Add 5px "just in case" to the above values (except the first value) to make our breakpoint values:
+ * 
+ */
+
+$phone: 320px;
+$tablet: 605px;
+$desktop: 1030px; // Make even wider for IE11.
+ 
+.restrain {
+  margin: auto;
+  display: block;
+  clear: both;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.halfs {
+  width: 100%;
+  //padding: 1rem;
+  //MT
+  padding:7px;
+}
+
+.thirds {
+  width: 100%;
+}
+
+.two-thirds {
+  width: 100%;
+  padding: 0;
+}
+
+.fill-viewport {
+  min-height: calc(100vh) !important; 
+}
+
+.slide {
+  width: 100%;
+}
+
+.slide-content {
+  padding-bottom: 2rem;
+}
+
+.main-content {
+  padding-top: 10rem;
+}
+
+.front .main-content {
+  padding-top: 1rem;
+}
+
+@media only screen and (min-width: $phone) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .restrain {
+    max-width: 320px;
+  }
+
+} /* END min-width: 320px */
+
+@media only screen and (min-width: $tablet) {
+
+  body {
+    overflow: initial;
+  }
+
+  .restrain {
+    max-width: 600px;
+  }
+
+  .halfs {
+    width: 49.5%;
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .thirds {
+    width: 33%;
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .two-thirds {
+    width: 65%;
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .main-content {
+    padding-top: 10rem;
+  }
+
+} /* END min-width: 605px */
+
+@media only screen and (min-width: $desktop) {
+
+  .restrain {
+    max-width: $desktop;
+  }
+
+} /* END min-width: 1005px */
+
+@media only screen and (max-width: $phone) {
+
+  /* 
+    In case our screen is really really small, make sure to allow some breathing room.
+    So that we are not bashing our content right up against the margins.
+  */
+  .chart-legend,
+  .slide-content h1,
+  .slide-content h2,
+  .slide-content h3,
+  .slide-content h4,
+  .slide-content h5,
+  .slide-content h6,
+  .slide-content p, 
+  .slide-content ul, 
+  .slide-content ol {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+  }
+
+}

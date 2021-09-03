@@ -18,6 +18,7 @@ class ReportsController extends Controller {
       'student-satisfaction',
       'post-secondary-career-prep',
       'prov-exams',
+	    'grad-assess',		
       'transition-to-post-secondary'
 
     );
@@ -36,6 +37,7 @@ class ReportsController extends Controller {
       'student-satisfaction',
       'post-secondary-career-prep',
       'prov-exams',
+      'grad-assess',
       'transition-to-post-secondary'
 
     );

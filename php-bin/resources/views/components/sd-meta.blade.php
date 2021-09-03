@@ -1,4 +1,4 @@
-<section class="slide blue-bg" style="padding-top: 3rem;@if(isset($report_slug)) min-height: 27rem;@endif">
+<section class="slide blue-bg" style="padding-top: 3rem;@if(isset($report_slug)) min-height: 27rem;@endif margin-bottom: -15px;">
   <div class="slide-content restrain">
 
     <img src="/img/maps/map_sd_{{ $school_district->sd }}.png" alt="{{ trans('esdr2.map_desc1') }} {{ $school_district->sd }} {{ trans('esdr2.map_desc2') }}." class="key-image thirds">
@@ -15,10 +15,19 @@
     </h2>
 
     @if(isset($report_slug))
-  
+
       @include('components.report-meta-descriptions')
 
-    @else
+    @elseif(Request::is('governance/*'))
+	  <p class="school-meta white">
+	  The following is the most up to date contact information available for District Leadership, Board leaders, and the relevant Members of the Legislative Assembly for each School District.
+	  <br><br><br><br>
+    </p>
+	@elseif(Request::is('finance/*'))
+	  <p class="school-meta white">
+	  Investment in the K-12 education system takes many forms. The ministry funds Schools Districts in two main ways: Operating and Capital. These investment are carefully monitored to ensure that Districts are operating as close to optimally as possible and that there is a high level of public trust in the system.
+	  </p>
+	@else
 
       <p class="school-meta white">
 

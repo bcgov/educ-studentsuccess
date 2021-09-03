@@ -5,7 +5,8 @@
     'fsa',
     'student-satisfaction',
     'post-secondary-career-prep',
-    'prov-exams'
+    'prov-exams',
+    'grad-assess'
   );
 
   if (in_array($report_slug, $report_slugs_with_legends)) {
@@ -15,7 +16,8 @@
       'fsa' => 'district_fsa_yr',
       'student-satisfaction' => 'district_sats_surv_yr',
       'post-secondary-career-prep' => 'district_psi_surv_yr',
-      'prov-exams' => 'district_exams_yr'
+      'prov-exams' => 'district_exams_yr',
+      'grad-assess' => 'district_exams_yr'
     );
     try{
     	$metadata_location = $report_slug_mappings[$report_slug];
@@ -38,7 +40,6 @@
     
 
   }
-
 @endphp
 
 <div class="chart-legend">
@@ -55,8 +56,10 @@
   <div class="selected-districts">
     <div class="selected-districts-graphic"></div>
     <div class="legend-desc">
-      @if (!isset($school))
+      @if (!isset($school) && $report_slug != "grad-assess")
         {{ trans('esdr2.typical_range_copy2') }} ({{ $report_year_high_value }})
+      @elseif (!isset($school) && $report_slug == "grad-assess")
+        {{ trans('esdr2.typical_range_school_copy2') }}
       @else
         {{ trans('esdr2.typical_range_school_copy2') }} {{ $report_year_high_value }}
       @endif
@@ -65,8 +68,10 @@
   <div class="range-of-districts">
     <div class="range-of-districts-graphic"></div>
     <div class="legend-desc">
-      @if (!isset($school))
+      @if (!isset($school) && $report_slug != "grad-assess")
         {{ trans('esdr2.typical_range_copy3') }} ({{ $report_year_low_value }} - {{ $report_year_high_value }})
+      @elseif (!isset($school) && $report_slug == "grad-assess")  
+        {{ trans('esdr2.typical_range_copy3') }}
       @else
         {{ trans('esdr2.typical_range_school_copy3') }} ({{ $report_year_low_value }} - {{ $report_year_high_value }})
       @endif

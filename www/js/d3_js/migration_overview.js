@@ -95,8 +95,8 @@ $(document).ready(function () {
 
 
     //Continuouscolor scale
-    let colorIn = d3.scaleLinear().range(["#b2ebf2", "#67a9cf"]);
-    let colorOut = d3.scaleLinear().range(["#ff8f00", "#ffecb3"]);
+    let colorIn = d3.scaleLinear().range(["#ffecb3", "#ff8f00"]);
+    let colorOut = d3.scaleLinear().range(["#67a9cf", "#b2ebf2"]);
 
     //legend
     let legend = function (g) {
@@ -108,14 +108,21 @@ $(document).ready(function () {
             .attr("height", h)
             .attr("preserveAspectRatio", "none")
             //image link
-            .attr("xlink:href", "./assets/img/choropleth_legend2.png");
+            .attr("xlink:href", "./assets/img/choropleth_legend_r2b.png");
 
+        g.append("text")
+            .attr("class", "caption")
+            .attr("y", -24)
+            .attr("text-anchor", "start")
+            .attr("font-weight", "bold")
+            .text("Net Change");
+        
         g.append("text")
             .attr("class", "caption")
             .attr("y", -6)
             .attr("text-anchor", "start")
             .attr("font-weight", "bold")
-            .text("Net Change (Funded FTE)");
+            .text("(Funded FTE)");
 
         let ticks = ["Inflow", "Outflow"];
 
@@ -265,20 +272,20 @@ $(document).ready(function () {
 
     // queue to load the multiple datasets
     d3.queue()
+        .defer(d3.csv, './assets/raw_data/sd_going_2020.csv')
+        .defer(d3.csv, './assets/raw_data/sd_going_2019.csv')
         .defer(d3.csv, './assets/raw_data/sd_going_2018.csv')
         .defer(d3.csv, './assets/raw_data/sd_going_2017.csv')
         .defer(d3.csv, './assets/raw_data/sd_going_2016.csv')
         .defer(d3.csv, './assets/raw_data/sd_going_2015.csv')
-        .defer(d3.csv, './assets/raw_data/sd_going_2014.csv')
-        .defer(d3.csv, './assets/raw_data/sd_going_2013.csv')
-        .await(function (error, d2018, d2017, d2016, d2015, d2014, d2013) {
-            data['2013'] = d2013;
-            data['2014'] = d2014;
+        .await(function (error, d2020, d2019, d2018, d2017, d2016, d2015) {
             data['2015'] = d2015;
             data['2016'] = d2016;
             data['2017'] = d2017;
             data['2018'] = d2018;
-            update(2013);
+            data['2019'] = d2019;
+            data['2020'] = d2020;
+            update(2015);
         });
 
 
@@ -347,15 +354,15 @@ $(document).ready(function () {
 
         let moving = false;
         let currentValue = 0;
-        let targetValue = mgslider_width - 40;
+        let targetValue = mgslider_width - 50;
 
-        let years = [2013, 2018];
+        let years = [2015, 2020];
         let step = 1;
         // array useful for step sliders
         let yearValues = d3.range(years[0], years[1], step || 1).concat(years[1]);
 
         let yearText = d3.select('#ani_year')
-            .html("<span>Year: 2013</span>");
+            .html("<span>Year: 2015</span>");
 
         let playButton = d3.select("#play-pause");
 

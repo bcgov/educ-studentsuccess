@@ -38,7 +38,7 @@
 
     </div>
   </section>
-
+ 
   <section class="slide aqua-bg">
     <div class="slide-content restrain">
 
@@ -54,9 +54,32 @@
 
     </div>
   </section>
-
-  <section class="slide light-gray-bg" style="padding-top: 3rem; padding-bottom: 3rem;">
+  <div style="margin-top: -5px; padding-top:4rem; padding-bottom: 6rem; background-image: url('{{URL::to('/')}}/img/bg-images/bg-narrow-grey-1.jpg');background-repeat: no-repeat;" class="reports-heading">
+    <div class="restrain">
+      <h3 class="ministry-blue slide-title">
+        {{ trans('esdr2.reports_heading1') }}
+      </h3>
+    </div>
+  </div>
+  <section class="slide" style="padding-top: 3rem; padding-bottom: 3rem;">
     @include('components.sd-charts-menu')
   </section>
-
+  <div style="margin-top: -5px; padding-top:4rem; padding-bottom: 5rem; background-image: url('{{URL::to('/')}}/img/bg-images/bg-district-foot.jpg');background-repeat: no-repeat;" class="reports-heading">
+  <div class="restrain">
+    <div class="row">
+      <div class="col-sm-12 col-md-5">
+        <img src="/img/reports-pic.png" alt="picture of reports" width="auto" height="190px">
+      </div>
+      <div class="col-sm-12 col-md-7">
+        <p><h3 class="dark-blue">FSA Item Analysis</h3></p>
+        <p><img class="green-bar" style="margin:0px; float: left" src="{{URL::to('/')}}/img/green-bar-2.png" alt=""/><br></p>
+        <p>Reports for educators to help interpret and understand<br>
+          student's results for hte provincial Grades 4 and 7 Foundation<br>
+          Skills Assessment.
+        </p>
+        <p><a class="btn btn-primary btn-lg" style="border-radius:0px;" href="/fsa/index.html">View the Data+</a></p>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection

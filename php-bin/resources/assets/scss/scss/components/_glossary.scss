@@ -1,0 +1,36 @@
+#glossary #clear-search {
+  position: relative;
+  top: -5rem;
+  top: calc(-5rem - 3px);
+
+  @media screen and (max-width: $desktop) {
+    top: -4.25rem;
+  }
+}
+
+#glossarySearch {
+  width: 100%;
+  margin-bottom: 1rem;
+} 
+
+.glossary.directory-wrapper {
+  min-height: 40vh;
+}
+
+.glossary-title {
+  display: inline-block;
+}
+
+.glossary-permalink {
+  margin-top: 0.125rem;
+  color: gray;
+  cursor: pointer;
+  background: #ccc;
+  padding: 5px;
+  border-radius: 50%;
+  float: right; 
+
+  &:hover, &:active, &:focus {
+    text-decoration: none !important;
+  }
+}

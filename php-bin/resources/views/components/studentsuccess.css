@@ -1,0 +1,42 @@
+.dark-blue{
+	color: #036;
+}
+
+.body-color{
+	color: #494949;
+}
+
+.tp {
+	padding-top: 20px;
+}
+
+.mt {
+	margin-top: 20px;
+}
+
+.no-bullet{
+	list-style-type:none;
+}
+
+.btn.btn-primary {
+	background-color: #036;
+}
+
+.image { 
+   position: relative; 
+   width: 100%; /* for IE 6 */
+}
+
+.report-icon {
+	z-index: -1;
+   width:auto;
+   height: 150px;
+}
+
+.bottom-left { 
+   position: absolute; 
+   top: 200px; 
+   left: 5px; 
+   width: 100%; 
+   color: white;
+}

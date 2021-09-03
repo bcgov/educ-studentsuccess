@@ -1,0 +1,119 @@
+#logo {
+  padding-left: 0.5rem;
+}
+
+#header {
+  background: #003366;
+  border-bottom: 2px solid $gov-gold;
+  position: fixed; /* All we need for a "sticky" header :) */
+  height: 7rem;
+
+  #language-switcher {
+    padding-top: 1rem;
+    margin-right: 0.5rem;
+    text-align: right;
+
+    a {
+      color: $white;
+
+      &.active {
+        font-weight: bold;
+      }
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+#header h1 {
+  font-size: 2.625rem; /* This is Gov standard, but not big enough for us... */
+  font-size: 40px; /* ...so this. */
+  color: #fff;
+  margin: 10px 1rem;
+  display: inline-block;
+}
+
+#secondary-nav {
+  position: fixed;
+  top: 14rem;
+  display: block;
+  background-color: #38598a;
+  width: 100%;
+  box-shadow: 0px 3px 3px 1px rgba(51, 51, 51, 0.5);
+  z-index: 99;
+  overflow: hidden;
+  height: 21rem;
+
+  -webkit-transition: all 0.125s linear; 
+  -moz-transition: all 0.125s linear; 
+  -ms-transition: all 0.125s linear; 
+  -o-transition: all 0.125s linear; 
+  transition: all 0.125s linear;
+}
+  #secondary-nav.contracted {
+    height: 3.5rem;
+  }
+
+.secondary-nav-container > li {
+  margin-bottom: 1rem;
+  display: block;
+
+  @media screen and (min-width: $desktop) {
+    padding-left: 0.5rem;
+  }
+}
+  .secondary-nav-container > li:first-of-type {
+    margin-top: 1rem;
+  }
+  .secondary-nav-container > li:last-of-type {
+    border-right: 0;
+  }
+
+#secondary-nav .secondary-nav-link,
+#secondary-nav .secondary-nav-link:hover,
+#secondary-nav .secondary-nav-link:visited {
+  color: $white;
+}
+#secondary-nav .secondary-nav-link:hover {
+  text-decoration: underline;
+}
+
+.sub-menu-trigger {
+  color: white;
+  padding-left: 0.5rem;
+  cursor: pointer;
+}
+.sub-menu-trigger.expand {
+  margin-top: 1rem;
+}
+.sub-menu-trigger.contract {
+  margin-bottom: 1rem;
+}
+
+.school-meta {
+  margin-bottom: 0;
+
+  a {
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// Directory masthead/nav.
+.directory-masthead {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+#directory-sort-wrapper {
+
+  .button {
+    display: block;
+  }
+}
+#directory-sort-wrapper {
+  font-size: 2.5rem;
+}

@@ -20,7 +20,7 @@
           </li>
         </ul>
       @endif
-
+<!--
       @if ($school->w_fsa1 || $school->w_fsa2 || $school->w_g2g || $school->w_exam)
         <h4 class="toc slide-sub-heading">{{ trans('esdr2.intel_dev_heading') }}</h4>
         <ul class="toc-sub-section">
@@ -76,7 +76,7 @@
       @if ($school->w_sat2 || $school->w_psi)
         </ul>
       @endif
-
+-->
     </nav>
 
   @endif

@@ -65,10 +65,10 @@
 		 
       {{-- This is an excetion for Mission School District. See also: SchoolDistrictsController@getSdReport and pages.sd-report --}}
       @if ($school_district->sd != '099')		  
-        <a id="ahawd-download-report-link" data-sd="{{ $school_district->sd }}" href="https://www2.gov.bc.ca/assets/gov/education/administration/kindergarten-to-grade-12/reports/ab-hawd/ab-hawd-school-district-{{ $school_district->sd }}.pdf" target="_blank"><img alt="Image of a chart depicting Indigenous: How Are We Doing reports." class="toc-chart-thumbnail" src="/img/charts/ahawd.png" />
+        <a id="ahawd-download-report-link" data-sd="{{ $school_district->sd }}" href="https://www2.gov.bc.ca/assets/gov/education/administration/kindergarten-to-grade-12/reports/ab-hawd/ab-hawd-school-district-{{ $school_district->sd }}.pdf" target="_blank"><img alt="Image of a chart depicting Indigenous: How Are We Doing reports." class="toc-chart-thumbnail" src="/img/charts/HowWeDoingIcon.png" />
         {{ trans('esdr2.abo_how_are_we_doing_heading') }}</a> (PDF)
 	  @else  
-        <a id="ahawd-download-report-link" data-sd="{{ $school_district->sd }}" href="https://www2.gov.bc.ca/assets/gov/education/administration/kindergarten-to-grade-12/reports/ab-hawd/ab-hawd-school-district-public.pdf" target="_blank"><img alt="Image of a chart depicting Indigenous: How Are We Doing reports." class="toc-chart-thumbnail" src="/img/charts/ahawd.png" />
+        <a id="ahawd-download-report-link" data-sd="{{ $school_district->sd }}" href="https://www2.gov.bc.ca/assets/gov/education/administration/kindergarten-to-grade-12/reports/ab-hawd/ab-hawd-school-district-public.pdf" target="_blank"><img alt="Image of a chart depicting Indigenous: How Are We Doing reports." class="toc-chart-thumbnail" src="/img/charts/HowWeDoingIcon.png" />
         {{ trans('esdr2.abo_how_are_we_doing_heading') }}</a> (PDF)
 	  @endif		  
       </li>

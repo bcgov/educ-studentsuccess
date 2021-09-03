@@ -329,9 +329,9 @@ $(document).ready(function () {
               /*fill the color based on -/+ net changes*/
               let diff = d.properties.total_move_in - d.properties.total_move_out;
               if (diff > 0) {
-                return "#65a89d";
+                return "#a96a46"; // #65a89d
               } else {
-                return "#a96a46";
+                return "#65a89d"; // #a96a46
               }
 
             })
@@ -376,7 +376,7 @@ $(document).ready(function () {
   }
 
   //default map
-  updateMap("./assets/raw_data/sd_coming_2018.csv", "./assets/raw_data/sd_going_2018.csv");
+  updateMap("./assets/raw_data/sd_coming_2019.csv", "./assets/raw_data/sd_going_2019.csv");
 
   function toolOver(v, thepath) {
     d3.select(thepath)
@@ -634,9 +634,9 @@ $(document).ready(function () {
         let finalval = comingData[i][selDist] - goingData[i][selDist];
         if (finalval > 0) {
           //color for positive growth
-          return "#65a89d";
+          return "#a96a46"; // #65a89d
         } else {
-          return "#a96a46";
+          return "#65a89d"; // #a96a46
         }
 
       })

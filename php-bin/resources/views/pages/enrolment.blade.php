@@ -33,25 +33,28 @@
     </div>
   </div>
 </div>
+
+    
+    
+    
 <div id="content_wrapper">
   <div class="container" id='intro'>
     <!-- Jumbotron / hero section, a component -->
     <div class="row pt-3">
       <div class="col-sm-12 col-md-5">
         <h2 class="intro_header">Enrolment Model</h2>
-        <p>Explore the Ministry of Education’s enrolment model by interacting with different sections describing the
-          four main influencers. Student enrolment is influenced by four main influencers: demographics, migration,
+        <p style="font-size:16px">Explore the Ministry of Education’s enrolment model by interacting with the different sections that describe each of the four main student enrolment drivers. Student enrolment is influenced by demographics, migration,
           public-independent transition, and course load retention. All values are reported in funded <a
             href="https://studentsuccess.gov.bc.ca/glossary#79" target="_blank" class="fte_defin">Full-Time Equivalent
             (FTE)</a>.</p>
         <div class="cta_container mt-5">
-          <a class="btn ctaBtn btn-lg mr-3" href="#enrolment_model">EXPLORE</a>
-          <a class="btn ctaGhost btn-lg"
+          <a class="btn btn-primary btn-lg top-button" style="font-weight: lighter;font-size: 15px;padding: 9px 18px;border-radius: 0px;" href="#enrolment_model">EXPLORE  +</a>
+          <a class="ghostBtn" style="font-weight: lighter;font-size: 15px;padding: 9px 18px;border-radius: 0px;"
             href="https://studentsuccess.gov.bc.ca/school-district/099/report/contextual-information"
-            target="_blank">MORE REPORTS</a>
+            target="_blank">MORE REPORTS  +</a>
         </div>
-        <p class="gradient_para"><i class="far fa-chart-bar"></i><span>An interactive dashboard exploring enrolment
-            data</span></p>
+        <!-- <p class="gradient_para"><i class="far fa-chart-bar"></i><span>An interactive dashboard exploring enrolment
+            data</span></p> -->
       </div>
       <div class="col-sm-12 col-md-7">
         <img src="./assets/img/hero_isometric.png" class="isometric_img" alt="hero img">
@@ -62,8 +65,9 @@
   <div class="container" id="enrolment_model">
     <div class="row">
       <div class="col-md-8 mx-auto driver_section">
-        <h3 class="section_header text-center"><span>Key Metrics and Impact</span></h3>
-        <p>The Ministry of Education District Enrolment Model (DEM) has been developed based on the Cohort
+        <h3 class="text-center"><span>Key Metrics and Impact</span></h3>
+        <img class="green-bar center" style="margin-top:20px; margin-bottom:20px; margin-left: auto; margin-right: auto; display: block;" src="{{URL::to('/')}}/img/green-bar-2.png" alt=""/>
+        <p style="font-size:16px">The Ministry of Education District Enrolment Model has been developed based on the Cohort
           Survival Method approach. This method takes into consideration the existing student population and
           calculates
           how many students will leave and enter the system in a given school year. These flows of students are
@@ -106,10 +110,11 @@
   <div class="container" id="demographics">
     <div class="row">
       <div class="col-md-8 mx-auto driver_section">
-        <h3 class="section_header text-center"><span>Demographics</span></h3>
-        <p>The demographics driver provides an indication of whether more kindergarten students are entering B.C.
+        <h3 class="text-center"><span>Demographics</span></h3>
+        <img class="green-bar center" style="margin-top:20px; margin-bottom:20px; margin-left: auto; margin-right: auto; display: block;" src="{{URL::to('/')}}/img/green-bar-2.png" alt=""/>
+        <p style="font-size:16px">The demographics driver provides an indication of whether more kindergarten students are entering B.C.
           public
-          schools relative for those leaving the school system through graduation. If the net demographics value is
+          schools relative to those leaving the school system through graduation. If the net demographics value is
           positive, it indicates that more five year olds are entering Kindergarten relative to the number of Grade 12
           students that are graduating.
         </p>
@@ -173,14 +178,15 @@
   <div class="container" id='migration_overview'>
     <div class="row mb-5">
       <div class="col-sm-12 col-md-4">
-        <h3 class="section_header"><span>Student Migration</span></h3>
-        <p>The migration driver provides a measure of how many students are entering or leaving a district. It is
+        <h3 class="text-center"><span>Student Migration</span></h3>
+        <img class="green-bar center" style="margin-top:20px; margin-bottom:20px; margin-left: auto; margin-right: auto; display: block;" src="{{URL::to('/')}}/img/green-bar-2.png" alt=""/>
+        <p style="font-size:16px">The migration driver provides a measure of how many students are entering or leaving a district. It is
           further broken down into interprovincial migration, district to district migration, and international
           immigration. District to district migration is a transfer of students within the province, where as
           interprovincial or international migration involves students entering or exiting the Public School System
           external to B.C and external to Canada.
         </p>
-        <p>The following migration visualizations address District to District Migration. These values represent
+        <p style="font-size:16px">The following migration visualizations address District to District Migration. These values represent
           students from all facility types.</p>
       </div>
       <div class="col-sm-12 col-md-8">
@@ -207,18 +213,20 @@
       </div>
 
       <div class="col-sm-12 col-md-4">
-        <h3 class="section_header"><span>Where Do Students Go</span></h3>
+        <h3 class="text-center"><span>Where Students Go</span></h3>
+        <img class="green-bar center" style="margin-top:20px; margin-bottom:20px; margin-left: auto; margin-right: auto; display: block;" src="{{URL::to('/')}}/img/green-bar-2.png" alt=""/>
         <div id='flow_control'>
           <div class="controlSection">
             <h5>School Year</h5>
             <div id="yearDropdown" class="dropDown" tabindex="1">
-              <span>2018</span>
+            <span>2020</span>
               <div class="list">
+                <div data-value="2020">2020</div>
+                <div data-value="2019">2019</div>
                 <div data-value="2018">2018</div>
                 <div data-value="2017">2017</div>
                 <div data-value="2016">2016</div>
                 <div data-value="2015">2015</div>
-                <div data-value="2014">2014</div>
               </div>
             </div>
           </div>
@@ -242,7 +250,7 @@
               <input type="checkbox" id="flat_switch" />
               <label for="flat_switch"></label>
             </div>
-            <img class="img-fluid" src="./assets/img/flow_legend.png" alt="flow legend">
+            <img class="img-fluid" src="./assets/img/flow_legend2.png" alt="flow legend">
           </div>
         </div>
       </div>
@@ -252,8 +260,9 @@
   <div class="container" id="transition">
     <div class="row">
       <div class="col-md-8 mx-auto driver_section">
-        <h3 class="section_header text-center"><span>Public-Independent Student Transition</span></h3>
-        <p>The transition driver measures how many students move from the Independent School system to the Public
+        <h3 class="text-center"><span>Public-Independent Student Transition</span></h3>
+        <img class="green-bar center" style="margin-top:20px; margin-bottom:20px; margin-left: auto; margin-right: auto; display: block;" src="{{URL::to('/')}}/img/green-bar-2.png" alt=""/>
+        <p style="font-size:16px">The transition driver measures how many students move from the Independent School system to the Public
           School
           system as a net positive inflow, and movement from the Public School system to the Independent School system
           as a net negative outflow.</p>
@@ -316,8 +325,9 @@
   <div class="container" id="retention">
     <div class="row">
       <div class="col-md-8 mx-auto driver_section">
-        <h3 class="section_header text-center"><span>Full-time and Part-time Retention</span></h3>
-        <p>The retention driver provides an indication if students are moving from a full course load to a partial
+        <h3 class="text-center"><span>Full-time and Part-time Retention</span></h3>
+        <img class="green-bar center" style="margin-top:20px; margin-bottom:20px; margin-left: auto; margin-right: auto; display: block;" src="{{URL::to('/')}}/img/green-bar-2.png" alt=""/>
+        <p style="font-size:16px">The retention driver provides an indication if students are moving from a full course load to a partial
           course load or vice-versa. It also provides insight into whether students are advancing to the next grade in
           succession or repeating a grade. If <b>net retention is positive</b>, this could mean that there is an
           <em>influx of
@@ -329,7 +339,7 @@
           year, <em>students
             could be decreasing their course load</em> compared to the previous year, or <em>students are graduating
             and advancing
-            as expected</em>. Comparing a school districts retention rate trend to the provincial retention rate trend
+            as expected</em>. Comparing a school district's retention rate trend to the provincial retention rate trend
           can help
           highlight changes in policies pertaining to course loads or interesting movements of students throughout the
           public system.</p>
@@ -360,12 +370,13 @@
   <div class="container" id="booklet">
     <div class="row">
       <div class="col-md-8 mx-auto  mb-5 text-center driver_section">
-        <h3 class="section_header"><span>BC Provincial Student Enrolment Report</span></h3>
+        <h3 class="text-center"><span>BC Provincial Student Enrolment Report</span></h3>
+        <img class="green-bar center" style="margin-top:20px; margin-bottom:20px; margin-left: auto; margin-right: auto; display: block;" src="{{URL::to('/')}}/img/green-bar-2.png" alt=""/>
         <h5>For more data at the provincial and district levels. Please view the contextual reports on the student
           success website.</h5>
-        <a class="btn ctaBtn btn-lg"
+        <a class="btn btn-primary btn-lg top-button" style="font-weight: lighter;font-size: 15px;padding: 9px 18px;border-radius: 0px;"
           href="https://studentsuccess.gov.bc.ca/school-district/099/report/contextual-information" target="_blank">VIEW
-          REPORTS</a>
+          REPORTS  +</a>
       </div>
     </div>
   </div>

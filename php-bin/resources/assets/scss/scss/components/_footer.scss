@@ -1,0 +1,100 @@
+#back-to-top {
+  opacity: 0; // changes with JS
+  background-color: $aqua;
+  width: 90px;
+  height: 90px;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  color: white;
+  border-radius: 50px;
+  float: right;
+  padding-top: 13px;
+  cursor: default;
+  position: relative;
+  top: -15px;
+  z-index: 99;
+
+  &:hover {
+
+    #back-to-top-trigger {
+      text-decoration: underline;
+    }
+  }
+
+  @media screen and (min-width: $desktop) {
+    width: 100px;
+    height: 100px;
+  }
+
+  @media screen and (max-width: $desktop) {
+    top: -10px; 
+  }
+
+  .new-line {
+    font-size: 160%;
+    display: block;
+
+    @media screen and (min-width: $desktop) {
+      font-size: 190%;
+    }
+  }
+}
+
+#back-to-top-trigger {
+  font-size: 115%;
+
+  @media screen and (min-width: $tablet) {
+    font-size: 119%;
+  }
+}
+
+#footer-bar-thing {
+  background: $ministry_blue_light; 
+  height: 7rem;
+
+  .some-links {
+    position: relative;
+    top: -8.5rem;
+    font-size: 250%;
+
+    @media (max-width: $desktop) {
+      top: -7.5rem;
+    }
+
+    .some-link {
+      padding-right: 1rem;
+    }
+  }
+}
+
+#footer { 
+  background: #003366;
+  border-top: 2px solid $gov-gold;
+  min-height: 179px;
+
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+#footer nav ul {
+  color: #fff;
+  padding: 0;
+  padding-top: 2rem;
+
+  li {
+    list-style: none;
+    padding: 1px 5px;
+    display: inline-block;
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+
+    &:last-of-type {
+      border-right: 0;
+    }
+
+    &:first-of-type {
+      padding-left: 0;
+    }
+  }
+}
