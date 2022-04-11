@@ -319,3 +319,46 @@ section#about {
       margin-left: 1%;
     } 
   }
+
+/* For Vega Charts */
+/* Mobile */
+@media (max-width: 576px) { 
+  .desktop {
+    display:none !important; 
+  }
+  .tablet {
+    display: none !important;
+  }
+  .mobile {
+    display:block !important; 
+  } 
+  .restrain{
+    margin:10px !important;
+  }
+}
+/* Tablets */
+@media (min-width: 576px) and (max-width: 1027px){ 
+  .desktop {
+    display:none !important; 
+  }
+  .tablet {
+    display: block !important;
+  }
+  .mobile {
+    display:none !important; 
+  } 
+}
+/* Desktop */
+@media only screen and (min-width: 1028px) {
+  .desktop {
+    display:block !important; 
+  }
+  .tablet {
+    display: none !important;
+  }
+  .mobile {
+    display:none !important; 
+  }
+}
+
+

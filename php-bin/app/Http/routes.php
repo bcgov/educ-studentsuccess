@@ -46,7 +46,8 @@ Route::get('/provincial-results', 'SchoolDistrictsController@getProvinicialData'
 // Directory page /all/[cities | school-districts]
 Route::get('/all/cities', 'SchoolsController@getAllSchoolCities'); 
 //Route::get('/all/cities-api', 'SchoolsController@getAllSchoolCitiesApi'); 
-
+// Test
+Route::get('/district-test', 'SchoolDistrictsController@index');
 Route::get('/all/school-districts', 'SchoolDistrictsController@getAllSchoolDistricts'); 
 //Route::get('/all/school-districts-api', 'SchoolDistrictsController@getAllSchoolDistrictsApi'); 
 
@@ -69,7 +70,6 @@ Route::get('/school-district/{sdID}', 'SchoolDistrictsController@getSchoolDistri
 // School District report page /school-district/[school_district_ID]/report/[report_type]
 Route::get('/school-district/{sdID}/report/{report_type}', 'SchoolDistrictsController@getSdReport');
 //Route::get('/school-district-api/{sdID}/report/{report_type}', 'SchoolDistrictsController@getSdReportApi');
-
 // Glossary /glossary
 Route::get('/glossary', 'GlossaryController@getAllTerms');
 //Route::get('/glossary-api', 'GlossaryController@getAllTermsApi');
@@ -107,6 +107,9 @@ Route::get('/school-district-api/{sdID}', 'SchoolDistrictsController@getSchoolDi
 Route::get('/glossary-api', 'GlossaryController@getAllTermsApi');
 
 Route::get('/school-district-api/{sdID}/report/{report_type}', 'SchoolDistrictsController@getSdReportApi');
+Route::get('/test-school-district-api/{sdID}/report/{report_type}', 'SchoolDistrictsController@testGetSdReportApi');
+
+Route::get('/school-district-api/{sdID}/report', 'SchoolDistrictsController@getAllReportApi');
 
 Route::get('/schools-api/in/{city}', 'SchoolsController@getAllSchoolsByCityApi'); 
 
@@ -118,7 +121,9 @@ Route::get('/school-api/{mincode}/report/{report_type}', 'SchoolsController@getS
 
 // API for FSA
 // Selected Response
-
+Route::get('/fsa-school-districts-agg', 'FsaController@getSchoolDistrictsAgg');
+Route::get('/fsa-all-school-districts-agg', 'FsaController@getAllSchoolDistrictsAgg');
+Route::get('/fsa-school-districtsID/{district}', 'FsaController@getSchoolDistrictsID');
 Route::get('/selected-response/{district}/{year}/{grade}/{subject}/{exam_language}/{gender}/{francophone}/{french_immersion}/{ell}/{indigenous}', 'FsaController@getSelectedResponse');
 Route::get('/fsa-districts', 'FsaController@getSchoolDistricts');
 Route::get('/constructed-response/{district}/{year}/{grade}/{subject}/{exam_language}/{gender}/{francophone}/{french_immersion}/{ell}/{indigenous}', 'FsaController@getConstructedResponse');

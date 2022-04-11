@@ -10,7 +10,8 @@ use App\Http\Controllers\ReportsController;
 use Helper;
 
 use App\Fsa;
-
+use App\FSASchoolOrDistrictID;
+use App\FSASchoolOrDistrictIDAGG;
 use DB;
 
 class FsaController extends Controller {
@@ -138,6 +139,32 @@ public function getSelectedResponse( $district, $year, $grade, $subject, $exam_l
 	->get();
 
     return response()->json($constructedResponse, 200);
+  }
+  public function getSchoolDistrictsAgg(){
+	$schoolDistrictsAgg = FSASchoolOrDistrictIDAGG::select('school_or_district_id','school_or_district_name','district')
+		->orderBy('school_or_district_id','asc')
+		->remember(30) // Cache the result as we are on production server. 
+		->get()
+		->sortBy('school_or_district_id', SORT_NATURAL|SORT_FLAG_CASE);
+
+	return response()->json($schoolDistrictsAgg, 200);
+  }
+  public function getAllSchoolDistrictsAgg(){
+	$allSchoolDistrictsAgg = FSASchoolOrDistrictIDAGG::select('school_or_district_id','school_or_district_name','district')
+		->where('district', '=', null)
+		->orderBy('school_or_district_id','desc')
+		->remember(30) // Cache the result as we are on production server. 
+		->get()
+		->sortBy('school_or_district_id', SORT_NATURAL|SORT_FLAG_CASE);
+
+	return response()->json($allSchoolDistrictsAgg, 200);
+  }
+  public function getSchoolDistrictsID($district){
+	$schoolDistrictsID = DB::table('EDW_RESEARCH.FSA_ILR_SCHOOL_OR_DISTRICT_ID')
+	->where('district', '=', $district)
+	->orderBy('school_or_district_name','asc')
+	->get();
+    return response()->json($schoolDistrictsID, 200);
   }
 }
 

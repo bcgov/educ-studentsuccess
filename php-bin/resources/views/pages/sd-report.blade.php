@@ -9,7 +9,7 @@ $(function() {
   $('#dynamic_select').on('change', function() {
     var url = $(this).val(); // get selected value
     if (url) { // require a URL
-      console.log($school_district->sd)
+
       window.location = url; // redirect
     }
     return false;
@@ -95,11 +95,10 @@ $(function() {
       @endif
 
       @if ($report_slug == 'completion-rates')
-		 
-
-        <h3 class="slide-title light-blue">{{ trans('esdr2.completion_rate_heading') }}</h3>
+        <!-- <h3 class="slide-title light-blue">{{ trans('esdr2.completion_rate_heading') }}</h3> -->
         @include('components.chart-legend')
-        <iframe scrolling="no" id="frameId-91" class="tableau-embed" src="//public.tableau.com/views/ESDR2/5_CompRate?:showVizHome=no&:display_share=no&:embed=true&:toolbar=no&:device=desktop&SD={{ $school_district->sd }}"></iframe>
+ 
+        <!-- <iframe scrolling="no" id="frameId-91" class="tableau-embed" src="//public.tableau.com/views/ESDR2/5_CompRate?:showVizHome=no&:display_share=no&:embed=true&:toolbar=no&:device=desktop&SD={{ $school_district->sd }}"></iframe>
         <div style="background:white;margin-top: -41px;position:absolute;height: 27px;width: 100%;"></div>
         * All Students includes non-residents, some of whom are international students.  
         <hr class="chart-hr" style="margin-top: 30px; margin-bottom: 50px;">
@@ -112,12 +111,55 @@ $(function() {
         <h3 class="slide-title light-blue">{{ trans('esdr2.completion_rate_abbo2') }}</h3>
         <iframe scrolling="no" id="frameId-93" class="tableau-embed restrain" src="//public.tableau.com/views/ESDR1/6_CompRate3?:showVizHome=no&:display_share=no&:embed=true&:toolbar=no&:device=desktop&SD={{ $school_district->sd }}&Student%20Group=SPECIAL%20NEEDS,BC%20Residents"></iframe>
         <div style="background:white;margin-top: -37px;position:absolute;height: 27px;width: 100%;"></div>
-        <hr class="chart-hr" style="margin-top: 30px; margin-bottom: 50px;">
+        <hr class="chart-hr" style="margin-top: 30px; margin-bottom: 50px;"> -->  
+          
+        @foreach ($labels as $key=>$label)
+        <h3 class="slide-title light-blue">{{$label}}</h3>
+        <div id="desktopView{{ $key }}" class="desktop"></div>
+        <div id="tabletView{{ $key }}" class="tablet"></div>
+        <div id="mobileView{{ $key++ }}" class="mobile"></div>
+        
+        <br>
+        @endforeach
+
+        @foreach ($mobileData as $key=>$data)
+          <script type="text/javascript"> 
+            var view;        
+            var spec = {!! json_encode($data) !!};
+            var viewVar = "#mobileView"+{{ $key++ }};
+            console.log(viewVar);
+            vegaEmbed(viewVar, spec, {"actions": false}).then(function(result) {
+              // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+            }).catch(console.error);                     
+          </script>
+        @endforeach
+        @foreach ($desktopData as $key=>$data)
+          <script type="text/javascript"> 
+            var view;        
+            var spec = {!! json_encode($data) !!};
+            var viewVar = "#desktopView"+{{ $key++ }};
+            console.log(viewVar);
+            vegaEmbed(viewVar, spec, {"actions": false}).then(function(result) {
+              // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+            }).catch(console.error);                     
+          </script>
+        @endforeach
+        @foreach ($tabletData as $key=>$data)
+          <script type="text/javascript"> 
+            var view;        
+            var spec = {!! json_encode($data) !!};
+            var viewVar = "#tabletView"+{{ $key++ }};
+            console.log(viewVar);
+            vegaEmbed(viewVar, spec, {"actions": false}).then(function(result) {
+              // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+            }).catch(console.error);                     
+          </script>
+        @endforeach
       @endif
 
       @if ($report_slug == 'fsa')
         
-        <h3 class="slide-title light-blue">{{ trans('esdr2.fsa_heading') }}</h3>
+        <!-- <h3 class="slide-title light-blue">{{ trans('esdr2.fsa_heading') }}</h3>
         @include('components.chart-legend')
         <iframe scrolling="no" id="frameId-101" class="tableau-embed" src="//public.tableau.com/views/ESDR1/7_FSA?:showVizHome=no&:display_share=no&:embed=true&:toolbar=no&:device=desktop&SD={{ $school_district->sd }}"></iframe>
         <div style="background:white;margin-top: -41px;position:absolute;height: 27px;width: 100%;"></div>
@@ -139,14 +181,98 @@ $(function() {
         <iframe scrolling="no" id="frameId-104" class="tableau-embed" src="//public.tableau.com/views/ESDR1/8_FSA2?:showVizHome=no&:display_share=no&:embed=true&:toolbar=no&:device=desktop&SD={{ $school_district->sd }}&SKILL=Numeracy"></iframe>
         <div style="background:white;margin-top: -41px;position:absolute;height: 27px;width: 100%;"></div>
         @include('components.chart-legend_fsa')
-        <hr class="chart-hr" style="margin-top: 50px; margin-bottom: 50px;">
+        <hr class="chart-hr" style="margin-top: 50px; margin-bottom: 50px;"> -->
+        @include('components.chart-legend')
+        @foreach ($labels as $key=>$label)
+        <h3 class="slide-title light-blue">{{$label}}</h3>
+        <div id="desktopView{{ $key }}" class="desktop"></div>
+        <div id="tabletView{{ $key }}" class="tablet"></div>
+        <div id="mobileView{{ $key++ }}" class="mobile"></div>
+        
+        <br>
+        @endforeach
+
+        @foreach ($mobileData as $key=>$data)
+          <script type="text/javascript"> 
+            var view;        
+            var spec = {!! json_encode($data) !!};
+            var viewVar = "#mobileView"+{{ $key++ }};
+            console.log(viewVar);
+            vegaEmbed(viewVar, spec, {"actions": false}).then(function(result) {
+              // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+            }).catch(console.error);                     
+          </script>
+        @endforeach
+        @foreach ($desktopData as $key=>$data)
+          <script type="text/javascript"> 
+            var view;        
+            var spec = {!! json_encode($data) !!};
+            var viewVar = "#desktopView"+{{ $key++ }};
+            console.log(viewVar);
+            vegaEmbed(viewVar, spec, {"actions": false}).then(function(result) {
+              // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+            }).catch(console.error);                     
+          </script>
+        @endforeach
+        @foreach ($tabletData as $key=>$data)
+          <script type="text/javascript"> 
+            var view;        
+            var spec = {!! json_encode($data) !!};
+            var viewVar = "#tabletView"+{{ $key++ }};
+            console.log(viewVar);
+            vegaEmbed(viewVar, spec, {"actions": false}).then(function(result) {
+              // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+            }).catch(console.error);                     
+          </script>
+        @endforeach
       @endif
 
       @if ($report_slug == 'grade-to-grade-transitions')
-        <h3 class="slide-title light-blue">{{ trans('esdr2.g2g_heading') }}</h3>
-        <iframe scrolling="no" id="frameId-11" class="tableau-embed" src="//public.tableau.com/views/ESDR1/9_G2G?:showVizHome=no&:display_share=no&:embed=true&:toolbar=no&:device=desktop&SD={{ $school_district->sd }}"></iframe>
-        <div style="background:white;margin-top: -41px;position:absolute;height: 27px;width: 100%;"></div>  
-        @endif
+        @foreach ($labels as $key=>$label)
+          <h3 class="slide-title light-blue">{{$label}}</h3>
+          <div id="desktopView{{ $key }}" class="desktop"></div>
+          <div id="tabletView{{ $key }}" class="tablet"></div>
+          <div id="mobileView{{ $key++ }}" class="mobile"></div>
+          
+          <br>
+        @endforeach    
+        @foreach ($mobileData as $key=>$data)
+          <script type="text/javascript"> 
+            var view;        
+            var spec = {!! json_encode($data) !!};
+            var viewVar = "#mobileView"+{{ $key++ }};
+            console.log(viewVar);
+            vegaEmbed(viewVar, spec, {"actions": false}).then(function(result) {
+              // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+            }).catch(console.error);                     
+          </script>
+        @endforeach
+        @foreach ($desktopData as $key=>$data)
+          <script type="text/javascript"> 
+            var view;        
+            var spec = {!! json_encode($data) !!};
+            var viewVar = "#desktopView"+{{ $key++ }};
+            console.log(viewVar);
+            vegaEmbed(viewVar, spec, {"actions": false}).then(function(result) {
+              // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+            }).catch(console.error);                     
+          </script>
+        @endforeach
+        @foreach ($tabletData as $key=>$data)
+          <script type="text/javascript"> 
+            var view;        
+            var spec = {!! json_encode($data) !!};
+            var viewVar = "#tabletView"+{{ $key++ }};
+            console.log(viewVar);
+            vegaEmbed(viewVar, spec, {"actions": false}).then(function(result) {
+              // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+            }).catch(console.error);                     
+          </script>
+        @endforeach
+        <!-- <h3 class="slide-title light-blue">{{ trans('esdr2.g2g_heading') }}</h3> -->
+        <!-- <iframe scrolling="no" id="frameId-11" class="tableau-embed" src="//public.tableau.com/views/ESDR1/9_G2G?:showVizHome=no&:display_share=no&:embed=true&:toolbar=no&:device=desktop&SD={{ $school_district->sd }}"></iframe>
+        <div style="background:white;margin-top: -41px;position:absolute;height: 27px;width: 100%;"></div>   -->
+      @endif
 
       @if ($report_slug == 'student-satisfaction')
         <h3 class="slide-title light-blue">{{ trans('esdr2.student_sat_heading') }}</h3>
@@ -189,3 +315,10 @@ $(function() {
 @endsection
 
 @section('subtitle'){{ $school_district->district_name }} {{ trans('esdr2.sd_heading') }}: {{ $report_headings[$sd_report_slugs[$current_report_index - 0]] }}@endsection
+@push('scripts') 
+	<script src="https://vega.github.io/vega/assets/promise.min.js"></script>
+	<script src="https://vega.github.io/vega/assets/symbol.min.js"></script>
+	<script src="https://vega.github.io/vega/assets/fetch.min.js"></script>
+	<script src="https://vega.github.io/vega/vega.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+@endpush
