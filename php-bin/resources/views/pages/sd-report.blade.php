@@ -296,11 +296,54 @@ $(function() {
         <div style="background:white;margin-top: -41px;position:absolute;height: 27px;width: 100%;"></div>    
       @endif
       @if ($report_slug == 'grad-assess')
-        <h3 class="slide-title light-blue">{{ trans('esdr2.prov_exam_heading') }}</h3>
-        @include('components.chart-legend')
+        <!-- <h3 class="slide-title light-blue">{{ trans('esdr2.prov_exam_heading') }}</h3>
+        @include('components.chart-legend') -->
         <!-- <iframe scrolling="no" id="frameId-12" class="tableau-embed" src="//public.tableau.com/views/ESDR1/10_Exams?:showVizHome=no&:display_share=no&:embed=true&:toolbar=no&:device=desktop&SD={{ $school_district->sd }}"></iframe> -->
-        <iframe scrolling="no" id="frameId-12" class="tableau-embed" src="//public.tableau.com/views/ESDR1/13_Assessments?:showVizHome=no&:display_share=no&:embed=true&:toolbar=no&:device=desktop&SD={{ $school_district->sd }}"></iframe>
-        <div style="background:white;margin-top: -41px;position:absolute;height: 27px;width: 100%;"></div>    
+        <!-- <iframe scrolling="no" id="frameId-12" class="tableau-embed" src="//public.tableau.com/views/ESDR1/13_Assessments?:showVizHome=no&:display_share=no&:embed=true&:toolbar=no&:device=desktop&SD={{ $school_district->sd }}"></iframe>
+        <div style="background:white;margin-top: -41px;position:absolute;height: 27px;width: 100%;"></div>     -->
+        @include('components.chart-legend')
+        @foreach ($labels as $key=>$label)
+        <h3 class="slide-title light-blue">{{$label}}</h3>
+        <div id="desktopView{{ $key }}" class="desktop"></div>
+        <div id="tabletView{{ $key }}" class="tablet"></div>
+        <div id="mobileView{{ $key++ }}" class="mobile"></div>
+        
+        <br>
+        @endforeach
+
+        @foreach ($mobileData as $key=>$data)
+          <script type="text/javascript"> 
+            var view;        
+            var spec = {!! json_encode($data) !!};
+            var viewVar = "#mobileView"+{{ $key++ }};
+            console.log(viewVar);
+            vegaEmbed(viewVar, spec, {"actions": false}).then(function(result) {
+              // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+            }).catch(console.error);                     
+          </script>
+        @endforeach
+        @foreach ($desktopData as $key=>$data)
+          <script type="text/javascript"> 
+            var view;        
+            var spec = {!! json_encode($data) !!};
+            var viewVar = "#desktopView"+{{ $key++ }};
+            console.log(viewVar);
+            vegaEmbed(viewVar, spec, {"actions": false}).then(function(result) {
+              // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+            }).catch(console.error);                     
+          </script>
+        @endforeach
+        @foreach ($tabletData as $key=>$data)
+          <script type="text/javascript"> 
+            var view;        
+            var spec = {!! json_encode($data) !!};
+            var viewVar = "#tabletView"+{{ $key++ }};
+            console.log(viewVar);
+            vegaEmbed(viewVar, spec, {"actions": false}).then(function(result) {
+              // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+            }).catch(console.error);                     
+          </script>
+        @endforeach
       @endif
 
       @if ($report_slug == 'transition-to-post-secondary')

@@ -1,4 +1,9 @@
 
+ #hero {
+  padding-bottom: 6rem;
+  background: url("../img/header_image.png") repeat !important;
+}
+
 .dark-blue{
 	color: #036;
 }

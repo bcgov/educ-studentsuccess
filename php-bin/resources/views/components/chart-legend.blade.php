@@ -59,9 +59,9 @@
       @if (!isset($school) && $report_slug != "grad-assess")
         {{ trans('esdr2.typical_range_copy2') }} ({{ $report_year_high_value }})
       @elseif (!isset($school) && $report_slug == "grad-assess")
-        {{ trans('esdr2.typical_range_school_copy2') }}
+        {{ trans('esdr2.typical_range_copy2') }}
       @else
-        {{ trans('esdr2.typical_range_school_copy2') }} {{ $report_year_high_value }}
+        {{ trans('esdr2.typical_range_copy2') }} {{ $report_year_high_value }}
       @endif
     </div>
   </div>
