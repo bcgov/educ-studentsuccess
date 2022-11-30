@@ -16,7 +16,7 @@
                 <option value="/school-district/{{ $school_district->sd }}/report/grade-to-grade-transitions">Grade-to-Grade Transitions</option>
                 <option value="/school-district/{{ $school_district->sd }}/report/grad-assess">Graduation Assessments</option>
                 <option value="/school-district/{{ $school_district->sd }}/report/students-entering-school">Characteristics of Students Entering School</option>
-                <option value="/school-district/{{ $school_district->sd }}/report/student-satisfaction">School Satisfaction</option>
+                <option value="/school-district/{{ $school_district->sd }}/report/student-satisfaction">Student Satisfaction and Wellness</option>
                 <option value="/school-district/{{ $school_district->sd }}/report/post-secondary-career-prep">Post-Secondary and Career Preparation</option>
                 <option value="/school-district/{{ $school_district->sd }}/report/transition-to-post-secondary">Transition to B.C. Post-Secondary</option>
             </select> 

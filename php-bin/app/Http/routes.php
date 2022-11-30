@@ -74,6 +74,9 @@ Route::get('/school-district/{sdID}/report/{report_type}', 'SchoolDistrictsContr
 Route::get('/glossary', 'GlossaryController@getAllTerms');
 //Route::get('/glossary-api', 'GlossaryController@getAllTermsApi');
 
+// Childcare /childcare
+Route::get('/childcare', 'ChildcareController@getChildcareData');
+
 // Enrolment app 
 Route::get('/enrolment-app', 'EnrolmentController@showEnrolment');
 

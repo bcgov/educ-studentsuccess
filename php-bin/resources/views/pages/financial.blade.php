@@ -16,7 +16,7 @@
 				<option value="/school-district/{{ $school_district->sd }}/report/grade-to-grade-transitions">Grade-to-Grade Transitions</option>
 				<option value="/school-district/{{ $school_district->sd }}/report/grad-assess">Graduation Assessments</option>
 				<option value="/school-district/{{ $school_district->sd }}/report/students-entering-school">Characteristics of Students Entering School</option>
-				<option value="/school-district/{{ $school_district->sd }}/report/student-satisfaction">School Satisfaction</option>
+				<option value="/school-district/{{ $school_district->sd }}/report/student-satisfaction">Student Satisfaction and Wellness</option>
 				<option value="/school-district/{{ $school_district->sd }}/report/post-secondary-career-prep">Post-Secondary and Career Preparation</option>
 				<option value="/school-district/{{ $school_district->sd }}/report/transition-to-post-secondary">Transition to B.C. Post-Secondary</option>
 			</select> 
@@ -35,10 +35,10 @@
 		<!-- <iframe width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=c1ac82c0-be1e-40c8-a3b2-69a2bf9a1c78&autoAuth=true&ctid=b9fec68c-c92d-461e-9a97-3d03a0f18b82&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXVzLW5vcnRoLWNlbnRyYWwtZi1wcmltYXJ5LXJlZGlyZWN0LmFuYWx5c2lzLndpbmRvd3MubmV0LyJ9" frameborder="0" allowFullScreen="true"></iframe> -->
 			<h3 class="slide-title light-blue">Capacity Utilization</h3>
 			<iframe scrolling="no" id="frameId-96" class="tableau-embed" style="min-height: 430px" src="//public.tableau.com/views/ESDR1/15_Capacity_Utilization?:showVizHome=no&:display_share=no&:embed=true&:toolbar=no&:device=desktop&SD={{$school_district->sd}}"></iframe> 
-			<div style="background:white;margin-top: -41px;position:absolute;height: 27px;width: 100%;"></div>
+
 			<h3 class="slide-title light-blue">Enrolment and Funding</h3>
 			<iframe scrolling="no" id="frameId-97" class="tableau-embed" style="min-height: 430px" src="//public.tableau.com/views/ESDR1/16_Enrolment_and_Funding?:showVizHome=no&:display_share=no&:embed=true&:toolbar=no&:device=desktop&SD={{$school_district->sd}}"></iframe>
-			<div style="background:white;margin-top: -41px;position:absolute;height: 27px;width: 100%;"></div>
+
 			<h3 class="slide-title light-blue">Indigenous Education Finances</h3>
 			<table class="finance-results-table table table-striped table-hover">
 				<tbody>  
@@ -56,7 +56,7 @@
         	</table>
 			<h3 class="slide-title light-blue">Financial Indicators</h3>
 			<iframe scrolling="no" id="frameId-98" class="tableau-embed" style="min-height: 617px" src="//public.tableau.com/views/ESDR1/17_Capital_Projects_In_Progress?:showVizHome=no&:display_share=no&:embed=true&:toolbar=no&:device=desktop&SD={{$school_district->sd}}"></iframe> 
-			<div style="background:white;margin-top: -41px;position:absolute;height: 27px;width: 100%;"></div>
+
 			<h3 class="slide-title light-blue">Minor Capital Program Funding (Since 2016/17)</h3>
 			<table class="finance-results-table table table-striped table-hover">
 				<thead class="thead-dark">

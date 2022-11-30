@@ -82,5 +82,6 @@
       <li style="list-style: square;">{{ trans('esdr2.transition_to_post_sec_copy4') }} {{ $metadata['district_stp_psi_yr'] }}</li>
     @endif
   </ul>
+  <p class="white report-meta">{{ trans('esdr2.transition_to_post_sec_copy5') }}</p>
   <p class="white report-meta" style="margin-top: 1rem;"><a href="http://www2.gov.bc.ca/gov/content/education-training/post-secondary-education/data-research/student-transitions-project">{{ trans('esdr2.transition_to_post_sec_link1') }}</a></p>
 @endif

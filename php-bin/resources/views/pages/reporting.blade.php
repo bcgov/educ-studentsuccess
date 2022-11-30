@@ -72,10 +72,10 @@
 
 	<div class="row">
 		<!-- FSA Card -->
-		<!-- <div class="r-n-a-panel panel panel-default col-xs-12 col-sm-12 col-lg-4">
+		<div class="r-n-a-panel panel panel-default col-xs-12 col-sm-12 col-lg-4">
 			<div class="panel-heading">
 				<a id="fsa-report-link" href="/fsa/index.html" target="_blank">
-					<img alt="" class="toc-chart-thumbnail" src="/img/charts/fsa-panel-img.png" />
+					<img alt="" class="toc-chart-thumbnail" src="/img/charts/fsa-panel-img.png" style="height:221px"/>
 				</a>
 			</div>
 			<div class="panel-body">
@@ -84,7 +84,7 @@
 					<p>Foundation Skills Assessment Reports</p>
 				</a>	
 			</div>
-		</div>		 -->
+		</div>		
 		<div class="r-n-a-panel panel panel-default col-xs-12 col-sm-12 col-lg-4">
 			<div class="panel-heading">
 				<a id="enrollment-report-image" href="/enrolment-app" target="_blank">
@@ -95,6 +95,19 @@
 				<p id="learner-centered" class="panel-body-title dark-blue">Data Science</p>
 				<a id="enrollment-report-link" href="/enrolment-app" target="_blank">
 					<p>Enrolment Model Report</p>
+				</a>	
+			</div>
+		</div>		
+		<div class="r-n-a-panel panel panel-default col-xs-12 col-sm-12 col-lg-4">
+			<div class="panel-heading">
+				<a id="childcare-report-image" href="/childcare" target="_blank">
+					<img alt="childcare thumbnail" class="enrollment-model-thumbnail" src="/img/charts/ChildCareimage.png" style="height:221px"/>
+				</a>
+			</div>
+			<div class="panel-body">
+				<p id="learner-centered" class="panel-body-title dark-blue">Child Care</p>
+				<a id="childcare-report-link" href="/childcare" target="_blank">
+					<p>Child Care Reports</p>
 				</a>	
 			</div>
 		</div>		

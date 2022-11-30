@@ -87,7 +87,7 @@
         <div class='image'>
           <a href="/school-district/{{ $school_district->sd }}/report/student-satisfaction">
             <img alt="Image of a chart depicting Student Satisfaction." class="toc-chart-thumbnail report-icon" src="/img/charts/icon-student-satisfaction.jpg" />
-            <h4 class='bottom-left'><span class="spacer">Student<br></span><span class="spacer">Satisfaction</span></h4>
+            <h4 class='bottom-left'><span class="spacer">Student<br></span><span class="spacer">Learning Survey</span></h4>
           </a>
         </div>  
       </li>
