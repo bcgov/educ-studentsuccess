@@ -28,8 +28,8 @@
 	background-color: #036;
 }
 
-.image { 
-   position: relative; 
+.image {
+   position: relative;
    width: 100%; /* for IE 6 */
 }
 
@@ -39,12 +39,19 @@
    height: 223px;
 }
 
-.bottom-left { 
+.bottom-left {
    position: absolute;
    top: 150px;
    left: 10px;
    width: 100%;
    color: white;
+}
+.main-title {
+  height: auto;
+  width: 70% !important;
+  padding-top: 59px;
+  left: -33px;
+  position: relative;
 }
 
 h3.ministry-blue.slide-title {
@@ -160,7 +167,7 @@ section#about {
 .tablet-image{
    width: auto;
    height: 330px;
-  
+
 }
 
 #about a.btn.btn-primary.btn-lg {
@@ -172,14 +179,14 @@ section#about {
 
 #frameId-5 {
    height: 347px; }
- 
+
  #frameId-6 {
    height: 327px; }
 
 .tab-toolbar.public.tab-fill.tab-widget {
   display: none;
-}   
- 
+}
+
  @media only screen and (min-width: 320px) {
    #frameId-6 {
      height: 327px; } }
@@ -191,7 +198,7 @@ section#about {
      height: 527px; } }
  #frameId-7 {
    height: 227px; }
- 
+
  @media only screen and (min-width: 320px) {
    #frameId-7 {
      height: 227px; } }
@@ -203,7 +210,7 @@ section#about {
      height: 277px; } }
  #frameId-8 {
    height: 477px; }
- 
+
  @media only screen and (min-width: 320px) {
    #frameId-8 {
      height: 477px; } }
@@ -215,11 +222,11 @@ section#about {
      height: 477px; } }
  #frameId-91 {
    height: 227px; }
- 
+
  #frameId-92,
  #frameId-93 {
    height: 227px; }
- 
+
  @media only screen and (min-width: 320px) {
    #frameId-92,
    #frameId-93 {
@@ -235,16 +242,16 @@ section#about {
  #frameId-101,
  #frameId-101b {
    height: 727px; }
- 
+
  #frameId-101-school,
  #frameId-101b-school {
    height: 377px; }
- 
+
  #frameId-102,
  #frameId-103,
  #frameId-104 {
    height: 427px; }
- 
+
  @media only screen and (min-width: 320px) {
    #frameId-102,
    #frameId-103,
@@ -254,11 +261,11 @@ section#about {
    #frameId-101,
    #frameId-101b {
      height: 827px; }
- 
+
    #frameId-101-school,
    #frameId-101b-school {
      height: 427px; }
- 
+
    #frameId-102,
    #frameId-103,
    #frameId-104 {
@@ -267,17 +274,17 @@ section#about {
    #frameId-101,
    #frameId-101b {
      height: 827px; }
- 
+
    #frameId-102,
    #frameId-103,
    #frameId-104 {
      height: 427px; } }
  #frameId-11 {
    height: 527px; }
- 
+
  #frameId-12 {
    height: 527px; }
- 
+
  @media only screen and (min-width: 320px) {
    #frameId-12 {
      height: 527px; } }
@@ -289,7 +296,7 @@ section#about {
      height: 427px; } }
  #frameId-13 {
    height: 827px; }
- 
+
  @media only screen and (min-width: 320px) {
    #frameId-13 {
      height: 827px; } }
@@ -301,10 +308,10 @@ section#about {
      height: 727px; } }
  #frameId-14 {
    height: 427px; }
- 
+
  #frameId-15 {
    height: 1077px; }
- 
+
  @media only screen and (min-width: 320px) {
    #frameId-15 {
      height: 627px; } }
@@ -317,53 +324,58 @@ section#about {
   @media only screen and (max-width: 1625px) and (min-width: 1449px) {
     .frontPage-charts {
       margin-left: 17%;
-    } 
+    }
   }
   @media only screen and (max-width: 1449px) and (min-width: 320px) {
     .frontPage-charts {
       margin-left: 1%;
-    } 
+    }
   }
 
 /* For Vega Charts */
 /* Mobile */
-@media (max-width: 576px) { 
+@media (max-width: 576px) {
   .desktop {
-    display:none !important; 
+    display:none !important;
   }
   .tablet {
     display: none !important;
   }
   .mobile {
-    display:block !important; 
-  } 
+    display:block !important;
+  }
   .restrain{
     margin:10px !important;
   }
 }
 /* Tablets */
-@media (min-width: 576px) and (max-width: 1027px){ 
+@media (min-width: 576px) and (max-width: 1027px){
   .desktop {
-    display:none !important; 
+    display:none !important;
   }
   .tablet {
     display: block !important;
   }
   .mobile {
-    display:none !important; 
-  } 
+    display:none !important;
+  }
 }
 /* Desktop */
 @media only screen and (min-width: 1028px) {
   .desktop {
-    display:block !important; 
+    display:block !important;
   }
   .tablet {
     display: none !important;
   }
   .mobile {
-    display:none !important; 
+    display:none !important;
   }
 }
 
-
+table th {
+  text-align: left !important;
+}
+.ahawd-table th{
+  text-align: left !important;
+}

@@ -17,11 +17,11 @@ use DB;
 class SchoolsController extends Controller {
 
   public function index() {
-    
+
     return view('pages.index');
-    
+
   }
-  
+
   public function getAllSchoolCities() {
 
     $cities = School::select('phy_city', DB::raw('count(*) as totalschools'))
@@ -53,14 +53,14 @@ class SchoolsController extends Controller {
     $schools = School::select('school_name', 'independent', 'mincode', 'sd', 'phy_address_line_1', 'phy_city')
       ->where('phy_city', $city)
       ->orderBy('school_name')
-      ->remember(60)
+      ->remember(180)
       ->get();
-	  
 
-    // Handle no records found. 
+
+    // Handle no records found.
     if (count($schools) < 1) {
       \App::abort(404);
-    } 
+    }
 
     $selected_city = $city;
     $first_public_school_sd = null;
@@ -106,12 +106,12 @@ class SchoolsController extends Controller {
       ->orderBy('school_name')
       ->remember(60)
       ->get();
-	  
 
-    // Handle no records found. 
+
+    // Handle no records found.
     if (count($schools) < 1) {
       \App::abort(404);
-    } 
+    }
 
     $selected_city = $city;
     $first_public_school_sd = null;
@@ -272,7 +272,7 @@ class SchoolsController extends Controller {
     return view('pages.school-report', compact('school', 'report_slug', 'school_report_slugs', 'metadata'));
 
   }
-	
+
 	public function getSchoolReportApi($mincode, $report_slug) {
 
 		$m = Metadata::select('location', 'school_year')
@@ -302,7 +302,7 @@ class SchoolsController extends Controller {
     $school = School::where('mincode', $mincode)
       ->remember(60)
       ->firstOrFail();
- 
+
     $report_slugs = array();
 
     if ($school->w_enrol1 || $school->w_enrol2) {
@@ -376,7 +376,7 @@ class SchoolsController extends Controller {
         'mincode' => $school->mincode,
         'type' => 'school',
         'primary_key'=> $school->mincode
-      ); 
+      );
     }
 
     return $json;

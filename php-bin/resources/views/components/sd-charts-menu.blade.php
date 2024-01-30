@@ -137,7 +137,7 @@
         @else  
           <a id="ahawd-download-report-link" data-sd="{{ $school_district->sd }}" href="https://www2.gov.bc.ca/assets/gov/education/administration/kindergarten-to-grade-12/reports/ab-hawd/ab-hawd-school-district-public.pdf" target="_blank">
           <img alt="Image of a chart depicting Aboriginal: How Are We Doing reports." class="toc-chart-thumbnail report-icon" src="/img/charts/ahawd.png" />
-          <h4 class='bottom-left'><span class="spacer" style="color:white;">Aboriginal Students: <br></span><span class="spacer" style="color:white;">How Are We Doing?</span><br> <span style="color:white;">(PDF) </a></span><span style="color:white;">(<a href="https://www2.gov.bc.ca/assets/download/3319D82A9B1945E28B893B0031524D6F" target="_blank"><span style="color:white;">XLXS</span></a>)</span></h4>
+          <h4 class='bottom-left'><span class="spacer" style="color:white;">Aboriginal Students: <br></span><span class="spacer" style="color:white;">How Are We Doing?</span><br> <span style="color:white;">(PDF) </a></span><span style="color:white;">(<a href="https://www2.gov.bc.ca/assets/download/CFC6AF49B7B04849B6164FF022A157D4" target="_blank"><span style="color:white;">XLXS</span></a>)</span></h4>
           <br><br>
         @endif		  
       </li>

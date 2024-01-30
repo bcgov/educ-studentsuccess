@@ -9,7 +9,7 @@
       <img src="/img/maps/map_sd_099.png" alt="Map of British Columbia" class="key-image thirds">
 
       <p class="white school-meta">{{ trans('esdr2.prov_results_label') }}</p>
-      
+
       <h2 class="ministry-blue slide-title">{{ trans('esdr2.british_columbia_heading') }}</h2>
 
       <p class="school-meta white">
@@ -18,15 +18,15 @@
           {{ trans('esdr2.ministry_of_education_lable') }}: <a target="_blank" href="https://www.google.ca/maps/place/{{ str_replace(' ', '+', $school_district->present()->formatSchoolDistrictAddress) }}">{{ $school_district->present()->formatSchoolDistrictAddress }}</a>
         @endif
 
-        @if ($school_district->contact_phone) 
+        @if ($school_district->contact_phone)
           <br>{{ trans('esdr2.phone_contact_label') }}: <a href="tel:{{ $school_district->present()->concatPhoneNumber }}">{{ $school_district->contact_phone }}</a>
         @endif
 
-        @if ($school_district->contact_phone_extension) 
+        @if ($school_district->contact_phone_extension)
           ext. {{ $school_district->contact_phone_extension }}
         @endif
 
-        @if ($school_district->website) 
+        @if ($school_district->website)
           <br>{{ trans('esdr2.website_contact_label') }}: <a href="{{ $school_district->website }}" target="_blank">www2.gov.bc.ca</a>
         @endif
 
@@ -38,13 +38,13 @@
 
     </div>
   </section>
- 
+
   <section class="slide aqua-bg">
     <div class="slide-content restrain">
 
       <div class="sd-sub-nav">
 
-        @if ($school_district->website) 
+        @if ($school_district->website)
           <a class="big button" href="{{ $school_district->website }}" target="_blank">{{ trans('esdr2.provincial_website_lable') }}</a>
         @endif
 
@@ -74,7 +74,7 @@
         <p><h3 class="dark-blue">FSA Item Analysis</h3></p>
         <p><img class="green-bar" style="margin:0px; float: left" src="{{URL::to('/')}}/img/green-bar-2.png" alt=""/><br></p>
         <p>Reports for educators to help interpret and understand<br>
-          student's results for hte provincial Grades 4 and 7 Foundation<br>
+          students' results for the provincial Grades 4 and 7 Foundation<br>
           Skills Assessment.
         </p>
         <p><a class="btn btn-primary btn-lg" style="border-radius:0px;" href="/fsa/index.html">View the Data+</a></p>

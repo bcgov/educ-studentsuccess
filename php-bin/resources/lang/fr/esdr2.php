@@ -182,6 +182,7 @@ return array (
   'how_are_we_doing_report_heading' => 'Children and Youth in Care: How Are we Doing?',
   'enrolment app heading' => 'Student Enrolment Report Application',
   'glossary_heading' => 'Glossary',
+  'childcare_heading' => 'Child Care',
   'glossary_heading_long' => 'Reporting on K-12 Glossary of Terms',
   'glossary_inline' => 'glossary',
   'glossary_copy' => 'For a detailed definitions of terms, please see our glossary.',

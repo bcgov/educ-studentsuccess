@@ -82,7 +82,7 @@ Route::get('/enrolment-app', 'EnrolmentController@showEnrolment');
 
 // Reporting Page 
 Route::get('/reporting', 'ReportingPageController@showReportingPage');
-
+Route::get('/ahawd', 'ReportingPageController@showAHWDPage');
 // Financial Reports Page 
 Route::get('/finance/{sdID}', 'FinancialReportsController@showFinancialReports');
 Route::get('/capital-projects-api/{sdID}', 'FinancialReportsController@showCapitalProjectsApi');
@@ -124,6 +124,7 @@ Route::get('/school-api/{mincode}/report/{report_type}', 'SchoolsController@getS
 
 // API for FSA
 // Selected Response
+Route::get('/fsa-school-years', 'FsaController@getSchoolYears');
 Route::get('/fsa-school-districts-agg', 'FsaController@getSchoolDistrictsAgg');
 Route::get('/fsa-all-school-districts-agg', 'FsaController@getAllSchoolDistrictsAgg');
 Route::get('/fsa-school-districtsID/{district}', 'FsaController@getSchoolDistrictsID');

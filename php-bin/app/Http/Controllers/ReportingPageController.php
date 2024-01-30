@@ -16,5 +16,9 @@ class ReportingPageController extends Controller {
     return view('pages.reporting');
 
   }
-    
+  public function showAHWDPage() {
+
+    return view('pages.ahawd');
+
+  }
 }

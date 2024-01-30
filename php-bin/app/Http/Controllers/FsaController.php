@@ -12,6 +12,7 @@ use Helper;
 use App\Fsa;
 use App\FSASchoolOrDistrictID;
 use App\FSASchoolOrDistrictIDAGG;
+use App\FSASchoolYear;
 use DB;
 
 class FsaController extends Controller {
@@ -20,6 +21,10 @@ class FsaController extends Controller {
 //public function getSelectedResponse($school_type,$district,$year,$grade,$subject,$exam_language,$gender,$francophone,$french_immersion,$ell,$indigenous) {
 public function getSchoolDistricts(){
 	$selectedResponse = DB::table('EDW_RESEARCH.FSA_ILR_SCHOOL_OR_DISTRICT_ID')->get();
+    return response()->json($selectedResponse, 200);
+}
+public function getSchoolYears(){
+	$selectedResponse = DB::table('EDW_RESEARCH.fsa_ilr_school_year')->get();
     return response()->json($selectedResponse, 200);
 }
 
