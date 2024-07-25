@@ -25,7 +25,7 @@
   <div class="expand sub-menu-trigger restrain">{{ trans('esdr2.open_trigger') }} <i class="fa fa-caret-down" aria-hidden="true"></i></div>
   <ul class="secondary-nav-container restrain white">
     <li><a class="secondary-nav-link" href="/">{{ trans('esdr2.home_link') }}</a></li>
-    <li><a class="secondary-nav-link" href="/all/school-districts">School districts</a></li>
+    <li><a class="secondary-nav-link" href="/all/school-districts">School Districts</a></li>
     <li><a class="secondary-nav-link" href="/all/cities">Cities</a></li>
     <li><a class="secondary-nav-link" href="/childcare">Child Care</a></li>
 	  <li><a class="secondary-nav-link" href="/reporting">Resources and Analytics</a></li>

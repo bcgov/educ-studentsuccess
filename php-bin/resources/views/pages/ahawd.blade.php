@@ -24,8 +24,8 @@
         <tbody>
             <tr>
                 <th scope="row">All Districts</th>
-                <td><a href="assets/reports/pdf-ab-hawd-school-district.zip" target="_blank">(67.4 MB, ZIP | PDF)</a></td>
-                <td><a href="assets/reports/xlsx-ab-hawd-school-district.zip" target="_blank">(128 MB, ZIP |Excel)</a></td>
+                <td><a href="https://www.bcedextranet.gov.bc.ca/student-success/reports/abhawd-all-school-district-pdf.zip" target="_blank">(67.4 MB, ZIP | PDF)</a></td>
+                <td><a href="https://www.bcedextranet.gov.bc.ca/student-success/reports/xlsx-ab-hawd-school-district.zip" target="_blank">(128 MB, ZIP |Excel)</a></td>
             </tr>
             <tr>
                 <th scope="row">B.C. Public Schools (99)</th>

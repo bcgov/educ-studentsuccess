@@ -2,45 +2,47 @@
 
 {{-- Set page title. --}}
 @if (isset($cities))
-  @section('subtitle'){{ trans('esdr2.city_directory_heading') }}@endsection
+@section('subtitle'){{ trans('esdr2.city_directory_heading') }}@endsection
 @endif
 
 @if (isset($school_districts))
-  @section('subtitle'){{ trans('esdr2.district_directory_heading') }}@endsection
+@section('subtitle'){{ trans('esdr2.district_directory_heading') }}@endsection
 @endif
 
 
 @section('content')
 
-  <div class="aqua-bg directory-masthead"@if(isset($school_districts)) style="margin-bottom: 1rem;"@endif>
+<div class="aqua-bg directory-masthead" @if(isset($school_districts)) style="margin-bottom: 1rem;" @endif>
     <div class="restrain">
-    
-      @if (isset($cities))
-        <h2 id="directory-main-heading" class="ministry-blue slide-title">{{ trans('esdr2.city_directory_heading') }}</h2>
-      @endif
 
-      @if (isset($school_districts))
-        <h2 id="directory-main-heading" class="ministry-blue slide-title" style="display: inline-block;">{{ trans('esdr2.district_directory_heading') }}</h2>
+        @if (isset($cities))
+        <h2 id="directory-main-heading" class="ministry-blue slide-title">{{ trans('esdr2.city_directory_heading') }}
+        </h2>
+        @endif
+
+        @if (isset($school_districts))
+        <h2 id="directory-main-heading" class="ministry-blue slide-title" style="display: inline-block;">
+            {{ trans('esdr2.district_directory_heading') }}</h2>
         <span id="directory-sort-wrapper" class="ministry-blue">
-          {{ trans('esdr2.sort_by_lable') }}: 
-          <a class="button" href="?sortBy=name">{{ trans('esdr2.name_lable') }}</a> 
-          <a class="button" href="?sortBy=number">{{ trans('esdr2.number_lable') }}</a>
+            {{ trans('esdr2.sort_by_lable') }}:
+            <a class="button" href="?sortBy=name">{{ trans('esdr2.name_lable') }}</a>
+            <a class="button" href="?sortBy=number">{{ trans('esdr2.number_lable') }}</a>
         </span>
-      @endif
+        @endif
 
     </div>
-  </div>
+</div>
 
-  <section class="slide">
+<section class="slide">
     <div class="slide-content restrain">
 
         <?php
 
           /**
-           * This is not exactly the Lavavel way. 
-           * Presenter methods exist for these $cities objects in `app/Presenters` but 
+           * This is not exactly the Lavavel way.
+           * Presenter methods exist for these $cities objects in `app/Presenters` but
            * they are not in use here because I couldn't figure out how to use them
-           * in a complex way. 
+           * in a complex way.
            */
 
           // Check if this is a "cities" directory page.
@@ -81,7 +83,7 @@
 
             }
             print '</ul>';
-            
+
             // Print out each letter and its respective cities.
             $sd_html = '';
             foreach ($alpha_schools as $letter => $value) {
@@ -108,7 +110,7 @@
 
               $sd_html .= '</ul></li>';
 
-            } 
+            }
 
             print '</div><!-- /.alpha_listing -->';
 
@@ -116,9 +118,9 @@
 
         ?>
 
-      <ul class="directory-wrapper">
-        
-        <?php 
+        <ul class="directory-wrapper">
+
+            <?php
 
           if (isset($cities)) {
             print $sd_html;
@@ -167,7 +169,7 @@
               print '</ul></li>';
 
               print '<li class="directory-letter-section"><span class="directory letter">'.trans('esdr2.prov_results_label').'</span><ul><li><a href="/school-district/099">'.trans('esdr2.prov_school_district_label').'</a> <a class="view-report" href="/school-district/099">'.trans('esdr2.view_report_lable').' '.trans('esdr2.entire_province_label').' <i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li></ul></li>';
-              
+
               // Print out each letter and its respective school districts.
               $sd_html = '';
               foreach ($alpha_school_districts as $letter => $value) {
@@ -186,7 +188,7 @@
 
                 $sd_html .= '</ul></li>';
 
-              } 
+              }
 
               print $sd_html;
 
@@ -196,9 +198,9 @@
 
         ?>
 
-      </ul><!-- /END ".directory-wrapper" -->
+        </ul><!-- /END ".directory-wrapper" -->
 
     </div>
-  </section>
+</section>
 
 @endsection
