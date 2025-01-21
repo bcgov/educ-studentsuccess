@@ -36,15 +36,13 @@
         <table class="table table-striped" style="width:50% !important; margin-left: 58px; font-size: 1.5rem;">
                 <tbody>
                         <tr>
-                                <th scope="row">Children and Youth In Care Provincial Report</th>
-                                <td><a href="https://www.bcedextranet.gov.bc.ca/student-success/reports/abhawd-all-school-district-pdf.zip"
-                                                target="_blank">(67.4 MB, ZIP | PDF)</a></td>
+                                <th scope="row"><a href="/assets/reports/cyic_hawd.pdf" target="_blank">Children and Youth In
+                                                Care Provincial Report (PDF)</a></th>
+                                <td></td>
                         </tr>
                 </tbody>
         </table>
-        <a href="https://www2.gov.bc.ca/assets/download/86B78216AC474EB69329A0930389DBFC"><img src="/img/cyic-webpage.png"
-                        alt="Small map graphic with School.">
-        </a>
+        <img src="/img/cyic-webpage.png" alt="Small map graphic with School.">
 
 </section>
 

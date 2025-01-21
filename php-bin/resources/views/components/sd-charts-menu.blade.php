@@ -173,7 +173,7 @@
                                 style="color:white;">(PDF)
                     </a></span><span style="color:white;">(<a
                             href="https://www2.gov.bc.ca/assets/gov/education/administration/kindergarten-to-grade-12/reports/ab-hawd/ab-hawd-school-district-{{ $school_district->sd }}.xlsx"
-                            target="_blank"><span style="color:white;">XLXS</span></a>)</span></h4>
+                            target="_blank"><span style="color:white;">XLSX</span></a>)</span></h4>
                     <br><br>
                 </div>
                 @else
@@ -187,42 +187,25 @@
                             style="color:white;">(PDF)
                 </a></span><span style="color:white;">(<a
                         href="https://www2.gov.bc.ca/assets/download/CFC6AF49B7B04849B6164FF022A157D4"
-                        target="_blank"><span style="color:white;">XLXS</span></a>)</span></h4>
+                        target="_blank"><span style="color:white;">XLSX</span></a>)</span></h4>
                 <br><br>
                 @endif
             </li>
             <li class="toc-chart sd-chart">
                 <div class='image'>
                     {{-- This is an excetion for Mission School District. See also: SchoolDistrictsController@getSdReport and pages.sd-report --}}
-                    @if ($school_district->sd != '099')
+                    @if ($school_district->sd == '099')
                     <a id="ahawd-download-report-link" data-sd="{{ $school_district->sd }}"
-                        href="https://www2.gov.bc.ca/assets/gov/education/administration/kindergarten-to-grade-12/reports/ab-hawd/ab-hawd-school-district-{{ $school_district->sd }}.pdf"
-                        target="_blank">
+                        href="/assets/reports/cyic_hawd.pdf" target="_blank">
                         <img alt="Image of a chart depicting Children and Youth In Care: How Are We Doing reports."
                             class="toc-chart-thumbnail report-icon" src="/img/charts/cyic-report-page-thumb.png" />
                         <h4 class='bottom-left'><span class="spacer" style="color:white;">Children and Youth In Care:
                                 <br></span><span class="spacer" style="color:white;">How Are We Doing?</span><br> <span
                                 style="color:white;">(PDF)
                     </a></span>
-                    <!-- <span style="color:white;">(<a
-                            href="https://www2.gov.bc.ca/assets/gov/education/administration/kindergarten-to-grade-12/reports/ab-hawd/ab-hawd-school-district-{{ $school_district->sd }}.xlsx"
-                            target="_blank"><span style="color:white;">XLXS</span></a>)</span> -->
                     </h4>
                     <br><br>
                 </div>
-                @else
-                <a id="ahawd-download-report-link" data-sd="{{ $school_district->sd }}"
-                    href="https://www2.gov.bc.ca/assets/gov/education/administration/kindergarten-to-grade-12/reports/ab-hawd/ab-hawd-school-district-public.pdf"
-                    target="_blank">
-                    <img alt="Image of a chart depicting Children and Youth In Care: How Are We Doing reports."
-                        class="toc-chart-thumbnail report-icon" src="/img/charts/cyic-report-page-thumb.png" />
-                    <h4 class='bottom-left'><span class="spacer" style="color:white;">Children and Youth In Care:
-                            <br></span><span class="spacer" style="color:white;">How Are We Doing?</span><br> <span
-                            style="color:white;">(PDF)
-                </a></span><span style="color:white;">(<a
-                        href="https://www2.gov.bc.ca/assets/download/CFC6AF49B7B04849B6164FF022A157D4"
-                        target="_blank"><span style="color:white;">XLXS</span></a>)</span></h4>
-                <br><br>
                 @endif
             </li>
         </ul>
